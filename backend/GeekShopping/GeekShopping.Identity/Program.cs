@@ -1,4 +1,6 @@
 using GeekShopping.Identity.Model.Context;
+using GeekShopping.Identity.Repository;
+using GeekShopping.Identity.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ builder.Services.AddDbContext<MySQLContext>(options => options
     .UseMySql(connection,
         new MySqlServerVersion(
             new Version(8, 0, 36))));
+
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IDbRepository, DbRepository>();
 
 // Add services to the container.
 
