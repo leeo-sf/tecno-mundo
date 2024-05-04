@@ -2,16 +2,18 @@ using AutoMapper;
 using GeekShopping.ProductAPI.Config;
 using GeekShopping.ProductAPI.Model.Context;
 using GeekShopping.ProductAPI.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 
 builder.Services.AddDbContext<MySQLContext>(options => options
-    .UseMySql(connection, 
+    .UseMySql(connection,
         new MySqlServerVersion(
             new Version(8, 0, 36))));
 
@@ -27,13 +29,25 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
 //Adicionando configurações de segurança
-builder.Services.AddAuthentication("Bearer")
+var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Authentication:Key").Value);
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options =>
     {
-        options.Authority = $"{builder.Configuration["Authentication:UrlAuthentication"]}";
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateAudience = false
+            ValidateIssuer = false,
+            ValidIssuer = builder.Configuration.GetSection("Authentication:UrlAuthentication").Value,
+            ValidateAudience = false,
+            ValidAudience = builder.Configuration.GetSection("Authentication:Scope").Value,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateLifetime = true
         };
     });
 
