@@ -24,8 +24,8 @@ namespace GeekShopping.Identity.Service
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                //Issuer
-                //Audience
+                Issuer = _configuration.GetSection("AuthenticationSettings:ProvaiderToken").Value,
+                Audience = _configuration.GetSection("AuthenticationSettings:AudienceToken").Value,
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.UserEmail.ToString()),

@@ -36,7 +36,7 @@ namespace GeekShopping.Identity.Controllers
             return Ok(Json(new InformacoesToken
             {
                 AcessToken = accessToken,
-                ExepiressInHours = Convert.ToInt32(_configuration.GetSection("AuthenticationSettings:ExpiressHours").Value)
+                ExpiressInHours = Convert.ToInt32(_configuration.GetSection("AuthenticationSettings:ExpiressHours").Value)
             }));
         }
     }

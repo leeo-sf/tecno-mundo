@@ -3,6 +3,6 @@
     public class InformacoesToken
     {
         public string AcessToken { get; set; }
-        public int ExepiressInHours { get; set; }
+        public int ExpiressInHours { get; set; }
     }
 }
