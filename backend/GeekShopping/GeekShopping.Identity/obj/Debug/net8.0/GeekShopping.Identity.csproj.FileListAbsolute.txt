@@ -111,3 +111,4 @@ C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.Identity\
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.Identity\obj\Debug\net8.0\GeekShopping.Identity.pdb
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.Identity\obj\Debug\net8.0\GeekShopping.Identity.genruntimeconfig.cache
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.Identity\obj\Debug\net8.0\ref\GeekShopping.Identity.dll
+C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.Identity\bin\Debug\net8.0\AutoMapper.dll

@@ -1,3 +1,6 @@
+using AutoMapper;
+using GeekShopping.Identity.Commands;
+using GeekShopping.Identity.Config;
 using GeekShopping.Identity.Model.Context;
 using GeekShopping.Identity.Repository;
 using GeekShopping.Identity.Service;
@@ -15,6 +18,10 @@ builder.Services.AddDbContext<MySQLContext>(options => options
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IDbRepository, DbRepository>();
+builder.Services.AddScoped<IInsertUser, InsertUser>();
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 // Add services to the container.
 

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "EWhanpnLp33NqAgdgQ1nPNgayJU6rR7KB0/I0nFK72g7x7Q9LsUGnenJGWFmJ2YTsoLqY4ju3LEVZW7cFsnaGw==",
+  "dgSpecHash": "yN9fMChsROAd+DZCGn9wjCPaZyUVNs25L93azJeYrJrqweftcgoo9UdAFVkbtWyijavg+s1yt1Kxw8xHpXIQEQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\GeekShopping.Identity.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\leona\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.4\\microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

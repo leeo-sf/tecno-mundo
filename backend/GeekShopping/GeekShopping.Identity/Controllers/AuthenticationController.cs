@@ -1,8 +1,12 @@
-﻿using GeekShopping.Identity.Model;
+﻿using GeekShopping.Identity.Commands;
+using GeekShopping.Identity.Data.ValueObjects;
+using GeekShopping.Identity.Model;
 using GeekShopping.Identity.Repository;
 using GeekShopping.Identity.Response;
 using GeekShopping.Identity.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekShopping.Identity.Controllers
 {
@@ -13,14 +17,17 @@ namespace GeekShopping.Identity.Controllers
         private readonly IDbRepository _repository;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
+        private readonly IInsertUser _insert;
 
         public AuthenticationController(IDbRepository repository,
             ITokenService tokenService,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IInsertUser insert)
         {
             _repository = repository;
             _tokenService = tokenService;
             _configuration = configuration;
+            _insert = insert;
         }
 
         [HttpPost]
@@ -38,6 +45,34 @@ namespace GeekShopping.Identity.Controllers
                 AcessToken = accessToken,
                 ExpiressInHours = Convert.ToInt32(_configuration.GetSection("AuthenticationSettings:ExpiressHours").Value)
             }));
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("create-account")]
+        public async Task<ActionResult> CreateAccount([FromBody] UserVO user)
+        {
+            try
+            {
+                await _insert.Execute(user);
+                return Ok();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(Json(ex.Message));
+            }
+            catch (ApplicationException ex)
+            {
+                return BadRequest(Json(ex.Message));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(Json(ex.Message));
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest(Json(ex.Message));
+            }
         }
     }
 }
