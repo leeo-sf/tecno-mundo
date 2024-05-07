@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|solutionrelative:geekshopping.identity\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\commands\\insertuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|solutionrelative:geekshopping.identity\\commands\\insertuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\repository\\dbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|solutionrelative:geekshopping.identity\\repository\\dbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.productapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|solutionrelative:geekshopping.productapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,8 +17,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 197,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 283,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +30,34 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DbRepository.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Repository\\DbRepository.cs",
-              "RelativeDocumentMoniker": "GeekShopping.Identity\\Repository\\DbRepository.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Repository\\DbRepository.cs",
-              "RelativeToolTip": "GeekShopping.Identity\\Repository\\DbRepository.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Program.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Program.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Program.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAhwBUAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T22:14:05.178Z",
+              "WhenOpened": "2024-05-07T22:29:43.423Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 111,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InsertUser.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Commands\\InsertUser.cs",
-              "RelativeDocumentMoniker": "GeekShopping.Identity\\Commands\\InsertUser.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Commands\\InsertUser.cs",
-              "RelativeToolTip": "GeekShopping.Identity\\Commands\\InsertUser.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAABbAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\Program.cs",
+              "RelativeDocumentMoniker": "GeekShopping.ProductAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\Program.cs",
+              "RelativeToolTip": "GeekShopping.ProductAPI\\Program.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAAAEwAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T21:44:46.768Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
-              "RelativeToolTip": "GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAYwEQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T21:34:56.721Z",
+              "WhenOpened": "2024-05-07T22:44:58.692Z",
               "EditorCaption": ""
             }
           ]
