@@ -1,3 +1,5 @@
+using AutoMapper;
+using GeekShopping.CartAPI.Config;
 using GeekShopping.CartAPI.Model.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,9 @@ builder.Services.AddDbContext<MySQLContext>(options => options
     .UseMySql(connection,
         new MySqlServerVersion(
             new Version(8, 0, 36))));
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 // Add services to the container.
 
