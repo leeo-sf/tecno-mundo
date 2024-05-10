@@ -3,28 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.couponapi\\model\\context\\mysqlcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|solutionrelative:geekshopping.couponapi\\model\\context\\mysqlcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.couponapi\\repository\\couponrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|solutionrelative:geekshopping.couponapi\\repository\\couponrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.couponapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|solutionrelative:geekshopping.couponapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.couponapi\\repository\\icouponrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|solutionrelative:geekshopping.couponapi\\repository\\icouponrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.couponapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|GeekShopping.CouponAPI\\GeekShopping.CouponAPI.csproj|solutionrelative:geekshopping.couponapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,79 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20240510221439_SeedCouponDatabase.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs",
-              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs",
-              "RelativeToolTip": "GeekShopping.CouponAPI\\Migrations\\20240510221439_SeedCouponDatabase.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T22:14:39.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MySQLContext.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Model\\Context\\MySQLContext.cs",
-              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Model\\Context\\MySQLContext.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Model\\Context\\MySQLContext.cs",
-              "RelativeToolTip": "GeekShopping.CouponAPI\\Model\\Context\\MySQLContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T22:10:05.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Program.cs",
-              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Program.cs",
-              "RelativeToolTip": "GeekShopping.CouponAPI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T22:08:33.136Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CouponRepository.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Repository\\CouponRepository.cs",
-              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Repository\\CouponRepository.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Repository\\CouponRepository.cs",
-              "RelativeToolTip": "GeekShopping.CouponAPI\\Repository\\CouponRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T22:05:02.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ICouponRepository.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Repository\\ICouponRepository.cs",
-              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Repository\\ICouponRepository.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Repository\\ICouponRepository.cs",
-              "RelativeToolTip": "GeekShopping.CouponAPI\\Repository\\ICouponRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T22:04:49.02Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Properties\\launchSettings.json",
-              "RelativeToolTip": "GeekShopping.CartAPI\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAVAAAA",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "GeekShopping.CouponAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CouponAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "GeekShopping.CouponAPI\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-05-10T21:55:55.345Z",
+              "WhenOpened": "2024-05-10T22:38:10.082Z",
               "EditorCaption": ""
             }
           ]
