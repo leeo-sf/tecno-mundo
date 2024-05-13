@@ -1,4 +1,5 @@
 using GeekShopping.OrderAPI.Model.Context;
+using GeekShopping.OrderAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,6 +14,13 @@ builder.Services.AddDbContext<MySQLContext>(options => options
     .UseMySql(connection,
         new MySqlServerVersion(
             new Version(8, 0, 36))));
+
+var builderDbContext = new DbContextOptionsBuilder<MySQLContext>();
+builderDbContext.UseMySql(connection, 
+    new MySqlServerVersion(
+            new Version(8, 0, 36)));
+
+builder.Services.AddSingleton(new OrderRepository(builderDbContext.Options));
 
 // Add services to the container.
 
