@@ -23,11 +23,15 @@ builder.Services.AddSingleton(mapper);
 
 
 builder.Services.AddScoped<ICartRepoository, CartRepository>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s =>
+    s.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
 
 
 //Adicionando configurações de segurança
