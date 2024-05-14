@@ -16,6 +16,6 @@ namespace GeekShopping.OrderAPI.Model
         [Column("product_name")]
         public string ProductName { get; set; }
         [Column("price")]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
     }
 }
