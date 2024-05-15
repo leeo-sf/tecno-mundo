@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeekShopping.MessageBus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5cc83c5b0f95970cb15dd784c9fe197e95a434e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec98d391677f75b82e8e1442d0d726200a03c6c7")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeekShopping.MessageBus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeekShopping.MessageBus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
