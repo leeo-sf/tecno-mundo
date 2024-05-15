@@ -1,9 +1,14 @@
+using GeekShopping.PaymentAPI.MessageConsumer;
+using GeekShopping.PaymentProcessor;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 
 // Add services to the container.
 

@@ -1143,6 +1143,16 @@
         "runtime": {
           "bin/placeholder/GeekShopping.MessageBus.dll": {}
         }
+      },
+      "GeekShopping.PaymentProcessor/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/GeekShopping.PaymentProcessor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GeekShopping.PaymentProcessor.dll": {}
+        }
       }
     }
   },
@@ -3152,11 +3162,17 @@
       "type": "project",
       "path": "../GeekShopping.MessageBus/GeekShopping.MessageBus.csproj",
       "msbuildProject": "../GeekShopping.MessageBus/GeekShopping.MessageBus.csproj"
+    },
+    "GeekShopping.PaymentProcessor/1.0.0": {
+      "type": "project",
+      "path": "../GeekShopping.PaymentProcessor/GeekShopping.PaymentProcessor.csproj",
+      "msbuildProject": "../GeekShopping.PaymentProcessor/GeekShopping.PaymentProcessor.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "GeekShopping.MessageBus >= 1.0.0",
+      "GeekShopping.PaymentProcessor >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
       "Pomelo.EntityFrameworkCore.MySql >= 8.0.2",
@@ -3196,6 +3212,9 @@
           "projectReferences": {
             "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj": {
               "projectPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj"
+            },
+            "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.PaymentProcessor\\GeekShopping.PaymentProcessor.csproj": {
+              "projectPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.PaymentProcessor\\GeekShopping.PaymentProcessor.csproj"
             }
           }
         }
