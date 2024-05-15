@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeekShopping.PaymentAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+958034554481b53c9749a130a1ecc2d7e4e1dc35")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d76e910c0727fdf5360394867f7dd237564854c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeekShopping.PaymentAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeekShopping.PaymentAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
