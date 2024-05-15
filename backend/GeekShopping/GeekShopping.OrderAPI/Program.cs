@@ -24,6 +24,7 @@ builderDbContext.UseMySql(connection,
 
 builder.Services.AddSingleton(new OrderRepository(builderDbContext.Options));
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Add services to the container.
