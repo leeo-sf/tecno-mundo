@@ -18,6 +18,15 @@
           }
         }
       },
+      "GeekShopping.MessagesBusPackage/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/GeekShopping.MessageBus.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/GeekShopping.MessageBus.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1149,16 +1158,6 @@
         "build": {
           "buildTransitive/net6.0/_._": {}
         }
-      },
-      "GeekShopping.MessageBus/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/GeekShopping.MessageBus.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GeekShopping.MessageBus.dll": {}
-        }
       }
     }
   },
@@ -1176,6 +1175,18 @@
         "icon.png",
         "lib/net6.0/AutoMapper.dll",
         "lib/net6.0/AutoMapper.xml"
+      ]
+    },
+    "GeekShopping.MessagesBusPackage/1.0.0": {
+      "sha512": "++8QdqGX0GOkv6azcaY4GWwh92a2MvaVQgSb57YC2d8ImG4XbABzlf3LHtYfU6o2/L5sb8ZgQBkolQWeZsFZLg==",
+      "type": "package",
+      "path": "geekshopping.messagesbuspackage/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "geekshopping.messagesbuspackage.1.0.0.nupkg.sha512",
+        "geekshopping.messagesbuspackage.nuspec",
+        "lib/net8.0/GeekShopping.MessageBus.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -3178,17 +3189,12 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "GeekShopping.MessageBus/1.0.0": {
-      "type": "project",
-      "path": "../GeekShopping.MessageBus/GeekShopping.MessageBus.csproj",
-      "msbuildProject": "../GeekShopping.MessageBus/GeekShopping.MessageBus.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "AutoMapper >= 13.0.1",
-      "GeekShopping.MessageBus >= 1.0.0",
+      "GeekShopping.MessagesBusPackage >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
       "Pomelo.EntityFrameworkCore.MySql >= 8.0.2",
@@ -3225,11 +3231,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj": {
-              "projectPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -3250,6 +3252,10 @@
           "AutoMapper": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "GeekShopping.MessagesBusPackage": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

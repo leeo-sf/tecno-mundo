@@ -1,0 +1,151 @@
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PWD}
+      MYSQL_USER: ${MYSQL_USR}
+      MYSQL_PASSWORD: ${MYSQL_PWD}
+    ports:
+      - '3307:3306'
+    networks:
+      - backend
+    container_name: 'mysql_container'
+    volumes:
+      - 'my_db:/var/lib/mysql'
+    command:
+      - --ssl=0
+
+
+  rabbit_mq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - backend
+
+
+  identity:
+    container_name: "identity"
+    build:
+      context: GeekShopping.Identity
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - '4435:8080'
+    restart: always
+    networks:
+      - backend
+    environment:
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${IDENTITY_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+    
+  
+  product:
+    container_name: "product"
+    build:
+      context: GeekShopping.ProductAPI
+    depends_on:
+      - db
+      - identity
+    env_file:
+      - .env
+    ports:
+      - '4440:8080'
+    environment:
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${PRODUCT_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+    restart: always
+    networks:
+      - backend
+  
+
+  coupon:
+    container_name: "coupon"
+    build:
+      context: GeekShopping.CouponAPI
+    depends_on:
+      - db
+      - identity
+    env_file:
+      - .env
+    ports:
+      - '4445:8080'
+    restart: always
+    environment:
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${COUPON_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+    networks:
+      - backend
+  
+
+  cart:
+    container_name: 'cart'
+    build: 
+      context: 'GeekShopping.CartAPI'
+    depends_on:
+      - db
+      - coupon
+      - rabbit_mq
+    env_file:
+      - .env
+    ports:
+      - '4451:8080'
+    restart: always
+    environment:
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${CART_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - RabbitMQServer__HostName=rabbit_mq
+      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+    networks:
+      - backend
+  
+
+  payment:
+    container_name: 'payment'
+    restart: always
+    build: 
+      context: 'GeekShopping.PaymentAPI'
+    depends_on:
+      - rabbit_mq
+    env_file:
+      - .env
+    environment:
+      - RabbitMQServer__HostName=rabbit_mq
+      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+    networks:
+      - backend
+  
+
+  order:
+    container_name: 'order'
+    restart: always
+    build: 
+      context: 'GeekShopping.OrderAPI'
+    depends_on:
+      - rabbit_mq
+      - db
+      - identity
+    env_file:
+      - .env
+    environment:
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${ORDER_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - RabbitMQServer__HostName=rabbit_mq
+      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+    networks:
+      - backend
+
+
+volumes:
+  my_db:
+
+
+networks:
+  backend:
+    driver: bridge
