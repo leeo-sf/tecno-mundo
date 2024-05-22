@@ -4,6 +4,7 @@
     "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj": {}
   },
   "projects": {
+<<<<<<< HEAD
     "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -12,6 +13,16 @@
         "projectPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\GeekShopping.MessageBus.csproj",
         "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.MessageBus\\obj\\",
+=======
+    "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj",
+        "projectName": "GeekShopping.OrderAPI",
+        "projectPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj",
+        "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\obj\\",
+>>>>>>> cart
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +55,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+<<<<<<< HEAD
           "imports": [
             "net461",
             "net462",
@@ -109,6 +121,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+=======
+          "dependencies": {
+            "GeekShopping.MessagesBusPackage": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+>>>>>>> cart
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.4, )"

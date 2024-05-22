@@ -12,18 +12,20 @@ namespace GeekShopping.CartAPI.Model
         public long Id { get; set; }
         [Column("name")]
         [Required]
-        [StringLength(150)]
+        [StringLength(150, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public string Name { get; set; }
         [Column("price")]
         [Required]
-        [Range(1, 10000)]
-        public float Price { get; set; }
+        [Range(1, 30000, ErrorMessage = "{0} should be between R${1} and R${2}")]
+        public decimal Price { get; set; }
         [Column("description")]
-        [StringLength(500)]
+        [StringLength(5000, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public string Description { get; set; }
-        [Column("category_name")]
-        [StringLength(50)]
-        public string CategoryName { get; set; }
+        [StringLength(50, ErrorMessage = "{0} cannot be longer than {1} characters.")]
+        public string Color { get; set; }
+        [Column("category_id")]
+        public int CategoryId { get; set; }
+        public ProductCategory? Category { get; set; }
         [Column("image_url")]
         [StringLength(300)]
         public string ImageUrl { get; set; }

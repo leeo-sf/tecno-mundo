@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "GeekShopping.MessageBus/1.0.0": {
+        "runtime": {
+          "GeekShopping.MessageBus.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GeekShopping.MessageBus/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,9 +1,17 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "fAPLwxruMJtx38C68WCL0f/gZr9qDF+N5noG3Qg9Pi2tGi9hYRRJ1IR+HfpeBs7WBt3Z/E953Rhxf0Yq3MVvDg==",
   "success": true,
   "projectFilePath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj",
   "expectedPackageFiles": [
+=======
+  "dgSpecHash": "CDjCifNH9GN1D4lWreBnyWyYO4nvudHItO6zVREydCLPbTEQrLbKEMLA9JBtROWestiuudKJavkp8rTrwZeNCw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.OrderAPI\\GeekShopping.OrderAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\leona\\.nuget\\packages\\geekshopping.messagesbuspackage\\1.0.0\\geekshopping.messagesbuspackage.1.0.0.nupkg.sha512",
+>>>>>>> cart
     "C:\\Users\\leona\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.4\\microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
