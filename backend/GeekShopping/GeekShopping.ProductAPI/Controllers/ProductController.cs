@@ -3,6 +3,8 @@ using GeekShopping.ProductAPI.Repository;
 using GeekShopping.ProductAPI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 
 namespace GeekShopping.ProductAPI.Controllers
 {
@@ -19,7 +21,6 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<ProductVO>>> FindAll()
         {
             var products = await _repository.FindAll();
@@ -28,7 +29,6 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<ProductVO>> Get(long id)
         {
             var product = await _repository.FindById(id);
@@ -38,15 +38,38 @@ namespace GeekShopping.ProductAPI.Controllers
             return Ok(product);
         }
 
+        [HttpGet("categories")]
+        public async Task<ActionResult<IEnumerable<CategoryVO>>> FindAllCategories()
+        {
+            var categories = await _repository.FindAllCategories();
+
+            if (categories is null) return NotFound();
+
+            return Ok(categories);
+        }
+
         [HttpPost]
         [Authorize(Roles = nameof(EnumRole.Admin))]
         public async Task<ActionResult<ProductVO>> Create(ProductVO vo)
         {
             if (vo is null) return BadRequest();
 
-            var product = await _repository.Create(vo);
-
-            return Ok(product);
+            try
+            {
+                var product = await _repository.Create(vo);
+                return Ok(product);
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is MySqlException mysqlError)
+                {
+                    if (mysqlError.Message.Contains("category_id"))
+                    {
+                        return BadRequest("Unregistered category");
+                    }
+                }
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
@@ -55,9 +78,22 @@ namespace GeekShopping.ProductAPI.Controllers
         {
             if (vo is null) return BadRequest();
 
-            var product = await _repository.Update(vo);
-
-            return Ok(product);
+            try
+            {
+                var product = await _repository.Update(vo);
+                return Ok(product);
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is MySqlException mysqlError)
+                {
+                    if (mysqlError.Message.Contains("category_id"))
+                    {
+                        return BadRequest("Unregistered category");
+                    }
+                }
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
