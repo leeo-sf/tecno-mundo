@@ -15,6 +15,18 @@ builder.Services.AddDbContext<MySQLContext>(options => options
         new MySqlServerVersion(
             new Version(8, 0, 36))));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy",
+        policy =>
+        {
+            policy.WithOrigins(builder.Configuration["CorsPolicy:GeekShopping-Web"])
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
+
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IDbRepository, DbRepository>();
@@ -33,13 +45,12 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
