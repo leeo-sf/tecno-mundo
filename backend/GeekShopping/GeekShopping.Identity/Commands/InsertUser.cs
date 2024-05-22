@@ -1,4 +1,5 @@
 ﻿using GeekShopping.Identity.Data.ValueObjects;
+using GeekShopping.Identity.Model;
 using GeekShopping.Identity.Repository;
 
 namespace GeekShopping.Identity.Commands
@@ -14,6 +15,8 @@ namespace GeekShopping.Identity.Commands
 
         public async Task Execute(UserVO user)
         {
+            if (!User.ValidateCpf(user.Cpf)) throw new ArgumentException("CPF invalid.");
+
             var role = await _repository.GetRoleById(user.RoleId);
 
             if (!user.EmailConfirmed) throw new ArgumentException("Email was not confirmed.");
