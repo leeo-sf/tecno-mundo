@@ -110,11 +110,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-<<<<<<< HEAD
-=======
 
 app.UseCors("CorsPolicy");
->>>>>>> products
 
 app.UseAuthentication();
 app.UseAuthorization();
