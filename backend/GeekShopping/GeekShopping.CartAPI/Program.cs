@@ -18,6 +18,18 @@ builder.Services.AddDbContext<MySQLContext>(options => options
         new MySqlServerVersion(
             new Version(8, 0, 36))));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy",
+        policy =>
+        {
+            policy.WithOrigins(builder.Configuration["CorsPolicy:GeekShopping-Web"])
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
+
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
@@ -109,6 +121,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
