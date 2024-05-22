@@ -3,19 +3,25 @@ using GeekShopping.CartAPI.Data.ValueObjects;
 using GeekShopping.CartAPI.Model;
 using GeekShopping.CartAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace GeekShopping.CartAPI.Repository
 {
     public class CartRepository : ICartRepoository
     {
         private readonly MySQLContext _context;
+        private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
 
         public CartRepository(MySQLContext context,
-            IMapper mapper)
+            IMapper mapper,
+            HttpClient httpClient)
         {
             _context = context;
             _mapper = mapper;
+            _httpClient = httpClient;
         }
 
         public async Task<bool> ApplyCuopon(string userId, string couponCode)
@@ -86,12 +92,11 @@ namespace GeekShopping.CartAPI.Repository
             }
         }
 
-        public async Task<CartVO> SaveOrUpdateCart(CartVO vo)
+        public async Task<CartVO> SaveOrUpdateCart(CartVO vo, string token)
         {
             Cart cart = _mapper.Map<Cart>(vo);
             //valida se o produto existe salvo no banco de dados, se não existir então salve
-            var product = await _context.Products
-                .FirstOrDefaultAsync(x => x.Id == vo.CartDetails.FirstOrDefault().ProductId);
+            var product = await GetProductById(vo.CartDetails.FirstOrDefault().ProductId, token);
 
             if (product is null)
             {
@@ -138,6 +143,19 @@ namespace GeekShopping.CartAPI.Repository
             }
 
             return _mapper.Map<CartVO>(cart);
+        }
+
+        private async Task<ProductVO> GetProductById(long id, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _httpClient.GetAsync($"/api/v1/Product/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.StatusCode != HttpStatusCode.OK) return new ProductVO();
+            return JsonSerializer.Deserialize<ProductVO>(content,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
         }
     }
 }

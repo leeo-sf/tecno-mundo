@@ -79,16 +79,19 @@ namespace GeekShopping.CartAPI.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("category_id");
+
+                    b.Property<string>("Color")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("category_name");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)")
+                        .HasMaxLength(5000)
+                        .HasColumnType("varchar(5000)")
                         .HasColumnName("description");
 
                     b.Property<string>("ImageUrl")
@@ -103,13 +106,33 @@ namespace GeekShopping.CartAPI.Migrations
                         .HasColumnType("varchar(150)")
                         .HasColumnName("name");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("float")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)")
                         .HasColumnName("price");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("product");
+                });
+
+            modelBuilder.Entity("GeekShopping.CartAPI.Model.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("category");
                 });
 
             modelBuilder.Entity("GeekShopping.CartAPI.Model.CartDetail", b =>
@@ -129,6 +152,17 @@ namespace GeekShopping.CartAPI.Migrations
                     b.Navigation("CartHeader");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("GeekShopping.CartAPI.Model.Product", b =>
+                {
+                    b.HasOne("GeekShopping.CartAPI.Model.ProductCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

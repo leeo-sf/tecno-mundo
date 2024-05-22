@@ -113,3 +113,6 @@ C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\o
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\obj\Debug\net8.0\GeekShopping.CartAPI.pdb
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\obj\Debug\net8.0\GeekShopping.CartAPI.genruntimeconfig.cache
 C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\obj\Debug\net8.0\ref\GeekShopping.CartAPI.dll
+C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\bin\Debug\net8.0\GeekShopping.MessageBus.dll
+C:\Users\leona\projects\GeekShopping\backend\GeekShopping\GeekShopping.CartAPI\bin\Debug\net8.0\GeekShopping.MessageBus.pdb
