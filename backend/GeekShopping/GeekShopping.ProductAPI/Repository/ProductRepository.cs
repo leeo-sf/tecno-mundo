@@ -21,13 +21,20 @@ namespace GeekShopping.ProductAPI.Repository
 
         public async Task<IEnumerable<ProductVO>> FindAll()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.Include(x => x.Category).ToListAsync();
             return _mapper.Map<List<ProductVO>>(products);
+        }
+
+        public async Task<IEnumerable<CategoryVO>> FindAllCategories()
+        {
+            var categories = await _context.ProductCategories.ToListAsync();
+            return _mapper.Map<List<CategoryVO>>(categories);
         }
 
         public async Task<ProductVO> FindById(long id)
         {
             var product = await _context.Products
+                .Include(x => x.Category)
                 .Where(p => p.Id == id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
