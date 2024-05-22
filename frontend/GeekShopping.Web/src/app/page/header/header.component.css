@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(141, 141, 141);
+    height: 6em;
+}
+
+header #header-title {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 6em;
+    font-size: 35px;
+}
+header #header-title span {
+    color: rgb(253, 39, 39);
+}
+
+.container-funcs {
+    margin-right: 10em;
+}
+.container-funcs a {
+    color: black;
+}
+.container-funcs a span {
+    padding: 20px;
+}
