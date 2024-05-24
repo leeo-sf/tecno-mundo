@@ -12,16 +12,13 @@ namespace GeekShopping.CartAPI.Repository
     public class CartRepository : ICartRepoository
     {
         private readonly MySQLContext _context;
-        private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
 
         public CartRepository(MySQLContext context,
-            IMapper mapper,
-            HttpClient httpClient)
+            IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _httpClient = httpClient;
         }
 
         public async Task<bool> ApplyCuopon(string userId, string couponCode)
@@ -92,17 +89,17 @@ namespace GeekShopping.CartAPI.Repository
             }
         }
 
-        public async Task<CartVO> SaveOrUpdateCart(CartVO vo, string token)
+        public async Task<CartVO> SaveOrUpdateCart(CartVO vo)
         {
             Cart cart = _mapper.Map<Cart>(vo);
             //valida se o produto existe salvo no banco de dados, se não existir então salve
-            var product = await GetProductById(vo.CartDetails.FirstOrDefault().ProductId, token);
+            //var product = null;
 
-            if (product is null)
-            {
-                _context.Products.Add(cart.CartDetails.FirstOrDefault().Product);
-                await _context.SaveChangesAsync();
-            }
+            //if (product is null)
+            //{
+            //    _context.Products.Add(cart.CartDetails.FirstOrDefault().Product);
+            //    await _context.SaveChangesAsync();
+            //}
 
             //valida se o cabeçalho do carrinho é nulo
             var cartHeader = await _context.CartHeaders
@@ -143,19 +140,6 @@ namespace GeekShopping.CartAPI.Repository
             }
 
             return _mapper.Map<CartVO>(cart);
-        }
-
-        private async Task<ProductVO> GetProductById(long id, string token)
-        {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.GetAsync($"/api/v1/Product/{id}");
-            var content = await response.Content.ReadAsStringAsync();
-            if (response.StatusCode != HttpStatusCode.OK) return new ProductVO();
-            return JsonSerializer.Deserialize<ProductVO>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
         }
     }
 }
