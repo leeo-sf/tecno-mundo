@@ -36,8 +36,7 @@ namespace GeekShopping.CartAPI.Controllers
         [HttpPost("add-cart")]
         public async Task<ActionResult<CartVO>> AddCart(CartVO vo)
         {
-            string token = Request.Headers["Authorization"];
-            var cart = await _cartRepostory.SaveOrUpdateCart(vo, token);
+            var cart = await _cartRepostory.SaveOrUpdateCart(vo);
             if (cart == null) return NotFound();
             return Ok(cart);
         }
@@ -45,8 +44,7 @@ namespace GeekShopping.CartAPI.Controllers
         [HttpPut("update-cart")]
         public async Task<ActionResult<CartVO>> UpdateCart(CartVO vo)
         {
-            string token = Request.Headers["Authorization"];
-            var cart = await _cartRepostory.SaveOrUpdateCart(vo, token);
+            var cart = await _cartRepostory.SaveOrUpdateCart(vo);
             if (cart == null) return NotFound();
             return Ok(cart);
         }
