@@ -44,6 +44,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s =>
     s.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
+builder.Services.AddHttpClient<IProductRepository, ProductRepository>(s =>
+    s.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 
 
 //Adicionando configurações de segurança

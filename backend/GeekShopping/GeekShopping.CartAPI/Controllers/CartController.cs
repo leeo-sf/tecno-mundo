@@ -36,9 +36,16 @@ namespace GeekShopping.CartAPI.Controllers
         [HttpPost("add-cart")]
         public async Task<ActionResult<CartVO>> AddCart(CartVO vo)
         {
-            var cart = await _cartRepostory.SaveOrUpdateCart(vo);
-            if (cart == null) return NotFound();
-            return Ok(cart);
+            try
+            {
+                var cart = await _cartRepostory.SaveOrUpdateCart(vo);
+                if (cart == null) return NotFound();
+                return Ok(cart);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("update-cart")]
