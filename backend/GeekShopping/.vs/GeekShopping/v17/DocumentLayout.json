@@ -9,6 +9,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|solutionrelative:geekshopping.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,6 +23,10 @@
 =======
       "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\commands\\insertuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|solutionrelative:geekshopping.identity\\commands\\insertuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|solutionrelative:geekshopping.identity\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> identity
     },
     {
       "AbsoluteMoniker": "D:0:0:{7D492873-A146-40A6-9FFB-37E501563D89}|GeekShopping.Identity\\GeekShopping.Identity.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.identity\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -80,6 +85,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           "DockedWidth": 283,
           "SelectedChildIndex": -1,
 =======
@@ -94,6 +100,10 @@
           "DockedWidth": 177,
           "SelectedChildIndex": 8,
 >>>>>>> cart
+=======
+          "DockedWidth": 177,
+          "SelectedChildIndex": 5,
+>>>>>>> identity
           "Children": [
             {
               "$type": "Document",
@@ -114,6 +124,10 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
@@ -125,8 +139,17 @@
 =======
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
 <<<<<<< HEAD
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\Controllers\\ProductController.cs",
@@ -197,6 +220,16 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-22T20:42:37.867Z",
 >>>>>>> identity
+=======
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Service\\TokenService.cs",
+              "RelativeDocumentMoniker": "GeekShopping.Identity\\Service\\TokenService.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Service\\TokenService.cs",
+              "RelativeToolTip": "GeekShopping.Identity\\Service\\TokenService.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAIwB4AAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T16:20:14.378Z",
+>>>>>>> identity
               "EditorCaption": ""
             },
             {
@@ -219,8 +252,9 @@
               "RelativeDocumentMoniker": "GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
               "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
               "RelativeToolTip": "GeekShopping.Identity\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAYwDgAAAAlAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCgAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2024-05-22T20:42:10.574Z",
 >>>>>>> identity
 =======
@@ -232,6 +266,9 @@
               "ViewState": "AQIAABkAAAAAAAAAAAAQwCIAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-26T02:12:16.366Z",
+=======
+              "WhenOpened": "2024-05-26T16:19:51.219Z",
+>>>>>>> identity
               "EditorCaption": ""
             },
             {
