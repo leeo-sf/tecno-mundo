@@ -1,4 +1,5 @@
 using AutoMapper;
+using GeekShopping.CartAPI.Command;
 using GeekShopping.CartAPI.Config;
 using GeekShopping.CartAPI.Model.Context;
 using GeekShopping.CartAPI.RabbitMQSender;
@@ -36,6 +37,7 @@ builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<ICartRepoository, CartRepository>();
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+builder.Services.AddScoped<ISaveOrUpdateCart, SaveOrUpdateCart>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Add services to the container.
@@ -44,6 +46,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s =>
     s.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
+builder.Services.AddHttpClient<IProductRepository, ProductRepository>(s =>
+    s.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 
 
 //Adicionando configurações de segurança

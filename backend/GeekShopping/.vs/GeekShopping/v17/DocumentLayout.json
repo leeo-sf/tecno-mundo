@@ -8,6 +8,7 @@
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|solutionrelative:geekshopping.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -33,14 +34,39 @@
     {
       "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.productapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj|solutionrelative:geekshopping.productapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\model\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\model\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\model\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\model\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> cart
     },
     {
       "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> cart
+=======
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\command\\saveorupdatecart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\command\\saveorupdatecart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\command\\isaveorupdatecart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\command\\isaveorupdatecart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\repository\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\repository\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|c:\\users\\leona\\projects\\geekshopping\\backend\\geekshopping\\geekshopping.cartapi\\repository\\icartrepoository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|GeekShopping.CartAPI\\GeekShopping.CartAPI.csproj|solutionrelative:geekshopping.cartapi\\repository\\icartrepoository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
 >>>>>>> cart
     }
   ],
@@ -53,6 +79,7 @@
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           "DockedWidth": 283,
           "SelectedChildIndex": -1,
 =======
@@ -63,13 +90,35 @@
           "DockedWidth": 200,
           "SelectedChildIndex": 5,
 >>>>>>> cart
+=======
+          "DockedWidth": 177,
+          "SelectedChildIndex": 8,
+>>>>>>> cart
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CartDetail.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Model\\CartDetail.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Model\\CartDetail.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Model\\CartDetail.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Model\\CartDetail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T15:19:12.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
+<<<<<<< HEAD
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -88,18 +137,42 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-22T20:08:14.728Z",
 =======
+=======
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+>>>>>>> cart
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IProductRepository.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\Repository\\IProductRepository.cs",
-              "RelativeDocumentMoniker": "GeekShopping.ProductAPI\\Repository\\IProductRepository.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\Repository\\IProductRepository.cs",
-              "RelativeToolTip": "GeekShopping.ProductAPI\\Repository\\IProductRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "SaveOrUpdateCart.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Command\\SaveOrUpdateCart.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Command\\SaveOrUpdateCart.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Command\\SaveOrUpdateCart.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Command\\SaveOrUpdateCart.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAA2wB0AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2024-05-22T22:04:18.876Z",
+>>>>>>> cart
+=======
+              "WhenOpened": "2024-05-26T02:32:36.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ISaveOrUpdateCart.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Command\\ISaveOrUpdateCart.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Command\\ISaveOrUpdateCart.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Command\\ISaveOrUpdateCart.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Command\\ISaveOrUpdateCart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T02:31:44.251Z",
 >>>>>>> cart
               "EditorCaption": ""
             },
@@ -156,13 +229,14 @@
               "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Controllers\\CartController.cs",
               "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Controllers\\CartController.cs",
               "RelativeToolTip": "GeekShopping.CartAPI\\Controllers\\CartController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC8AAAA8AAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwCIAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T22:03:08.598Z",
+              "WhenOpened": "2024-05-26T02:12:16.366Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 3,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Model\\Product.cs",
@@ -177,14 +251,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+=======
+              "DocumentIndex": 0,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Model\\Cart.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Model\\Cart.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Model\\Cart.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Model\\Cart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T02:09:37.841Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 177,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+>>>>>>> cart
               "Title": "CartRepository.cs",
               "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Repository\\CartRepository.cs",
               "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Repository\\CartRepository.cs",
               "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Repository\\CartRepository.cs",
               "RelativeToolTip": "GeekShopping.CartAPI\\Repository\\CartRepository.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAcwGIAAABhAAAA",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAgwIAAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2024-05-22T21:40:23.508Z",
+>>>>>>> cart
+=======
+              "WhenOpened": "2024-05-26T02:09:15.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ICartRepoository.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Repository\\ICartRepoository.cs",
+              "RelativeDocumentMoniker": "GeekShopping.CartAPI\\Repository\\ICartRepoository.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.CartAPI\\Repository\\ICartRepoository.cs",
+              "RelativeToolTip": "GeekShopping.CartAPI\\Repository\\ICartRepoository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T02:38:58.926Z",
 >>>>>>> cart
               "EditorCaption": ""
 >>>>>>> products
