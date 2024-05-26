@@ -28,7 +28,8 @@ namespace GeekShopping.Identity.Service
                 Audience = _configuration.GetSection("AuthenticationSettings:AudienceToken").Value,
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserEmail.ToString()),
+                    new Claim(ClaimTypes.Name, $"{user.UserName} {user.LastName}"),
+                    new Claim("UserId", user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.Name.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(
