@@ -2,19 +2,19 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(231, 231, 231);
     height: 6em;
 }
 
 header #header-title {
-    color: black;
+    color: rgb(31, 31, 31);
     font-weight: bold;
     text-decoration: none;
     margin-left: 6em;
     font-size: 35px;
 }
 header #header-title span {
-    color: rgb(253, 39, 39);
+    color: crimson;
 }
 
 .container-funcs {
@@ -25,4 +25,27 @@ header #header-title span {
 }
 .container-funcs a span {
     padding: 20px;
+}
+
+.sub-header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 30px;
+    height: 4em;
+    width: 50%;
+    background-color: rgb(226, 51, 86);
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+    padding: 19px;
+    font-size: 20px;
 }
