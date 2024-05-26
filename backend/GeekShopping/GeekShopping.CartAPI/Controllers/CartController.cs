@@ -1,4 +1,5 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
+﻿using GeekShopping.CartAPI.Command;
+using GeekShopping.CartAPI.Data.ValueObjects;
 using GeekShopping.CartAPI.Messages;
 using GeekShopping.CartAPI.RabbitMQSender;
 using GeekShopping.CartAPI.Repository;
@@ -13,22 +14,25 @@ namespace GeekShopping.CartAPI.Controllers
     public class CartController : Controller
     {
         private readonly ICartRepoository _cartRepostory;
+        private readonly ISaveOrUpdateCart _saveOrUpdate;
         private readonly ICouponRepository _couponRepostory;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
 
         public CartController(ICartRepoository repository,
+            ISaveOrUpdateCart insertCart,
             ICouponRepository couponRepository,
             IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _cartRepostory = repository;
             _couponRepostory = couponRepository;
+            _saveOrUpdate = insertCart;
             _rabbitMQMessageSender = rabbitMQMessageSender;
         }
 
-        [HttpGet("find-cart/{id}")]
-        public async Task<ActionResult<CartVO>> FindById(string id)
+        [HttpGet("find-cart/{userId}")]
+        public async Task<ActionResult<CartVO>> FindById(string userId)
         {
-            var cart = await _cartRepostory.FindCartByUserId(id);
+            var cart = await _cartRepostory.FindCartByUserId(userId);
             if (cart == null) return NotFound();
             return Ok(cart);
         }
@@ -38,7 +42,7 @@ namespace GeekShopping.CartAPI.Controllers
         {
             try
             {
-                var cart = await _cartRepostory.SaveOrUpdateCart(vo);
+                var cart = await _saveOrUpdate.Execute(vo);
                 if (cart == null) return NotFound();
                 return Ok(cart);
             }
@@ -51,9 +55,16 @@ namespace GeekShopping.CartAPI.Controllers
         [HttpPut("update-cart")]
         public async Task<ActionResult<CartVO>> UpdateCart(CartVO vo)
         {
-            var cart = await _cartRepostory.SaveOrUpdateCart(vo);
-            if (cart == null) return NotFound();
-            return Ok(cart);
+            try
+            {
+                var cart = await _saveOrUpdate.Execute(vo);
+                if (cart == null) return NotFound();
+                return Ok(cart);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("remove-cart/{id}")]
