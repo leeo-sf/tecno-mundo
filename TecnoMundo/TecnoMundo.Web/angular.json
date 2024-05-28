@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/geek-shopping.web",
+            "outputPath": "dist/tecno-mundo.web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "GeekShopping.Web:build:production"
+              "buildTarget": "TecnoMundo.Web:build:production"
             },
             "development": {
-              "buildTarget": "GeekShopping.Web:build:development"
+              "buildTarget": "TecnoMundo.Web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "GeekShopping.Web:build"
+            "buildTarget": "TecnoMundo.Web:build"
           }
         },
         "test": {
