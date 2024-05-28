@@ -1,0 +1,19 @@
+footer {
+    background-color: rgb(231, 231, 231);
+    position: absolute;
+    bottom: 0%;
+    height: 4em;
+    width: 100%;
+}
+
+.body-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.body-footer p {
+    font-weight: bold;
+}
+.body-footer p strong {
+    color: crimson;
+}
