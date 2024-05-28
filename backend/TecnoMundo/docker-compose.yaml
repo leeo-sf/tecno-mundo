@@ -4,17 +4,13 @@ services:
     restart: always
     env_file:
       - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PWD}
-      MYSQL_USER: ${MYSQL_USR}
-      MYSQL_PASSWORD: ${MYSQL_PWD}
     ports:
       - '3307:3306'
     networks:
       - backend
     container_name: 'mysql_container'
     volumes:
-      - 'my_db:/var/lib/mysql'
+      - 'db_data:/var/lib/mysql'
     command:
       - --ssl=0
 
@@ -33,33 +29,33 @@ services:
   identity:
     container_name: "identity"
     build:
-      context: GeekShopping.Identity
+      context: TecnoMundo.IdentityAPI
     depends_on:
       - db
-    env_file:
-      - .env
     ports:
       - '4435:8080'
     restart: always
     networks:
       - backend
+    env_file:
+      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${IDENTITY_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${IDENTITY_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
     
   
   product:
     container_name: "product"
     build:
-      context: GeekShopping.ProductAPI
+      context: TecnoMundo.ProductAPI
     depends_on:
       - db
       - identity
-    env_file:
-      - .env
     ports:
       - '4440:8080'
+    env_file:
+      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${PRODUCT_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${PRODUCT_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
     restart: always
     networks:
       - backend
@@ -68,17 +64,17 @@ services:
   coupon:
     container_name: "coupon"
     build:
-      context: GeekShopping.CouponAPI
+      context: TecnoMundo.CouponAPI
     depends_on:
       - db
       - identity
-    env_file:
-      - .env
     ports:
       - '4445:8080'
     restart: always
+    env_file:
+      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${COUPON_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${COUPON_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
     networks:
       - backend
   
@@ -86,18 +82,18 @@ services:
   cart:
     container_name: 'cart'
     build: 
-      context: 'GeekShopping.CartAPI'
+      context: 'TecnoMundo.CartAPI'
     depends_on:
       - db
       - coupon
       - rabbit_mq
-    env_file:
-      - .env
     ports:
       - '4451:8080'
     restart: always
+    env_file:
+      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${CART_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${CART_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
       - RabbitMQServer__HostName=rabbit_mq
       - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
       - RabbitMQServer__Username=${RABBIT_MQ_USER}
@@ -109,7 +105,7 @@ services:
     container_name: 'payment'
     restart: always
     build: 
-      context: 'GeekShopping.PaymentAPI'
+      context: 'TecnoMundo.PaymentAPI'
     depends_on:
       - rabbit_mq
     env_file:
@@ -126,7 +122,7 @@ services:
     container_name: 'order'
     restart: always
     build: 
-      context: 'GeekShopping.OrderAPI'
+      context: 'TecnoMundo.OrderAPI'
     depends_on:
       - rabbit_mq
       - db
@@ -134,7 +130,7 @@ services:
     env_file:
       - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${ORDER_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PWD};
+      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${ORDER_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
       - RabbitMQServer__HostName=rabbit_mq
       - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
       - RabbitMQServer__Username=${RABBIT_MQ_USER}
@@ -143,7 +139,7 @@ services:
 
 
 volumes:
-  my_db:
+  db_data:
 
 
 networks:
