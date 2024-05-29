@@ -3,11 +3,13 @@ import { ProductService } from '../../service/product.service';
 import { Product } from '../../../interface/Product';
 import { NgFor } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
+import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
+    SubHeaderComponent,
     MatIconModule
   ],
   providers: [
