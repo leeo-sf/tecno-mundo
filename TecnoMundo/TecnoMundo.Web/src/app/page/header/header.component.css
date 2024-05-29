@@ -22,7 +22,5 @@ header #header-title span {
 }
 .container-funcs a {
     color: black;
-}
-.container-funcs a span {
     padding: 20px;
 }
