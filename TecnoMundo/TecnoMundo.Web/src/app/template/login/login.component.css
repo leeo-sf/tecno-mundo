@@ -1,6 +1,6 @@
 .content {
-    display: flex;
     height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -22,12 +22,15 @@
 
 
 .title-form {
-    align-content: center;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 5em;
     background-color: rgb(226, 51, 86);
 }
-.title-form h3 {
-    font-size: 30px;
+.title-form p {
+    height: 100%;
+    align-content: center;
+    font-size: 2.0rem;
     font-family: fantasy;
 }
 
