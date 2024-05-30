@@ -1,5 +1,21 @@
 <app-sub-header></app-sub-header>
+<div class="search-for-product">
+    <div class="search-by-name">
+        <input type="text" id="search-name" placeholder="Search product">
+        <button>
+            <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+        </button>
+    </div>
+
+    <div class="search-by-category">
+        <select name="category" id="category">
+            <option value="0" selected disabled>Filter by category</option>
+            <option value="1">Headset</option>
+        </select>
+    </div>
+</div>
 <div class="content">
+
     <div *ngFor="let product of listOfProducts">
         <div class="product">
             <div class="img-product">

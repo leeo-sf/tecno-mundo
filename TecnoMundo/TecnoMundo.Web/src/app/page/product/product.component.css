@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin-top: 3%;
+    margin-top: 2%;
     margin-bottom: 6%;
 }
 
@@ -31,7 +31,6 @@
 }
 
 
-<<<<<<< HEAD
 .content-product {
     display: flex;
     flex-direction: column;
@@ -86,4 +85,56 @@
 .price span {
     font-size: 1.5rem;
     font-family: sans-serif;
+}
+
+
+.search-for-product {
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 4em;
+    margin-top: 2%;
+}
+
+
+.search-by-name {
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+    padding: 10px;
+}
+.search-by-name input {
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.search-by-name input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+.search-by-name input::placeholder {
+    color: rgb(37, 37, 37);
+    left: 30px;
+}
+.search-by-name button {
+    width: 5em;
+    border: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background-color: rgb(226, 51, 86);
+}
+
+
+.search-by-category {
+    display: flex;
+    width: 10em;
+}
+.search-by-category select {
+    width: 100%;
+    height: 2em;
 }
