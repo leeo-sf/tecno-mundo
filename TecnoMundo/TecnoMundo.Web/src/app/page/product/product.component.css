@@ -31,6 +31,7 @@
 }
 
 
+<<<<<<< HEAD
 .content-product {
     display: flex;
     flex-direction: column;
@@ -42,6 +43,9 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   -webkit-box-orient: vertical;
+}
+#productName {
+    max-height: 4em;
     margin-top: 4px;
     text-transform: capitalize;
     font-size: 15px;
