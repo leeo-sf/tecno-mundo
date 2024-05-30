@@ -31,14 +31,17 @@
 }
 
 
-.content-name {
+.content-product {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#productName {
     display: -webkit-box;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  -webkit-box-orient: vertical; 
-}
-#productName {
-    max-height: 4em;
+  -webkit-box-orient: vertical;
     margin-top: 4px;
     text-transform: capitalize;
     font-size: 15px;
@@ -48,6 +51,7 @@
 .action {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     height: 100%;
 }
 
