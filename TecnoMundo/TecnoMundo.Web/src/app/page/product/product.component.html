@@ -1,22 +1,24 @@
 <app-sub-header></app-sub-header>
 <div class="content">
-    <div class="product">
-        <div class="img-product">
-            <img src="https://m.media-amazon.com/images/I/61CQGpNbraL._AC_SL1000_.jpg" alt="nome">
-        </div>
+    <li *ngFor="let product of listOfProducts">
+        <div class="product">
+            <div class="img-product">
+                <img src="{{ product.imageUrl }}" alt="nome">
+            </div>
 
-        <div class="content-product">
-            <p id="productName">Headset Gamer Sem Fio Logitech G533 7.1 Dolby Surround com Drivers de Áudio Pro-G e Bateria Recarregável</p>
-
-            <div class="action">
-                <div class="price">
-                    <p>R$ <span id="productPrice">299</span></p>
+            <div class="content-product">
+                <p id="productName">{{ product.name }}</p>
+    
+                <div class="action">
+                    <div class="price">
+                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
+                    </div>
+                    <button class="action-btn">
+                        <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
+                        <span>Add to Cart</span>
+                    </button>
                 </div>
-                <button class="action-btn">
-                    <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
-                    <span>Add to Cart</span>
-                </button>
             </div>
         </div>
-    </div>
+    </li>
 </div>

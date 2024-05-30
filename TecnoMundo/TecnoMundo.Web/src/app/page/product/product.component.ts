@@ -10,6 +10,7 @@ import { SubHeaderComponent } from '../../template/sub-header/sub-header.compone
   standalone: true,
   imports: [
     SubHeaderComponent,
+    NgFor,
     MatIconModule
   ],
   providers: [
@@ -28,9 +29,10 @@ export class ProductComponent implements OnInit {
     this.getAllProducts();
   }
 
-  getAllProducts() {
+  getAllProducts(): void {
     this.serviceProduct.serviceListProducts().subscribe((products: Product[]) => {
-      this.listOfProducts = products
+      console.log(products);
+      this.listOfProducts = products;
     })
   }
 }
