@@ -1,13 +1,15 @@
 <app-sub-header></app-sub-header>
 <div class="content">
-    <li *ngFor="let product of listOfProducts">
+    <div *ngFor="let product of listOfProducts">
         <div class="product">
             <div class="img-product">
                 <img src="{{ product.imageUrl }}" alt="nome">
             </div>
 
             <div class="content-product">
-                <p id="productName">{{ product.name }}</p>
+                <div class="content-name">
+                    <p id="productName">{{ product.name }}</p>
+                </div>
     
                 <div class="action">
                     <div class="price">
@@ -20,5 +22,5 @@
                 </div>
             </div>
         </div>
-    </li>
+    </div>
 </div>
