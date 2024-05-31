@@ -9,6 +9,8 @@
     background-color: rgb(231, 231, 231);
     width: 30em;
     height: 30em;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 
@@ -26,6 +28,7 @@
     justify-content: center;
     height: 5em;
     background-color: rgb(226, 51, 86);
+    border-top-left-radius: 20px;
 }
 .title-form p {
     height: 100%;
