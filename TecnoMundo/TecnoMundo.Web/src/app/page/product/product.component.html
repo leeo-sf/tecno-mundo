@@ -10,7 +10,9 @@
     <div class="search-by-category">
         <select name="category" id="category">
             <option value="0" selected disabled>Filter by category</option>
-            <option value="1">Headset</option>
+            <option *ngFor="let category of listOfCategories"
+                [value]="category.id"
+            >{{ category.name }}</option>
         </select>
     </div>
 </div>
