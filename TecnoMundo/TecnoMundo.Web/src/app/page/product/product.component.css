@@ -1,0 +1,140 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    margin-bottom: 6%;
+}
+
+.product {
+    width: 20em;
+    height: 30em;
+    background-color: rgb(231, 231, 231);
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+
+.img-product {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;
+}
+.img-product img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.content-product {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#productName {
+    display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+#productName {
+    max-height: 4em;
+    margin-top: 4px;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+
+.action {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+}
+
+
+.action-btn {
+    background-color: rgb(226, 51, 86);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10em;
+    height: 50px;
+}
+.action-btn span {
+    color: white;
+}
+
+
+.price {
+    margin-left: 10px;
+}
+.price p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.0rem;
+    margin-top: 10px;
+}
+.price span {
+    font-size: 1.5rem;
+    font-family: sans-serif;
+}
+
+
+.search-for-product {
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 4em;
+    margin-top: 2%;
+}
+
+
+.search-by-name {
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+    padding: 10px;
+}
+.search-by-name input {
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.search-by-name input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+.search-by-name input::placeholder {
+    color: rgb(37, 37, 37);
+    left: 30px;
+}
+.search-by-name button {
+    width: 5em;
+    border: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background-color: rgb(226, 51, 86);
+}
+
+
+.search-by-category {
+    display: flex;
+    width: 10em;
+}
+.search-by-category select {
+    width: 100%;
+    height: 2em;
+}

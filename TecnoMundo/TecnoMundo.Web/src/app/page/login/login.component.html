@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="container-login">
+        <form (ngSubmit)="login()" [formGroup]="loginForm" #formDir="ngForm">
+            <div class="title-form">
+                <p>Login</p>
+            </div>
+    
+            <div class="content-form-login">
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input
+                    type="email"
+                    formControlName="userEmail"
+                    placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password"
+                    formControlName="password"
+                    placeholder="Enter your password">
+                </div>
+                
+                <div class="form-btn">
+                    <input type="submit" value="Fazer login">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

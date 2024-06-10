@@ -1,0 +1,26 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(231, 231, 231);
+    height: 6em;
+}
+
+header #header-title {
+    color: rgb(31, 31, 31);
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 6em;
+    font-size: 35px;
+}
+header #header-title span {
+    color: crimson;
+}
+
+.container-funcs {
+    margin-right: 10em;
+}
+.container-funcs a {
+    color: black;
+    padding: 20px;
+}

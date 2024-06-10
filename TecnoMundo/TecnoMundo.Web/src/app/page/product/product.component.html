@@ -1,0 +1,44 @@
+<app-sub-header></app-sub-header>
+<div class="search-for-product">
+    <div class="search-by-name">
+        <input type="text" id="search-name" placeholder="Search product">
+        <button>
+            <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+        </button>
+    </div>
+
+    <div class="search-by-category">
+        <select name="category" id="category">
+            <option value="0" selected disabled>Filter by category</option>
+            <option *ngFor="let category of listOfCategories"
+                [value]="category.id"
+            >{{ category.name }}</option>
+        </select>
+    </div>
+</div>
+<div class="content">
+
+    <div *ngFor="let product of listOfProducts">
+        <div class="product">
+            <div class="img-product">
+                <img src="{{ product.imageUrl }}" alt="nome">
+            </div>
+
+            <div class="content-product">
+                <div class="content-name">
+                    <p id="productName">{{ product.name }}</p>
+                </div>
+    
+                <div class="action">
+                    <div class="price">
+                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
+                    </div>
+                    <button class="action-btn">
+                        <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
