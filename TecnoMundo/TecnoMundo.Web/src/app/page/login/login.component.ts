@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,16 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     FormsModule,
     ReactiveFormsModule
   ],
+  providers: [
+    AuthService
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -31,6 +37,9 @@ export class LoginComponent implements OnInit {
       return
     }
 
-    console.log(this.loginForm.value)
+    console.log(this.loginForm.value);
+    this.authService.signIn(this.loginForm.value).subscribe((response) => {
+      
+    });
   }
 }
