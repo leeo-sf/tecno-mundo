@@ -18,9 +18,25 @@ header #header-title span {
 }
 
 .container-funcs {
+    display: flex;
     margin-right: 10em;
 }
 .container-funcs a {
     color: black;
     padding: 20px;
+}
+
+
+.display-name {
+    display: flex;
+    align-self: center;
+    height: 100%;
+}
+.display-name h5 {
+    margin-top: 10px;
+    font-size: 1.0rem;
+}
+.display-name h5 strong {
+    color: rgb(37, 37, 37);
+    font-size: 1.2rem;
 }

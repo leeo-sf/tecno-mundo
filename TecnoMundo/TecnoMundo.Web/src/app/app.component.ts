@@ -17,5 +17,5 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'GeekShopping.Web';
+  title = 'TecnoMundo.Web';
 }

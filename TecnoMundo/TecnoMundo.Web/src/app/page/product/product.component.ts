@@ -40,7 +40,6 @@ export class ProductComponent implements OnInit {
 
   getAllCategories(): void {
     this.serviceProduct.serviceListProductCategories().subscribe((categories: Category[]) => {
-      console.log(categories);
       this.listOfCategories = categories;
     });
   }
