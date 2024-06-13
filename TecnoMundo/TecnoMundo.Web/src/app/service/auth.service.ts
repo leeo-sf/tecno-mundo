@@ -32,6 +32,16 @@ export class AuthService {
     )
   }
 
+  logOut(): boolean {
+    if (this._isLoggedIn$.getValue()) {
+      localStorage.clear();
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   private validateToken(): any {
     try {
       const token = localStorage.getItem("token");
