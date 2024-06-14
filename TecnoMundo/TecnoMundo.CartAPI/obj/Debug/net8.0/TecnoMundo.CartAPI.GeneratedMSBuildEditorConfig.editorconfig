@@ -7,13 +7,23 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
+<<<<<<< HEAD:TecnoMundo/TecnoMundo.CartAPI/obj/Debug/net8.0/TecnoMundo.CartAPI.GeneratedMSBuildEditorConfig.editorconfig
 build_property.RootNamespace = TecnoMundo.CartAPI
 build_property.RootNamespace = TecnoMundo.CartAPI
 build_property.ProjectDir = C:\Users\leona\projects\TecnoMundo\TecnoMundo\TecnoMundo.CartAPI\
+=======
+build_property.RootNamespace = GeekShopping.ProductAPI
+build_property.RootNamespace = GeekShopping.ProductAPI
+build_property.ProjectDir = C:\Users\leona\projects\TecnoMundo\backend\GeekShopping\GeekShopping.ProductAPI\
+>>>>>>> products:backend/GeekShopping/GeekShopping.ProductAPI/obj/Debug/net8.0/GeekShopping.ProductAPI.GeneratedMSBuildEditorConfig.editorconfig
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD:TecnoMundo/TecnoMundo.CartAPI/obj/Debug/net8.0/TecnoMundo.CartAPI.GeneratedMSBuildEditorConfig.editorconfig
 build_property.MSBuildProjectDirectory = C:\Users\leona\projects\TecnoMundo\TecnoMundo\TecnoMundo.CartAPI
+=======
+build_property.MSBuildProjectDirectory = C:\Users\leona\projects\TecnoMundo\backend\GeekShopping\GeekShopping.ProductAPI
+>>>>>>> products:backend/GeekShopping/GeekShopping.ProductAPI/obj/Debug/net8.0/GeekShopping.ProductAPI.GeneratedMSBuildEditorConfig.editorconfig
 build_property._RazorSourceGeneratorDebug = 

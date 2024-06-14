@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD:TecnoMundo/TecnoMundo.ProductAPI/obj/project.nuget.cache
   "dgSpecHash": "2Km98RufuceZ01Bz3laxchlMyLx4mP1s6hd7lTFfqjOGzL2BjsrIJ2TpCK7MfG6HrqM6IkwEErCzpAaH4Xn5xQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj",
+=======
+  "dgSpecHash": "V/ck/mWm0JLcGNt2rM1Bd7HW7KWlRsTGFPEh/IvWUiasGf0KmuBpfRs0y874bIfwms6ZyUW7zbXmeGdEEtmsqg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
+>>>>>>> products:backend/GeekShopping/GeekShopping.ProductAPI/obj/project.nuget.cache
   "expectedPackageFiles": [
     "C:\\Users\\leona\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

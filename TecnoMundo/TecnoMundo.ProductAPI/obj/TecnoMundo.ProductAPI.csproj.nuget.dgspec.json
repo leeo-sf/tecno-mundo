@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD:TecnoMundo/TecnoMundo.ProductAPI/obj/TecnoMundo.ProductAPI.csproj.nuget.dgspec.json
     "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj",
         "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\obj\\",
+=======
+    "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
+        "projectName": "GeekShopping.ProductAPI",
+        "projectPath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
+        "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\obj\\",
+>>>>>>> products:backend/GeekShopping/GeekShopping.ProductAPI/obj/GeekShopping.ProductAPI.csproj.nuget.dgspec.json
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
