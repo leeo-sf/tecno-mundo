@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pnIFBdMXpqImG9vJ0TTI5bJz8nZEASyVFAo0fZ+gu1UPfafu37cCr8g/Ectl88U6NA7qOUuZwE931DMVJICL/g==",
+  "dgSpecHash": "V/ck/mWm0JLcGNt2rM1Bd7HW7KWlRsTGFPEh/IvWUiasGf0KmuBpfRs0y874bIfwms6ZyUW7zbXmeGdEEtmsqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\leona\\projects\\GeekShopping\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
+  "projectFilePath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\leona\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
