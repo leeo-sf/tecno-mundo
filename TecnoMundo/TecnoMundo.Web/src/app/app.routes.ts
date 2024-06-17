@@ -3,6 +3,8 @@ import { LoginComponent } from './page/login/login.component';
 import { ProductComponent } from './page/product/product.component';
 import { authGuard } from './service/_guard/auth.guard';
 import { loggedGuard } from './service/_guard/logged.guard';
+import { productResolve } from './service/_guard/productResolve';
+import { categoryResolve } from './service/_guard/categoryResolve';
 
 export const routes: Routes = [
     {
@@ -22,7 +24,10 @@ export const routes: Routes = [
     {
         path: "products",
         component: ProductComponent,
-        //pathMatch: 'full',
-        canActivate: [authGuard]
+        //canActivate: [authGuard],
+        resolve: { 
+            products : productResolve,
+            categories : categoryResolve
+        }
     }
 ];
