@@ -23,9 +23,6 @@ export class HeaderComponent {
   constructor(public authService: AuthService, private router: Router) {}
 
   logout(): void {
-    const logout = this.authService.logOut();
-    if (logout) {
-      this.router.navigate(['/home']);
-    }
+    this.authService.logOut();
   }
 }

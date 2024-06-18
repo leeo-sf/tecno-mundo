@@ -37,14 +37,14 @@
 }
 
 
-#productName {
-    display: -webkit-box;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
+.content-name {
+    height: 5.3em;
 }
 #productName {
-    max-height: 4em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
     margin-top: 4px;
     text-transform: capitalize;
     font-size: 15px;

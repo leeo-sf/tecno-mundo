@@ -34,8 +34,8 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.listOfProducts = data["products"];
-      this.listOfCategories = data["categories"];
+      this.listOfProducts = data['products'];
+      this.listOfCategories = data['categories'];
     });
   }
 

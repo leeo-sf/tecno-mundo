@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '../../interface/UserLogin';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,30 +17,33 @@ export class AuthService {
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   userName: string = "";
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {
     const token = this.validateToken();
     this._isLoggedIn$.next(!!token);
   }
 
   signIn(user: UserLogin) {
-    return this.httpClient.post(this.baseAuth, user).pipe(
-      tap((response: any) => {
+    return this.httpClient.post(this.baseAuth, user).subscribe(
+      (response: any) => {
         const tokenInfo = this.decodeToken(response.value.acessToken);
         localStorage.setItem("token", JSON.stringify(response.value.acessToken));
         localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
         localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
         this._isLoggedIn$.next(true);
+        this.router.navigate(['/']);
+      }, (error) => {
+        this._snackBar.open(error.error.value, "close");
       })
-    )
-  }
+    }
 
-  logOut(): boolean {
+  logOut() {
     if (this._isLoggedIn$.getValue()) {
       localStorage.clear();
-      return true;
-    }
-    else {
-      return false;
+      this.router.navigate(['/']);
     }
   }
 

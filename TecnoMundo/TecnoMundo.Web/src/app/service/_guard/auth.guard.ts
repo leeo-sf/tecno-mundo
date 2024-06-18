@@ -9,14 +9,11 @@ export const authGuard: CanActivateFn = (): Observable<boolean | UrlTree> => {
 
   return authService.isLoggedIn$.pipe(
     map(isLogged => {
-      console.log(isLogged);
       if (!isLogged) {
-        console.log("caiu no if, nao logado");
         router.navigate(['/login']);
         return false;
       }
       else {
-        console.log("caiu no else, logado");
         return true;
       }
     }),

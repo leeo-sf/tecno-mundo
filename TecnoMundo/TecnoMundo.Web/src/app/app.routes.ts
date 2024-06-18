@@ -8,15 +8,6 @@ import { categoryResolve } from './service/_guard/categoryResolve';
 
 export const routes: Routes = [
     {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "home"
-    },
-    {
-        path: "**",
-        redirectTo: "home"
-    },
-    {
         path: "login",
         component: LoginComponent,
         canActivate: [loggedGuard]
@@ -24,7 +15,6 @@ export const routes: Routes = [
     {
         path: "products",
         component: ProductComponent,
-        //canActivate: [authGuard],
         resolve: { 
             products : productResolve,
             categories : categoryResolve
