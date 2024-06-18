@@ -5,8 +5,7 @@ import { NgFor } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
 import { Category } from '../../../interface/Category';
-import { ActivatedRoute } from '@angular/router';
-import { productResolve } from '../../service/_guard/productResolve';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -28,8 +27,8 @@ export class ProductComponent implements OnInit {
   listOfCategories!: Category[];
 
   constructor(
-    private serviceProduct: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
