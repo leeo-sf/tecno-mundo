@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,11 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -34,12 +40,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.loginForm.invalid) {
+      this._snackBar.open("Invalid login data", "close");
       return
     }
 
-    console.log(this.loginForm.value);
-    this.authService.signIn(this.loginForm.value).subscribe((response) => {
-      
-    });
+    this.authService.signIn(this.loginForm.value);
   }
 }

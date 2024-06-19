@@ -19,26 +19,28 @@
 <div class="content">
 
     <div *ngFor="let product of listOfProducts">
-        <div class="product">
-            <div class="img-product">
-                <img src="{{ product.imageUrl }}" alt="nome">
-            </div>
-
-            <div class="content-product">
-                <div class="content-name">
-                    <p id="productName">{{ product.name }}</p>
+        <a href="/product-details/{{product.id}}">
+            <div class="product">
+                <div class="img-product">
+                    <img src="{{ product.imageUrl }}" alt="nome">
                 </div>
     
-                <div class="action">
-                    <div class="price">
-                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
+                <div class="content-product">
+                    <div class="content-name">
+                        <p id="productName">{{ product.name }}</p>
                     </div>
-                    <button class="action-btn">
-                        <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
-                        <span>Add to Cart</span>
-                    </button>
+        
+                    <div class="action">
+                        <div class="price">
+                            <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
+                        </div>
+                        <button class="action-btn">
+                            <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>

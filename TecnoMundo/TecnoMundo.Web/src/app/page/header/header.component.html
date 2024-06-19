@@ -1,13 +1,25 @@
 <header>
     <a id="header-title" href="#">Tecno<span>Mundo</span></a>
 
-    <div class="container-funcs">
+    <div *ngIf="authService.isLoggedIn$ | async else notLogged" class="container-funcs">
+        <div class="display-name">
+            <h5>Olá <strong>{{ authService.userName }}</strong></h5>
+        </div>
+
         <a href="#">
             <mat-icon aria-hidden="false" fontIcon="shopping_cart"></mat-icon>
         </a>
 
-        <a routerLink="/login">
-            <mat-icon aria-hidden="false" fontIcon="login"></mat-icon>
+        <a (click)="logout()">
+            <mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>
         </a>
     </div>
+
+    <ng-template #notLogged>
+        <div class="container-funcs">
+            <a routerLink="/login">
+                <mat-icon aria-hidden="false" fontIcon="login"></mat-icon>
+            </a>
+        </div>
+    </ng-template>
 </header>

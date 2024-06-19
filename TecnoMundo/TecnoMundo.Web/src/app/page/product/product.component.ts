@@ -5,6 +5,7 @@ import { NgFor } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
 import { Category } from '../../../interface/Category';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -25,23 +26,15 @@ export class ProductComponent implements OnInit {
   listOfProducts!: Product[];
   listOfCategories!: Category[];
 
-  constructor(private serviceProduct: ProductService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getAllProducts();
-    this.getAllCategories();
-  }
-
-  getAllProducts(): void {
-    this.serviceProduct.serviceListProducts().subscribe((products: Product[]) => {
-      this.listOfProducts = products;
-    });
-  }
-
-  getAllCategories(): void {
-    this.serviceProduct.serviceListProductCategories().subscribe((categories: Category[]) => {
-      console.log(categories);
-      this.listOfCategories = categories;
+    this.route.data.subscribe((data) => {
+      this.listOfProducts = data['products'];
+      this.listOfCategories = data['categories'];
     });
   }
 
