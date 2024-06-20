@@ -3147,19 +3147,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD:TecnoMundo/TecnoMundo.ProductAPI/obj/project.assets.json
       "projectUniqueName": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj",
       "projectName": "TecnoMundo.ProductAPI",
       "projectPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj",
       "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
-      "projectName": "GeekShopping.ProductAPI",
-      "projectPath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\GeekShopping.ProductAPI.csproj",
-      "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\GeekShopping\\GeekShopping.ProductAPI\\obj\\",
->>>>>>> products:backend/GeekShopping/GeekShopping.ProductAPI/obj/project.assets.json
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3252,6 +3244,12 @@
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1608",
       "level": "Warning",

@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\leona\\projects\\TecnoMundo\\backend\\TecnoMundo\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|TecnoMundo.CouponAPI\\TecnoMundo.CouponAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.couponapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|TecnoMundo.CouponAPI\\TecnoMundo.CouponAPI.csproj|solutionrelative:tecnomundo.couponapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 177,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -28,8 +33,17 @@
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CouponAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TecnoMundo.CouponAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CouponAPI\\appsettings.json",
+              "RelativeToolTip": "TecnoMundo.CouponAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-20T00:33:51.293Z",
+              "EditorCaption": ""
             }
           ]
         }
