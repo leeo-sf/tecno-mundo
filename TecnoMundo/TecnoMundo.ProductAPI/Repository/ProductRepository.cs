@@ -78,5 +78,25 @@ namespace GeekShopping.ProductAPI.Repository
                 return false;
             }
         }
+
+        public async Task<IEnumerable<ProductVO>> FindProductsByCategoryId(int id)
+        {
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == id)
+                .ToListAsync();
+
+            return _mapper.Map<List<ProductVO>>(products);
+        }
+
+        public async Task<IEnumerable<ProductVO>> FindProductsByName(string name)
+        {
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Name.Contains(name))
+                .ToListAsync();
+
+            return _mapper.Map<List<ProductVO>>(products);
+        }
     }
 }

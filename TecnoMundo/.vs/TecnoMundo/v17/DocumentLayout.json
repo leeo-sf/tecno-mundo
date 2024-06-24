@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|TecnoMundo.CouponAPI\\TecnoMundo.CouponAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.couponapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0A58EC71-A1E4-485E-B6BF-46176FE7733D}|TecnoMundo.CouponAPI\\TecnoMundo.CouponAPI.csproj|solutionrelative:tecnomundo.couponapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|solutionrelative:tecnomundo.productapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.productapi\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|solutionrelative:tecnomundo.productapi\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.productapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|solutionrelative:tecnomundo.productapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 177,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,15 +42,41 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Repository\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "TecnoMundo.ProductAPI\\Repository\\ProductRepository.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Repository\\ProductRepository.cs",
+              "RelativeToolTip": "TecnoMundo.ProductAPI\\Repository\\ProductRepository.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAwwF0AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T21:47:01.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Repository\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "TecnoMundo.ProductAPI\\Repository\\IProductRepository.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Repository\\IProductRepository.cs",
+              "RelativeToolTip": "TecnoMundo.ProductAPI\\Repository\\IProductRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T21:46:32.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CouponAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "TecnoMundo.CouponAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CouponAPI\\appsettings.json",
-              "RelativeToolTip": "TecnoMundo.CouponAPI\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-20T00:33:51.293Z",
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "TecnoMundo.ProductAPI\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "TecnoMundo.ProductAPI\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAgwD8AAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T21:40:14.216Z",
               "EditorCaption": ""
             }
           ]
