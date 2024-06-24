@@ -48,6 +48,26 @@ namespace GeekShopping.ProductAPI.Controllers
             return Ok(categories);
         }
 
+        [HttpGet("by-category/{idCategory}")]
+        public async Task<ActionResult<IEnumerable<CategoryVO>>> FindProductsByCategoryId(int idCategory)
+        {
+            var products = await _repository.FindProductsByCategoryId(idCategory);
+
+            if (products == null) return NotFound();
+
+            return Ok(products);
+        }
+
+        [HttpGet("by-name/{product}")]
+        public async Task<ActionResult<IEnumerable<CategoryVO>>> FindProductsByName(string product)
+        {
+            var products = await _repository.FindProductsByName(product);
+
+            if (products == null) return NotFound();
+
+            return Ok(products);
+        }
+
         [HttpPost]
         [Authorize(Roles = nameof(EnumRole.Admin))]
         public async Task<ActionResult<ProductVO>> Create(ProductVO vo)
