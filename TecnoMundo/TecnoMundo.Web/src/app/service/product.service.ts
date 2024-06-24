@@ -12,6 +12,8 @@ export class ProductService {
   private baseApiUrl = environment.baseApiUrlProduct;
   private baseApiUrlProducts = `${this.baseApiUrl}Product`;
   private baseApiUrlGetCategories = `${this.baseApiUrl}Product/categories`;
+  private baseApiUrlGetProductsByCategory = `${this.baseApiUrl}Product/by-category`;
+  private baseApiUrlGetProductsByName = `${this.baseApiUrl}Product/by-name`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,5 +27,13 @@ export class ProductService {
 
   serviceGetProductById(idProduct: string) {
     return this.httpClient.get<Product>(`${this.baseApiUrlProducts}/${idProduct}`);
+  }
+
+  serviceGetProductsByCategoryId(idCategory: number) {
+    return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByCategory}/${idCategory}`);
+  }
+
+  serviceGetProductsByName(productName: string) {
+    return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByName}/${productName}`);
   }
 }

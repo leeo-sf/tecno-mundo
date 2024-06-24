@@ -6,6 +6,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
 import { Category } from '../../../interface/Category';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [
     SubHeaderComponent,
     NgFor,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [
     NgFor,
@@ -25,10 +28,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductComponent implements OnInit {
   listOfProducts!: Product[];
   listOfCategories!: Category[];
+  public productName!: string;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +44,14 @@ export class ProductComponent implements OnInit {
   }
 
   filterProductsByCategory(idCategory: number): void {
-    console.log(idCategory);
+    this.productService.serviceGetProductsByCategoryId(idCategory).subscribe((data => {
+      this.listOfProducts = data;
+    }));
+  }
+
+  filterProductsByName(): void {
+    this.productService.serviceGetProductsByName(this.productName).subscribe((data => {
+      this.listOfProducts = data;
+    }))
   }
 }

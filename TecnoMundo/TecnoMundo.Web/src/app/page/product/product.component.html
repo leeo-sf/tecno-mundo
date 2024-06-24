@@ -1,8 +1,8 @@
 <app-sub-header></app-sub-header>
 <div class="search-for-product">
     <div class="search-by-name">
-        <input type="text" id="search-name" placeholder="Search product">
-        <button>
+        <input type="text" id="search-name" placeholder="Search product" [(ngModel)]="productName">
+        <button type="submit">
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
         </button>
     </div>
@@ -12,6 +12,7 @@
             <option value="0" selected disabled>Filter by category</option>
             <option *ngFor="let category of listOfCategories"
                 [value]="category.id"
+                (click)="filterProductsByCategory(category.id)"
             >{{ category.name }}</option>
         </select>
     </div>
