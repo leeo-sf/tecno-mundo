@@ -4,6 +4,7 @@ import { HeaderComponent } from './page/header/header.component';
 import { FooterComponent } from './page/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SubHeaderComponent } from './template/sub-header/sub-header.component';
+import { LoadingComponent } from './template/loading/loading.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import { SubHeaderComponent } from './template/sub-header/sub-header.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    HttpClientModule
+    HttpClientModule,
+    LoadingComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
