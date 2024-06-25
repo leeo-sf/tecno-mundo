@@ -2,7 +2,7 @@
 <div class="search-for-product">
     <div class="search-by-name">
         <input type="text" id="search-name" placeholder="Search product" [(ngModel)]="productName">
-        <button type="submit">
+        <button (click)="filterProductsByName()">
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
         </button>
     </div>
