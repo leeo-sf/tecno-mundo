@@ -21,10 +21,10 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "CorsPolicy", policy =>
     {
-        policy.WithOrigins(builder.Configuration["CorsPolicy:TecnoMundo-Web"])
-            .WithOrigins().AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+        policy.WithOrigins(builder.Configuration["CorsPolicy:TecnoMundo-Web-Http"],
+            builder.Configuration["CorsPolicy:TecnoMundo-Web-Https"])
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 

@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.productapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|solutionrelative:tecnomundo.productapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.productapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{264B3399-4D9B-4E5C-8420-1340F4EB4487}|TecnoMundo.ProductAPI\\TecnoMundo.ProductAPI.csproj|solutionrelative:tecnomundo.productapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|TecnoMundo.CartAPI\\TecnoMundo.CartAPI.csproj|c:\\users\\leona\\projects\\tecnomundo\\tecnomundo\\tecnomundo.cartapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C265A773-7D49-4405-9E9A-04221C8E4DA8}|TecnoMundo.CartAPI\\TecnoMundo.CartAPI.csproj|solutionrelative:tecnomundo.cartapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 177,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,28 +34,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "TecnoMundo.ProductAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\appsettings.json",
-              "RelativeToolTip": "TecnoMundo.ProductAPI\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-25T21:34:19.966Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Program.cs",
-              "RelativeDocumentMoniker": "TecnoMundo.ProductAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.ProductAPI\\Program.cs",
-              "RelativeToolTip": "TecnoMundo.ProductAPI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T21:33:46.616Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CartAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TecnoMundo.CartAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CartAPI\\appsettings.json",
+              "RelativeToolTip": "TecnoMundo.CartAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-25T22:04:32.723Z",
               "EditorCaption": ""
             }
           ]

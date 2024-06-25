@@ -15,16 +15,15 @@ builder.Services.AddDbContext<MySQLContext>(options => options
         new MySqlServerVersion(
             new Version(8, 0, 36))));
 
-builder.Services.AddCors(options =>
+builder.Services.AddCors(opt =>
 {
-    options.AddPolicy(name: "CorsPolicy",
-        policy =>
-        {
-            policy.WithOrigins(builder.Configuration["CorsPolicy:TecnoMundo-Web"])
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        });
+    opt.AddPolicy(name: "CorsPolicy", policy =>
+    {
+        policy.WithOrigins(builder.Configuration["CorsPolicy:TecnoMundo-Web-Http"],
+            builder.Configuration["CorsPolicy:TecnoMundo-Web-Https"])
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 
