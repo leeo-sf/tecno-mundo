@@ -5,7 +5,7 @@ import { AuthService } from '../../service/auth.service';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-nav-bar',
   standalone: true,
   imports: [
     MatIconModule,
@@ -16,10 +16,10 @@ import { CommonModule, NgIf } from '@angular/common';
   providers: [
     AuthService
   ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  templateUrl: './nav-bar.component.html',
+  styleUrl: './nav-bar.component.css'
 })
-export class HeaderComponent {
+export class NavBarComponent {
   constructor(public authService: AuthService, private router: Router) {}
 
   logout(): void {
