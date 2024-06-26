@@ -3,7 +3,6 @@ import { ProductService } from '../../service/product.service';
 import { Product } from '../../../interface/Product';
 import { NgFor } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
-import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
 import { Category } from '../../../interface/Category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -13,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-product',
   standalone: true,
   imports: [
-    SubHeaderComponent,
     NgFor,
     MatIconModule,
     FormsModule

@@ -2,8 +2,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
     background-color: rgb(231, 231, 231);
-    height: 6em;
+    height: 70px;
 }
 
 header #header-title {
@@ -15,15 +16,6 @@ header #header-title {
 }
 header #header-title span {
     color: crimson;
-}
-
-.container-funcs {
-    display: flex;
-    margin-right: 10em;
-}
-.container-funcs a {
-    color: black;
-    padding: 20px;
 }
 
 
@@ -39,4 +31,22 @@ header #header-title span {
 .display-name h5 strong {
     color: rgb(37, 37, 37);
     font-size: 1.2rem;
+}
+
+
+.container-funcs {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 70px;
+}
+.container-funcs a {
+    gap: 30px;
+    text-decoration: none;
+    color: rgb(31, 31, 31);
+    padding: 20px;
+}
+.container-funcs a:hover {
+    background-color: crimson;
+    color: rgb(231, 231, 231);
 }
