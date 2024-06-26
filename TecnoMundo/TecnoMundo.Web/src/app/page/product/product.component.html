@@ -1,7 +1,7 @@
 <div class="search-for-product">
     <div class="search-by-name">
-        <input type="text" id="search-name" placeholder="Search product" [(ngModel)]="productName">
-        <button (click)="filterProductsByName()">
+        <input #inputElement type="text" id="search-name" placeholder="Search product">
+        <button (click)="filterProductsByName(inputElement.value)">
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
         </button>
     </div>
@@ -16,8 +16,7 @@
         </select>
     </div>
 </div>
-<div class="content">
-
+<div *ngIf="this.listOfProducts.length != 0 else productNotFound" class="content">
     <div *ngFor="let product of listOfProducts">
         <a href="/product-details/{{product.id}}">
             <div class="product">
@@ -44,3 +43,15 @@
         </a>
     </div>
 </div>
+
+<ng-template #productNotFound>
+    <div class="content-product-not-found">
+        <div class="product-not-found">
+            <div class="mensagens">
+                <h1>Nenhum resultado para '<span>{{this.msgProductNotFound}}</span>'.</h1>
+        
+                <p>Verifique a ortografia ou use palavras chaves.</p>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -4,7 +4,7 @@ header {
     justify-content: space-between;
     position: relative;
     background-color: rgb(231, 231, 231);
-    height: 70px;
+    height: 6em;
 }
 
 header #header-title {

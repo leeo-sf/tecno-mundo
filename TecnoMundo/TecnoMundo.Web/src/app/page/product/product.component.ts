@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../../interface/Product';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Category } from '../../../interface/Category';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     NgFor,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   providers: [
     NgFor,
@@ -26,7 +27,7 @@ import { FormsModule } from '@angular/forms';
 export class ProductComponent implements OnInit {
   listOfProducts!: Product[];
   listOfCategories!: Category[];
-  public productName!: string;
+  public msgProductNotFound!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,9 +48,13 @@ export class ProductComponent implements OnInit {
     }));
   }
 
-  filterProductsByName(): void {
-    this.productService.serviceGetProductsByName(this.productName).subscribe((data => {
+  filterProductsByName(productName: string): void {
+    this.productService.serviceGetProductsByName(productName).subscribe((data => {
+      if (data.length == 0) {
+        this.msgProductNotFound = productName;
+      }
+
       this.listOfProducts = data;
-    }))
+    }));
   }
 }
