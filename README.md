@@ -16,7 +16,7 @@ Projeto backend em API's ASP.NET 8, frontend em Angular 9. Projeto voltado a ven
 - __Pagamento__: O serviço de pagamento é uma simulação. Mas ao finalizar uma compra ele vai até o RabbitMQ e processa seu pedido concluindo o pagamento.
 
 
-## Tecnologia Utilizadas
+## Tecnologias Utilizadas
 
 - Docker compose.
 - RabbitMQ.
