@@ -8,10 +8,11 @@
         <div *ngIf="authService.isLoggedIn$ | async else notLogged">
             <a href="#">Meus Pedidos</a>
             <a href="#">Carrinho</a>
-            <a (click)="logout()">Sair</a>
+            <a href="#" (click)="logout()">Sair</a>
         </div>
 
         <ng-template #notLogged>
+            <a href="/register">Registrar-se</a>
             <a href="/login">Entrar</a>
         </ng-template>
     </div>

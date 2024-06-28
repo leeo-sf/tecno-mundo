@@ -6,6 +6,10 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserRegister } from '../../interface/UserRegister';
+import { response } from 'express';
+import { FormatString } from '../../utils/formatString';
+import { MethodUtils } from '../../utils/MethodUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +18,17 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private baseApiUrl: string = environment.baseApiUrlIdentity;
   private baseAuth: string = `${this.baseApiUrl}auth`;
+  private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
+  private durationInSeconds: number = 3;
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   userName: string = "";
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private format: FormatString,
+    private utils: MethodUtils
   ) {
     const token = this.validateToken();
     this._isLoggedIn$.next(!!token);
@@ -36,9 +44,25 @@ export class AuthService {
         this._isLoggedIn$.next(true);
         this.router.navigate(['/']);
       }, (error) => {
-        this._snackBar.open(error.error.value, "close");
-      })
-    }
+        this._snackBar.open(error.error.value, "close", { duration: this.durationInSeconds * 1000 });
+      }
+    )
+  }
+
+  serviceRegister(user: UserRegister) {
+    user.cpf = this.format.removePunctuation(user.cpf);
+    user.phoneNumber = this.format.removePunctuation(user.phoneNumber);
+    user.emailConfirmed = true;
+    user.roleId = this.utils.defineRole(user.roleId);
+
+    return this.httpClient.post(this.baseCreateAccount, user).subscribe(
+      (response: any) => {
+        this.router.navigate(["/login"]);
+      }, (error) => {
+        this._snackBar.open(error.error.value, "close", { duration: this.durationInSeconds * 1000 });
+      }
+    );
+  }
 
   logOut() {
     if (this._isLoggedIn$.getValue()) {

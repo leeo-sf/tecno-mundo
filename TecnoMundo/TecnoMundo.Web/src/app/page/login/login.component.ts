@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.loginForm.invalid) {
-      this._snackBar.open("Invalid login data", "close");
+      this._snackBar.open("Invalid login data", "close", { duration: 3 * 1000 });
       return
     }
 

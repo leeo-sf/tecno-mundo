@@ -1,0 +1,111 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.container-register {
+    background-color: rgb(231, 231, 231);
+    width: 50%;
+}
+
+
+.title-form {
+    display: flex;
+    justify-content: center;
+    height: 5em;
+    background-color: rgb(226, 51, 86);
+}
+.title-form p {
+    height: 100%;
+    align-content: center;
+    font-size: 2.0rem;
+    font-family: fantasy;
+}
+
+
+
+.content-form-register {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+
+.name-and-lastname {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.name-and-lastname .form-group input {
+    width: 90%;
+}
+
+
+.form-group {
+    width: 92%;
+    padding: 10px;
+}
+.form-group label {
+    display: block;
+    font-size: 1.2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.form-group input {
+    border: none;
+    border-bottom: 1px solid rgb(56,56,56);
+    background-color: rgb(231, 231, 231);
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+}
+.form-group input:focus {
+    box-shadow:  0 0 0 0;
+    outline: 0;
+}
+.form-group input::placeholder {
+    font-size: 0.8rem;
+    font-family: monospace;
+}
+
+
+.form-btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin-top: 20px;
+}
+.form-btn input {
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(
+        to right,
+        rgb(226, 51, 86),
+        rgb(255, 102, 128)
+    );
+    width: 20%;
+    height: 2em;
+}
+.form-btn input:hover {
+    transform: scale(1.1);
+}
+
+
+.role {
+    display: flex;
+}
+.role select {
+    color: black;
+    border: 1px solid crimson;
+    background: linear-gradient(
+        to left,
+        rgb(226, 51, 86),
+        rgb(255, 102, 128)
+    );
+    border-radius: 5px;
+    width: 100px;
+    margin-left: 20px;
+}

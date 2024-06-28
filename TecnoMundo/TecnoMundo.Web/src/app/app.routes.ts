@@ -7,6 +7,7 @@ import { productResolve } from './service/_guard/productResolve';
 import { categoryResolve } from './service/_guard/categoryResolve';
 import { ProductDetailsComponent } from './page/product-details/product-details.component';
 import { productByIdResolve } from './service/_guard/product-by-idResolve';
+import { RegisterComponent } from './page/register/register.component';
 
 export const routes: Routes = [
     {
@@ -28,5 +29,10 @@ export const routes: Routes = [
         resolve: {
             product: productByIdResolve
         }
+    },
+    {
+        path: "register",
+        component: RegisterComponent,
+        canActivate: [loggedGuard]
     }
 ];
