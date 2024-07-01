@@ -13,6 +13,7 @@ header #header-title {
     text-decoration: none;
     margin-left: 6em;
     font-size: 35px;
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.7);
 }
 header #header-title span {
     color: crimson;
