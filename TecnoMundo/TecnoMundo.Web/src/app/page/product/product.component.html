@@ -1,10 +1,10 @@
 <div class="search-for-product">
-    <div class="search-by-name">
+    <form class="search-by-name" (ngSubmit)="filterProductsByName(inputElement.value)">
         <input #inputElement type="text" id="search-name" placeholder="Search product">
-        <button (click)="filterProductsByName(inputElement.value)">
+        <button>
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
         </button>
-    </div>
+    </form>
 
     <div class="search-by-category">
         <select name="category" id="category">
@@ -18,29 +18,31 @@
 </div>
 <div *ngIf="this.listOfProducts.length != 0 else productNotFound" class="content">
     <div *ngFor="let product of listOfProducts">
-        <a href="/product-details/{{product.id}}">
-            <div class="product">
+        <div class="product">
+            <a href="/product-details/{{product.id}}">
                 <div class="img-product">
                     <img src="{{ product.imageUrl }}" alt="nome">
                 </div>
-    
-                <div class="content-product">
+            </a>
+
+            <div class="content-product">
+                <a href="/product-details/{{product.id}}">
                     <div class="content-name">
                         <p id="productName">{{ product.name }}</p>
                     </div>
-        
-                    <div class="action">
-                        <div class="price">
-                            <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
-                        </div>
-                        <button class="action-btn">
-                            <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
-                            <span>Add to Cart</span>
-                        </button>
+                </a>
+    
+                <div class="action">
+                    <div class="price">
+                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
                     </div>
+                    <button class="action-btn">
+                        <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
+                        <span>Add to Cart</span>
+                    </button>
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 </div>
 
