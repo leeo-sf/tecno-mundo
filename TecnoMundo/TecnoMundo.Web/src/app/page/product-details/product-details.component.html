@@ -21,7 +21,8 @@
         </div>
     
         <div class="btns-actions">
-            <app-add-to-cart id="add-cart"></app-add-to-cart>
+            <input type="number" maxlength="100" placeholder="Amount" [(ngModel)]="amount">
+            <app-add-to-cart id="add-cart" [amount]="amount" [product]="product" ></app-add-to-cart>
             <button id="buy-now" type="submit">Buy now</button>
         </div>
     </div>

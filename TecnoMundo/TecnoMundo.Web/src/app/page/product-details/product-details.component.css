@@ -102,19 +102,25 @@
 .btns-actions {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-around;
     height: 100%;
-    width: 40%;
-    margin-right: 10px;
+    width: 50%;
 }
 
+
+.btns-actions input {
+    width: 100px;
+    height: 40%;
+}
+
+
 #add-cart {
-    width: 50%;
+    width: 150px;
     height: 50%;
 }
 #buy-now {
     height: 50%;
-    width: 50%;
+    width: 150px;
     background-color: rgb(50,205,50);
     color: rgb(54,54,54);
     border: 2px solid rgb(50,205,50);
