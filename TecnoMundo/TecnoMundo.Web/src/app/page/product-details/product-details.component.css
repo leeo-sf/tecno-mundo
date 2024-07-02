@@ -65,6 +65,7 @@
 .container-actions {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
@@ -103,21 +104,17 @@
     align-items: center;
     justify-content: flex-end;
     height: 100%;
-    width: 50%;
+    width: 40%;
     margin-right: 10px;
-}
-.btns-actions button {
-    width: 200px;
-    height: 30px;
 }
 
 #add-cart {
-    background-color: crimson;
-    color: white;
-    border: 2px solid crimson;
-    border-radius: 8px;
+    width: 50%;
+    height: 50%;
 }
 #buy-now {
+    height: 50%;
+    width: 50%;
     background-color: rgb(50,205,50);
     color: rgb(54,54,54);
     border: 2px solid rgb(50,205,50);

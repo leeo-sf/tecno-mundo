@@ -5,8 +5,8 @@ import { NgFor, NgIf } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Category } from '../../../interface/Category';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     NgFor,
     MatIconModule,
     FormsModule,
-    NgIf
+    NgIf,
+    AddToCartComponent
   ],
   providers: [
     NgFor,

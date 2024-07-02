@@ -1,0 +1,13 @@
+button {
+    background-color: rgb(226, 51, 86);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+button span {
+    color: white;
+}

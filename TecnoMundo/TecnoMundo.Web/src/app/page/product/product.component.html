@@ -36,10 +36,7 @@
                     <div class="price">
                         <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
                     </div>
-                    <button class="action-btn">
-                        <mat-icon aria-hidden="false" fontIcon="add_shopping_cart"></mat-icon>
-                        <span>Add to Cart</span>
-                    </button>
+                    <app-add-to-cart class="btn-add-cart" [product]="product" [amount]="1"></app-add-to-cart>
                 </div>
             </div>
         </div>
