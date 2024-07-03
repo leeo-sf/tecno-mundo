@@ -7,7 +7,7 @@ namespace GeekShopping.ProductAPI.Repository
         Task<IEnumerable<ProductVO>> FindAll();
         Task<IEnumerable<CategoryVO>> FindAllCategories();
         Task<IEnumerable<ProductVO>> FindProductsByCategoryId(int id);
-        Task<IEnumerable<ProductVO>> FindProductsByName(string name);
+        Task<IEnumerable<ProductVO>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo);
         Task<ProductVO> FindById(long id);
         Task<ProductVO> Create(ProductVO vo);
         Task<ProductVO> Update(ProductVO vo);

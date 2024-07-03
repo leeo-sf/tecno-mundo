@@ -89,11 +89,12 @@ namespace GeekShopping.ProductAPI.Repository
             return _mapper.Map<List<ProductVO>>(products);
         }
 
-        public async Task<IEnumerable<ProductVO>> FindProductsByName(string name)
+        public async Task<IEnumerable<ProductVO>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo)
         {
             var products = await _context.Products
                 .Include(p => p.Category)
-                .Where(p => p.Name.Contains(name))
+                .Where(p => p.Name.Contains(name)
+                    && p.Price >= priceOf && p.Price <= priceUpTo)
                 .ToListAsync();
 
             return _mapper.Map<List<ProductVO>>(products);

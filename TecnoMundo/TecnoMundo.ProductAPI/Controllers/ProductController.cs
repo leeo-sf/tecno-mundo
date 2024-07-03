@@ -4,6 +4,7 @@ using GeekShopping.ProductAPI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MySqlConnector;
 
 namespace GeekShopping.ProductAPI.Controllers
@@ -49,7 +50,7 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet("by-category/{idCategory}")]
-        public async Task<ActionResult<IEnumerable<CategoryVO>>> FindProductsByCategoryId(int idCategory)
+        public async Task<ActionResult<IEnumerable<ProductVO>>> FindProductsByCategoryId(int idCategory)
         {
             var products = await _repository.FindProductsByCategoryId(idCategory);
 
@@ -58,14 +59,17 @@ namespace GeekShopping.ProductAPI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("by-name/{product}")]
-        public async Task<ActionResult<IEnumerable<CategoryVO>>> FindProductsByName(string product)
+        [HttpGet("filter")]
+        public async Task<ActionResult<IEnumerable<ProductVO>>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo)
         {
-            var products = await _repository.FindProductsByName(product);
+            var product = await _repository.ProductFilter(
+                string.IsNullOrEmpty(name) ? "" : name, 
+                !priceOf.HasValue ? 1 : priceOf,
+                !priceUpTo.HasValue ? 50000 : priceUpTo);
 
-            if (products == null) return NotFound();
+            if (product.IsNullOrEmpty()) return NotFound();
 
-            return Ok(products);
+            return Ok(product);
         }
 
         [HttpPost]
