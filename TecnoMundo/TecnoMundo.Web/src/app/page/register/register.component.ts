@@ -3,6 +3,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../service/auth.service';
 import { NgIf } from '@angular/common';
+import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +26,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private _snackBar: MatSnackBar
   ) {
     authService.isLoggedIn$.subscribe((data) => {
@@ -78,7 +81,12 @@ export class RegisterComponent implements OnInit {
       this._snackBar.open("Os e-mail não coindicem", "close", { duration: 3 * 1000 });
       return;
     }
-    this.authService.serviceRegister(this.registerForm.value);
+
+    this.authService.serviceRegister(this.registerForm.value).subscribe((response) => {
+      this.router.navigate(["login"]);
+    }, (error) => {
+      this._snackBar.open(error.error.value, "close", { duration: 3 * 1000 });
+    });
   }
 
   formatCpf(event: FocusEvent): void {

@@ -47,12 +47,10 @@ export class AddToCartComponent {
   }
 
   private setCart(product: Product, count: number): Cart {
-    //corrigir aqui q esta assim "\"1\""
-    let userId = localStorage.getItem("user-id");
-    console.log(userId);
+    let userId: string = localStorage.getItem("user-id") ?? "";
     let cartHeader: CartHeader = {
       id: 0,
-      userId: String(userId),
+      userId: JSON.parse(userId),
       couponCode: ""
     };
     let cartDetails: CartDetails = {

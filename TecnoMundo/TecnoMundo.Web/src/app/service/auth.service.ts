@@ -4,10 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '../../interface/UserLogin';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserRegister } from '../../interface/UserRegister';
-import { response } from 'express';
 import { FormatString } from '../../utils/formatString';
 import { MethodUtils } from '../../utils/MethodUtils';
 
@@ -19,14 +17,12 @@ export class AuthService {
   private baseApiUrl: string = environment.baseApiUrlIdentity;
   private baseAuth: string = `${this.baseApiUrl}auth`;
   private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
-  private durationInSeconds: number = 3;
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   userName: string = "";
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private _snackBar: MatSnackBar,
     private format: FormatString,
     private utils: MethodUtils
   ) {
@@ -35,18 +31,15 @@ export class AuthService {
   }
 
   signIn(user: UserLogin) {
-    return this.httpClient.post(this.baseAuth, user).subscribe(
-      (response: any) => {
+    return this.httpClient.post<any>(this.baseAuth, user).pipe(
+      tap((response) => {
+        this._isLoggedIn$.next(true);
         const tokenInfo = this.decodeToken(response.value.acessToken);
         localStorage.setItem("token", JSON.stringify(response.value.acessToken));
         localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
         localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
-        this._isLoggedIn$.next(true);
-        this.router.navigate(['/']);
-      }, (error) => {
-        this._snackBar.open(error.error.value, "close", { duration: this.durationInSeconds * 1000 });
-      }
-    )
+      })
+    );
   }
 
   serviceRegister(user: UserRegister) {
@@ -55,13 +48,7 @@ export class AuthService {
     user.emailConfirmed = true;
     user.roleId = this.utils.defineRole(user.roleId);
 
-    return this.httpClient.post(this.baseCreateAccount, user).subscribe(
-      (response: any) => {
-        this.router.navigate(["/login"]);
-      }, (error) => {
-        this._snackBar.open(error.error.value, "close", { duration: this.durationInSeconds * 1000 });
-      }
-    );
+    return this.httpClient.post(this.baseCreateAccount, user);
   }
 
   logOut() {
