@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../service/product.service';
-import { Product } from '../../../interface/Product';
-import { NgFor, NgIf } from '@angular/common';
-import {MatIconModule} from '@angular/material/icon';
-import { Category } from '../../../interface/Category';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { ProductTemplateComponent } from '../../template/product-template/product-template.component';
+import { MatSliderModule } from '@angular/material/slider'
 import { FormsModule } from '@angular/forms';
-import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../../../interface/Category';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -14,48 +13,40 @@ import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.compo
   imports: [
     NgFor,
     MatIconModule,
-    FormsModule,
-    NgIf,
-    AddToCartComponent
-  ],
-  providers: [
-    NgFor,
-    ProductService
+    MatSliderModule,
+    ProductTemplateComponent,
+    FormsModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
-  listOfProducts!: Product[];
-  listOfCategories!: Category[];
-  public msgProductNotFound!: string;
+  minPrice: number = 1;
+  maxPrice: number = 50000;
+  listOfCategory!: Category[];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.listOfProducts = data['products'];
-      this.listOfCategories = data['categories'];
+      this.listOfCategory = data["categories"];
     });
   }
 
-  filterProductsByCategory(idCategory: number): void {
-    this.productService.serviceGetProductsByCategoryId(idCategory).subscribe((data => {
-      this.listOfProducts = data;
-    }));
+  filter(productName: string) {
+    if (this.minPrice !== 1 || this.maxPrice !== 50000) {
+      return this.router.navigate(["/products/filter/", productName, this.minPrice, this.maxPrice]);
+    }
+
+    if (productName === "") return;
+
+    return this.router.navigate(["/products/filter/", productName]);
   }
 
-  filterProductsByName(productName: string): void {
-    this.productService.serviceGetProductsByName(productName).subscribe((data => {
-      if (data.length == 0) {
-        this.msgProductNotFound = productName;
-      }
-
-      this.listOfProducts = data;
-    }));
+  filterCategory(categoryId: number) {
+    return this.router.navigate(["/products/by-category/filter/", categoryId]);
   }
 }

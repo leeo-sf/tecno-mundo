@@ -1,56 +1,64 @@
-<div class="search-for-product">
-    <form class="search-by-name" (ngSubmit)="filterProductsByName(inputElement.value)">
+<div class="container-search-by-name">
+    <form class="search-by-name" (ngSubmit)="filter(inputElement.value)">
         <input #inputElement type="text" id="search-name" placeholder="Search product">
         <button>
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
         </button>
     </form>
-
-    <div class="search-by-category">
-        <select name="category" id="category">
-            <option value="0" selected disabled>Filter by category</option>
-            <option *ngFor="let category of listOfCategories"
-                [value]="category.id"
-                (click)="filterProductsByCategory(category.id)"
-            >{{ category.name }}</option>
-        </select>
-    </div>
-</div>
-<div *ngIf="this.listOfProducts.length != 0 else productNotFound" class="content">
-    <div *ngFor="let product of listOfProducts">
-        <div class="product">
-            <a href="/product-details/{{product.id}}">
-                <div class="img-product">
-                    <img src="{{ product.imageUrl }}" alt="nome">
-                </div>
-            </a>
-
-            <div class="content-product">
-                <a href="/product-details/{{product.id}}">
-                    <div class="content-name">
-                        <p id="productName">{{ product.name }}</p>
-                    </div>
-                </a>
-    
-                <div class="action">
-                    <div class="price">
-                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
-                    </div>
-                    <app-add-to-cart class="btn-add-cart" [product]="product" [amount]="1"></app-add-to-cart>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
-<ng-template #productNotFound>
-    <div class="content-product-not-found">
-        <div class="product-not-found">
-            <div class="mensagens">
-                <h1>Nenhum resultado para '<span>{{this.msgProductNotFound}}</span>'.</h1>
-        
-                <p>Verifique a ortografia ou use palavras chaves.</p>
+
+<div class="content">
+    <div class="advanced-filter">
+        <div class="search-by-category">
+            <div class="title">
+                <h3>By Category</h3>
+            </div>
+
+            <div class="options-category">
+                <select name="category" id="category">
+                    <option value="0" selected disabled>Filter by category</option>
+                    <option *ngFor="let category of listOfCategory"
+                        [value]="category.id"
+                        (click)="filterCategory(category.id)"
+                    >{{ category.name }}</option>
+                </select>
             </div>
         </div>
+
+        <div class="price-range">
+            <div class="title">
+                <h3>Price Range</h3>
+            </div>
+
+            <div class="values">
+                <div class="field">
+                    <span>Min</span>
+                    <span id="value">{{ minPrice }}</span>
+                </div> 
+
+                <div class="field">
+                    <span>Max</span>
+                    <span id="value">{{ maxPrice }}</span>
+                </div> 
+            </div>
+
+            <div class="slider">
+                <mat-slider min="1" max="15000">
+                    <input matSliderStartThumb [(ngModel)]="minPrice">
+                    <input matSliderEndThumb [(ngModel)]="maxPrice">
+                </mat-slider>
+            </div>
+        </div>
+
+        <div class="search">
+            <button (click)="filter(inputElement.value)">
+                <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+            </button>
+        </div>
     </div>
-</ng-template>
+
+    <div class="content-product">
+        <app-product-template></app-product-template>
+    </div>
+</div>
