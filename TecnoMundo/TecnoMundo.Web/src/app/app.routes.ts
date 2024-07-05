@@ -7,6 +7,7 @@ import { categoryResolve } from './service/_guard/categoryResolve';
 import { ProductDetailsComponent } from './page/product-details/product-details.component';
 import { RegisterComponent } from './page/register/register.component';
 import { ProductComponent } from './page/product/product.component';
+import { ProductTemplateComponent } from './template/product-template/product-template.component';
 
 export const routes: Routes = [
     {
@@ -23,23 +24,16 @@ export const routes: Routes = [
         }
     },
     {
-        path: "products/filter/:name",
+        path: "products/filter",
         component: ProductComponent,
         resolve: {
             products: productResolve,
             categories: categoryResolve
-        }
+        },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange'
     },
     {
-        path: "products/filter/:name/:low-price/:high-price",
-        component: ProductComponent,
-        resolve: {
-            products: productResolve,
-            categories: categoryResolve
-        }
-    },
-    {
-        path: "products/by-category/filter/:categoryId",
+        path: "products/filter/by-category/:categoryId",
         component: ProductComponent,
         resolve: {
             products: productResolve,

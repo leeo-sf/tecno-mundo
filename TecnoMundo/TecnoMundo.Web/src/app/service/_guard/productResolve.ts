@@ -17,21 +17,19 @@ export const productResolve: ResolveFn<Product[] | Product | Observable<any>> = 
         return productService.serviceGetProductsByCategoryId(categoryId);
     }
 
-    if (route.paramMap.get("name") || route.paramMap.get("low-price")) {
-        const nameProduct: string = route.paramMap.get("name")!;
-        if (route.paramMap.get("low-price")) {
-            const lowPrice: string = route.paramMap.get("low-price")!;
-            const highPrice: string = route.paramMap.get("high-price")!;
+    if (route.queryParamMap.get("product-name") || route.queryParamMap.get("low-price")) {
+        const nameProduct: string = route.queryParamMap.get("product-name")!;
+        if (route.queryParamMap.get("low-price")) {
+            const lowPrice: string = route.queryParamMap.get("low-price")!;
+            const highPrice: string = route.queryParamMap.get("high-price")!;
             return productService.servicePriceRange(nameProduct, lowPrice, highPrice).pipe(
                 catchError(error => {
-                    console.log("Erro no resvolve ", error);
                     return of({ products: null, error: nameProduct })
                 })
             );
         }
         return productService.serviceGetProductsByName(nameProduct).pipe(
             catchError(error => {
-                console.log("Erro no resvolve ", error);
                 return of({ products: null, error: nameProduct })
             })
         );

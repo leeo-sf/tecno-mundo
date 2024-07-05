@@ -38,15 +38,17 @@ export class ProductComponent implements OnInit {
 
   filter(productName: string) {
     if (this.minPrice !== 1 || this.maxPrice !== 50000) {
-      return this.router.navigate(["/products/filter/", productName, this.minPrice, this.maxPrice]);
+      return this.router.navigate(["/products/filter"], { queryParams: { 
+        "product-name": productName, "low-price": this.minPrice, "high-price": this.maxPrice
+       } });
     }
 
     if (productName === "") return;
 
-    return this.router.navigate(["/products/filter/", productName]);
+    return this.router.navigate(["/products/filter"], { queryParams: { "product-name": productName } });
   }
 
   filterCategory(categoryId: number) {
-    return this.router.navigate(["/products/by-category/filter/", categoryId]);
+    return this.router.navigate(["/products/filter/by-category/", categoryId]);
   }
 }
