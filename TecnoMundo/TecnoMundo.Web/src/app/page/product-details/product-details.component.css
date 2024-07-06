@@ -1,9 +1,18 @@
 .content-product-detail {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 2em;
-    margin-bottom: 5em;
+    margin-bottom: 2em;
+    width: 100%;
+    height: 60%;
+}
+
+
+.product-details {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
 }
 
 
@@ -11,21 +20,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: beige;
-    width: 480px;
-    height: 400px;
+    background-color: white;
+    width: 500px;
+    height: 100%;
+    overflow: hidden;
 }
 .img-product img {
-    width: 80%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 
 .info-product {
+    display: flex;
+    flex-direction: column;
     border: 2px solid rgb(231, 231, 231);
     border-radius: 5px;
     padding: 5px;
     width: 400px;
+    height: 97%;
 }
 .info-product p {
     color: rgb(231, 231, 231);
@@ -34,6 +48,7 @@
 
 .name-product {
     border-bottom: 2px solid crimson;
+    max-height: 32%;
 }
 #productName {
     word-spacing: 3px;
@@ -42,30 +57,44 @@
 }
 
 
-.description-product {
-    margin-top: 10px;
+#description {
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
 }
 #title-description {
+    margin-left: 3px;
+    margin-top: 5px;
     font-size: 1.1rem;
+}
+
+
+.container-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 
 .action-product {
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    flex-direction: column;
+    width: 65%;
+    height: 4em;
     border: 2px solid rgb(231, 231, 231);
     border-radius: 5px;
-    padding: 5px;
-    height: 100%;
-    width: 130px;
 }
 
 
 .price {
     display: flex;
     align-items: center;
-    height: 50px;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
 }
 .price #moeda {
     font-size: 0.8rem;
@@ -78,23 +107,28 @@
 
 
 .btns-actions {
-    margin-top: 10px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 50%;
 }
-.btns-actions button {
-    display: block;
-    width: 100%;
+
+
+.btns-actions input {
+    width: 100px;
+    height: 40%;
 }
+
+
 #add-cart {
-    background-color: crimson;
-    margin-bottom: 5px;
-    color: white;
-    border: 2px solid crimson;
-    border-radius: 8px;
+    width: 150px;
+    height: 50%;
 }
 #buy-now {
+    height: 50%;
+    width: 150px;
     background-color: rgb(50,205,50);
-    margin-bottom: 5px;
     color: rgb(54,54,54);
     border: 2px solid rgb(50,205,50);
     border-radius: 8px;

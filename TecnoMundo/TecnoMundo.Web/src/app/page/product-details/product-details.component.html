@@ -1,27 +1,30 @@
 <div class="content-product-detail">
-    <div class="img-product">
-        <img src="{{ product.imageUrl }}" alt="nome">
-    </div>
-
-    <div class="info-product">
-        <div class="name-product">
-            <p id="productName">{{ product.name }}</p>
+    <div class="product-details">
+        <div class="img-product">
+            <img src="{{ product.imageUrl }}" alt="nome">
         </div>
-
-        <div class="description-product">
+    
+        <div class="info-product">
+            <div class="name-product">
+                <p id="productName">{{ product.name }}</p>
+            </div>
+    
             <p id="title-description">Sobre este item</p>
             <p id="description">{{ product.description }}</p>
         </div>
     </div>
+</div>
 
+<div class="container-actions">
     <div class="action-product">
         <div class="price">
             <span id="moeda">R$</span>
             <span id="val-price">{{ product.price.toFixed(2) }}</span>
         </div>
-
+    
         <div class="btns-actions">
-            <button id="add-cart" type="submit">Add to Cart</button>
+            <input type="number" maxlength="100" placeholder="Amount" [(ngModel)]="amount">
+            <app-add-to-cart id="add-cart" [amount]="amount" [product]="product" ></app-add-to-cart>
             <button id="buy-now" type="submit">Buy now</button>
         </div>
     </div>

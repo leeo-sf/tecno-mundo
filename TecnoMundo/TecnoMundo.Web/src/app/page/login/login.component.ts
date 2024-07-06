@@ -40,10 +40,19 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.loginForm.invalid) {
-      this._snackBar.open("Invalid login data", "close");
+      this._snackBar.open("Invalid login data", "close", { duration: 3 * 1000 });
       return
     }
 
-    this.authService.signIn(this.loginForm.value);
+    this.authService.signIn(this.loginForm.value).subscribe((response) => {
+      this.router.navigate(['']);
+    }, (error) => {
+      if (error.error.value) {
+        this._snackBar.open(error.error.value, "close", { duration: 3 * 1000 });
+      }
+      else {
+        this._snackBar.open(error.error.errors.Password[0], "close", { duration: 3 * 1000 });
+      }
+    });
   }
 }

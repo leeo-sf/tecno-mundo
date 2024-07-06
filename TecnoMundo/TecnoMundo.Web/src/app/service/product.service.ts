@@ -10,20 +10,33 @@ import { Category } from '../../interface/Category';
 })
 export class ProductService {
   private baseApiUrl = environment.baseApiUrlProduct;
-  private baseApiUrlProducts = `${this.baseApiUrl}Product`;
-  private baseApiUrlGetCategories = `${this.baseApiUrl}Product/categories`;
+  private baseApiUrlGetCategories = `${this.baseApiUrl}categories`;
+  private baseApiUrlGetProductsByCategory = `${this.baseApiUrl}by-category`;
+  private baseApiUrlGetProductsByName = `${this.baseApiUrl}filter`;
 
   constructor(private httpClient: HttpClient) { }
 
   serviceListProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.baseApiUrlProducts);
+    return this.httpClient.get<Product[]>(this.baseApiUrl);
   }
 
   serviceListProductCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.baseApiUrlGetCategories);
   }
 
-  serviceGetProductById(idProduct: string) {
-    return this.httpClient.get<Product>(`${this.baseApiUrlProducts}/${idProduct}`);
+  serviceGetProductById(idProduct: string): Observable<Product> {
+    return this.httpClient.get<Product>(`${this.baseApiUrl}${idProduct}`);
+  }
+
+  serviceGetProductsByCategoryId(idCategory: number): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByCategory}/${idCategory}`);
+  }
+
+  serviceGetProductsByName(productName: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByName}/?name=${productName}`);
+  }
+
+  servicePriceRange(productName: string, lowPrice: string, highPrice: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByName}/?name=${productName}&priceOf=${lowPrice}&priceUpTo=${highPrice}`);
   }
 }

@@ -4,8 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '../../interface/UserLogin';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserRegister } from '../../interface/UserRegister';
+import { FormatString } from '../../utils/formatString';
+import { MethodUtils } from '../../utils/MethodUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -14,31 +16,40 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private baseApiUrl: string = environment.baseApiUrlIdentity;
   private baseAuth: string = `${this.baseApiUrl}auth`;
+  private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   userName: string = "";
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private format: FormatString,
+    private utils: MethodUtils
   ) {
     const token = this.validateToken();
     this._isLoggedIn$.next(!!token);
   }
 
   signIn(user: UserLogin) {
-    return this.httpClient.post(this.baseAuth, user).subscribe(
-      (response: any) => {
+    return this.httpClient.post<any>(this.baseAuth, user).pipe(
+      tap((response) => {
+        this._isLoggedIn$.next(true);
         const tokenInfo = this.decodeToken(response.value.acessToken);
         localStorage.setItem("token", JSON.stringify(response.value.acessToken));
         localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
         localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
-        this._isLoggedIn$.next(true);
-        this.router.navigate(['/']);
-      }, (error) => {
-        this._snackBar.open(error.error.value, "close");
       })
-    }
+    );
+  }
+
+  serviceRegister(user: UserRegister) {
+    user.cpf = this.format.removePunctuation(user.cpf);
+    user.phoneNumber = this.format.removePunctuation(user.phoneNumber);
+    user.emailConfirmed = true;
+    user.roleId = this.utils.defineRole(user.roleId);
+
+    return this.httpClient.post(this.baseCreateAccount, user);
+  }
 
   logOut() {
     if (this._isLoggedIn$.getValue()) {

@@ -1,0 +1,19 @@
+<header>
+    <a id="header-title" href="#">Tecno<span>Mundo</span></a>
+
+    <div class="container-funcs">
+        <a href="#">Home</a>
+        <a href="/products">Products</a>
+        
+        <div *ngIf="authService.isLoggedIn$ | async else notLogged">
+            <a href="#">Orders</a>
+            <a href="#">Cart</a>
+            <a href="#" (click)="logout()">Logout</a>
+        </div>
+
+        <ng-template #notLogged>
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        </ng-template>
+    </div>
+</header>

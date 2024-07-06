@@ -1,44 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../service/product.service';
-import { Product } from '../../../interface/Product';
-import { NgFor } from '@angular/common';
-import {MatIconModule} from '@angular/material/icon';
-import { SubHeaderComponent } from '../../template/sub-header/sub-header.component';
-import { Category } from '../../../interface/Category';
+import { MatIconModule } from '@angular/material/icon';
+import { ProductTemplateComponent } from '../../template/product-template/product-template.component';
+import { MatSliderModule } from '@angular/material/slider'
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../../../interface/Category';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
-    SubHeaderComponent,
     NgFor,
-    MatIconModule
-  ],
-  providers: [
-    NgFor,
-    ProductService
+    MatIconModule,
+    MatSliderModule,
+    ProductTemplateComponent,
+    FormsModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
-  listOfProducts!: Product[];
-  listOfCategories!: Category[];
+  minPrice: number = 1;
+  maxPrice: number = 50000;
+  listOfCategory!: Category[];
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.listOfProducts = data['products'];
-      this.listOfCategories = data['categories'];
+      this.listOfCategory = data["categories"];
     });
   }
 
-  filterProductsByCategory(idCategory: number): void {
-    console.log(idCategory);
+  filter(productName: string) {
+    if (this.minPrice !== 1 || this.maxPrice !== 50000) {
+      return this.router.navigate(["/products/filter"], { queryParams: { 
+        "product-name": productName, "low-price": this.minPrice, "high-price": this.maxPrice
+       } });
+    }
+
+    if (productName === "") return;
+
+    return this.router.navigate(["/products/filter"], { queryParams: { "product-name": productName } });
+  }
+
+  filterCategory(categoryId: number) {
+    return this.router.navigate(["/products/filter/by-category/", categoryId]);
   }
 }
