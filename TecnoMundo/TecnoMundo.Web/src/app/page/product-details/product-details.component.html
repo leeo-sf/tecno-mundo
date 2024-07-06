@@ -1,15 +1,17 @@
 <div class="content-product-detail">
-    <div class="img-product">
-        <img src="{{ product.imageUrl }}" alt="nome">
-    </div>
-
-    <div class="info-product">
-        <div class="name-product">
-            <p id="productName">{{ product.name }}</p>
+    <div class="product-details">
+        <div class="img-product">
+            <img src="{{ product.imageUrl }}" alt="nome">
         </div>
-
-        <p id="title-description">Sobre este item</p>
-        <p id="description">{{ product.description }}</p>
+    
+        <div class="info-product">
+            <div class="name-product">
+                <p id="productName">{{ product.name }}</p>
+            </div>
+    
+            <p id="title-description">Sobre este item</p>
+            <p id="description">{{ product.description }}</p>
+        </div>
     </div>
 </div>
 

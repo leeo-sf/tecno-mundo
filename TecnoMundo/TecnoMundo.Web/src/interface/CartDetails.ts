@@ -3,8 +3,8 @@ import { Product } from "./Product";
 
 export interface CartDetails {
     id?: number,
-    cartHeaderId: number,
-    cartHeader: CartHeader,
+    cartHeaderId?: number,
+    cartHeader?: CartHeader,
     productId: number,
     product: Product,
     count: number
