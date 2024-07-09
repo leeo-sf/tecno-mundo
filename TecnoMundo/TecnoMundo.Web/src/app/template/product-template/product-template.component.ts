@@ -1,12 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, LOCALE_ID, OnInit, Output } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../../interface/Product';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf, registerLocaleData } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Category } from '../../../interface/Category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
+import localPt from '@angular/common/locales/pt';
+
+registerLocaleData(localPt)
 
 @Component({
   selector: 'app-product-template',
@@ -16,7 +19,8 @@ import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
     MatIconModule,
     FormsModule,
     NgIf,
-    AddToCartComponent
+    AddToCartComponent,
+    CommonModule
   ],
   providers: [
     NgFor,

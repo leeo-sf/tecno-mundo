@@ -1,10 +1,12 @@
 <div class="container-search-by-name">
-    <form class="search-by-name" (ngSubmit)="filter(inputElement.value)">
-        <input #inputElement type="text" id="search-name" placeholder="Search product">
-        <button>
-            <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
-        </button>
-    </form>
+    <div class="content-search-by-name">
+        <form class="search-by-name" (ngSubmit)="filter(inputElement.value)">
+            <input #inputElement type="text" id="search-name" placeholder="Search product">
+            <button>
+                <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+            </button>
+        </form>
+    </div>
 </div>
 
 
@@ -53,12 +55,14 @@
 
         <div class="search">
             <button (click)="filter(inputElement.value)">
-                <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+                Apply
             </button>
         </div>
     </div>
 
     <div class="content-product">
-        <app-product-template></app-product-template>
+        <div class="product">
+            <app-product-template></app-product-template>
+        </div>
     </div>
 </div>
