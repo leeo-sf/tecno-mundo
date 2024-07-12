@@ -8,11 +8,11 @@ export class LoadingService {
 
   constructor() { }
 
-  loadingTrue() {
+  show() {
     this.loading = true;
   }
 
-  loadingFalse() {
+  hide() {
     this.loading = false;
   }
 }

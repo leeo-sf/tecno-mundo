@@ -4,7 +4,7 @@ import { Product } from '../../../interface/Product';
 import { CommonModule, NgFor, NgIf, registerLocaleData } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Category } from '../../../interface/Category';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import localPt from '@angular/common/locales/pt';
@@ -20,7 +20,8 @@ registerLocaleData(localPt)
     FormsModule,
     NgIf,
     AddToCartComponent,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   providers: [
     NgFor,

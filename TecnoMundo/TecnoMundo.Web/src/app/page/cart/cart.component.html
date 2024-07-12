@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="cart-content">
+        <h3>Shopping Cart</h3>
+        <div class="info-cart" *ngFor="let product of cart.cartDetails">
+            <div class="info-content-product">
+                <div class="image-product">
+                    <img src="{{ product.product.imageUrl }}" alt="teste">
+                </div>
+    
+                <div class="infos-product">
+                    <p id="productName">{{ product.product.name }}</p>
+                    <p id="category">Category: <span>{{ product.product.category.name }}</span></p>
+                    <p id="amount">Amount: <span>{{ product.count }}</span></p>
+
+                    <div class="actions-cart">
+                        <a id="details" routerLink="/product-details/{{ product.productId }}">Details</a>
+                        <div class="separator"></div>
+                        <a id="save" routerLink="">Save</a>
+                        <div class="separator"></div>
+                        <a id="delete" routerLink="">Delete</a>
+                    </div>
+                </div>
+    
+                <div class="price">
+                    <p>R$ <span>{{ product.product.price | number:'1.2-2':'pt-BR' }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="purchase-amount-container">
+            <div class="purchase-amount-content">
+                <p id="title-subtotal">Subtotal ({{ cart.cartDetails.length }} products):</p>
+                <p id="subtotal">R$ <span>{{ cart.cartDetails[0].product.price | number:'1.2-2':'pt-BR' }}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
