@@ -18,8 +18,9 @@ Projeto backend em API's ASP.NET 8, frontend em Angular 9. Projeto voltado a ven
 
 ## Tecnologias Utilizadas
 
-- Docker compose.
+- Docker | Docker Compose.
 - RabbitMQ.
 - .NET 8.
-- Banco de dados MySQL.
-- Angular 9.
+- MySQL.
+- Angular 9, Angular Material.
+- Azure
