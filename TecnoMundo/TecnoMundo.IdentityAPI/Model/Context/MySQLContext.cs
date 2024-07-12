@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TecnoMundo.IdentityAPI.Utils;
 
 namespace GeekShopping.Identity.Model.Context
 {
@@ -15,5 +16,14 @@ namespace GeekShopping.Identity.Model.Context
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .Property(p => p.Id)
+                .HasValueGenerator<RandomIdValueGenerator>();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

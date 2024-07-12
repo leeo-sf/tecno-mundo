@@ -23,12 +23,12 @@ namespace GeekShopping.CouponAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.CouponAPI.Model.Coupon", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CouponCode")
                         .IsRequired()
@@ -47,13 +47,13 @@ namespace GeekShopping.CouponAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = 104819,
                             CouponCode = "GEEK_SHOPPING_10",
                             DiscountAmount = 10f
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = 907498,
                             CouponCode = "GEEK_SHOPPING_15",
                             DiscountAmount = 15f
                         });

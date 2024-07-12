@@ -7,6 +7,6 @@ namespace GeekShopping.CartAPI.Model.Base
     {
         [Key]
         [Column("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GeekShopping.CouponAPI.Model;
 using Microsoft.EntityFrameworkCore;
+using TecnoMundo.CouponAPI.Utils;
 
 namespace GeekShopping.CouponAPI.Model.Context
 {
@@ -11,20 +12,25 @@ namespace GeekShopping.CouponAPI.Model.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Coupon>()
+                .Property(p => p.Id)
+                .HasValueGenerator<RandomIdValueGenerator>();
 
             modelBuilder.Entity<Coupon>().HasData(new Coupon
             {
-                Id = 1,
+                Id = 104819,
                 CouponCode = "GEEK_SHOPPING_10",
                 DiscountAmount = 10
             });
             modelBuilder.Entity<Coupon>().HasData(new Coupon
             {
-                Id = 2,
+                Id = 907498,
                 CouponCode = "GEEK_SHOPPING_15",
                 DiscountAmount = 15
             });
+
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
