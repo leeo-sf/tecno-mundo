@@ -28,11 +28,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private _snackBar: MatSnackBar
-  ) {
-    authService.isLoggedIn$.subscribe((data) => {
-      this.isLogged = data
-    })
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({

@@ -13,11 +13,9 @@ import { MethodUtils } from '../../utils/MethodUtils';
   providedIn: 'root'
 })
 export class AuthService {
-  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private baseApiUrl: string = environment.baseApiUrlIdentity;
   private baseAuth: string = `${this.baseApiUrl}auth`;
   private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
-  isLoggedIn$ = this._isLoggedIn$.asObservable();
   userName: string = "";
 
   constructor(
@@ -26,14 +24,12 @@ export class AuthService {
     private format: FormatString,
     private utils: MethodUtils
   ) {
-    const token = this.validateToken();
-    this._isLoggedIn$.next(!!token);
+    this.validateToken();
   }
 
   signIn(user: UserLogin) {
     return this.httpClient.post<any>(this.baseAuth, user).pipe(
       tap((response) => {
-        this._isLoggedIn$.next(true);
         const tokenInfo = this.decodeToken(response.value.acessToken);
         localStorage.setItem("token", JSON.stringify(response.value.acessToken));
         localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
@@ -52,31 +48,30 @@ export class AuthService {
   }
 
   logOut() {
-    if (this._isLoggedIn$.getValue()) {
+    if (this.loggedInUser) {
       localStorage.clear();
       this.router.navigate(['/']);
     }
   }
 
-  private validateToken(): any {
+  get loggedInUser(): boolean {
+    return !!localStorage.getItem("token");
+  }
+
+  private validateToken(): void {
     try {
       const token = localStorage.getItem("token");
       if (this.tokenExpired(token)) {
         //token expired
-        localStorage.removeItem("token");
-        localStorage.removeItem("user-name");
-        localStorage.removeItem("user-id");
-        this._isLoggedIn$.next(false);
+        localStorage.clear();
         return;
       }
       
       const tokenInfo = this.decodeToken(String(token));
-      this._isLoggedIn$.next(!!token);
       this.userName = tokenInfo.unique_name;
-      return token;
     }
     catch (Error) {
-      this._isLoggedIn$.next(false);
+      return;
     }
   }
 

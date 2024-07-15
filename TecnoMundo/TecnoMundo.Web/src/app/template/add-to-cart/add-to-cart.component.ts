@@ -28,23 +28,21 @@ export class AddToCartComponent {
   ) {  }
 
   addToCart(): void {
-    this.authService.isLoggedIn$.subscribe((data) => {
-      if (!data) {
-        const message = "Access your account";
-        this.requestedOperationMessage(message);
-      }
-      else {
-        const token = JSON.parse(localStorage.getItem("token") ?? "");
-        const cart: Cart = this.setCart(this.product, this.amount);
+    if (!this.authService.loggedInUser) {
+      const message = "Access your account";
+      this.requestedOperationMessage(message);
+    }
+    else {
+      const token = JSON.parse(localStorage.getItem("token") ?? "");
+      const cart: Cart = this.setCart(this.product, this.amount);
 
-        this.cartService.serviceAddItemToCart(cart, token).subscribe((data) => {
-          const message = "Product added to cart";
-          this.requestedOperationMessage(message);
-        }, (error) => {
-          console.log(error);
-        });
-      }
-    })
+      this.cartService.serviceAddItemToCart(cart, token).subscribe((data) => {
+        const message = "Product added to cart";
+        this.requestedOperationMessage(message);
+      }, (error) => {
+        console.log(error);
+      });
+    }
   }
 
   private setCart(product: Product, count: number): Cart {
