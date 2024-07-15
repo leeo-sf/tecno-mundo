@@ -39,8 +39,8 @@
 
 
 .image-product {
-    width: 20%;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     background-color: white;
 }
 .image-product img {
@@ -114,6 +114,23 @@
 }
 #delete:hover {
     color: red;
+}
+
+
+.action-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.action-btn button {
+    color: #286fb0;
+    background: #181818;
+    border: none;
+}
+.action-btn button:hover {
+    text-decoration: underline;
+    transform: scale(1.08);
+    cursor: pointer;
 }
 
 

@@ -34,7 +34,6 @@ export class AddToCartComponent {
         this.requestedOperationMessage(message);
       }
       else {
-        console.log("Add to cart");
         const token = JSON.parse(localStorage.getItem("token") ?? "");
         const cart: Cart = this.setCart(this.product, this.amount);
 

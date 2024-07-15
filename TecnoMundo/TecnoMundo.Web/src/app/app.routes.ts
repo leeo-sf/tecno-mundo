@@ -59,5 +59,6 @@ export const routes: Routes = [
         component: CartComponent,
         //canActivate: [authGuard]
         resolve: { cart: cartResolve },
+        runGuardsAndResolvers: 'always'
     }
 ];

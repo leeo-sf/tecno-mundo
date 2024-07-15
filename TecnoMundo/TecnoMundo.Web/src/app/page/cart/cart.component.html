@@ -1,28 +1,32 @@
 <div class="container">
     <div class="cart-content">
         <h3>Shopping Cart</h3>
-        <div class="info-cart" *ngFor="let product of cart.cartDetails">
+        <div class="info-cart" *ngFor="let cartDetail of cart.cartDetails">
             <div class="info-content-product">
                 <div class="image-product">
-                    <img src="{{ product.product.imageUrl }}" alt="teste">
+                    <img src="{{ cartDetail.product.imageUrl }}" alt="teste">
                 </div>
     
                 <div class="infos-product">
-                    <p id="productName">{{ product.product.name }}</p>
-                    <p id="category">Category: <span>{{ product.product.category.name }}</span></p>
-                    <p id="amount">Amount: <span>{{ product.count }}</span></p>
+                    <p id="productName">{{ cartDetail.product.name }}</p>
+                    <p id="category">Category: <span>{{ cartDetail.product.category.name }}</span></p>
+                    <p id="amount">Amount: <span>{{ cartDetail.count }}</span></p>
 
                     <div class="actions-cart">
-                        <a id="details" routerLink="/product-details/{{ product.productId }}">Details</a>
+                        <a id="details" routerLink="/product-details/{{ cartDetail.productId }}">Details</a>
                         <div class="separator"></div>
-                        <a id="save" routerLink="">Save</a>
+                        <div class="action-btn">
+                            <button (click)="updateCart(cartDetail)" id="save">Save</button>
+                        </div>
                         <div class="separator"></div>
-                        <a id="delete" routerLink="">Delete</a>
+                        <div class="action-btn">
+                            <button (click)="deleteCart(cartDetail.id ?? 0)" id="delete">Delete</button>
+                        </div>
                     </div>
                 </div>
     
                 <div class="price">
-                    <p>R$ <span>{{ product.product.price | number:'1.2-2':'pt-BR' }}</span></p>
+                    <p>R$ <span>{{ cartDetail.product.price | number:'1.2-2':'pt-BR' }}</span></p>
                 </div>
             </div>
         </div>
