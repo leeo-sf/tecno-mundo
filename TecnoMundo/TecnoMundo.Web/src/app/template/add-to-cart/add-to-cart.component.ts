@@ -6,6 +6,7 @@ import { CartService } from '../../service/cart.service';
 import { Cart } from '../../../interface/Cart';
 import { CartHeader } from '../../../interface/CartHeader';
 import { CartDetails } from '../../../interface/CartDetails';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -24,7 +25,8 @@ export class AddToCartComponent {
   constructor(
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    private cartService: CartService
+    private cartService: CartService,
+    private loadingService: LoadingService
   ) {  }
 
   addToCart(): void {
@@ -33,13 +35,16 @@ export class AddToCartComponent {
       this.requestedOperationMessage(message);
     }
     else {
+      this.loadingService.show();
       const token = JSON.parse(localStorage.getItem("token") ?? "");
       const cart: Cart = this.setCart(this.product, this.amount);
 
       this.cartService.serviceAddItemToCart(cart, token).subscribe((data) => {
+        this.loadingService.hide();
         const message = "Product added to cart";
         this.requestedOperationMessage(message);
       }, (error) => {
+        this.loadingService.hide();
         console.log(error);
       });
     }

@@ -14,6 +14,7 @@ export class CartService {
   private baseApiUrlAddCart = `${this.baseApiUrl}add-cart`;
   private baseApiUrlUpdateCart = `${this.baseApiUrl}update-cart`;
   private baseApiUrlRemoveCart = `${this.baseApiUrl}remove-cart`;
+  private baseApiUrlClearCart = `${this.baseApiUrl}clear`;
   private baseApiUrlCheckout = `${this.baseApiUrl}checkout`;
 
   constructor(
@@ -53,8 +54,12 @@ export class CartService {
     return this.httpClient.delete<boolean>(`${this.baseApiUrlRemoveCart}/${cartId}`, { headers });
   }
 
-  serviceClearCart(userId: string, token: string) {
-
+  serviceClearCart(userId: number, token: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`
+    });
+    
+    return this.httpClient.delete<boolean>(`${this.baseApiUrlClearCart}/${userId}`, { headers });
   }
 
   serviceCheckout(cartHeader: CartHeader, token: string) {

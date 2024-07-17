@@ -1,6 +1,11 @@
-<div class="container">
+<div class="container" *ngIf="cart.cartDetails.length else emptyCart">
     <div class="cart-content">
-        <h3>Shopping Cart</h3>
+        <div class="container-info-cart">
+            <h3>Shopping Cart</h3>
+            <div class="delete-all-items">
+                <button (click)="clearCart()" id="delete-all-items">Delete all items</button>
+            </div>
+        </div>
         <div class="info-cart" *ngFor="let cartDetail of cart.cartDetails">
             <div class="info-content-product">
                 <div class="image-product">
@@ -32,9 +37,56 @@
         </div>
         <div class="purchase-amount-container">
             <div class="purchase-amount-content">
-                <p id="title-subtotal">Subtotal ({{ cart.cartDetails.length }} products):</p>
-                <p id="subtotal">R$ <span>{{ cart.cartDetails[0].product.price | number:'1.2-2':'pt-BR' }}</span></p>
+                <div class="title-subtotal">
+                    <p id="title-subtotal">
+                        Subtotal ({{ cart.cartDetails.length }} product <span id="moreThenOne" *ngIf="cart.cartDetails.length > 1 else oneProduct">s</span> 
+                        <ng-template #oneProduct>
+                            <span></span>
+                        </ng-template>
+                        ):
+                    </p>
+                </div>
+
+                <div class="subtotal">
+                    <p id="subtotal">R$ <span>{{ subTotal | number:'1.2-2':'pt-BR' }}</span></p>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="container-subtotal-selected-products">
+        <div class="msg-shipping">
+            <mat-icon aria-hidden="false" aria-label="Package" fontIcon="local_shipping"></mat-icon>
+            <p>Your order has <span>FREE shipping</span>.</p>
+        </div>
+        <div class="info-subtotal">
+            <p id="titleContainerSubtotal">
+                Subtotal ({{ cart.cartDetails.length }} product <span id="moreThenOneContainer" *ngIf="cart.cartDetails.length > 1 else oneProduct">s</span> 
+                <ng-template #oneProduct>
+                    <span></span>
+                </ng-template>
+                ):
+            </p>
+            <p> <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> </p>
+        </div>
+
+        <div class="container-coupon">
+            <input type="text" placeholder="Enter coupon">
+            <button>Apply</button>
+        </div>
+
+        <div class="container-checkout">
+            <button>Finalize order</button>
+        </div>
+    </div>
 </div>
+
+<ng-template #emptyCart>
+    <div class="container-empty">
+        <div class="empty-cart">
+            <h2>Your shopping cart is empty.</h2>
+            <p>Discover our products.</p>
+            <a routerLink="/products">Products</a>
+        </div>
+    </div>
+</ng-template>
