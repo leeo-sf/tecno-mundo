@@ -75,6 +75,38 @@ namespace GeekShopping.CartAPI.Controllers
             return Ok(status);
         }
 
+        [HttpDelete("clear/{userId}")]
+        public async Task<ActionResult<bool>> ClearCart(string userId)
+        {
+            var status = await _cartRepostory.ClearCart(userId);
+
+            return Ok(status);
+        }
+
+        [HttpPost("apply-coupon")]
+        public async Task<ActionResult<bool>> ApplyCouponToCart(
+            [FromHeader] string couponCode,
+            [FromHeader] string userId
+            )
+        {
+            string token = Request.Headers["Authorization"];
+            CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(couponCode, token.Replace("Bearer ", ""));
+            if (coupon.Id == 0) return BadRequest();
+
+            var status = await _cartRepostory.ApplyCuopon(userId, couponCode);
+
+            return Ok(status);
+        }
+
+        [HttpPost("remove-coupon")]
+        public async Task<ActionResult<bool>> RemoveCouponToCart(
+            [FromHeader] string userId)
+        {
+            var status = await _cartRepostory.RemoveCoupon(userId);
+
+            return Ok(status);
+        }
+
         [HttpPost("checkout")]
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
         {
@@ -84,7 +116,7 @@ namespace GeekShopping.CartAPI.Controllers
             if (cart == null) return NotFound();
             if (!string.IsNullOrEmpty(vo.CouponCode))
             {
-                CouponVO coupon = await _couponRepostory.GetCouponByCouoponCode(vo.CouponCode, token);
+                CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(vo.CouponCode, token.Replace("Bearer ", ""));
                 if (vo.DiscountAmount != coupon.DiscountAmount)
                 {
                     return StatusCode(412);

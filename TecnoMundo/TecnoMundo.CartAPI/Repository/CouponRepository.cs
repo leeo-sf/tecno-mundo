@@ -16,10 +16,10 @@ namespace GeekShopping.CartAPI.Repository
             _client = client;
         }
 
-        public async Task<CouponVO> GetCouponByCouoponCode(string couponCode, string token)
+        public async Task<CouponVO> GetCouponByCouponCode(string couponCode, string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _client.GetAsync($"/api/v1/coupon/{couponCode}");
+            var response = await _client.GetAsync($"/api/v1/Coupon/{couponCode}");
             var content = await response.Content.ReadAsStringAsync();
             if (response.StatusCode != HttpStatusCode.OK) return new CouponVO();
             return JsonSerializer.Deserialize<CouponVO>(content,

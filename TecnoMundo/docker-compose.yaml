@@ -1,9 +1,11 @@
 services:
   db:
-    image: mysql:5.7
+    image: leoof/tecnomundo-database:latest
     restart: always
-    env_file:
-      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=superPassword@root
+      - MYSQL_USER=userAdmin
+      - MYSQL_PASSWORD=pwdAdmin@tecno_mundo
     ports:
       - '3307:3306'
     networks:
@@ -16,7 +18,7 @@ services:
 
 
   rabbit_mq:
-    image: rabbitmq:3.13-management
+    image: leoof/tecnomundo-rabbitmq:latest
     container_name: rabbitmq
     restart: always
     ports:
@@ -27,6 +29,7 @@ services:
 
 
   identity:
+    image: leoof/tecnomundo-identity-server:v1
     container_name: "identity"
     build:
       context: TecnoMundo.IdentityAPI
@@ -37,13 +40,12 @@ services:
     restart: always
     networks:
       - backend
-    env_file:
-      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${IDENTITY_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_identity_api;Uid=root;Pwd=superPassword@root;
     
   
   product:
+    image: leoof/tecnomundo-product:v1
     container_name: "product"
     build:
       context: TecnoMundo.ProductAPI
@@ -52,16 +54,15 @@ services:
       - identity
     ports:
       - '4440:8080'
-    env_file:
-      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${PRODUCT_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_product_api;Uid=root;Pwd=superPassword@root;
     restart: always
     networks:
       - backend
   
 
   coupon:
+    image: leoof/tecnomundo-coupon:v1
     container_name: "coupon"
     build:
       context: TecnoMundo.CouponAPI
@@ -71,54 +72,53 @@ services:
     ports:
       - '4445:8080'
     restart: always
-    env_file:
-      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${COUPON_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_coupon_api;Uid=root;Pwd=superPassword@root;
     networks:
       - backend
   
 
   cart:
+    image: leoof/tecnomundo-cart:v1
     container_name: 'cart'
     build: 
       context: 'TecnoMundo.CartAPI'
     depends_on:
+      - product
       - db
       - coupon
       - rabbit_mq
     ports:
-      - '4451:8080'
+      - '4450:8080'
     restart: always
-    env_file:
-      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${CART_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_cart_api;Uid=root;Pwd=superPassword@root;
       - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
-      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+      - RabbitMQServer__Password=guest
+      - RabbitMQServer__Username=guest
+      - ServiceUrls__ProductAPI=http://product:8080
     networks:
       - backend
   
 
   payment:
+    image: leoof/tecnomundo-payment:v1
     container_name: 'payment'
     restart: always
     build: 
       context: 'TecnoMundo.PaymentAPI'
     depends_on:
       - rabbit_mq
-    env_file:
-      - .env
     environment:
       - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
-      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+      - RabbitMQServer__Password=guest
+      - RabbitMQServer__Username=guest
     networks:
       - backend
   
 
   order:
+    image: leoof/tecnomundo-order:v1
     container_name: 'order'
     restart: always
     build: 
@@ -127,13 +127,11 @@ services:
       - rabbit_mq
       - db
       - identity
-    env_file:
-      - .env
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;Port=${DATABASE_PORT};DataBase=${ORDER_DATABASE};Uid=${MYSQL_USR};Pwd=${MYSQL_ROOT_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_order_api;Uid=root;Pwd=superPassword@root;
       - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=${RABBIT_MQ_PASSWORD}
-      - RabbitMQServer__Username=${RABBIT_MQ_USER}
+      - RabbitMQServer__Password=guest
+      - RabbitMQServer__Username=guest
     networks:
       - backend
 
@@ -144,4 +142,3 @@ volumes:
 
 networks:
   backend:
-    driver: bridge
