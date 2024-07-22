@@ -8,6 +8,7 @@ import { CartDetails } from '../../../interface/CartDetails';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../template/dialog/dialog.component';
 import { CartService } from '../../service/cart.service';
+import { ApplyCouponComponent } from '../../template/apply-coupon/apply-coupon.component';
 
 registerLocaleData(localPt)
 
@@ -19,7 +20,8 @@ registerLocaleData(localPt)
     MatIconModule,
     RouterLink,
     NgIf,
-    MatIconModule
+    MatIconModule,
+    ApplyCouponComponent
   ],
   providers: [ NgFor ],
   templateUrl: './cart.component.html',
@@ -62,7 +64,7 @@ export class CartComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-        this.cartService.serviceRemoveFromCart(idCartDetails, JSON.parse(token)).subscribe((result) => {
+        this.cartService.serviceClearCart(idCartDetails, JSON.parse(token)).subscribe((result) => {
           if (result) {
             this.router.navigate(['/my-cart']);
           }

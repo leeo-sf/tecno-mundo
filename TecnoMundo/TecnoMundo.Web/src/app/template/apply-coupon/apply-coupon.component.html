@@ -1,0 +1,17 @@
+<div class="coupon">
+    <div class="apply-coupon">
+        <input #inputElement type="text" placeholder="Enter coupon" [disabled]="false">
+        <button (click)="applyCoupon(inputElement.value)" [disabled]="false">Apply</button>
+    </div>
+    
+    <div class="container-coupon" *ngIf="cart.cartHeader.couponCode">
+        <div class="coupon-code">
+            <button>x</button>
+            <p>{{ cart.cartHeader.couponCode }}</p>
+        </div>
+
+        <div class="discount-amount">
+            <p>R$ <span>10</span></p>
+        </div>
+    </div>
+</div>
