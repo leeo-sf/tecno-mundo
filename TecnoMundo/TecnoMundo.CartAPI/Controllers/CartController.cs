@@ -83,11 +83,9 @@ namespace GeekShopping.CartAPI.Controllers
             return Ok(status);
         }
 
-        [HttpPost("apply-coupon")]
-        public async Task<ActionResult<bool>> ApplyCouponToCart(
-            [FromHeader] string couponCode,
-            [FromHeader] string userId
-            )
+        [HttpPost("apply-coupon/{userId}")]
+        public async Task<ActionResult<bool>> ApplyCouponToCart([FromRoute] string userId, 
+            [FromHeader(Name = "Coupon-Code")] string couponCode)
         {
             string token = Request.Headers["Authorization"];
             CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(couponCode, token.Replace("Bearer ", ""));
