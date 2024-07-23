@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../template/dialog/dialog.component';
 import { CartService } from '../../service/cart.service';
 import { ApplyCouponComponent } from '../../template/apply-coupon/apply-coupon.component';
+import { Coupon } from '../../../interface/Coupon';
 
 registerLocaleData(localPt)
 
@@ -30,6 +31,7 @@ registerLocaleData(localPt)
 export class CartComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   public cart!: Cart;
+  public appliedCoupon!: Coupon;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,14 +43,18 @@ export class CartComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.cart = data["cart"];
     });
-
-    console.log(this.subTotal);
   }
 
   get subTotal(): number {
     return this.cart.cartDetails.reduce((x, item) => {
       return x + (item.product.price * item.count);
     }, 0);
+  }
+
+  get subtotalWithDiscountApplied(): number {
+    const subtotal = this.subTotal;
+
+    return subtotal - this.appliedCoupon.discountAmount;
   }
 
   updateCart(cartDetail: CartDetails): void {
@@ -64,7 +70,7 @@ export class CartComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-        this.cartService.serviceClearCart(idCartDetails, JSON.parse(token)).subscribe((result) => {
+        this.cartService.serviceRemoveFromCart(idCartDetails, JSON.parse(token)).subscribe((result) => {
           if (result) {
             this.router.navigate(['/my-cart']);
           }
@@ -90,6 +96,10 @@ export class CartComponent implements OnInit {
         });
       }
     });
+  }
+
+  onCouponApplied(coupon: Coupon) {
+    this.appliedCoupon = coupon;
   }
 
 }

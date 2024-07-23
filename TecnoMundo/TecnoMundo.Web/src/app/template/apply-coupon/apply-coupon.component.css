@@ -61,3 +61,9 @@
 .discount-amount p span {
     font-size: 1.0rem;
 }
+
+
+#msgInvalidCoupon {
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

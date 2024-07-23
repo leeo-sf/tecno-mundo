@@ -17,6 +17,7 @@ export class CartService {
   private baseApiUrlClearCart = `${this.baseApiUrl}clear`;
   private baseApiUrlCheckout = `${this.baseApiUrl}checkout`;
   private baseApiUrlApplyCoupon = `${this.baseApiUrl}apply-coupon`;
+  private baseApiUrlRemoveCoupon = `${this.baseApiUrl}remove-coupon`;
 
   constructor(
     private httpClient: HttpClient
@@ -70,12 +71,27 @@ export class CartService {
   serviceApplyCoupon(couponCode: string, userId: string, token: string): Observable<boolean> {
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${token}`,
-      "userId": userId,
-      "couponCode": couponCode
+      'Content-Type': 'application/json',
+      "Coupon-Code": couponCode
     });
     
-    return this.httpClient.post<boolean>(this.baseApiUrlApplyCoupon, { headers: headers });
+    return this.httpClient.post<boolean>(`${this.baseApiUrlApplyCoupon}/${userId}`, 
+      {}, 
+      { headers }
+    );
   }
 
-  //serviceRemoveCoupon(userId: string, token: string) {}
+  serviceRemoveCoupon(userId: string, token: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      "userId": userId
+    });
+
+    return this.httpClient.post<boolean>(
+      this.baseApiUrlRemoveCoupon,
+      {},
+      { headers: headers }
+    );
+  }
 }

@@ -59,6 +59,11 @@
             <mat-icon aria-hidden="false" aria-label="Package" fontIcon="local_shipping"></mat-icon>
             <p>Your order has <span>FREE shipping</span>.</p>
         </div>
+
+        <div class="container-coupon">
+            <app-apply-coupon [cart]="cart" (couponApplied)="onCouponApplied($event)"></app-apply-coupon>
+        </div>
+
         <div class="info-subtotal">
             <p id="titleContainerSubtotal">
                 Subtotal ({{ cart.cartDetails.length }} product <span id="moreThenOneContainer" *ngIf="cart.cartDetails.length > 1 else oneProduct">s</span> 
@@ -67,11 +72,21 @@
                 </ng-template>
                 ):
             </p>
-            <p> <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> </p>
-        </div>
+            <div class="sub-total">
+                <p *ngIf="!cart.cartHeader.couponCode else notCouponApplied"> 
+                    <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> 
+                </p>
 
-        <div class="container-coupon">
-            <app-apply-coupon [cart]="cart"></app-apply-coupon>
+                <ng-template #notCouponApplied>
+                    <p [ngStyle]="{'text-decoration': 'line-through', 'text-decoration-color': 'red'}"> 
+                        <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> 
+                    </p>
+                </ng-template>
+
+                <div class="discount" *ngIf="cart.cartHeader.couponCode">
+                    <p><span id="moeda">R$</span> <span id="subTotalDiscount">{{ subtotalWithDiscountApplied | number:'1.2-2':'pt-BR' }}</span></p>
+                </div>
+            </div>
         </div>
 
         <div class="container-checkout">
