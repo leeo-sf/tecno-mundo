@@ -42,7 +42,8 @@ export class CartService {
 
   serviceUpdateToCart(cart: Cart, token: string): Observable<Cart> {
     const headers = new HttpHeaders({
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
 
     return this.httpClient.put<Cart>(this.baseApiUrlUpdateCart, JSON.stringify(cart), { headers });

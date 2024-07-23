@@ -15,9 +15,20 @@
                 <div class="infos-product">
                     <p id="productName">{{ cartDetail.product.name }}</p>
                     <p id="category">Category: <span>{{ cartDetail.product.category.name }}</span></p>
-                    <p id="amount">Amount: <span>{{ cartDetail.count }}</span></p>
 
                     <div class="actions-cart">
+                        <div class="amount">
+                            <label id="amount" for="Amount">Amount:</label>
+                            <select name="amount" [(ngModel)]="qtdUpdate">
+                                <option value="0" selected disabled>QTD {{ cartDetail.count }}</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="separator"></div>
                         <a id="details" routerLink="/product-details/{{ cartDetail.productId }}">Details</a>
                         <div class="separator"></div>
                         <div class="action-btn">
@@ -27,6 +38,7 @@
                         <div class="action-btn">
                             <button (click)="deleteCart(cartDetail.id ?? 0)" id="delete">Delete</button>
                         </div>
+                        <div class="separator"></div>
                     </div>
                 </div>
     

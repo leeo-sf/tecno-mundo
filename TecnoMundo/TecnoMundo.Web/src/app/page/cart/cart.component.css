@@ -116,12 +116,12 @@
 .actions-cart {
     display: flex;
     justify-content: flex-start;
-    width: 60%;
+    width: 100%;
 }
 .actions-cart a {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 90%;
     align-items: center;
     color: #286fb0;
     text-decoration: none;
@@ -141,7 +141,7 @@
 .action-btn {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 90%;
 }
 .action-btn button {
     color: #286fb0;
@@ -327,4 +327,13 @@
 }
 .discount p {
     color: green;
+}
+
+
+.amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 20px;
+    width: 80%;
 }

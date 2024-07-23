@@ -10,6 +10,8 @@ import { DialogComponent } from '../../template/dialog/dialog.component';
 import { CartService } from '../../service/cart.service';
 import { ApplyCouponComponent } from '../../template/apply-coupon/apply-coupon.component';
 import { Coupon } from '../../../interface/Coupon';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 registerLocaleData(localPt)
 
@@ -22,7 +24,8 @@ registerLocaleData(localPt)
     RouterLink,
     NgIf,
     MatIconModule,
-    ApplyCouponComponent
+    ApplyCouponComponent,
+    FormsModule
   ],
   providers: [ NgFor ],
   templateUrl: './cart.component.html',
@@ -32,11 +35,13 @@ export class CartComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   public cart!: Cart;
   public appliedCoupon!: Coupon;
+  public qtdUpdate: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +63,23 @@ export class CartComponent implements OnInit {
   }
 
   updateCart(cartDetail: CartDetails): void {
-    console.log("update");
+    const token: string = JSON.parse(localStorage.getItem("token") ?? "");
+    cartDetail.count = this.qtdUpdate;
+
+    let cart: Cart = {
+      cartHeader: this.cart.cartHeader,
+      cartDetails: [cartDetail]
+    }
+    
+    this.cartService.serviceUpdateToCart(cart, token).subscribe((result) => {
+      this.router.navigate(['/my-cart']);
+    }, (error) => {
+      this._snackBar.open("Unable to update quantity", "Close", {
+        horizontalPosition: "end",
+        verticalPosition: "top",
+        duration: 3 * 1000
+      });
+    });
   }
 
   deleteCart(idCartDetails: number): void {
