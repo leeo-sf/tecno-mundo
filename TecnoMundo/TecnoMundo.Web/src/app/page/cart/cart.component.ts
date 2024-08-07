@@ -12,6 +12,7 @@ import { ApplyCouponComponent } from '../../template/apply-coupon/apply-coupon.c
 import { Coupon } from '../../../interface/Coupon';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FinalizeOrder } from '../../../interface/FinalizeOrder';
 
 registerLocaleData(localPt)
 
@@ -42,9 +43,12 @@ export class CartComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) {
+    console.log("constructor");
+  }
 
   ngOnInit(): void {
+    console.log("ngOnInit");
     this.route.data.subscribe((data) => {
       this.cart = data["cart"];
     });
@@ -121,6 +125,14 @@ export class CartComponent implements OnInit {
 
   onCouponApplied(coupon: Coupon) {
     this.appliedCoupon = coupon;
+  }
+
+  finalizeOrder(): void {
+    const checkout: FinalizeOrder = {
+      cart: this.cart,
+      coupon: this.appliedCoupon
+    }
+    this.router.navigateByUrl('finalize-order', { state: checkout });
   }
 
 }

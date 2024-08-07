@@ -3,7 +3,7 @@ import { environment } from '../../environment/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cart } from '../../interface/Cart';
-import { CartHeader } from '../../interface/CartHeader';
+import { Checkout } from '../../interface/Checkout';
 
 @Injectable({
   providedIn: 'root'
@@ -65,8 +65,17 @@ export class CartService {
     return this.httpClient.delete<boolean>(`${this.baseApiUrlClearCart}/${userId}`, { headers });
   }
 
-  serviceCheckout(cartHeader: CartHeader, token: string) {
-
+  serviceCheckout(checkout: Checkout, token: string): Observable<Checkout> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    
+    return this.httpClient.post<Checkout>(
+      this.baseApiUrlCheckout, 
+      JSON.stringify(checkout),
+      { headers }
+    );
   }
 
   serviceApplyCoupon(couponCode: string, userId: string, token: string): Observable<boolean> {

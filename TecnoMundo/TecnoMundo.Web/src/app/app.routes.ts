@@ -10,6 +10,7 @@ import { ProductComponent } from './page/product/product.component';
 import { ProductTemplateComponent } from './template/product-template/product-template.component';
 import { CartComponent } from './page/cart/cart.component';
 import { cartResolve } from './service/_guard/cartResolve';
+import { FinalizeOrderComponent } from './page/finalize-order/finalize-order.component';
 
 export const routes: Routes = [
     {
@@ -57,8 +58,13 @@ export const routes: Routes = [
     {
         path: "my-cart",
         component: CartComponent,
+        runGuardsAndResolvers: 'always',
         //canActivate: [authGuard]
         resolve: { cart: cartResolve },
-        runGuardsAndResolvers: 'always'
+    },
+    {
+        path: "finalize-order",
+        component: FinalizeOrderComponent,
+        canActivate: [authGuard]
     }
 ];
