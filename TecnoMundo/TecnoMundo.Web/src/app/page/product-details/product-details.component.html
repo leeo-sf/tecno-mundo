@@ -19,7 +19,7 @@
     <div class="action-product">
         <div class="price">
             <span id="moeda">R$</span>
-            <span id="val-price">{{ product.price.toFixed(2) }}</span>
+            <span id="val-price">{{ product.price | number:'1.2-2':'pt-BR' }}</span>
         </div>
     
         <div class="btns-actions">

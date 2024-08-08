@@ -1,22 +1,26 @@
 <div *ngIf="this.listOfProducts.length != 0 else productNotFound" class="content">
     <div *ngFor="let product of listOfProducts">
         <div class="product">
-            <a href="/product-details/{{product.id}}">
+            <a routerLink="/product-details/{{product.id}}">
                 <div class="img-product">
                     <img src="{{ product.imageUrl }}" alt="nome">
                 </div>
             </a>
 
             <div class="content-product">
-                <a href="/product-details/{{product.id}}">
+                <a routerLink="/product-details/{{product.id}}">
                     <div class="content-name">
                         <p id="productName">{{ product.name }}</p>
                     </div>
                 </a>
+
+                <div class="divider">
+                    <hr>
+                </div>
     
                 <div class="action">
                     <div class="price">
-                        <p>R$ <span id="productPrice">{{ product.price.toFixed(2) }}</span></p>
+                        <p>R$ <span id="productPrice">{{ product.price | number:'1.2-2':'pt-BR' }}</span></p>
                     </div>
                     <app-add-to-cart class="btn-add-cart" [product]="product" [amount]="1"></app-add-to-cart>
                 </div>

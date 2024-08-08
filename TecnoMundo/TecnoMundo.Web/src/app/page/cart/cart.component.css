@@ -1,0 +1,339 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 6%;
+    width: 100%;
+}
+
+
+.container-empty {
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+
+.cart-content {
+    width: 80%;
+    padding: 10px;
+    margin: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: rgb(231,231,231);
+    box-shadow: 3px 3px 3px 3px rgba(231, 231, 231);
+}
+
+
+.container-info-cart {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    padding: 10px;
+}
+.container-info-cart h3 {
+    font-size: 2.0rem;
+    font-family: Montserrat;
+}
+.delete-all-items button {
+    border: none;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: #286fb0;
+}
+
+
+.info-cart {
+    padding: 15px;
+    background-color: #181818;
+}
+
+
+.info-content-product {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+    border-bottom: 1px solid crimson;
+}
+
+
+.image-product {
+    width: 20%;
+    height: 200px;
+    background-color: white;
+}
+.image-product img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.infos-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20px;
+    width: 60%;
+}
+
+
+#productName {
+    font-size: 1.4rem;
+    color: white;
+    line-height: 1.2;
+}
+#category, #amount {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #5F5D6B;
+}
+.infos-product p span {
+    color: rgb(231,231,231);
+}
+
+
+.price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 20%;
+}
+.price p {
+    font-size: 1.2rem;
+    color: crimson;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.price p span {
+    font-size: 1.7rem;
+    color: white;
+}
+
+
+.actions-cart {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.actions-cart a {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    align-items: center;
+    color: #286fb0;
+    text-decoration: none;
+}
+.actions-cart a:hover {
+    text-decoration: underline;
+    transform: scale(1.08);
+}
+#save:hover {
+    color: green;
+}
+#delete:hover {
+    color: red;
+}
+
+
+.action-btn {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+.action-btn button {
+    color: #286fb0;
+    background: #181818;
+    border: none;
+}
+.action-btn button:hover {
+    text-decoration: underline;
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+
+.separator {
+    background-color: crimson;
+    width: 5px;
+    height: 100%;
+}
+
+
+.purchase-amount-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1.3%;
+}
+.purchase-amount-content p {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.0rem;
+}
+.purchase-amount-content .title-subtotal {
+    width: 60%;
+    height: 40px;
+}
+#title-subtotal {
+    font-size: 1.4rem;
+    font-family: Montserrat;
+    padding: 10px;
+}
+#moreThenOne {
+    font-size: 1.4rem;
+    font-family: Montserrat;
+}
+.purchase-amount-content .subtotal {
+    display: flex;
+    justify-content: flex-end;
+
+    width: 20%;
+}
+#subtotal {
+    padding: 10px;
+    letter-spacing: 2px;
+    font-size: 1.0rem;
+    color: crimson;
+    background-color: #181818;
+    border-radius: 10px;
+}
+#subtotal span {
+    margin-left: 8px;
+    color: rgb(231,231,231);
+}
+.purchase-amount-content p span {
+    font-size: 1.7rem;
+}
+
+
+.container-subtotal-selected-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 20%;
+    height: 230px;
+    margin: 20px;
+    background-color: rgb(231,231,231);
+    box-shadow: 3px 3px 3px 3px rgba(231, 231, 231);
+}
+
+
+.info-subtotal {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 25px;
+}
+.info-subtotal p {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.0rem;
+}
+#moeda {
+    margin-right: 5px;
+}
+
+
+.container-coupon {
+    width: 100%;
+    height: 30px;
+}
+
+
+.container-checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30px;
+}
+.container-checkout button {
+    width: 90%;
+    height: 100%;
+    background: linear-gradient(
+        to left,
+        rgb(226, 51, 86),
+        rgb(255, 102, 128)
+    );
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+.container-checkout button:hover {
+    transform: scale(1.05);
+}
+
+
+.msg-shipping {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+
+.msg-shipping p {
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #699934;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+.msg-shipping p span {
+    font-size: 0.9rem;
+    color: rgb(16, 110, 16);
+}
+
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: rgb(231,231,231);
+    padding: 30px;
+}
+
+
+.empty-cart h2 {
+    font-size: 1.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.empty-cart p {
+    font-size: 1.1rem;
+    font-family: serif;
+}
+.empty-cart a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 30px;
+    text-decoration: none;
+    color: rgb(231,231,231);
+    background-color: crimson;
+    border-radius: 5px;
+}
+
+
+.sub-total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.discount p {
+    color: green;
+}
+
+
+.amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 20px;
+    width: 80%;
+}

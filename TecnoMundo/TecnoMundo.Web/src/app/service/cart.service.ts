@@ -3,7 +3,7 @@ import { environment } from '../../environment/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cart } from '../../interface/Cart';
-import { CartHeader } from '../../interface/CartHeader';
+import { Checkout } from '../../interface/Checkout';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,10 @@ export class CartService {
   private baseApiUrlAddCart = `${this.baseApiUrl}add-cart`;
   private baseApiUrlUpdateCart = `${this.baseApiUrl}update-cart`;
   private baseApiUrlRemoveCart = `${this.baseApiUrl}remove-cart`;
+  private baseApiUrlClearCart = `${this.baseApiUrl}clear`;
   private baseApiUrlCheckout = `${this.baseApiUrl}checkout`;
+  private baseApiUrlApplyCoupon = `${this.baseApiUrl}apply-coupon`;
+  private baseApiUrlRemoveCoupon = `${this.baseApiUrl}remove-coupon`;
 
   constructor(
     private httpClient: HttpClient
@@ -39,7 +42,8 @@ export class CartService {
 
   serviceUpdateToCart(cart: Cart, token: string): Observable<Cart> {
     const headers = new HttpHeaders({
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
 
     return this.httpClient.put<Cart>(this.baseApiUrlUpdateCart, JSON.stringify(cart), { headers });
@@ -53,15 +57,51 @@ export class CartService {
     return this.httpClient.delete<boolean>(`${this.baseApiUrlRemoveCart}/${cartId}`, { headers });
   }
 
-  serviceClearCart(userId: string, token: string) {
-
+  serviceClearCart(userId: number, token: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`
+    });
+    
+    return this.httpClient.delete<boolean>(`${this.baseApiUrlClearCart}/${userId}`, { headers });
   }
 
-  serviceCheckout(cartHeader: CartHeader, token: string) {
-
+  serviceCheckout(checkout: Checkout, token: string): Observable<Checkout> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    
+    return this.httpClient.post<Checkout>(
+      this.baseApiUrlCheckout, 
+      JSON.stringify(checkout),
+      { headers }
+    );
   }
 
-  //serviceApplyCoupon(cart: Cart, couponCode: string, token: string) {}
+  serviceApplyCoupon(couponCode: string, userId: string, token: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      "Coupon-Code": couponCode
+    });
+    
+    return this.httpClient.post<boolean>(`${this.baseApiUrlApplyCoupon}/${userId}`, 
+      {}, 
+      { headers }
+    );
+  }
 
-  //serviceRemoveCoupon(userId: string, token: string) {}
+  serviceRemoveCoupon(userId: string, token: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      "userId": userId
+    });
+
+    return this.httpClient.post<boolean>(
+      this.baseApiUrlRemoveCoupon,
+      {},
+      { headers: headers }
+    );
+  }
 }

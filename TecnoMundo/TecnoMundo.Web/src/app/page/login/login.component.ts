@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -44,9 +46,12 @@ export class LoginComponent implements OnInit {
       return
     }
 
+    this.loadingService.show();
     this.authService.signIn(this.loginForm.value).subscribe((response) => {
+      this.loadingService.hide();
       this.router.navigate(['']);
     }, (error) => {
+      this.loadingService.hide();
       if (error.error.value) {
         this._snackBar.open(error.error.value, "close", { duration: 3 * 1000 });
       }
