@@ -94,9 +94,8 @@ services:
     environment:
       - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_cart_api;Uid=root;Pwd=superPassword@root;
       - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=guest
-      - RabbitMQServer__Username=guest
       - ServiceUrls__ProductAPI=http://product:8080
+      - ServiceUrls__CouponAPI=http://coupon:8080
     networks:
       - backend
   

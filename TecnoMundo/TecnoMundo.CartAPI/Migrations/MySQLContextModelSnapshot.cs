@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GeekShopping.CartAPI.Migrations
+namespace TecnoMundo.CartAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
     partial class MySQLContextModelSnapshot : ModelSnapshot
@@ -44,8 +44,6 @@ namespace GeekShopping.CartAPI.Migrations
 
                     b.HasIndex("CartHeaderId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("cart_detail");
                 });
 
@@ -73,60 +71,6 @@ namespace GeekShopping.CartAPI.Migrations
                     b.ToTable("cart_header");
                 });
 
-            modelBuilder.Entity("GeekShopping.CartAPI.Model.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("GeekShopping.CartAPI.Model.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategory");
-                });
-
             modelBuilder.Entity("GeekShopping.CartAPI.Model.CartDetail", b =>
                 {
                     b.HasOne("GeekShopping.CartAPI.Model.CartHeader", "CartHeader")
@@ -135,26 +79,7 @@ namespace GeekShopping.CartAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GeekShopping.CartAPI.Model.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("CartHeader");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("GeekShopping.CartAPI.Model.Product", b =>
-                {
-                    b.HasOne("GeekShopping.CartAPI.Model.ProductCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
