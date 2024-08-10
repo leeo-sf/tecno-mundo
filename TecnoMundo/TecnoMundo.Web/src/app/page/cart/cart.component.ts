@@ -43,12 +43,9 @@ export class CartComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private _snackBar: MatSnackBar
-  ) {
-    console.log("constructor");
-  }
+  ) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit");
     this.route.data.subscribe((data) => {
       this.cart = data["cart"];
     });
@@ -132,7 +129,7 @@ export class CartComponent implements OnInit {
       cart: this.cart,
       coupon: this.appliedCoupon
     }
-    this.router.navigateByUrl('finalize-order', { state: checkout });
+    this.router.navigate(['finalize-order'], { state: { finalizeOrder: checkout } });
   }
 
 }

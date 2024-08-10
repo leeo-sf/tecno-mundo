@@ -1,0 +1,122 @@
+.container-order-made {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5%;
+}
+
+.content-order-made {
+    width: 60%;
+    background: rgb(231,231,231);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgb(0, 137, 0);
+    padding: 10px;
+    height: 80px;
+}
+.img-order-made {
+    width: 80px;
+    height: 80px;
+}
+.img-order-made img {
+    width: 100%;
+    height: 100%;
+}
+.header h3 {
+    font-size: 2.0rem;
+    padding-left: 1%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.space {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.info-order-made {
+    margin: 20px;
+}
+
+.info-order {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 150px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.payment-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(226, 226, 0);
+    width: 100%;
+    height: 30px;
+}
+
+.purchase-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+    height: 100%;
+}
+
+.space-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-item label {
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.form-item span {
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.container-info-products {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.info-products {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.image-product {
+    width: 25%;
+    height: 130px;
+    background-color: white;
+}
+.image-product img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.details-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 10px;
+    width: 80%;
+}
+.details-product a {
+    color: #286fb0;
+}

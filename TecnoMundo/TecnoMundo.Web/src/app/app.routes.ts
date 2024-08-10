@@ -11,6 +11,8 @@ import { ProductTemplateComponent } from './template/product-template/product-te
 import { CartComponent } from './page/cart/cart.component';
 import { cartResolve } from './service/_guard/cartResolve';
 import { FinalizeOrderComponent } from './page/finalize-order/finalize-order.component';
+import { PurchaseMadeComponent } from './template/purchase-made/purchase-made.component';
+import { routeGuard } from './service/_guard/route.guard';
 
 export const routes: Routes = [
     {
@@ -65,6 +67,11 @@ export const routes: Routes = [
     {
         path: "finalize-order",
         component: FinalizeOrderComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard, routeGuard]
+    },
+    {
+        path: "finalize-order/order",
+        component: PurchaseMadeComponent,
+        canActivate: [authGuard, routeGuard]
     }
 ];
