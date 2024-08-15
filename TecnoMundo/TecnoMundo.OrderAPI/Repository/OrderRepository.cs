@@ -1,6 +1,7 @@
 ﻿using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
+using TecnoMundo.OrderAPI.Model;
 
 namespace GeekShopping.OrderAPI.Repository
 {
@@ -33,6 +34,20 @@ namespace GeekShopping.OrderAPI.Repository
                 header.PaymentStatus = status;
                 await _db.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Order>> GetAllOrder(string profileId)
+        {
+            await using var _db = new MySQLContext(_context);
+            var orderList = new List<Order>();
+            var orderHeader = await _db.Headers.Where(x => x.UserId == profileId).ToListAsync();
+            foreach(var order in orderHeader)
+            {
+                var orderDetails = await _db.Details.Where(x => x.OrderHeaderId == order.Id).ToListAsync();
+                orderList.Add(new Order(order, orderDetails));
+            }
+
+            return orderList;
         }
     }
 }
