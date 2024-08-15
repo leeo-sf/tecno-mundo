@@ -36,18 +36,15 @@ namespace GeekShopping.OrderAPI.Repository
             }
         }
 
-        public async Task<List<Order>> GetAllOrder(string profileId)
+        public async Task<List<OrderHeader>> GetAllOrder(string profileId)
         {
             await using var _db = new MySQLContext(_context);
-            var orderList = new List<Order>();
-            var orderHeader = await _db.Headers.Where(x => x.UserId == profileId).ToListAsync();
-            foreach(var order in orderHeader)
-            {
-                var orderDetails = await _db.Details.Where(x => x.OrderHeaderId == order.Id).ToListAsync();
-                orderList.Add(new Order(order, orderDetails));
-            }
-
-            return orderList;
+            var orderHeaders = await _db.Headers
+                .Include(x => x.OrderDetails)
+                .Where(o => o.UserId == profileId)
+                .OrderByDescending(x => x.DateTime)
+                .ToListAsync();
+            return orderHeaders;
         }
     }
 }

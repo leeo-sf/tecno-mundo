@@ -7,6 +7,6 @@ namespace GeekShopping.OrderAPI.Repository
     {
         Task<bool> AddOrder(OrderHeader header);
         Task UpdateOrderPaymentStatus(long orderHeaderId, bool status);
-        Task<List<Order>> GetAllOrder(string profileId);
+        Task<List<OrderHeader>> GetAllOrder(string profileId);
     }
 }
