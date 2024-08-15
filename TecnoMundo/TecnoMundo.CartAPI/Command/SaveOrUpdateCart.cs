@@ -61,7 +61,6 @@ namespace GeekShopping.CartAPI.Command
                 else
                 {
                     cart.CartDetails.FirstOrDefault().Product = null;
-                    cart.CartDetails.FirstOrDefault().Count = cartDetail.Count;
                     cart.CartDetails.FirstOrDefault().Id = cartDetail.Id;
                     cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetail.CartHeaderId;
                     await _repository.UpdateCartDetails(cart.CartDetails.FirstOrDefault());
