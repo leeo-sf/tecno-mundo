@@ -1,4 +1,5 @@
-﻿using GeekShopping.OrderAPI.Repository;
+﻿using GeekShopping.OrderAPI.Model;
+using GeekShopping.OrderAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using TecnoMundo.OrderAPI.Model;
 
@@ -16,7 +17,7 @@ namespace TecnoMundo.OrderAPI.Controllers
         }
 
         [HttpGet("{profileId}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrder(string profileId)
+        public async Task<ActionResult<List<OrderHeader>>> GetAllOrder(string profileId)
         {
             var orders = await _orderRepository.GetAllOrder(profileId);
 
