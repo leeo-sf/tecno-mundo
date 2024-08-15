@@ -6,3 +6,11 @@
 /backend/GeekShopping/.env
 /backend/TecnoMundo/.vs/TecnoMundo/FileContentIndex
 *.vsidx
+**/appsettings*.json
+secrets.json
+**/bin/
+**/obj/
+*.nupkg
+.vs/
+.vscode/
+.idea/
