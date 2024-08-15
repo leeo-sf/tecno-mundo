@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnoMundo.CouponAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4465e8ca3da18f601666b5983595e07012419f0b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+447159fcfa204290bb7fbef85670e264d028ea22")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnoMundo.CouponAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnoMundo.CouponAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
