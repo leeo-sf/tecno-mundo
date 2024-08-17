@@ -1,5 +1,6 @@
 ﻿using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TecnoMundo.OrderAPI.Model;
 
@@ -7,6 +8,7 @@ namespace TecnoMundo.OrderAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;

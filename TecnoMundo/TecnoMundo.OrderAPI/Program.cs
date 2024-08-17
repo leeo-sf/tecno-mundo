@@ -22,6 +22,17 @@ builderDbContext.UseMySql(connection,
     new MySqlServerVersion(
             new Version(8, 0, 36)));
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "CorsPolicy", policy =>
+    {
+        policy.WithOrigins(builder.Configuration["CorsPolicy:TecnoMundo-Web-Http"],
+            builder.Configuration["CorsPolicy:TecnoMundo-Web-Https"])
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddSingleton(new OrderRepository(builderDbContext.Options));
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
@@ -68,6 +79,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecnoMundo.Order", Version = "v1" });
+    c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token!",
@@ -105,7 +117,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
