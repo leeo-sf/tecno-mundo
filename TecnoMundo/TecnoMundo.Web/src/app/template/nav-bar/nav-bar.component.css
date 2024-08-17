@@ -51,3 +51,8 @@ header #header-title span {
     background-color: crimson;
     color: rgb(231, 231, 231);
 }
+
+.active-link {
+    color: white;
+    border-bottom: 5px solid crimson;
+}

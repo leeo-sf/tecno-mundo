@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule, NgIf } from '@angular/common';
 
@@ -11,7 +11,8 @@ import { CommonModule, NgIf } from '@angular/common';
     MatIconModule,
     RouterLink,
     NgIf,
-    CommonModule
+    CommonModule,
+    RouterLinkActive
   ],
   providers: [
     AuthService
