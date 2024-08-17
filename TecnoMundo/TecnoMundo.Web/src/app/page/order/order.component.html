@@ -1,1 +1,36 @@
-<p>order works!</p>
+<div class="container-orders">
+    <h3>Your orders</h3>
+    <div class="content-orders" *ngFor="let order of orders">
+        <div class="header-order">
+            <div class="details-header-order">
+                <div class="order-group order-placed">
+                    <span>Order placed</span>
+                    <span id="date">{{ order.dateTime | date: 'dd MMMM yyyy' }}</span>
+                </div>
+    
+                <div class="order-group order-total">
+                    <span>Total</span>
+                    <span id="total">R$ {{ order.purchaseAmount | number: '1.2-2':'pt-BR' }}</span>
+                </div>
+    
+                <div class="order-group purchased-by">
+                    <span>Purchased by</span>
+                    <span>{{ order.fistrName }} {{ order.lastName }}</span>
+                </div>
+            </div>
+
+            <div class="number-order">
+                <span>Order Nº</span>
+                <span id="number-order">{{ order.id }}</span>
+            </div>
+
+            <div class="btn-see-order">
+                <button (click)="showHideOrder(order.id)">x</button>
+            </div>
+        </div>
+
+        <div [ngStyle]="{'display': 'none'}" class="details-order" *ngFor="let orderDetail of order.orderDetails" [attr.data-order-id]="order.id" #orders>
+            <span>{{ orderDetail.productId }}</span>
+        </div>
+    </div>
+</div>

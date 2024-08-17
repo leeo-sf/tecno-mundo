@@ -1,6 +1,7 @@
 import { OrderDetail } from "./OrderDetail"
 
 export interface OrderHeader {
+    id: number
     userId: string,
     couponCode: string,
     purchaseAmount: string,

@@ -63,7 +63,7 @@ export const routes: Routes = [
         path: "my-cart",
         component: CartComponent,
         runGuardsAndResolvers: 'always',
-        //canActivate: [authGuard]
+        canActivate: [ authGuard ],
         resolve: { cart: cartResolve },
     },
     {
@@ -79,6 +79,7 @@ export const routes: Routes = [
     {
         path: "orders",
         component: OrderComponent,
+        canActivate: [ authGuard ],
         resolve: { orders: orderResolve }
     }
 ];
