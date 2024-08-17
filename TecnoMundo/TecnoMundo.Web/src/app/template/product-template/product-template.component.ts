@@ -24,8 +24,7 @@ registerLocaleData(localPt)
     RouterLink
   ],
   providers: [
-    NgFor,
-    ProductService
+    NgFor
   ],
   templateUrl: './product-template.component.html',
   styleUrl: './product-template.component.css'
