@@ -4,6 +4,7 @@
     align-items: center;
     width: 100%;
     margin-top: 5%;
+    margin-bottom: 6%;
 }
 .container-orders h3 {
     display: flex;
@@ -17,9 +18,6 @@
 .content-orders {
     width: 80%;
     margin: 5px;
-    border: 1px solid rgb(231, 231, 231);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 .header-order {
@@ -44,6 +42,7 @@
 .number-order {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 50%;
 }
 
@@ -52,8 +51,80 @@
     justify-content: flex-end;
     width: 7%;
 }
+.btn-see-order button {
+    border: none;
+    cursor: pointer;
+    background-color: rgb(231, 231, 231);
+}
+
+.title-header-order {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-details-order {
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(231, 231, 231);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.details-order {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.img-product {
+    width: 12%;
+    background-color: white;
+    border-radius: 5px;
+}
+.img-product img {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+}
 
 
-/* .details-order {
-    transition: 0.9s ease-in;
-} */
+.details-product {
+    margin: 10px;
+    width: 100%;
+}
+
+.content-name a {
+    color: white;
+    font-size: 1.0rem;
+}
+
+.actions-product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70%;
+    width: 30%;
+}
+.actions-btn {
+    padding: 10px;
+}
+.actions-btn button {
+    background-color: rgb(231, 231, 231);
+    border: 1px solid black;
+    border-radius: 15px;
+    color: black;
+    height: 30px;
+}
+
+.to-assess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+.to-assess button {
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 100%;
+    height: 30px;
+    margin: 5px;
+}

@@ -4,33 +4,73 @@
         <div class="header-order">
             <div class="details-header-order">
                 <div class="order-group order-placed">
-                    <span>Order placed</span>
+                    <span class="title-header-order">Order placed</span>
                     <span id="date">{{ order.dateTime | date: 'dd MMMM yyyy' }}</span>
                 </div>
     
                 <div class="order-group order-total">
-                    <span>Total</span>
+                    <span class="title-header-order">Total</span>
                     <span id="total">R$ {{ order.purchaseAmount | number: '1.2-2':'pt-BR' }}</span>
+                </div>
+
+                <div class="order-group order-discount" *ngIf="order.discountAmount">
+                    <span class="title-header-order">Discount</span>
+                    <span [ngStyle]="{'color': 'green'}" id="total">R$ {{ order.discountAmount | number: '1.2-2':'pt-BR' }}</span>
                 </div>
     
                 <div class="order-group purchased-by">
-                    <span>Purchased by</span>
+                    <span class="title-header-order">Purchased by</span>
                     <span>{{ order.fistrName }} {{ order.lastName }}</span>
                 </div>
             </div>
 
             <div class="number-order">
-                <span>Order Nº</span>
-                <span id="number-order">{{ order.id }}</span>
+                <span class="title-header-order">Order Nº</span>
+                <span [ngStyle]="{'font-weight': 'bold', 'margin': '5px'}" id="number-order">{{ order.id }}</span>
             </div>
 
             <div class="btn-see-order">
-                <button (click)="showHideOrder(order.id)">x</button>
+                <button [ngStyle]="{'transform': 'rotate(90deg)'}" class="details-order" (click)="showHideOrder(order.id)" [attr.data-button-id]="order.id" #buttons>
+                    <mat-icon aria-hidden="false" fontIcon="arrow_back_ios_new"></mat-icon>
+                </button>
             </div>
         </div>
 
-        <div [ngStyle]="{'display': 'none'}" class="details-order" *ngFor="let orderDetail of order.orderDetails" [attr.data-order-id]="order.id" #orders>
-            <span>{{ orderDetail.productId }}</span>
+        <div [ngStyle]="{'display': 'none'}" class="container-details-order" [attr.data-order-id]="order.id" #orders>
+            <div class="details-order" *ngFor="let orderDetail of order.orderDetails">
+                <div class="img-product">
+                    <a routerLink="/product-details/{{orderDetail.productId}}">
+                        <img src="{{ orderDetail.product.imageUrl }}" alt="product">
+                    </a>
+                </div>
+
+
+                <div class="details-product">
+                    <div class="content-name">
+                        <a routerLink="/product-details/{{orderDetail.productId}}">
+                            <p id="productName">{{ orderDetail.product.name }}</p>
+                        </a>
+                    </div>
+
+                    <div class="actions-product">
+                        <div class="actions-btn">
+                            <button (click)="buyAgain(order)">
+                                Buy again
+                            </button>
+                        </div>
+
+                        <div class="actions-btn">
+                            <button>View your item</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="to-assess">
+                    <button [ngStyle]="{'background-color': 'crimson', 'color': 'white'}">Contact the manufacturer</button>
+
+                    <button>Evaluate the product</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
