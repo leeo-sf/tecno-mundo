@@ -1,4 +1,4 @@
-<div class="container-orders">
+<div class="container-orders" *ngIf="orders.length else orderEmpty">
     <h3>Your orders</h3>
     <div class="content-orders" *ngFor="let order of orders">
         <div class="header-order">
@@ -74,3 +74,13 @@
         </div>
     </div>
 </div>
+
+<ng-template #orderEmpty>
+    <div class="container-empty">
+        <div class="empty-order">
+            <h2>You haven't placed any orders yet.</h2>
+            <p>Discover our products.</p>
+            <a routerLink="/products">Products</a>
+        </div>
+    </div>
+</ng-template>
