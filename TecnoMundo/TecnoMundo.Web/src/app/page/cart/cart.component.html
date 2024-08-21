@@ -1,4 +1,4 @@
-<div class="container" *ngIf="cart.cartDetails.length else emptyCart">
+<div class="container" *ngIf="!cartIsEmpty">
     <div class="cart-content">
         <div class="container-info-cart">
             <h3>Shopping Cart</h3>
@@ -107,12 +107,10 @@
     </div>
 </div>
 
-<ng-template #emptyCart>
-    <div class="container-empty">
-        <div class="empty-cart">
-            <h2>Your shopping cart is empty.</h2>
-            <p>Discover our products.</p>
-            <a routerLink="/products">Products</a>
-        </div>
+<div class="container-empty" *ngIf="cartIsEmpty">
+    <div class="empty-cart">
+        <h2>Your shopping cart is empty.</h2>
+        <p>Discover our products.</p>
+        <a routerLink="/products">Products</a>
     </div>
-</ng-template>
+</div>

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { Cart } from '../../../interface/Cart';
 import localPt from '@angular/common/locales/pt';
 import { CommonModule, NgFor, NgIf, registerLocaleData } from '@angular/common';
@@ -37,6 +37,7 @@ export class CartComponent implements OnInit {
   public cart!: Cart;
   public appliedCoupon!: Coupon;
   public qtdUpdate: number = 0;
+  public cartIsEmpty: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,8 +47,13 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.popularCart();
+  }
+
+  popularCart(): void {
     this.route.data.subscribe((data) => {
       this.cart = data["cart"];
+      this.validateCountDetails(this.cart.cartDetails);
     });
   }
 
@@ -73,7 +79,11 @@ export class CartComponent implements OnInit {
     }
     
     this.cartService.serviceUpdateToCart(cart, token).subscribe((result) => {
-      this.router.navigate(['/my-cart']);
+      if (result !== undefined) {
+        const details = this.cart.cartDetails;
+        this.cart.cartDetails = []
+        this.cart.cartDetails = details.filter(cartDetail => result.cartDetails.map(item => item.id == cartDetail.id));
+      }
     }, (error) => {
       this._snackBar.open("Unable to update quantity", "Close", {
         horizontalPosition: "end",
@@ -94,7 +104,8 @@ export class CartComponent implements OnInit {
       if (result === 'confirm') {
         this.cartService.serviceRemoveFromCart(idCartDetails, JSON.parse(token)).subscribe((result) => {
           if (result) {
-            this.router.navigate(['/my-cart']);
+            this.cart.cartDetails = this.cart.cartDetails.filter(cart => cart.id !== idCartDetails);
+            this.validateCountDetails(this.cart.cartDetails);
           }
         });
       }
@@ -111,11 +122,18 @@ export class CartComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-        this.cartService.serviceClearCart(JSON.parse(userId), JSON.parse(token)).subscribe((result) => {
-          if (result) {
-            this.router.navigate(['/my-cart']);
-          }
-        });
+        this.clearConfirm(userId, token);
+      }
+    });
+  }
+
+  private clearConfirm(userId: string, token: string): void {
+    this.cartService.serviceClearCart(JSON.parse(userId), JSON.parse(token)).subscribe((result) => {
+      if (result) {
+        this.cartIsEmpty = true;
+      }
+      else {
+        this.cartIsEmpty = false;
       }
     });
   }
@@ -130,6 +148,10 @@ export class CartComponent implements OnInit {
       coupon: this.appliedCoupon
     }
     this.router.navigate(['finalize-order'], { state: { finalizeOrder: checkout } });
+  }
+
+  private validateCountDetails(cartDetails: CartDetails[]) {
+    this.cartIsEmpty = cartDetails.length === 0 ? true : false;
   }
 
 }
