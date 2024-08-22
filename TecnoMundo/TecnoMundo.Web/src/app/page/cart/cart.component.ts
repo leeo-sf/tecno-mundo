@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   public cart!: Cart;
   public appliedCoupon!: Coupon;
-  public qtdUpdate: number = 0;
+  public appliedCoupon$!: boolean;
   public cartIsEmpty: boolean = true;
 
   constructor(
@@ -50,28 +50,14 @@ export class CartComponent implements OnInit {
     this.popularCart();
   }
 
-  popularCart(): void {
-    this.route.data.subscribe((data) => {
-      this.cart = data["cart"];
-      this.validateCountDetails(this.cart.cartDetails);
-    });
-  }
-
-  get subTotal(): number {
-    return this.cart.cartDetails.reduce((x, item) => {
-      return x + (item.product.price * item.count);
-    }, 0);
-  }
-
   get subtotalWithDiscountApplied(): number {
-    const subtotal = this.subTotal;
+    const subtotal = this.cart.cartHeader.purchaseAmount ?? 0;
 
     return subtotal - this.appliedCoupon.discountAmount;
   }
 
   updateCart(cartDetail: CartDetails): void {
     const token: string = JSON.parse(localStorage.getItem("token") ?? "");
-    cartDetail.count = this.qtdUpdate;
 
     let cart: Cart = {
       cartHeader: this.cart.cartHeader,
@@ -83,6 +69,7 @@ export class CartComponent implements OnInit {
         const details = this.cart.cartDetails;
         this.cart.cartDetails = []
         this.cart.cartDetails = details.filter(cartDetail => result.cartDetails.map(item => item.id == cartDetail.id));
+        this.cartValue();
       }
     }, (error) => {
       this._snackBar.open("Unable to update quantity", "Close", {
@@ -139,6 +126,7 @@ export class CartComponent implements OnInit {
   }
 
   onCouponApplied(coupon: Coupon) {
+    this.appliedCoupon$ = !(!coupon || Object.values(coupon).every(value => value === null || value === undefined));
     this.appliedCoupon = coupon;
   }
 
@@ -152,6 +140,21 @@ export class CartComponent implements OnInit {
 
   private validateCountDetails(cartDetails: CartDetails[]) {
     this.cartIsEmpty = cartDetails.length === 0 ? true : false;
+    this.cartValue();
+  }
+
+  private cartValue(): void {
+    this.cart.cartHeader.purchaseAmount = this.cart.cartDetails.reduce((x, item) => {
+      return x + (item.product.price * item.count);
+    }, 0);
+  }
+
+  private popularCart(): void {
+    this.route.data.subscribe((data) => {
+      this.cart = data["cart"];
+      this.validateCountDetails(this.cart.cartDetails);
+      this.cartValue();
+    });
   }
 
 }

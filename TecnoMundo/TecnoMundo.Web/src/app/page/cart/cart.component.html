@@ -19,8 +19,7 @@
                     <div class="actions-cart">
                         <div class="amount">
                             <label id="amount" for="Amount">Amount:</label>
-                            <select name="amount" [(ngModel)]="qtdUpdate">
-                                <option value="0" selected disabled>QTD {{ cartDetail.count }}</option>
+                            <select name="amount" [(ngModel)]="cartDetail.count">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -60,7 +59,7 @@
                 </div>
 
                 <div class="subtotal">
-                    <p id="subtotal">R$ <span>{{ subTotal | number:'1.2-2':'pt-BR' }}</span></p>
+                    <p id="subtotal">R$ <span>{{ cart.cartHeader.purchaseAmount | number:'1.2-2':'pt-BR' }}</span></p>
                 </div>
             </div>
         </div>
@@ -85,17 +84,17 @@
                 ):
             </p>
             <div class="sub-total">
-                <p *ngIf="!cart.cartHeader.couponCode else notCouponApplied"> 
-                    <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> 
+                <p *ngIf="!appliedCoupon$ else notCouponApplied"> 
+                    <span id="moeda">R$</span> <span id="subtotalContainer">{{ cart.cartHeader.purchaseAmount | number:'1.2-2':'pt-BR' }}</span> 
                 </p>
 
                 <ng-template #notCouponApplied>
                     <p [ngStyle]="{'text-decoration': 'line-through', 'text-decoration-color': 'red'}"> 
-                        <span id="moeda">R$</span> <span id="subtotalContainer">{{ subTotal | number:'1.2-2':'pt-BR' }}</span> 
+                        <span id="moeda">R$</span> <span id="subtotalContainer">{{ cart.cartHeader.purchaseAmount | number:'1.2-2':'pt-BR' }}</span> 
                     </p>
                 </ng-template>
 
-                <div class="discount" *ngIf="cart.cartHeader.couponCode">
+                <div class="discount" *ngIf="appliedCoupon$">
                     <p><span id="moeda">R$</span> <span id="subTotalDiscount">{{ subtotalWithDiscountApplied | number:'1.2-2':'pt-BR' }}</span></p>
                 </div>
             </div>

@@ -27,11 +27,7 @@ export class ApplyCouponComponent implements OnInit {
   ngOnInit(): void {
     if (this.cart.cartHeader.couponCode) {
       const token: string = JSON.parse(localStorage.getItem("token") ?? "");
-      this.couponService.serviceGetCouponCode(this.cart.cartHeader.couponCode, token).subscribe((result) => {
-        this.couponApplied$ = true;
-        this.coupon = result;
-        this.couponApplied.emit(this.coupon);
-      });
+      this.getCoupon(this.cart.cartHeader.couponCode, token);
     }
 
     this.couponApplied$ = false;
@@ -42,6 +38,16 @@ export class ApplyCouponComponent implements OnInit {
     private router: Router,
     private couponService: CouponService
   ) {}
+
+  private getCoupon(couponCode: string, token: string): void {
+    this.couponService.serviceGetCouponCode(couponCode, token).subscribe((result) => {
+      if (result) {
+        this.couponApplied$ = true;
+        this.coupon = result;
+        this.couponApplied.emit(this.coupon);
+      }
+    });
+  }
 
   applyCoupon(couponCode: string) {
     if (couponCode === "") {
@@ -55,7 +61,10 @@ export class ApplyCouponComponent implements OnInit {
     const userId: string = this.cart.cartHeader.userId;
     const token: string = JSON.parse(localStorage.getItem("token") ?? "");
     
-    this.cartService.serviceApplyCoupon(couponCode, JSON.parse(userId), token).subscribe((response) => {}, 
+    this.cartService.serviceApplyCoupon(couponCode, JSON.parse(userId), token).subscribe((response) => {
+      this.couponApplied$ = true;
+      this.getCoupon(couponCode, token)
+    }, 
     (error) => {
         let message = "Invalid Coupon";
         this.messageAttemptToApplyCoupon = message;
@@ -70,6 +79,10 @@ export class ApplyCouponComponent implements OnInit {
     const userId: string = this.cart.cartHeader.userId;
     const token: string = JSON.parse(localStorage.getItem("token") ?? "");
 
-    this.cartService.serviceRemoveCoupon(userId, token).subscribe();
+    this.cartService.serviceRemoveCoupon(userId, token).subscribe((result) => {
+      this.coupon = new Coupon();
+      this.couponApplied$ = false;
+      this.couponApplied.emit(this.coupon);
+    });
   }
 }
