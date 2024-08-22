@@ -8,6 +8,11 @@
                     <span id="date">{{ order.dateTime | date: 'dd MMMM yyyy' }}</span>
                 </div>
     
+                <div class="order-group purchased-by">
+                    <span class="title-header-order">Purchased by</span>
+                    <span>{{ order.fistrName }} {{ order.lastName }}</span>
+                </div>
+    
                 <div class="order-group order-total">
                     <span class="title-header-order">Total</span>
                     <span id="total">R$ {{ order.purchaseAmount | number: '1.2-2':'pt-BR' }}</span>
@@ -18,9 +23,13 @@
                     <span [ngStyle]="{'color': 'green'}" id="total">R$ {{ order.discountAmount | number: '1.2-2':'pt-BR' }}</span>
                 </div>
     
-                <div class="order-group purchased-by">
-                    <span class="title-header-order">Purchased by</span>
-                    <span>{{ order.fistrName }} {{ order.lastName }}</span>
+                <div class="order-group order-payment-status">
+                    <span class="title-header-order">Payment status</span>
+                    <span [ngStyle]="{'color': 'green', 'font-weight': 'bold'}" id="paymentStatus" *ngIf="order.paymentStatus else paymentStatusProcess">Approved</span>
+
+                    <ng-template #paymentStatusProcess>
+                        <span [ngStyle]="{'color': '#5c65c0', 'font-weight': 'bold'}" id="paymentStatus" id="paymentStatus">Processing</span>
+                    </ng-template>
                 </div>
             </div>
 

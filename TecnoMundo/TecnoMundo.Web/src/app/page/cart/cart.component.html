@@ -19,7 +19,7 @@
                     <div class="actions-cart">
                         <div class="amount">
                             <label id="amount" for="Amount">Amount:</label>
-                            <select name="amount" [(ngModel)]="cartDetail.count">
+                            <select name="amount" [(ngModel)]="cartDetail.count" (change)="updateCart(cartDetail)">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -28,10 +28,10 @@
                             </select>
                         </div>
                         <div class="separator"></div>
-                        <a id="details" routerLink="/product-details/{{ cartDetail.productId }}">Details</a>
-                        <div class="separator"></div>
                         <div class="action-btn">
-                            <button (click)="updateCart(cartDetail)" id="save">Save</button>
+                            <button id="details">
+                                <a routerLink="/product-details/{{ cartDetail.productId }}">Details</a>
+                            </button>
                         </div>
                         <div class="separator"></div>
                         <div class="action-btn">
