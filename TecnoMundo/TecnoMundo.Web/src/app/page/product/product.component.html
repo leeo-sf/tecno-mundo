@@ -18,11 +18,11 @@
             </div>
 
             <div class="options-category">
-                <select name="category" id="category">
+                <select name="category" id="category" [(ngModel)]="category">
                     <option value="0" selected disabled>Filter by category</option>
                     <option *ngFor="let category of listOfCategory"
                         [value]="category.id"
-                        (click)="filterCategory(category.id)"
+                        (click)="filterCategory()"
                     >{{ category.name }}</option>
                 </select>
             </div>

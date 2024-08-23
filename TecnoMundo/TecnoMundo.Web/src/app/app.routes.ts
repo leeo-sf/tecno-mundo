@@ -28,24 +28,8 @@ export const routes: Routes = [
         resolve: { 
             products: productResolve,
             categories: categoryResolve
-        }
-    },
-    {
-        path: "products/filter",
-        component: ProductComponent,
-        resolve: {
-            products: productResolve,
-            categories: categoryResolve
         },
         runGuardsAndResolvers: 'paramsOrQueryParamsChange'
-    },
-    {
-        path: "products/filter/by-category/:categoryId",
-        component: ProductComponent,
-        resolve: {
-            products: productResolve,
-            categories: categoryResolve
-        }
     },
     {
         path: "product-details/:id",

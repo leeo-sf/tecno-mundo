@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit {
   paginatedProducts!: Product[];
   pageSizeOptions = [10, 20, 30, 40];
   msgProductNotFound: string = "";
+  category: number = 0;
 
   constructor(
     private router: Router,
@@ -47,18 +48,18 @@ export class ProductComponent implements OnInit {
 
   filter(productName: string) {
     if (this.minPrice !== 1 || this.maxPrice !== 50000) {
-      return this.router.navigate(["/products/filter"], { queryParams: { 
+      return this.router.navigate(["/products"], { queryParams: { 
         "product-name": productName, "low-price": this.minPrice, "high-price": this.maxPrice
        } });
     }
 
     if (productName === "") return;
 
-    return this.router.navigate(["/products/filter"], { queryParams: { "product-name": productName } });
+    return this.router.navigate(["/products"], { queryParams: { "product-name": productName } });
   }
 
-  filterCategory(categoryId: number) {
-    return this.router.navigate(["/products/filter/by-category/", categoryId]);
+  filterCategory() {
+    return this.router.navigate(["/products"], { queryParams: { "category": this.category } });
   }
 
   nextOrPreviousPage(event: any) {

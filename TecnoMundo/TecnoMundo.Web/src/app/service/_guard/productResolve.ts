@@ -12,8 +12,8 @@ export const productResolve: ResolveFn<Product[] | Product | Observable<any>> = 
         return productService.serviceGetProductById(idProduct);
     }
 
-    if (route.paramMap.get("categoryId")) {
-        const categoryId: number = Number.parseInt(route.paramMap.get("categoryId")!);
+    if (route.queryParamMap.get("category")) {
+        const categoryId: number = Number.parseInt(route.queryParamMap.get("category")!);
         return productService.serviceGetProductsByCategoryId(categoryId);
     }
 
