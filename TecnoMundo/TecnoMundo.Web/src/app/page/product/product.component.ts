@@ -5,7 +5,9 @@ import { MatSliderModule } from '@angular/material/slider'
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../../interface/Category';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { Product } from '../../../interface/Product';
 
 @Component({
   selector: 'app-product',
@@ -15,15 +17,23 @@ import { NgFor } from '@angular/common';
     MatIconModule,
     MatSliderModule,
     ProductTemplateComponent,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    NgIf
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
+  listOfProducts!: Product[];
   minPrice: number = 1;
   maxPrice: number = 50000;
   listOfCategory!: Category[];
+  pageSize: number = 10;
+  pageIndex: number = 0;
+  paginatedProducts!: Product[];
+  pageSizeOptions = [10, 20, 30, 40];
+  msgProductNotFound: string = "";
 
   constructor(
     private router: Router,
@@ -31,9 +41,8 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      this.listOfCategory = data["categories"];
-    });
+    this.getProductsLoaded();
+    this.updatePaginatedProducts();
   }
 
   filter(productName: string) {
@@ -51,4 +60,34 @@ export class ProductComponent implements OnInit {
   filterCategory(categoryId: number) {
     return this.router.navigate(["/products/filter/by-category/", categoryId]);
   }
+
+  nextOrPreviousPage(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePaginatedProducts();
+  }
+
+  private updatePaginatedProducts() {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    this.paginatedProducts = this.listOfProducts.slice(start, end);
+  }
+
+  private getProductsLoaded(): void {
+    this.route.data.subscribe((data) => {
+      this.listOfCategory = data["categories"];
+      if (data['products'].error) {
+        this.msgProductNotFound = data['products'].error;
+        this.listOfProducts = [];
+        this.updatePaginatedProducts();
+      } else {
+        this.listOfProducts = data['products'];
+        this.updatePaginatedProducts();
+      }
+    }, (error) => {
+      this.msgProductNotFound = error;
+      this.listOfProducts = []
+    });
+  }
+
 }

@@ -65,6 +65,8 @@
 
 .content {
     display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
     width: 100%;
 }
 
@@ -75,13 +77,11 @@ h3, span {
 
 
 .advanced-filter {
-    float: left;
-    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     margin-left: 2%;
-    width: 18em;
+    width: 18%;
     height: 40em;
     border: 3px solid black;
     border-radius: 20px;
@@ -139,14 +139,14 @@ mat-slider {
 .content-product {
     display: flex;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-    margin-left: 10%;
-    margin-top: 2%;
-    margin-bottom: 6%;
+    flex-direction: column;
+    width: 67%;
+    margin-top: 1%;
+    margin-bottom: 7%;
+    margin-left: 1%;
 }
 .product {
-    width: 70%;
+    width: auto;
     padding: 15px;
     background-color: rgb(231, 231, 231);
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
@@ -169,4 +169,11 @@ mat-slider {
     border-radius: 10px;
     color: white;
     background-color: crimson;
+}
+
+
+.paginator {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1%;
 }

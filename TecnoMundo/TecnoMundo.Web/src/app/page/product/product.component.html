@@ -62,7 +62,15 @@
 
     <div class="content-product">
         <div class="product">
-            <app-product-template></app-product-template>
+            <app-product-template [listOfProducts]="paginatedProducts" [msgProductNotFound]="msgProductNotFound"></app-product-template>
+        </div>
+
+        <div class="paginator" *ngIf="listOfProducts.length >= 1">
+            <mat-paginator [length]="listOfProducts.length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="nextOrPreviousPage($event)">
+            </mat-paginator>
         </div>
     </div>
 </div>
