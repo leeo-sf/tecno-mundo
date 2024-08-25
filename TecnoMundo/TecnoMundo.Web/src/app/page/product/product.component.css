@@ -94,10 +94,6 @@ h3, span {
     align-items: center;
     justify-content: center;
 }
-.search-by-category select {
-    width: 80%;
-    height: 2em;
-}
 
 
 .values {

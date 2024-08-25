@@ -8,6 +8,9 @@ import { Category } from '../../../interface/Category';
 import { NgFor, NgIf } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Product } from '../../../interface/Product';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +22,10 @@ import { Product } from '../../../interface/Product';
     ProductTemplateComponent,
     FormsModule,
     MatPaginatorModule,
-    NgIf
+    NgIf,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
