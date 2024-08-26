@@ -1,10 +1,10 @@
 <div class="container-order-made">
     <div class="content-order-made">
         <div class="header">
+            <span>Order Made</span>
             <div class="img-order-made">
-                <img src="./assets/pedido.png" alt="check">
+                <img src="./assets/carrinho-de-compras.png" alt="check">
             </div>
-            <h3>Order Made</h3>
         </div>
 
         <div class="info-order-made">
@@ -35,6 +35,12 @@
                             <label>Purchase amount</label>
                             <span>R$ {{ orderMade.purchaseAmount| number:'1.2-2':'pt-BR' }}</span>
                         </div>
+                    </div>
+
+                    <div class="btn-see-order">
+                        <button>
+                            <a routerLink="/orders">See order</a>
+                        </button>
                     </div>
                 </div>
     

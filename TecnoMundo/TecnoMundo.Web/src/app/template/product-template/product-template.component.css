@@ -8,13 +8,11 @@ a {
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin-bottom: 6%;
 }
 
 .product {
     width: 20em;
     height: 30em;
-    background-color: rgb(231, 231, 231);
     padding: 10px;
     cursor: pointer;
     margin: 10px;
