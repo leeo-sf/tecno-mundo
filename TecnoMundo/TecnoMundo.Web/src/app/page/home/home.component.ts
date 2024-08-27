@@ -2,12 +2,14 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Images } from '../../../interface/Images';
 import { CarouselComponent } from '../../template/carousel/carousel.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CarouselComponent
+    CarouselComponent,
+    MatIconModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
