@@ -7,7 +7,6 @@ import { categoryResolve } from './service/_guard/categoryResolve';
 import { ProductDetailsComponent } from './page/product-details/product-details.component';
 import { RegisterComponent } from './page/register/register.component';
 import { ProductComponent } from './page/product/product.component';
-import { ProductTemplateComponent } from './template/product-template/product-template.component';
 import { CartComponent } from './page/cart/cart.component';
 import { cartResolve } from './service/_guard/cartResolve';
 import { FinalizeOrderComponent } from './page/finalize-order/finalize-order.component';
@@ -18,15 +17,6 @@ import { orderResolve } from './service/_guard/orderResolve';
 import { HomeComponent } from './page/home/home.component';
 
 export const routes: Routes = [
-    {
-        path: "",
-        redirectTo: "/home",
-        pathMatch: "full"
-    },
-    {
-        path: "home",
-        component: HomeComponent
-    },
     {
         path: "login",
         component: LoginComponent,
@@ -75,5 +65,14 @@ export const routes: Routes = [
         component: OrderComponent,
         canActivate: [ authGuard ],
         resolve: { orders: orderResolve }
+    },
+    {
+        path: "",
+        component: HomeComponent
+    },
+    {
+        path: "**",
+        redirectTo: "",
+        pathMatch: "full"
     }
 ];

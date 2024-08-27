@@ -1,8 +1,7 @@
 <header>
-    <a id="header-title" routerLink="/home">Tecno<span>Mundo</span></a>
+    <a id="header-title" routerLink="">Tecno<span>Mundo</span></a>
 
     <div class="container-funcs">
-        <a routerLink="/home" routerLinkActive="active-link">Home</a>
         <a routerLink="/products" routerLinkActive="active-link">Products</a>
 
         <div *ngIf="!authService.loggedInUser else notLogged">

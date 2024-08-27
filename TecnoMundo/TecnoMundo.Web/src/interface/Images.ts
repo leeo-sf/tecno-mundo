@@ -1,5 +1,6 @@
 export interface Images {
     src: string,
     alt: string,
-    title: string
+    title: string,
+    nameProduct: string
 }
