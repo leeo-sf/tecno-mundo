@@ -15,8 +15,18 @@ import { PurchaseMadeComponent } from './template/purchase-made/purchase-made.co
 import { routeGuard } from './service/_guard/route.guard';
 import { OrderComponent } from './page/order/order.component';
 import { orderResolve } from './service/_guard/orderResolve';
+import { HomeComponent } from './page/home/home.component';
 
 export const routes: Routes = [
+    {
+        path: "",
+        redirectTo: "/home",
+        pathMatch: "full"
+    },
+    {
+        path: "home",
+        component: HomeComponent
+    },
     {
         path: "login",
         component: LoginComponent,
