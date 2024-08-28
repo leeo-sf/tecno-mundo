@@ -40,7 +40,9 @@
                             
                             <div class="actions-buttons">
                                 <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
-                                <p-button class="btn-cart" icon="pi pi-shopping-cart" severity="danger" />
+                                <div class="add-cart">
+                                    <app-add-to-cart [product]="product" [amount]="1" ></app-add-to-cart>
+                                </div>
                             </div>
                         </div>
                     </div>

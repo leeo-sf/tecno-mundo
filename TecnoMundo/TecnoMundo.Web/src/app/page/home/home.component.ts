@@ -8,6 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { TagModule } from 'primeng/tag';
     ButtonModule,
     TagModule,
     CommonModule,
-    RouterLink
+    RouterLink,
+    AddToCartComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
