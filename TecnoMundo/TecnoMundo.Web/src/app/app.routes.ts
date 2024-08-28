@@ -68,7 +68,8 @@ export const routes: Routes = [
     },
     {
         path: "",
-        component: HomeComponent
+        component: HomeComponent,
+        resolve: { newsProduct: productResolve }
     },
     {
         path: "**",

@@ -12,7 +12,40 @@
         </div>
 
         <div class="news">
-
+            <p-carousel
+                [value]="newsProduct"
+                [numVisible]="4"
+                [numScroll]="2"
+                [circular]="true">
+                <ng-template let-product pTemplate="item">
+                    <div class="border-1 surface-border border-round m-2 p-3 product">
+                        <div class="mb-3">
+                            <div class="relative mx-auto image">
+                                <a routerLink="/product-details/{{product.id}}">
+                                    <img 
+                                    src="{{ product.imageUrl }}" 
+                                    [alt]="product.name" 
+                                    class="w-full border-round img" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mb-3 font-medium content-name">
+                            <p>{{ product.name }}</p>
+                        </div>
+                        <div class="mt-0 font-semibold text-xl actions">
+                            <div>
+                                <span id="moeda">R$</span>
+                                <span id="price">{{ product.price | number:'1.2-2':'pt-BR' }}</span>
+                            </div>
+                            
+                            <div class="actions-buttons">
+                                <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                                <p-button class="btn-cart" icon="pi pi-shopping-cart" severity="danger" />
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
         </div>
     </div>
 </div>

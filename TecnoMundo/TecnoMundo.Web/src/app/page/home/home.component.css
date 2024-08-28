@@ -2,7 +2,7 @@
     position: relative;
     margin: auto;
     margin-top: 1%;
-    width: 90%;
+    width: 98%;
     height: 70%;
     text-align: center;
     border-radius: 15px;
@@ -17,6 +17,7 @@
 .container-news .content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 95%;
     margin-top: 3%;
     margin-bottom: 6%;
@@ -25,12 +26,14 @@
 .content .title {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
     align-items: center;
     margin-bottom: 1%;
 }
 .title span {
     color: rgb(231, 231, 231);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -42,7 +45,71 @@
 }
 
 .news {
+    width: 90%;
+}
+
+.product {
+    border: 1px solid black;
+    max-width: 80%;
+    background-color: rgb(46, 46, 46);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 1%;
+    margin-left: 5%;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 10px;
-    background-color: aquamarine;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.img {
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    padding: 5px;
+}
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-name {
+    margin: 5px;
+    height: 60px;
+}
+.content-name p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    margin-top: 4px;
+    text-transform: capitalize;
+    font-size: 15px;
+    color: rgb(231, 231, 231);
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(20, 177, 20);
+}
+
+#moeda {
+    font-size: 17px;
+}
+#price {
+    margin-left: 5px;
+    font-size: 21px;
+}
+
+.actions-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
 }
