@@ -130,7 +130,7 @@
         </div>
 
         <form class="input-email" (ngSubmit)="iWantToReceivePromotions(inputEmail.value)" [formGroup]="receivePromotions" #formDir="ngForm">
-            <input #inputEmail type="email" formControlName="userName" placeholder="Enter your e-mail">
+            <input #inputEmail type="email" formControlName="emailToReceive" placeholder="Enter your e-mail">
             <button>
                 <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
             </button>
