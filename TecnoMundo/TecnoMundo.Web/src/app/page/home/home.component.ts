@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Images } from '../../../interface/Images';
 import { CarouselComponent } from '../../template/carousel/carousel.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.component';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,9 @@ import { AddToCartComponent } from '../../template/add-to-cart/add-to-cart.compo
     TagModule,
     CommonModule,
     RouterLink,
-    AddToCartComponent
+    AddToCartComponent,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -35,35 +39,26 @@ export class HomeComponent implements OnInit {
   public autoSlide!: boolean;
   public slideInterval!: number;
   public newsProduct!: Product[];
+  public receivePromotions!: FormGroup;
   responsiveOptions: any[] | undefined;
   public product: Product[] = [
     { id: 1, name: "Headset Gamer Sem Fio Logitech G533 7.1 Dolby Surround com Drivers de Áudio Pro-G e Bateria Recarregável", price: 1198, imageUrl: "https://m.media-amazon.com/images/I/61CQGpNbraL._AC_SL1000_.jpg", color: "Preto", categoryId: 10, category: { id: 10, name: "Teste" }, description: "testando" }
   ];
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.getNewsProduct();
 
-    this.responsiveOptions = [
-        {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
-            numVisible: 2,
-            numScroll: 1
-        },
-        {
-            breakpoint: '767px',
-            numVisible: 1,
-            numScroll: 1
-        }
-    ];
+    this.receivePromotions = new FormGroup({
+      emailToReceive: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ])
+    });
 
     this.autoSlide = false;
     this.slideInterval = 4000;
@@ -73,5 +68,14 @@ export class HomeComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.newsProduct = data["newsProduct"].slice(0, 10);
     });
+  }
+
+  public iWantToReceivePromotions(email: string): void {
+    if (this.receivePromotions.invalid) {
+      this._snackBar.open("Enter a valid e-mail", "close", { duration: 3 * 1000 });
+      return;
+    }
+
+    // fazer mensagem de email enviado com sucesso
   }
 }

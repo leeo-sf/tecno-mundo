@@ -51,3 +51,113 @@
         </div>
     </div>
 </div>
+
+<div class="container-home-footer">
+    <div class="infos">
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Institutional</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">Who we are</a>
+                <a href="#">Localization</a>
+                <a href="#">Our stores</a>
+                <a href="#">Blog</a>
+            </div>
+        </div>
+
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Doubts</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">Delivery</a>
+                <a href="#">Guarantee</a>
+                <a href="#">How to buy</a>
+                <a href="#">Payment methods</a>
+            </div>
+        </div>
+
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Help</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">SAC</a>
+                <a href="#">Contact us</a>
+                <a href="#">Term of acceptance</a>
+                <a href="#">Privacy policies</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-options">
+        <div class="title-form-group-infos">
+            <h6>Payment</h6>
+        </div>
+
+        <div class="methods">
+            <div class="payment-method">
+                <img src="./assets/mastercard.png" alt="mastercard">
+            </div>
+            
+            <div class="payment-method">
+                <img src="./assets/ticket.png" alt="ticket">
+            </div>
+            
+            <div class="payment-method">
+                <img src="./assets/visa.png" alt="visa">
+            </div>
+        </div>
+    </div>
+
+    <div class="newsletter">
+        <div class="title-form-group-infos">
+            <h6>Newsletter</h6>
+        </div>
+
+        <div class="container-title-newsletter">
+            <div class="title-newsletter">
+                <span>Stay up to date with the news.</span>
+            </div>
+
+            <div class="subtitle-newsletter">
+                <span>Receive exclusive offers in your email.</span>
+            </div>
+        </div>
+
+        <form class="input-email" (ngSubmit)="iWantToReceivePromotions(inputEmail.value)" [formGroup]="receivePromotions" #formDir="ngForm">
+            <input #inputEmail type="email" formControlName="userName" placeholder="Enter your e-mail">
+            <button>
+                <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
+            </button>
+        </form>
+
+        <div class="container-find-us">
+            <div class="title-social">
+                <span>Follow us on social media</span>
+            </div>
+
+            <div class="container-social-media">
+                <div class="social-media">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
