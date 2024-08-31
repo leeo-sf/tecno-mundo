@@ -1,6 +1,0 @@
-@GeekShopping.CouponAPI_HostAddress = http://localhost:5177
-
-GET {{GeekShopping.CouponAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
