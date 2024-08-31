@@ -1,135 +1,154 @@
-.content-product-detail {
+.container-details {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    width: 100%;
-    height: 60%;
-}
-
-
-.product-details {
-    display: flex;
     justify-content: space-around;
-    width: 70%;
-}
-
-
-.img-product {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: white;
-    width: 500px;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
 }
-.img-product img {
+
+.container-image-product {
+    width: 40%;
+    height: 500px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.content-image {
+    width: 100%;
+    height: 100%;
+}
+.content-image img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-
-.info-product {
+.container-more-about-the-product {
     display: flex;
     flex-direction: column;
-    border: 2px solid rgb(231, 231, 231);
-    border-radius: 5px;
-    padding: 5px;
-    width: 400px;
-    height: 97%;
-}
-.info-product p {
+    justify-content: space-between;
+    width: 40%;
+    height: 100%;
+    max-height: 85%;
+    padding: 15px;
     color: rgb(231, 231, 231);
+    background-color: rgb(41, 41, 41);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 
-.name-product {
-    border-bottom: 2px solid crimson;
-    max-height: 32%;
+.info-name {
+    height: 100%;
+    max-height: 10%;
 }
-#productName {
-    word-spacing: 3px;
-    line-height: 27px !important;
-    font-size: 1.4rem;
+.info-name p {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
-#description {
+.info-details {
+    margin-bottom: 5%;
+    max-height: 40%;
+}
+.description-product {
     height: 100%;
     overflow: auto;
-    padding: 10px;
 }
-#title-description {
-    margin-left: 3px;
-    margin-top: 5px;
-    font-size: 1.1rem;
+.description-product p {
+    font-size: 0.96rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-
-.container-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+#title-description, .title-installments span {
+    font-size: 1.0rem;
+    color: crimson;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
 .action-product {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 65%;
-    height: 4em;
-    border: 2px solid rgb(231, 231, 231);
-    border-radius: 5px;
+    justify-content: space-between;
+    margin-top: 2%;
+    height: 13%;
 }
-
-
-.price {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 100%;
-}
-.price #moeda {
-    font-size: 0.8rem;
-    color: green;
-}
-.price #val-price {
-    color: rgb(231, 231, 231);
-    font-size: 1.3rem;
-}
-
 
 .btns-actions {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 100%;
+    justify-content: space-evenly;
+    align-items: flex-end;
     width: 50%;
 }
-
-
-.btns-actions input {
-    width: 100px;
-    height: 40%;
-}
-
-
-#add-cart {
-    width: 150px;
-    height: 50%;
-}
 #buy-now {
-    height: 50%;
-    width: 150px;
+    height: 30px;
     background-color: rgb(50,205,50);
     color: rgb(54,54,54);
     border: 2px solid rgb(50,205,50);
     border-radius: 8px;
+}
+#buy-now, #add-cart {
+    width: 50%;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.container-moeda {
+    display: flex;
+    padding-right: 2%;
+}
+#moeda {
+    font-size: 0.99rem;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#val-price {
+    color: rgb(0, 172, 0);
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.8rem;
+}
+
+.container-installments {
+    max-height: 27%;
+}
+
+.title-installments {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 37%;
+}
+.title-installments span {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.title-installments button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: white;
+}
+
+.content-installments {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-height: 100%;
+    background-color: rgb(46, 46, 46);
+    padding: 10px;
+    margin-top: 1%;
 }

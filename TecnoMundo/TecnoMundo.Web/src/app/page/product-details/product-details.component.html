@@ -1,31 +1,55 @@
-<div class="content-product-detail">
-    <div class="product-details">
-        <div class="img-product">
-            <img src="{{ product.imageUrl }}" alt="nome">
-        </div>
-    
-        <div class="info-product">
-            <div class="name-product">
-                <p id="productName">{{ product.name }}</p>
-            </div>
-    
-            <p id="title-description">Sobre este item</p>
-            <p id="description">{{ product.description }}</p>
+<div class="container-details">
+    <div class="container-image-product">
+        <div class="content-image">
+            <img src="{{ product.imageUrl }}" alt="{{ product.name.slice(0, 5) }}">
         </div>
     </div>
-</div>
 
-<div class="container-actions">
-    <div class="action-product">
-        <div class="price">
-            <span id="moeda">R$</span>
-            <span id="val-price">{{ product.price | number:'1.2-2':'pt-BR' }}</span>
+    <div class="container-more-about-the-product">
+        <div class="info-name">
+            <p id="productName">{{ product.name }}</p>
         </div>
-    
-        <div class="btns-actions">
-            <input type="number" maxlength="100" placeholder="Amount" [(ngModel)]="amount">
-            <app-add-to-cart id="add-cart" [amount]="amount" [product]="product" ></app-add-to-cart>
-            <button id="buy-now" type="submit">Buy now</button>
+
+        <div class="info-details">
+            <p id="title-description">About this item</p>
+            <div class="description-product">
+                <p id="description">{{ product.description }}</p>
+            </div>
+        </div>
+
+        <!-- incluir opcoes de parcelamento' -->
+        <div class="container-installments">
+            <div class="title-installments">
+                <mat-icon aria-hidden="false" aria-label="Package" fontIcon="credit_card"></mat-icon>
+                <span (click)="expandInstallments($event)">
+                    INSTALLMENTS
+                </span>
+                <button [ngStyle]="{'transform': 'rotate(0deg)'}" id="see-installments" #btnSeeInstallments (click)="expandInstallments($event)">
+                    <mat-icon aria-hidden="false" aria-label="Package" fontIcon="chevron_right"></mat-icon>
+                </button>
+            </div>
+
+            <div [ngStyle]="{ 'display': 'none' }" class="content-installments" #contentInstallments>
+                <div class="installment" *ngFor="let installment of installments">
+                    <p id="installment-{{ installment.numberOfInstallments }}">
+                        {{ installment.numberOfInstallments }}x of R$ <span id="val-installment-{{ installment.numberOfInstallments }}">{{ installment.installmentValue | number:'1.2-2':'pt-BR' }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-product">
+            <div class="price">
+                <div class="container-moeda">
+                    <span id="moeda">R$</span>
+                </div>
+                <span id="val-price">{{ product.price | number:'1.2-2':'pt-BR' }}</span>
+            </div>
+        
+            <div class="btns-actions">
+                <app-add-to-cart id="add-cart" [amount]="amount" [product]="product" ></app-add-to-cart>
+                <button id="buy-now" type="submit">Buy now</button>
+            </div>
         </div>
     </div>
 </div>
