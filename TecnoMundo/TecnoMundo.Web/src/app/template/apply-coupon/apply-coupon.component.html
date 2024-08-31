@@ -8,14 +8,14 @@
         <p id="msgInvalidCoupon">{{ messageAttemptToApplyCoupon }}</p>
     </div>
     
-    <div class="container-coupon" *ngIf="cart.cartHeader.couponCode">
+    <div class="container-coupon" *ngIf="couponApplied$">
         <div class="coupon-code">
             <button (click)="removeCoupon()">x</button>
-            <p>{{ cart.cartHeader.couponCode }}</p>
+            <p>{{ coupon.couponCode }}</p>
         </div>
 
         <div class="discount-amount">
-            <p>R$ <span>{{ coupon.discountAmount | number:'1.2-2':'pt-BR' }}</span></p>
+            <p>R$ <span>{{ coupon.discountAmount| number:'1.2-2':'pt-BR' }}</span></p>
         </div>
     </div>
 </div>

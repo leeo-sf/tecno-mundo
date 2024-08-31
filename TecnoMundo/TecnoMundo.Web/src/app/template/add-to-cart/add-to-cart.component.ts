@@ -7,11 +7,14 @@ import { Cart } from '../../../interface/Cart';
 import { CartHeader } from '../../../interface/CartHeader';
 import { CartDetails } from '../../../interface/CartDetails';
 import { LoadingService } from '../../service/loading.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-add-to-cart',
   standalone: true,
-  imports: [],
+  imports: [
+    MatIconModule
+  ],
   providers: [
     CartService
   ],

@@ -1,0 +1,64 @@
+<div class="container-order-made">
+    <div class="content-order-made">
+        <div class="header">
+            <span>Order Made</span>
+            <div class="img-order-made">
+                <img src="./assets/carrinho-de-compras.png" alt="check">
+            </div>
+        </div>
+
+        <div class="info-order-made">
+
+            <div class="space">
+                <div class="info-order">
+                    <div class="payment-status">
+                        <span>Payment in processing</span>
+                    </div>
+
+                    <div class="purchase-info">
+                        <div class="form-item space-form">
+                            <label>Final Card</label>
+                            <span>{{ orderMade.finalCardPurchased }}</span>
+                        </div>
+                        
+                        <div class="form-item space-form">
+                            <label>Total item</label>
+                            <span>{{ orderMade.totalItems }}</span>
+                        </div>
+                        
+                        <div class="form-item space-form" *ngIf="orderMade.discountAmount">
+                            <label>Discount amount</label>
+                            <span [ngStyle]="{'color': 'green'}">R$ {{ orderMade.discountAmount| number:'1.2-2':'pt-BR' }}</span>
+                        </div>
+                        
+                        <div class="form-item space-form">
+                            <label>Purchase amount</label>
+                            <span>R$ {{ orderMade.purchaseAmount| number:'1.2-2':'pt-BR' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="btn-see-order">
+                        <button>
+                            <a routerLink="/orders">See order</a>
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="container-info-products">
+                    <div class="info-products" *ngFor="let product of orderMade.cartDetails">
+                        <div class="image-product">
+                            <img src="{{ product.product.imageUrl }}" alt="teste">
+                        </div>
+    
+                        <div class="details-product">
+                            <p>{{ product.product.name }}</p>
+                            
+                            <a routerLink="/product-details/{{ product.productId }}">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

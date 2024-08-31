@@ -1,4 +1,4 @@
-header {
+header nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,4 +50,9 @@ header #header-title span {
 .container-funcs a:hover {
     background-color: crimson;
     color: rgb(231, 231, 231);
+}
+
+.active-link {
+    color: white;
+    border-bottom: 5px solid crimson;
 }

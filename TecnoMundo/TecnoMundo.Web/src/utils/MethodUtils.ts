@@ -6,10 +6,10 @@ import { Injectable } from "@angular/core";
 export class MethodUtils {
   public defineRole(value: string): string {
     if (value == "" || value === "Client") {
-      return "72091";
+      return "389164";
     }
     else {
-      return "19027";
+      return "107927";
     }
   }
 }

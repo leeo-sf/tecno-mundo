@@ -7,10 +7,14 @@ import { categoryResolve } from './service/_guard/categoryResolve';
 import { ProductDetailsComponent } from './page/product-details/product-details.component';
 import { RegisterComponent } from './page/register/register.component';
 import { ProductComponent } from './page/product/product.component';
-import { ProductTemplateComponent } from './template/product-template/product-template.component';
 import { CartComponent } from './page/cart/cart.component';
 import { cartResolve } from './service/_guard/cartResolve';
 import { FinalizeOrderComponent } from './page/finalize-order/finalize-order.component';
+import { PurchaseMadeComponent } from './template/purchase-made/purchase-made.component';
+import { routeGuard } from './service/_guard/route.guard';
+import { OrderComponent } from './page/order/order.component';
+import { orderResolve } from './service/_guard/orderResolve';
+import { HomeComponent } from './page/home/home.component';
 
 export const routes: Routes = [
     {
@@ -24,24 +28,8 @@ export const routes: Routes = [
         resolve: { 
             products: productResolve,
             categories: categoryResolve
-        }
-    },
-    {
-        path: "products/filter",
-        component: ProductComponent,
-        resolve: {
-            products: productResolve,
-            categories: categoryResolve
         },
         runGuardsAndResolvers: 'paramsOrQueryParamsChange'
-    },
-    {
-        path: "products/filter/by-category/:categoryId",
-        component: ProductComponent,
-        resolve: {
-            products: productResolve,
-            categories: categoryResolve
-        }
     },
     {
         path: "product-details/:id",
@@ -59,12 +47,33 @@ export const routes: Routes = [
         path: "my-cart",
         component: CartComponent,
         runGuardsAndResolvers: 'always',
-        //canActivate: [authGuard]
+        canActivate: [ authGuard ],
         resolve: { cart: cartResolve },
     },
     {
         path: "finalize-order",
         component: FinalizeOrderComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard, routeGuard]
+    },
+    {
+        path: "finalize-order/order",
+        component: PurchaseMadeComponent,
+        canActivate: [authGuard, routeGuard]
+    },
+    {
+        path: "orders",
+        component: OrderComponent,
+        canActivate: [ authGuard ],
+        resolve: { orders: orderResolve }
+    },
+    {
+        path: "",
+        component: HomeComponent,
+        resolve: { newsProduct: productResolve }
+    },
+    {
+        path: "**",
+        redirectTo: "",
+        pathMatch: "full"
     }
 ];

@@ -6,6 +6,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Checkout } from '../../../interface/Checkout';
 import { CartService } from '../../service/cart.service';
+import { OrderMade } from '../../../interface/OrderMade';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-finalize-order',
@@ -33,11 +35,12 @@ export class FinalizeOrderComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.orderData = history.state;
+    this.orderData = history.state.finalizeOrder;
 
     this.finalizeOrderForm = new FormGroup({
       firstName: new FormControl('', [
@@ -227,8 +230,16 @@ export class FinalizeOrderComponent implements OnInit {
     }
 
     this.cartService.serviceCheckout(checkout, token).subscribe((result) => {
-      console.log("deu certo");
-      console.log(result);
+      const orderResult: Checkout = result;
+
+      let orderMade: OrderMade = {
+        cartDetails: orderResult.cartDetails,
+        finalCardPurchased: Number.parseInt(orderResult.cardNumber.slice(-4)),
+        totalItems: this.totalItems,
+        purchaseAmount: orderResult.purchaseAmount,
+        discountAmount: orderResult.discountAmount
+      };
+      this.router.navigate(['finalize-order/order'], { state: { orderMade: orderMade } });
     }, (error) => {
       console.log(error);
     });

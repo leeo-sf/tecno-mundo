@@ -18,13 +18,14 @@
             </div>
 
             <div class="options-category">
-                <select name="category" id="category">
-                    <option value="0" selected disabled>Filter by category</option>
-                    <option *ngFor="let category of listOfCategory"
-                        [value]="category.id"
-                        (click)="filterCategory(category.id)"
-                    >{{ category.name }}</option>
-                </select>
+                <mat-form-field>
+                    <mat-label>Product category</mat-label>
+                    <mat-select [(ngModel)]="category" name="productCategory" (selectionChange)="filterCategory()">
+                      @for (category of listOfCategory; track category) {
+                        <mat-option [value]="category.id">{{category.name}}</mat-option>
+                      }
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
 
@@ -62,7 +63,15 @@
 
     <div class="content-product">
         <div class="product">
-            <app-product-template></app-product-template>
+            <app-product-template [listOfProducts]="paginatedProducts" [msgProductNotFound]="msgProductNotFound"></app-product-template>
+        </div>
+
+        <div class="paginator" *ngIf="listOfProducts.length >= 1">
+            <mat-paginator [length]="listOfProducts.length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="nextOrPreviousPage($event)">
+            </mat-paginator>
         </div>
     </div>
 </div>

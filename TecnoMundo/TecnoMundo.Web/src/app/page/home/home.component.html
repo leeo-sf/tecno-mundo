@@ -1,0 +1,163 @@
+<div class="carousel">
+    <app-carousel [images]="images" [autoSlide]="autoSlide" [slideInterval]="slideInterval"></app-carousel>
+</div>
+
+<div class="container-news">
+    <div class="content">
+        <div class="title">
+            <span class="icon-news">
+                <mat-icon aria-hidden="false" fontIcon="report"></mat-icon>
+            </span>
+            <span>NEW PRODUCTS AND LAUNCHES</span>
+        </div>
+
+        <div class="news">
+            <p-carousel
+                [value]="newsProduct"
+                [numVisible]="4"
+                [numScroll]="2"
+                [circular]="true">
+                <ng-template let-product pTemplate="item">
+                    <div class="border-1 surface-border border-round m-2 p-3 product">
+                        <div class="mb-3">
+                            <div class="relative mx-auto image">
+                                <a routerLink="/product-details/{{product.id}}">
+                                    <img 
+                                    src="{{ product.imageUrl }}" 
+                                    [alt]="product.name" 
+                                    class="w-full border-round img" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mb-3 font-medium content-name">
+                            <p>{{ product.name }}</p>
+                        </div>
+                        <div class="mt-0 font-semibold text-xl actions">
+                            <div>
+                                <span id="moeda">R$</span>
+                                <span id="price">{{ product.price | number:'1.2-2':'pt-BR' }}</span>
+                            </div>
+                            
+                            <div class="actions-buttons">
+                                <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                                <div class="add-cart">
+                                    <app-add-to-cart [product]="product" [amount]="1" ></app-add-to-cart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+</div>
+
+<div class="container-home-footer">
+    <div class="infos">
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Institutional</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">Who we are</a>
+                <a href="#">Localization</a>
+                <a href="#">Our stores</a>
+                <a href="#">Blog</a>
+            </div>
+        </div>
+
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Doubts</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">Delivery</a>
+                <a href="#">Guarantee</a>
+                <a href="#">How to buy</a>
+                <a href="#">Payment methods</a>
+            </div>
+        </div>
+
+        <div class="form-group-infos">
+            <div class="title-form-group-infos">
+                <h6>Help</h6>
+            </div>
+
+            <div class="links">
+                <a href="#">SAC</a>
+                <a href="#">Contact us</a>
+                <a href="#">Term of acceptance</a>
+                <a href="#">Privacy policies</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-options">
+        <div class="title-form-group-infos">
+            <h6>Payment</h6>
+        </div>
+
+        <div class="methods">
+            <div class="payment-method">
+                <img src="./assets/mastercard.png" alt="mastercard">
+            </div>
+            
+            <div class="payment-method">
+                <img src="./assets/ticket.png" alt="ticket">
+            </div>
+            
+            <div class="payment-method">
+                <img src="./assets/visa.png" alt="visa">
+            </div>
+        </div>
+    </div>
+
+    <div class="newsletter">
+        <div class="title-form-group-infos">
+            <h6>Newsletter</h6>
+        </div>
+
+        <div class="container-title-newsletter">
+            <div class="title-newsletter">
+                <span>Stay up to date with the news.</span>
+            </div>
+
+            <div class="subtitle-newsletter">
+                <span>Receive exclusive offers in your email.</span>
+            </div>
+        </div>
+
+        <form class="input-email" (ngSubmit)="iWantToReceivePromotions(inputEmail.value)" [formGroup]="receivePromotions" #formDir="ngForm">
+            <input #inputEmail type="email" formControlName="emailToReceive" placeholder="Enter your e-mail">
+            <button>
+                <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
+            </button>
+        </form>
+
+        <div class="container-find-us">
+            <div class="title-social">
+                <span>Follow us on social media</span>
+            </div>
+
+            <div class="container-social-media">
+                <div class="social-media">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                
+                <div class="social-media">
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
