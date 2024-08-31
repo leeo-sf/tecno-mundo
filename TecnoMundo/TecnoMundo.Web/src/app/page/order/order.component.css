@@ -1,0 +1,166 @@
+.container-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 6%;
+}
+.container-orders h3 {
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+    color: rgb(231, 231, 231);
+    font-size: 1.8rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.content-orders {
+    width: 80%;
+    margin: 5px;
+}
+
+.header-order {
+    display: flex;
+    background-color: rgb(231, 231, 231);
+    padding: 20px;
+}
+
+.details-header-order {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.order-group {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.number-order {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+}
+
+.btn-see-order {
+    display: flex;
+    justify-content: flex-end;
+    width: 7%;
+}
+.btn-see-order button {
+    border: none;
+    cursor: pointer;
+    background-color: rgb(231, 231, 231);
+}
+
+.title-header-order {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-details-order {
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(231, 231, 231);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.details-order {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.img-product {
+    width: 12%;
+    background-color: white;
+    border-radius: 5px;
+}
+.img-product img {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+}
+
+
+.details-product {
+    margin: 10px;
+    width: 100%;
+}
+
+.content-name a {
+    color: white;
+    font-size: 1.0rem;
+}
+
+.actions-product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70%;
+    width: 30%;
+}
+.actions-btn {
+    padding: 10px;
+}
+.actions-btn button {
+    background-color: rgb(231, 231, 231);
+    border: 1px solid black;
+    border-radius: 15px;
+    color: black;
+    height: 30px;
+}
+
+.to-assess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+.to-assess button {
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 100%;
+    height: 30px;
+    margin: 5px;
+}
+
+.container-empty {
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+.empty-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: rgb(231,231,231);
+    padding: 30px;
+}
+
+
+.empty-order h2 {
+    font-size: 1.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.empty-order p {
+    font-size: 1.1rem;
+    font-family: serif;
+}
+.empty-order a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 30px;
+    text-decoration: none;
+    color: rgb(231,231,231);
+    background-color: crimson;
+    border-radius: 5px;
+}

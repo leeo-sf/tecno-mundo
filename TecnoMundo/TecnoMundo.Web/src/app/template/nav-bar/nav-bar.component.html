@@ -1,0 +1,20 @@
+<header>
+    <nav>
+        <a id="header-title" routerLink="">Tecno<span>Mundo</span></a>
+
+        <div class="container-funcs">
+            <a routerLink="/products" routerLinkActive="active-link">Products</a>
+
+            <div *ngIf="!authService.loggedInUser else notLogged">
+                <a routerLink="/register" routerLinkActive="active-link">Register</a>
+                <a routerLink="/login" routerLinkActive="active-link">Login</a>
+            </div>
+
+            <ng-template #notLogged>
+                <a routerLink="/orders" routerLinkActive="active-link">Orders</a>
+                <a routerLink="/my-cart" routerLinkActive="active-link">Cart</a>
+                <a routerLink="#" (click)="logout()">Logout</a>
+            </ng-template>
+        </div>
+    </nav>
+</header>

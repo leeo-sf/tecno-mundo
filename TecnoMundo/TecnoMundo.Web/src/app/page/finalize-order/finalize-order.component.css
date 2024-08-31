@@ -1,0 +1,253 @@
+.container-checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 2%;
+    height: 100%;
+    width: 100%;
+}
+
+
+.title-form h3 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+
+.container-purchase-amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    background-color: #181818;
+    width: 70%;
+}
+
+
+.form-purchase-amount {
+    margin: 10px;
+    width: 40%;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.form-group input::placeholder {
+    text-transform: capitalize;
+}
+.info-card {
+    display: flex;
+    justify-content: space-between;
+}
+.date {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+.barra {
+    width: 1px;
+    background-color: crimson;
+    height: 50%;
+    transform: rotate(30deg);
+}
+.form-group-exp input {
+    width: 30%;
+}
+
+
+.btn-finalize {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    width: 100%;
+    height: 30px;
+}
+.btn-finalize button {
+    color: white;
+    width: 70%;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(44, 44, 194);
+}
+.btn-finalize button:hover {
+    transform: scale(1.05);
+}
+
+
+.cart-details {
+    width: 18%;
+    padding: 15px;
+    background-color: rgb(231, 231, 231);
+}
+
+.cart-details h3 {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.separator {
+    background-color: #6b6b6b;
+    width: 100%;
+    height: 2px;
+    margin-bottom: 13px;
+}
+
+
+.info-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.info-content p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.info-content span {
+    letter-spacing: 1px;
+}
+
+.coupon span {
+    color: green;
+}
+
+
+.total-order-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.total-order-content p {
+    font-size: 1.1rem;
+    color: crimson;
+    font-weight: bold;
+}
+.total-order-content span {
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+}
+
+
+.container-right {
+    display: flex;
+    width: 40%;
+    height: 20%;
+}
+
+
+.card {
+    width: 450px;
+    height: 100%;
+    margin: 0 auto;
+    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(0,140,177,1) 35%, rgba(0,29,125,1) 100%);
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 15px;
+}
+
+.intern {
+    padding: 20px;
+}
+
+.aproximation {
+    width: 30px;
+    transform: rotate(90deg);
+}
+
+
+.chip {
+    float: right;
+    margin-bottom: 10px;
+}
+.img-chip {
+    height: 40px;
+}
+
+
+.card-number {
+    margin-top: 40px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+}
+
+.card-holder {
+    color: whitesmoke;
+}
+
+.card label {
+    font-size: .7rem;
+}
+
+.card-infos {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    color: white;
+}
+
+#credit-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1.1rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.number-container, .name-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.expiration-container, .cvv-container {
+    width: 50%;
+}
+
+input {
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #333333;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    outline: 0;
+    width: 100%;
+}
+
+input[type="text"]:focus {
+    border: 1px solid #95B8D1;
+}
+
+input#valid-thru-text, input#cvv-text {
+    width: 80%;
+}
+
+input[type="submit"] {
+    width: 95%;
+    background-color: #008cb1;
+    cursor: pointer;
+}
+
+.infos-container {
+    display: flex;
+}
+
+@media (max-width: 1024px) {
+    .ui {
+        flex-direction: column-reverse;
+    }
+
+    .container-left, .container-right {
+        width: 100%;
+    }
+}
