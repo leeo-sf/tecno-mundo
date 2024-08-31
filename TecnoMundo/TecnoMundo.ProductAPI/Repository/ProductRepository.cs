@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using GeekShopping.ProductAPI.Data.ValueObjects;
-using GeekShopping.ProductAPI.Model;
-using GeekShopping.ProductAPI.Model.Context;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Model;
+using TecnoMundo.ProductAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeekShopping.ProductAPI.Repository
+namespace TecnoMundo.ProductAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {
@@ -31,7 +31,7 @@ namespace GeekShopping.ProductAPI.Repository
             return _mapper.Map<List<CategoryVO>>(categories);
         }
 
-        public async Task<ProductVO> FindById(long id)
+        public async Task<ProductVO> FindById(Guid id)
         {
             var product = await _context.Products
                 .Include(x => x.Category)
@@ -41,7 +41,7 @@ namespace GeekShopping.ProductAPI.Repository
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<ProductVO> Create(ProductVO vo)
+        public async Task<ProductVO> Create(CreateProductVO vo)
         {
             Product product = _mapper.Map<Product>(vo);
             _context.Products.Add(product);
@@ -57,7 +57,7 @@ namespace GeekShopping.ProductAPI.Repository
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task<bool> Delete(Guid id)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace GeekShopping.ProductAPI.Repository
             }
         }
 
-        public async Task<IEnumerable<ProductVO>> FindProductsByCategoryId(int id)
+        public async Task<IEnumerable<ProductVO>> FindProductsByCategoryId(Guid id)
         {
             var products = await _context.Products
                 .Include(p => p.Category)

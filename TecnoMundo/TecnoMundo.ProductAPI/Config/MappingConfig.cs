@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using GeekShopping.ProductAPI.Data.ValueObjects;
-using GeekShopping.ProductAPI.Model;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Model;
 
-namespace GeekShopping.ProductAPI.Config
+namespace TecnoMundo.ProductAPI.Config
 {
     public class MappingConfig
     {
@@ -16,6 +16,8 @@ namespace GeekShopping.ProductAPI.Config
                 config.CreateMap<Product, ProductVO>();
 
                 config.CreateMap<ProductCategory, CategoryVO>();
+
+                config.CreateMap<CreateProductVO, Product>();
             });
 
             return config;

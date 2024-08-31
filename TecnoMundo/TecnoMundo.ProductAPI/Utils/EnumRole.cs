@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.ProductAPI.Utils
+﻿namespace TecnoMundo.ProductAPI.Utils
 {
     public enum EnumRole
     {

@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TecnoMundo.ProductAPI.Model.Base;
 
-namespace GeekShopping.ProductAPI.Model
+namespace TecnoMundo.ProductAPI.Model
 {
     [Table("category")]
-    public class ProductCategory
+    public class ProductCategory : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public string Name { get; set; }
