@@ -22,11 +22,34 @@ namespace GeekShopping.ProductAPI.Model
         [StringLength(50, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public string Color { get; set; }
         [Column("category_id")]
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         [Column("category")]
         public ProductCategory? Category { get; set; }
         [Column("image_url")]
         [StringLength(300)]
         public string ImageUrl { get; set; }
+
+        public Product(string name, decimal price, string description, string color, Guid categoryId, string imageUrl)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Price = price;
+            Description = description;
+            Color = color;
+            CategoryId = categoryId;
+            ImageUrl = imageUrl;
+        }
+
+        public Product(Guid id, string name, decimal price, string description, string color, Guid categoryId, ProductCategory? category, string imageUrl)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            Description = description;
+            Color = color;
+            CategoryId = categoryId;
+            Category = category;
+            ImageUrl = imageUrl;
+        }
     }
 }

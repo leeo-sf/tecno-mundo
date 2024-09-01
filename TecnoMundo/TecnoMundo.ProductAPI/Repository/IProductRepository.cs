@@ -1,4 +1,5 @@
 ﻿using GeekShopping.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
 
 namespace GeekShopping.ProductAPI.Repository
 {
@@ -6,11 +7,11 @@ namespace GeekShopping.ProductAPI.Repository
     {
         Task<IEnumerable<ProductVO>> FindAll();
         Task<IEnumerable<CategoryVO>> FindAllCategories();
-        Task<IEnumerable<ProductVO>> FindProductsByCategoryId(int id);
+        Task<IEnumerable<ProductVO>> FindProductsByCategoryId(Guid id);
         Task<IEnumerable<ProductVO>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo);
-        Task<ProductVO> FindById(long id);
-        Task<ProductVO> Create(ProductVO vo);
+        Task<ProductVO> FindById(Guid id);
+        Task<ProductVO> Create(CreateProductVO vo);
         Task<ProductVO> Update(ProductVO vo);
-        Task<bool> Delete(long id);
+        Task<bool> Delete(Guid id);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TecnoMundo.ProductAPI.Utils;
 
 namespace GeekShopping.ProductAPI.Model.Context
 {
@@ -11,14 +10,5 @@ namespace GeekShopping.ProductAPI.Model.Context
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>()
-                .Property(p => p.Id)
-                .HasValueGenerator<RandomIdValueGenerator>();
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

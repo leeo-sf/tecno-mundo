@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MySqlConnector;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
 
 namespace GeekShopping.ProductAPI.Controllers
 {
@@ -30,7 +31,7 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductVO>> Get(long id)
+        public async Task<ActionResult<ProductVO>> Get(Guid id)
         {
             var product = await _repository.FindById(id);
 
@@ -50,7 +51,7 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet("by-category/{idCategory}")]
-        public async Task<ActionResult<IEnumerable<ProductVO>>> FindProductsByCategoryId(int idCategory)
+        public async Task<ActionResult<IEnumerable<ProductVO>>> FindProductsByCategoryId(Guid idCategory)
         {
             var products = await _repository.FindProductsByCategoryId(idCategory);
 
@@ -74,7 +75,7 @@ namespace GeekShopping.ProductAPI.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(EnumRole.Admin))]
-        public async Task<ActionResult<ProductVO>> Create(ProductVO vo)
+        public async Task<ActionResult<ProductVO>> Create(CreateProductVO vo)
         {
             if (vo is null) return BadRequest();
 
@@ -122,7 +123,7 @@ namespace GeekShopping.ProductAPI.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(EnumRole.Admin))]
-        public async Task<ActionResult> Delete(long id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var status = await _repository.Delete(id);
             if (!status)return BadRequest();
