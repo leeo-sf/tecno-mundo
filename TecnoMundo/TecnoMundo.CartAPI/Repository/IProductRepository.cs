@@ -4,6 +4,6 @@ namespace GeekShopping.CartAPI.Repository
 {
     public interface IProductRepository
     {
-        Task<ProductVO> GetProductById(long productId);
+        Task<ProductVO> GetProductById(Guid productId);
     }
 }

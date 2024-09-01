@@ -32,7 +32,7 @@ namespace GeekShopping.CartAPI.Command
             var productVO = await _productRepository.GetProductById(
                 cart.CartDetails.FirstOrDefault().ProductId);
 
-            if (productVO.Id == 0)
+            if (productVO.Id == Guid.Empty)
             {
                 throw new ArgumentException("Product id invalid.");
             }

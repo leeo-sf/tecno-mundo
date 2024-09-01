@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnoMundo.ProductAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fd0cea38120f19707056698be483088d9ce636c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d46ef43ec0538cbc467bd23a16d488c4fe1f1484")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnoMundo.ProductAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnoMundo.ProductAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

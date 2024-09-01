@@ -24,7 +24,7 @@ namespace GeekShopping.CartAPI.Repository
             _productRepository = productRepository;
         }
 
-        public async Task<bool> ApplyCuopon(string userId, string couponCode)
+        public async Task<bool> ApplyCuopon(string userId, Guid couponCode)
         {
             var header = await _context.CartHeaders
                         .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -81,7 +81,7 @@ namespace GeekShopping.CartAPI.Repository
                         .FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
             {
-                header.CouponCode = "";
+                header.CouponCode = Guid.Empty;
                 _context.CartHeaders.Update(header);
                 await _context.SaveChangesAsync();
                 return true;
@@ -89,7 +89,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<bool> RemoveFromCart(long cartDetailsId)
+        public async Task<bool> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace GeekShopping.CartAPI.Repository
                 .FirstOrDefaultAsync(c => c.UserId == id);
         }
 
-        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(long productId, long cartHeaderId)
+        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(Guid productId, Guid cartHeaderId)
         {
             return await _context.CartDetails
                 .AsNoTracking()

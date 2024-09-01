@@ -68,7 +68,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpDelete("remove-cart/{id}")]
-        public async Task<ActionResult<CartVO>> RemoveCart(int id)
+        public async Task<ActionResult<CartVO>> RemoveCart(Guid id)
         {
             var status = await _cartRepostory.RemoveFromCart(id);
             if (status == null) return BadRequest();
@@ -85,11 +85,11 @@ namespace GeekShopping.CartAPI.Controllers
 
         [HttpPost("apply-coupon/{userId}")]
         public async Task<ActionResult<bool>> ApplyCouponToCart([FromRoute] string userId, 
-            [FromHeader(Name = "Coupon-Code")] string couponCode)
+            [FromHeader(Name = "Coupon-Code")] Guid couponCode)
         {
             string token = Request.Headers["Authorization"];
             CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(couponCode, token.Replace("Bearer ", ""));
-            if (coupon.Id == 0) return BadRequest();
+            if (coupon.Id == Guid.Empty) return BadRequest();
 
             var status = await _cartRepostory.ApplyCuopon(userId, couponCode);
 
@@ -112,7 +112,7 @@ namespace GeekShopping.CartAPI.Controllers
             if (vo?.UserId == null) return BadRequest();
             var cart = await _cartRepostory.FindCartByUserId(vo.UserId);
             if (cart == null) return NotFound();
-            if (!string.IsNullOrEmpty(vo.CouponCode))
+            if (!(vo.CouponCode == Guid.Empty))
             {
                 CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(vo.CouponCode, token.Replace("Bearer ", ""));
                 if (vo.DiscountAmount != coupon.DiscountAmount)
