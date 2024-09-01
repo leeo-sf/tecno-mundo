@@ -1,12 +1,12 @@
-﻿using GeekShopping.CartAPI.Command;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Messages;
-using GeekShopping.CartAPI.RabbitMQSender;
-using GeekShopping.CartAPI.Repository;
+﻿using TecnoMundo.CartAPI.Command;
+using TecnoMundo.CartAPI.Data.ValueObjects;
+using TecnoMundo.CartAPI.Messages;
+using TecnoMundo.CartAPI.RabbitMQSender;
+using TecnoMundo.CartAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekShopping.CartAPI.Controllers
+namespace TecnoMundo.CartAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

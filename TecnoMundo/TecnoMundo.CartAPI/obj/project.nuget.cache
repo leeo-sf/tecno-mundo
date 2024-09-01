@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FToObAEKDfgFElHyevAn5gtxaiPpo9STxxd/YecEU1QUhSSxfRmflH4PooAPFT0+Q9othF6h8RwK5ZQtfpMJTA==",
-  "success": true,
+  "dgSpecHash": "rBh4wp7E69uhrwM/ebmOZBcULvrcU6rAiX2S6WQRADyXgpddkenTQfJHUMkzSdndKsF3avBvIpnM8dwl4VKOQw==",
+  "success": false,
   "projectFilePath": "C:\\Users\\leona\\projects\\TecnoMundo\\TecnoMundo\\TecnoMundo.CartAPI\\TecnoMundo.CartAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\leona\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
-    "C:\\Users\\leona\\.nuget\\packages\\geekshopping.messagesbuspackage\\1.0.0\\geekshopping.messagesbuspackage.1.0.0.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.4\\microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
@@ -65,5 +64,15 @@
     "C:\\Users\\leona\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\leona\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Unable to find package TecnoMundo.MessagesBusPackage. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "TecnoMundo.MessagesBusPackage",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TecnoMundo.CartAPI.Utils;
 
-namespace GeekShopping.CartAPI.Model.Context
+namespace TecnoMundo.CartAPI.Model.Context
 {
     public class MySQLContext : DbContext
     {

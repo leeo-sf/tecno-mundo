@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model.Context;
+using TecnoMundo.CartAPI.Data.ValueObjects;
+using TecnoMundo.CartAPI.Model.Context;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.CartAPI.Repository
 {
     public class CouponRepository : ICouponRepository
     {

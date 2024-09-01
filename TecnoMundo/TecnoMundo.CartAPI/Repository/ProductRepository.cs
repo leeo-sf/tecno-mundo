@@ -1,8 +1,8 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
+﻿using TecnoMundo.CartAPI.Data.ValueObjects;
 using System.Net;
 using System.Text.Json;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.CartAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {

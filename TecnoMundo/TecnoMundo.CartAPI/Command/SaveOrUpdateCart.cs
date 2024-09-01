@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model;
-using GeekShopping.CartAPI.Repository;
+using TecnoMundo.CartAPI.Data.ValueObjects;
+using TecnoMundo.CartAPI.Model;
+using TecnoMundo.CartAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.PortableExecutable;
 
-namespace GeekShopping.CartAPI.Command
+namespace TecnoMundo.CartAPI.Command
 {
     public class SaveOrUpdateCart : ISaveOrUpdateCart
     {

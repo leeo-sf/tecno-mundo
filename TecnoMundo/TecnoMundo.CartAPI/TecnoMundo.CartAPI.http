@@ -1,6 +1,6 @@
-@GeekShopping.CartAPI_HostAddress = http://localhost:5237
+@TecnoMundo.CartAPI_HostAddress = http://localhost:5237
 
-GET {{GeekShopping.CartAPI_HostAddress}}/weatherforecast/
+GET {{TecnoMundo.CartAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

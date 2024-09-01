@@ -1,6 +1,6 @@
-﻿using GeekShopping.CartAPI.Model.Base;
+﻿using TecnoMundo.CartAPI.Model.Base;
 
-namespace GeekShopping.CartAPI.Data.ValueObjects
+namespace TecnoMundo.CartAPI.Data.ValueObjects
 {
     public class CartHeaderVO : BaseEntity
     {

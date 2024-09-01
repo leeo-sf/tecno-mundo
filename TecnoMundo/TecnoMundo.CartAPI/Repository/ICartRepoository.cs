@@ -1,7 +1,7 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model;
+﻿using TecnoMundo.CartAPI.Data.ValueObjects;
+using TecnoMundo.CartAPI.Model;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.CartAPI.Repository
 {
     public interface ICartRepoository
     {

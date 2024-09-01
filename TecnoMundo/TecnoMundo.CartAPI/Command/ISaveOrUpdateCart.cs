@@ -1,6 +1,6 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
+﻿using TecnoMundo.CartAPI.Data.ValueObjects;
 
-namespace GeekShopping.CartAPI.Command
+namespace TecnoMundo.CartAPI.Command
 {
     public interface ISaveOrUpdateCart
     {

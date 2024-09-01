@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.CartAPI.Model
+﻿namespace TecnoMundo.CartAPI.Model
 {
     public class Product
     {

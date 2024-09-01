@@ -1,9 +1,9 @@
 using AutoMapper;
-using GeekShopping.CartAPI.Command;
-using GeekShopping.CartAPI.Config;
-using GeekShopping.CartAPI.Model.Context;
-using GeekShopping.CartAPI.RabbitMQSender;
-using GeekShopping.CartAPI.Repository;
+using TecnoMundo.CartAPI.Command;
+using TecnoMundo.CartAPI.Config;
+using TecnoMundo.CartAPI.Model.Context;
+using TecnoMundo.CartAPI.RabbitMQSender;
+using TecnoMundo.CartAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
