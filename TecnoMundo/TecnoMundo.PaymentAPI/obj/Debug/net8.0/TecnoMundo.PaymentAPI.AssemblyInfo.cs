@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnoMundo.PaymentAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91df73ec4d316fb2b564f42056f4311d290918e1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69ce3c0b4f4d278b3cf6085e9f5431401d5339f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnoMundo.PaymentAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnoMundo.PaymentAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
