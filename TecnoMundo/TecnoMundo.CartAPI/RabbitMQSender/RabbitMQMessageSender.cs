@@ -1,5 +1,5 @@
 ﻿using TecnoMundo.CartAPI.Messages;
-using TecnoMundo.MessageBus;
+using GeekShopping.MessageBus;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;

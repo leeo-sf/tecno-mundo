@@ -18,6 +18,15 @@
           }
         }
       },
+      "GeekShopping.MessagesBusPackage/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/GeekShopping.MessageBus.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/GeekShopping.MessageBus.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1166,6 +1175,18 @@
         "icon.png",
         "lib/net6.0/AutoMapper.dll",
         "lib/net6.0/AutoMapper.xml"
+      ]
+    },
+    "GeekShopping.MessagesBusPackage/1.0.0": {
+      "sha512": "++8QdqGX0GOkv6azcaY4GWwh92a2MvaVQgSb57YC2d8ImG4XbABzlf3LHtYfU6o2/L5sb8ZgQBkolQWeZsFZLg==",
+      "type": "package",
+      "path": "geekshopping.messagesbuspackage/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "geekshopping.messagesbuspackage.1.0.0.nupkg.sha512",
+        "geekshopping.messagesbuspackage.nuspec",
+        "lib/net8.0/GeekShopping.MessageBus.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -3173,6 +3194,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "AutoMapper >= 13.0.1",
+      "GeekShopping.MessagesBusPackage >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
       "Pomelo.EntityFrameworkCore.MySql >= 8.0.2",
@@ -3180,8 +3202,7 @@
       "Swashbuckle.AspNetCore >= 6.4.0",
       "Swashbuckle.AspNetCore.Annotations >= 6.5.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 6.5.0",
-      "Swashbuckle.AspNetCore.SwaggerUI >= 6.5.0",
-      "TecnoMundo.MessagesBusPackage >= 1.0.0"
+      "Swashbuckle.AspNetCore.SwaggerUI >= 6.5.0"
     ]
   },
   "packageFolders": {
@@ -3232,6 +3253,10 @@
             "target": "Package",
             "version": "[13.0.1, )"
           },
+          "GeekShopping.MessagesBusPackage": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[8.0.4, )"
@@ -3265,10 +3290,6 @@
           "Swashbuckle.AspNetCore.SwaggerUI": {
             "target": "Package",
             "version": "[6.5.0, )"
-          },
-          "TecnoMundo.MessagesBusPackage": {
-            "target": "Package",
-            "version": "[1.0.0, )"
           }
         },
         "imports": [
@@ -3293,16 +3314,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1101",
-      "level": "Error",
-      "message": "Unable to find package TecnoMundo.MessagesBusPackage. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
-      "libraryId": "TecnoMundo.MessagesBusPackage",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

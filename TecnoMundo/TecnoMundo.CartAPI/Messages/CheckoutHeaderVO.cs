@@ -1,5 +1,5 @@
 ﻿using TecnoMundo.CartAPI.Data.ValueObjects;
-using TecnoMundo.MessageBus;
+using GeekShopping.MessageBus;
 
 namespace TecnoMundo.CartAPI.Messages
 {

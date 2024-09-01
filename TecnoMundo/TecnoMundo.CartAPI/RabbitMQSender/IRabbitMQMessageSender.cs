@@ -1,4 +1,4 @@
-﻿using TecnoMundo.MessageBus;
+﻿using GeekShopping.MessageBus;
 
 namespace TecnoMundo.CartAPI.RabbitMQSender
 {

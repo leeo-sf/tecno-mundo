@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "GeekShopping.MessagesBusPackage": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.4, )"
@@ -82,10 +86,6 @@
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
               "version": "[6.5.0, )"
-            },
-            "TecnoMundo.MessagesBusPackage": {
-              "target": "Package",
-              "version": "[1.0.0, )"
             }
           },
           "imports": [
