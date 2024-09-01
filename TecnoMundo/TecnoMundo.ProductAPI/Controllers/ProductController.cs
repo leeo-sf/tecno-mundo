@@ -1,6 +1,6 @@
-﻿using GeekShopping.ProductAPI.Data.ValueObjects;
-using GeekShopping.ProductAPI.Repository;
-using GeekShopping.ProductAPI.Utils;
+﻿using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Repository;
+using TecnoMundo.ProductAPI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using MySqlConnector;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
 
-namespace GeekShopping.ProductAPI.Controllers
+namespace TecnoMundo.ProductAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

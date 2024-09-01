@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using GeekShopping.ProductAPI.Data.ValueObjects;
-using GeekShopping.ProductAPI.Model;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Model;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
 
-namespace GeekShopping.ProductAPI.Config
+namespace TecnoMundo.ProductAPI.Config
 {
     public class MappingConfig
     {

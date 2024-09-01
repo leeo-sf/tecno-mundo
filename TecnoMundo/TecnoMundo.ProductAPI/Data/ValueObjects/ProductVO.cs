@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GeekShopping.ProductAPI.Data.ValueObjects
+namespace TecnoMundo.ProductAPI.Data.ValueObjects
 {
     public class ProductVO
     {

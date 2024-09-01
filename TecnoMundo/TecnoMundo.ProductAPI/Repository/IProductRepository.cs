@@ -1,7 +1,7 @@
-﻿using GeekShopping.ProductAPI.Data.ValueObjects;
+﻿using TecnoMundo.ProductAPI.Data.ValueObjects;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
 
-namespace GeekShopping.ProductAPI.Repository
+namespace TecnoMundo.ProductAPI.Repository
 {
     public interface IProductRepository
     {
