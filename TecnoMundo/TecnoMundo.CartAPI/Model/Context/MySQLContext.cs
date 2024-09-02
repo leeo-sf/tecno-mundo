@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TecnoMundo.CartAPI.Utils;
 
 namespace GeekShopping.CartAPI.Model.Context
 {

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnoMundo.CartAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f1e6afc1115c2632521e496c47b25a42659d5d1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab63c7a3cf9f997233a54c697b2f683ada9d413a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnoMundo.CartAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnoMundo.CartAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

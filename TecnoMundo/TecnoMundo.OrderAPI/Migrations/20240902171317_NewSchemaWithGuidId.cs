@@ -1,13 +1,12 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GeekShopping.OrderAPI.Migrations
+namespace TecnoMundo.OrderAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddOrderDataTablesOnDB : Migration
+    public partial class NewSchemaWithGuidId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,10 +18,8 @@ namespace GeekShopping.OrderAPI.Migrations
                 name: "order_header",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    user_id = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    user_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     coupon_code = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     purchase_amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
@@ -56,14 +53,13 @@ namespace GeekShopping.OrderAPI.Migrations
                 name: "order_detail",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OrderHeaderId = table.Column<long>(type: "bigint", nullable: false),
-                    ProductId = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    OrderHeaderId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ProductId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     count = table.Column<int>(type: "int", nullable: false),
                     product_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    price = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    price = table.Column<float>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

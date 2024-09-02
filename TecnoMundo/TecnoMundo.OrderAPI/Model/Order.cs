@@ -7,6 +7,8 @@ namespace TecnoMundo.OrderAPI.Model
         public OrderHeader OrderHeader { get; set; }
         public List<OrderDetail> OrderDetail { get; set; }
 
+        public Order() { }
+
         public Order(OrderHeader orderHeader, List<OrderDetail> orderDetail)
         {
             OrderHeader = orderHeader;

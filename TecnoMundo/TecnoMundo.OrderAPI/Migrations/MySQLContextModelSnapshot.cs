@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GeekShopping.OrderAPI.Migrations
+namespace TecnoMundo.OrderAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
     partial class MySQLContextModelSnapshot : ModelSnapshot
@@ -24,26 +24,24 @@ namespace GeekShopping.OrderAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderDetail", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<int>("Count")
                         .HasColumnType("int")
                         .HasColumnName("count");
 
-                    b.Property<long>("OrderHeaderId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("OrderHeaderId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)")
+                    b.Property<float>("Price")
+                        .HasColumnType("float")
                         .HasColumnName("price");
 
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint")
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("char(36)")
                         .HasColumnName("ProductId");
 
                     b.Property<string>("ProductName")
@@ -60,12 +58,10 @@ namespace GeekShopping.OrderAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderHeader", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("CVV")
                         .IsRequired()
@@ -131,9 +127,8 @@ namespace GeekShopping.OrderAPI.Migrations
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("purchase_amount");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
@@ -143,18 +138,16 @@ namespace GeekShopping.OrderAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderDetail", b =>
                 {
-                    b.HasOne("GeekShopping.OrderAPI.Model.OrderHeader", "OrderHeader")
-                        .WithMany("CartDetails")
+                    b.HasOne("GeekShopping.OrderAPI.Model.OrderHeader", null)
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("OrderHeader");
                 });
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderHeader", b =>
                 {
-                    b.Navigation("CartDetails");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
