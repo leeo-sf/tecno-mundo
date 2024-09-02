@@ -89,7 +89,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<bool> RemoveFromCart(long cartDetailsId)
+        public async Task<bool> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace GeekShopping.CartAPI.Repository
                 .FirstOrDefaultAsync(c => c.UserId == id);
         }
 
-        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(Guid productId, long cartHeaderId)
+        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(Guid productId, Guid cartHeaderId)
         {
             return await _context.CartDetails
                 .AsNoTracking()

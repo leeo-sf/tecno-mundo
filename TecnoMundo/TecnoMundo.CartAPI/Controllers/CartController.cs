@@ -68,7 +68,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpDelete("remove-cart/{id}")]
-        public async Task<ActionResult<CartVO>> RemoveCart(int id)
+        public async Task<ActionResult<CartVO>> RemoveCart(Guid id)
         {
             var status = await _cartRepostory.RemoveFromCart(id);
             if (status == null) return BadRequest();

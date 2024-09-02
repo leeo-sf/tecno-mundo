@@ -24,30 +24,43 @@ namespace GeekShopping.CartAPI.Command
 
         public async Task<CartVO> Execute(CartVO vo)
         {
-            Cart cart = _mapper.Map<Cart>(vo);
+            Cart cart;
 
-            if (cart.CartDetails.FirstOrDefault().Count == 0) 
+            if (vo.CartDetails.FirstOrDefault().Count == 0) 
                 throw new ArgumentException("Count invalid.");
 
             var productVO = await _productRepository.GetProductById(
-                cart.CartDetails.FirstOrDefault().ProductId);
+                vo.CartDetails.FirstOrDefault().ProductId);
 
             if (productVO.Id == Guid.Empty)
             {
                 throw new ArgumentException("Product id invalid.");
             }
 
-            var cartHeader = await _repository.FindCartHeaderById(cart.CartHeader.UserId);
+            var cartHeader = await _repository.FindCartHeaderById(vo.CartHeader.UserId);
 
             if (cartHeader is null)
             {
-                await _repository.AddCartHeaders(cart.CartHeader);
-                cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
-                cart.CartDetails.FirstOrDefault().Product = null;
-                await _repository.AddCartDetails(cart.CartDetails.FirstOrDefault());
+                var cartHeaderToBeCreated = CartHeader.CreateCartHeader(vo.CartHeader.UserId, vo.CartHeader.CouponCode);
+                var cartDetailToBeCreated = CartDetail.CreateCartDetail(
+                    cartHeaderId: cartHeaderToBeCreated.Id,
+                    cartHeader: cartHeaderToBeCreated,
+                    productId: productVO.Id,
+                    product: null,
+                    count: vo.CartDetails.FirstOrDefault().Count
+                    );
+                await _repository.AddCartHeaders(cartHeaderToBeCreated);
+                await _repository.AddCartDetails(cartDetailToBeCreated);
+
+                var listCartDetails = new List<CartDetail>();
+                listCartDetails.Add(cartDetailToBeCreated);
+
+                cart = new Cart(cartHeader: cartHeaderToBeCreated, cartDetails: listCartDetails);
             }
             else
             {
+                cart = _mapper.Map<Cart>(vo);
+
                 var cartDetail = await _repository.FindCartDetailByProductIdAndCartHeaderId(
                     cart.CartDetails.FirstOrDefault().ProductId,
                     cartHeader.Id);

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TecnoMundo.CartAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240902152404_NewSchema")]
-    partial class NewSchema
+    [Migration("20240902165630_NewSchemaWithGuidIdEntities")]
+    partial class NewSchemaWithGuidIdEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,13 @@ namespace TecnoMundo.CartAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.CartAPI.Model.CartDetail", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartHeaderId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CartHeaderId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int")
@@ -53,12 +51,10 @@ namespace TecnoMundo.CartAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.CartAPI.Model.CartHeader", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CouponCode")
                         .IsRequired()
