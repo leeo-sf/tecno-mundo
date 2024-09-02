@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.Identity.Response
+﻿namespace TecnoMundo.Identity.Response
 {
     public class InformacoesToken
     {

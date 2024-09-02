@@ -1,6 +1,6 @@
-﻿using GeekShopping.Identity.Model;
+﻿using TecnoMundo.Identity.Model;
 
-namespace GeekShopping.Identity.Service
+namespace TecnoMundo.Identity.Service
 {
     public interface ITokenService
     {

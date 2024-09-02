@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using GeekShopping.Identity.Data.ValueObjects;
-using GeekShopping.Identity.Model;
+using TecnoMundo.Identity.Data.ValueObjects;
+using TecnoMundo.Identity.Model;
+using TecnoMundo.IdentityAPI.Data.ValueObjects;
 
-namespace GeekShopping.Identity.Config
+namespace TecnoMundo.Identity.Config
 {
     public class MappingConfig
     {
@@ -11,6 +12,7 @@ namespace GeekShopping.Identity.Config
             var config = new MapperConfiguration(config =>
             {
                 config.CreateMap<UserVO, User>();
+                config.CreateMap<AuthenticateVO, Authenticate>();
             });
 
             return config;

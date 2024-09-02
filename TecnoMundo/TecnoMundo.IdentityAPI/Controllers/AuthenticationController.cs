@@ -1,14 +1,16 @@
-﻿using GeekShopping.Identity.Commands;
-using GeekShopping.Identity.Data.ValueObjects;
-using GeekShopping.Identity.Model;
-using GeekShopping.Identity.Repository;
-using GeekShopping.Identity.Response;
-using GeekShopping.Identity.Service;
+﻿using TecnoMundo.Identity.Commands;
+using TecnoMundo.Identity.Data.ValueObjects;
+using TecnoMundo.Identity.Model;
+using TecnoMundo.Identity.Repository;
+using TecnoMundo.Identity.Response;
+using TecnoMundo.Identity.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using TecnoMundo.IdentityAPI.Data.ValueObjects;
 
-namespace GeekShopping.Identity.Controllers
+namespace TecnoMundo.Identity.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -31,8 +33,8 @@ namespace GeekShopping.Identity.Controllers
         }
 
         [HttpPost]
-        [Route("auth")]
-        public async Task<ActionResult> GetToken([FromBody] UserLogin userLogin)
+        [Route("Auth")]
+        public async Task<ActionResult> GetToken([FromBody] AuthenticateVO userLogin)
         {
             var user = await _repository.ValidateUserEmailAndPassword(userLogin);
 
@@ -40,16 +42,16 @@ namespace GeekShopping.Identity.Controllers
 
             var accessToken = _tokenService.GenerateToken(user);
 
-            return Ok(Json(new InformacoesToken
+            return Ok(new
             {
-                AcessToken = accessToken,
+                AccessToken = accessToken,
                 ExpiressInHours = Convert.ToInt32(_configuration.GetSection("AuthenticationSettings:ExpiressHours").Value)
-            }));
+            });
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("create-account")]
+        [Route("Create-Account")]
         public async Task<ActionResult> CreateAccount([FromBody] UserVO user)
         {
             try
@@ -57,21 +59,12 @@ namespace GeekShopping.Identity.Controllers
                 await _insert.Execute(user);
                 return Ok();
             }
-            catch (KeyNotFoundException ex)
+            catch (Exception ex) when (ex is ApplicationException || ex is ArgumentException || ex is DbUpdateException)
             {
-                return NotFound(Json(ex.Message));
-            }
-            catch (ApplicationException ex)
-            {
-                return BadRequest(Json(ex.Message));
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(Json(ex.Message));
-            }
-            catch (DbUpdateException ex)
-            {
-                return BadRequest(Json(ex.Message));
+                return BadRequest(new
+                {
+                    Error = ex.Message
+                });
             }
         }
     }

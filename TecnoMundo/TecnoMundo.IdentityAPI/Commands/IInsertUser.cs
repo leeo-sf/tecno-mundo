@@ -1,6 +1,6 @@
-﻿using GeekShopping.Identity.Data.ValueObjects;
+﻿using TecnoMundo.Identity.Data.ValueObjects;
 
-namespace GeekShopping.Identity.Commands
+namespace TecnoMundo.Identity.Commands
 {
     public interface IInsertUser
     {
