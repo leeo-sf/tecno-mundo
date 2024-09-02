@@ -1,7 +1,7 @@
 using AutoMapper;
-using GeekShopping.CouponAPI.Config;
-using GeekShopping.CouponAPI.Model.Context;
-using GeekShopping.CouponAPI.Repository;
+using TecnoMundo.CouponAPI.Config;
+using TecnoMundo.CouponAPI.Model.Context;
+using TecnoMundo.CouponAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

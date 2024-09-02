@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace GeekShopping.CouponAPI.Migrations
+namespace TecnoMundo.CouponAPI.Migrations
 {
     /// <inheritdoc />
     public partial class AddGenerateRandomId : Migration

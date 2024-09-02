@@ -1,6 +1,6 @@
-@GeekShopping.CouponAPI_HostAddress = http://localhost:5177
+@TecnoMundo.CouponAPI_HostAddress = http://localhost:5177
 
-GET {{GeekShopping.CouponAPI_HostAddress}}/weatherforecast/
+GET {{TecnoMundo.CouponAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
