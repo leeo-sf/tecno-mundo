@@ -9,7 +9,7 @@ namespace GeekShopping.CartAPI.Model
         public int CartHeaderId { get; set; }
         [ForeignKey("CartHeaderId")]
         public virtual CartHeader CartHeader { get; set; }
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [NotMapped]
         public virtual Product? Product { get; set; }
         [Column("count")]

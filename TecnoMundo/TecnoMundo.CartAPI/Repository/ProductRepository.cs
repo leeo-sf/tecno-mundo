@@ -14,7 +14,7 @@ namespace GeekShopping.CartAPI.Repository
             _httpClient = httpClient;
         }
 
-        public async Task<ProductVO> GetProductById(long productId)
+        public async Task<ProductVO> GetProductById(Guid productId)
         {
             var response = await _httpClient.GetAsync($"/api/v1/Product/{productId}");
             var content = await response.Content.ReadAsStringAsync();
