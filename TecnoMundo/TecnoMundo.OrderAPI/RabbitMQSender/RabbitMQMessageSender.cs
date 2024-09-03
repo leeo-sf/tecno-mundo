@@ -1,8 +1,8 @@
-﻿using GeekShopping.MessageBus;
+﻿using System.Text;
+using System.Text.Json;
+using GeekShopping.MessageBus;
 using GeekShopping.OrderAPI.Messages;
 using RabbitMQ.Client;
-using System.Text;
-using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.RabbitMQSender
 {
@@ -30,7 +30,11 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
                 channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
                 byte[] body = GetMessageAsByteArray(message);
                 channel.BasicPublish(
-                    exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                    exchange: "",
+                    routingKey: queueName,
+                    basicProperties: null,
+                    body: body
+                );
             }
         }
 
@@ -67,7 +71,8 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
 
         private bool ConnectionExists()
         {
-            if (_connection != null) return true;
+            if (_connection != null)
+                return true;
             CreateConnection();
             return _connection != null;
         }

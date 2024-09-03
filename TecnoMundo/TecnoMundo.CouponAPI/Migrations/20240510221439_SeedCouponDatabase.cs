@@ -19,21 +19,16 @@ namespace TecnoMundo.CouponAPI.Migrations
                 {
                     { 1L, "GEEK_SHOPPING_10", 10f },
                     { 2L, "GEEK_SHOPPING_15", 15f }
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 1L);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 1L);
 
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 2L);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 2L);
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using GeekShopping.CartAPI.Messages;
+﻿using System.Text;
+using System.Text.Json;
+using GeekShopping.CartAPI.Messages;
 using GeekShopping.MessageBus;
 using RabbitMQ.Client;
-using System.Text;
-using System.Text.Json;
 
 namespace GeekShopping.CartAPI.RabbitMQSender
 {
@@ -30,7 +30,11 @@ namespace GeekShopping.CartAPI.RabbitMQSender
                 channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
                 byte[] body = GetMessageAsByteArray(message);
                 channel.BasicPublish(
-                    exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                    exchange: "",
+                    routingKey: queueName,
+                    basicProperties: null,
+                    body: body
+                );
             }
         }
 
@@ -41,7 +45,10 @@ namespace GeekShopping.CartAPI.RabbitMQSender
                 //para considerar as classes filhas
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize<CheckoutHeaderVO>((CheckoutHeaderVO)message, options);
+            var json = JsonSerializer.Serialize<CheckoutHeaderVO>(
+                (CheckoutHeaderVO)message,
+                options
+            );
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }
@@ -67,7 +74,8 @@ namespace GeekShopping.CartAPI.RabbitMQSender
 
         private bool ConnectionExists()
         {
-            if (_connection != null) return true;
+            if (_connection != null)
+                return true;
             CreateConnection();
             return _connection != null;
         }

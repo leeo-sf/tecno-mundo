@@ -1,6 +1,6 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
+using GeekShopping.CartAPI.Data.ValueObjects;
 
 namespace GeekShopping.CartAPI.Repository
 {
@@ -8,8 +8,7 @@ namespace GeekShopping.CartAPI.Repository
     {
         private readonly HttpClient _httpClient;
 
-        public ProductRepository(
-            HttpClient httpClient)
+        public ProductRepository(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -18,12 +17,12 @@ namespace GeekShopping.CartAPI.Repository
         {
             var response = await _httpClient.GetAsync($"/api/v1/Product/{productId}");
             var content = await response.Content.ReadAsStringAsync();
-            if (response.StatusCode != HttpStatusCode.OK) return new ProductVO();
-            return JsonSerializer.Deserialize<ProductVO>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            if (response.StatusCode != HttpStatusCode.OK)
+                return new ProductVO();
+            return JsonSerializer.Deserialize<ProductVO>(
+                content,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
         }
     }
 }

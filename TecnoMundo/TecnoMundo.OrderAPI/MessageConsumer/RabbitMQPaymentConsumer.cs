@@ -1,12 +1,11 @@
-﻿
+﻿using System.Text;
+using System.Text.Json;
 using GeekShopping.OrderAPI.Messages;
 using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.RabbitMQSender;
 using GeekShopping.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
-using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
@@ -17,9 +16,11 @@ namespace GeekShopping.OrderAPI.MessageConsumer
         private IConnection _connection;
         private IModel _channel;
 
-        public RabbitMQPaymentConsumer(OrderRepository repository, 
+        public RabbitMQPaymentConsumer(
+            OrderRepository repository,
             IConfiguration configuration,
-            IRabbitMQMessageSender rabbitMQMessageSender)
+            IRabbitMQMessageSender rabbitMQMessageSender
+        )
         {
             _repository = repository;
             _configuration = configuration;
@@ -31,7 +32,13 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "orderpaymentresultqueue", false, false, false, arguments: null);
+            _channel.QueueDeclare(
+                queue: "orderpaymentresultqueue",
+                false,
+                false,
+                false,
+                arguments: null
+            );
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)

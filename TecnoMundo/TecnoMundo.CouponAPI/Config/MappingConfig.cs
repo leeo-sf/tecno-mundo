@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Model;
 using TecnoMundo.CouponAPI.Data.ValueObjects;
+using TecnoMundo.CouponAPI.Model;
 
 namespace TecnoMundo.CouponAPI.Config
 {
@@ -11,8 +11,7 @@ namespace TecnoMundo.CouponAPI.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<CouponVO, Coupon>()
-                    .ReverseMap();
+                config.CreateMap<CouponVO, Coupon>().ReverseMap();
 
                 config.CreateMap<CreateCouponVO, Coupon>();
             });

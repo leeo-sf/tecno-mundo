@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
-using TecnoMundo.ProductAPI.Model;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Model;
 
 namespace TecnoMundo.ProductAPI.Config
 {
@@ -12,7 +12,8 @@ namespace TecnoMundo.ProductAPI.Config
             var config = new MapperConfiguration(config =>
             {
                 //entra um productvo e vira product
-                config.CreateMap<ProductVO, Product>()
+                config
+                    .CreateMap<ProductVO, Product>()
                     .ForMember(x => x.Category, opt => opt.Ignore());
                 config.CreateMap<Product, ProductVO>();
 

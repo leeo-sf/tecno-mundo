@@ -1,5 +1,5 @@
-﻿using GeekShopping.CartAPI.Model.Base;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using GeekShopping.CartAPI.Model.Base;
 
 namespace GeekShopping.CartAPI.Model
 {
@@ -7,17 +7,26 @@ namespace GeekShopping.CartAPI.Model
     public class CartDetail : BaseEntity
     {
         public Guid CartHeaderId { get; set; }
+
         [ForeignKey("CartHeaderId")]
         public virtual CartHeader CartHeader { get; set; }
         public Guid ProductId { get; set; }
+
         [NotMapped]
         public virtual Product? Product { get; set; }
+
         [Column("count")]
         public int Count { get; set; }
 
         public CartDetail() { }
 
-        public CartDetail(Guid cartHeaderId, CartHeader cartHeader, Guid productId, Product? product, int count)
+        public CartDetail(
+            Guid cartHeaderId,
+            CartHeader cartHeader,
+            Guid productId,
+            Product? product,
+            int count
+        )
         {
             Id = Guid.NewGuid();
             CartHeaderId = cartHeaderId;
@@ -27,7 +36,14 @@ namespace GeekShopping.CartAPI.Model
             Count = count;
         }
 
-        public CartDetail(Guid id, Guid cartHeaderId, CartHeader cartHeader, Guid productId, Product? product, int count)
+        public CartDetail(
+            Guid id,
+            Guid cartHeaderId,
+            CartHeader cartHeader,
+            Guid productId,
+            Product? product,
+            int count
+        )
         {
             Id = id;
             CartHeaderId = cartHeaderId;
@@ -37,9 +53,21 @@ namespace GeekShopping.CartAPI.Model
             Count = count;
         }
 
-        public static CartDetail CreateCartDetail(Guid cartHeaderId, CartHeader cartHeader, Guid productId, Product? product, int count)
+        public static CartDetail CreateCartDetail(
+            Guid cartHeaderId,
+            CartHeader cartHeader,
+            Guid productId,
+            Product? product,
+            int count
+        )
         {
-            return new CartDetail(cartHeaderId: cartHeaderId, cartHeader: cartHeader, productId: productId, product: product, count: count);
+            return new CartDetail(
+                cartHeaderId: cartHeaderId,
+                cartHeader: cartHeader,
+                productId: productId,
+                product: product,
+                count: count
+            );
         }
     }
 }
