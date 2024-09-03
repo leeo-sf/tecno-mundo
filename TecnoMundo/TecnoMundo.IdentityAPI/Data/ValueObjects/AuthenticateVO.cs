@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GeekShopping.Identity.Model
+namespace TecnoMundo.IdentityAPI.Data.ValueObjects
 {
-    public class UserLogin
+    public class AuthenticateVO
     {
         [Required(ErrorMessage = "{0} is required")]
         [EmailAddress(ErrorMessage = "{0} is invalid")]

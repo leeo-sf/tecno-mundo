@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TecnoMundo.IdentityAPI.Model.Base;
+using TecnoMundo.IdentityAPI.Utils;
 
-namespace GeekShopping.Identity.Model
+namespace TecnoMundo.Identity.Model
 {
     [Table("user")]
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(80, ErrorMessage = "{0} cannot be more than {2} characters")]
         public string UserName { get; set; }
@@ -28,9 +28,20 @@ namespace GeekShopping.Identity.Model
         [StringLength(12, MinimumLength = 6, ErrorMessage = "{0} must be between 6 and 12 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Column("role_id")]
-        public int RoleId { get; set; }
-        public Role? Role { get; set; }
+        public EnumRole Role { get; set; }
+
+        public User(string userName, string lastName, string cpf, string phoneNumber, string userEmail, bool emailConfirmed, string password)
+        {
+            Id = Guid.NewGuid();
+            UserName = userName;
+            LastName = lastName;
+            Cpf = cpf;
+            PhoneNumber = phoneNumber;
+            UserEmail = userEmail;
+            EmailConfirmed = emailConfirmed;
+            Password = password;
+            Role = EnumRole.Client;
+        }
 
         public static bool ValidateCpf(string cpf)
         {

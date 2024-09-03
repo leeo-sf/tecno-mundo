@@ -24,7 +24,7 @@ namespace GeekShopping.CartAPI.Repository
             _productRepository = productRepository;
         }
 
-        public async Task<bool> ApplyCuopon(string userId, string couponCode)
+        public async Task<bool> ApplyCoupon(Guid userId, string couponCode)
         {
             var header = await _context.CartHeaders
                         .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -38,7 +38,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<bool> ClearCart(string userId)
+        public async Task<bool> ClearCart(Guid userId)
         {
             var cartHeader = await _context.CartHeaders
                         .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -55,7 +55,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<CartVO> FindCartByUserId(string userId)
+        public async Task<CartVO> FindCartByUserId(Guid userId)
         {
             Cart cart = new()
             {
@@ -75,7 +75,7 @@ namespace GeekShopping.CartAPI.Repository
             return _mapper.Map<CartVO>(cart);
         }
 
-        public async Task<bool> RemoveCoupon(string userId)
+        public async Task<bool> RemoveCoupon(Guid userId)
         {
             var header = await _context.CartHeaders
                         .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -89,7 +89,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<bool> RemoveFromCart(long cartDetailsId)
+        public async Task<bool> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
@@ -132,14 +132,14 @@ namespace GeekShopping.CartAPI.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<CartHeader> FindCartHeaderById(string id)
+        public async Task<CartHeader> FindCartHeaderById(Guid id)
         {
             return await _context.CartHeaders
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.UserId == id);
         }
 
-        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(long productId, long cartHeaderId)
+        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(Guid productId, Guid cartHeaderId)
         {
             return await _context.CartDetails
                 .AsNoTracking()

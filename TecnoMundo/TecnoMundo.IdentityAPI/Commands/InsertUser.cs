@@ -1,27 +1,28 @@
-﻿using GeekShopping.Identity.Data.ValueObjects;
-using GeekShopping.Identity.Model;
-using GeekShopping.Identity.Repository;
+﻿using AutoMapper;
+using TecnoMundo.Identity.Data.ValueObjects;
+using TecnoMundo.Identity.Model;
+using TecnoMundo.Identity.Repository;
 
-namespace GeekShopping.Identity.Commands
+namespace TecnoMundo.Identity.Commands
 {
     public class InsertUser : IInsertUser
     {
         private readonly IDbRepository _repository;
+        private readonly IMapper _mapper;
 
-        public InsertUser(IDbRepository repository)
+        public InsertUser(IDbRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task Execute(UserVO user)
+        public async Task Execute(UserVO userVO)
         {
+            var user = _mapper.Map<User>(userVO);
+
             if (!User.ValidateCpf(user.Cpf)) throw new ArgumentException("CPF invalid.");
 
-            var role = await _repository.GetRoleById(user.RoleId);
-
             if (!user.EmailConfirmed) throw new ArgumentException("Email was not confirmed.");
-
-            if (role is null) throw new KeyNotFoundException("Role id not found!");
 
             var cpfExists = await _repository.CpfExists(user.Cpf);
             if (cpfExists) throw new ApplicationException($"CPF {user.Cpf} already exists");

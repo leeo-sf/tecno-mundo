@@ -25,7 +25,7 @@ namespace GeekShopping.OrderAPI.Repository
             return true;
         }
 
-        public async Task UpdateOrderPaymentStatus(long orderHeaderId, bool status)
+        public async Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status)
         {
             await using var _db = new MySQLContext(_context);
             var header = await _db.Headers.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
@@ -36,7 +36,7 @@ namespace GeekShopping.OrderAPI.Repository
             }
         }
 
-        public async Task<List<OrderHeader>> GetAllOrder(string profileId)
+        public async Task<List<OrderHeader>> GetAllOrder(Guid profileId)
         {
             await using var _db = new MySQLContext(_context);
             var orderHeaders = await _db.Headers

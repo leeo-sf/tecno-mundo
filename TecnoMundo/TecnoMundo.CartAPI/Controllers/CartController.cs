@@ -30,7 +30,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpGet("find-cart/{userId}")]
-        public async Task<ActionResult<CartVO>> FindById(string userId)
+        public async Task<ActionResult<CartVO>> FindById(Guid userId)
         {
             var cart = await _cartRepostory.FindCartByUserId(userId);
             if (cart == null) return NotFound();
@@ -68,7 +68,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpDelete("remove-cart/{id}")]
-        public async Task<ActionResult<CartVO>> RemoveCart(int id)
+        public async Task<ActionResult<CartVO>> RemoveCart(Guid id)
         {
             var status = await _cartRepostory.RemoveFromCart(id);
             if (status == null) return BadRequest();
@@ -76,7 +76,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpDelete("clear/{userId}")]
-        public async Task<ActionResult<bool>> ClearCart(string userId)
+        public async Task<ActionResult<bool>> ClearCart(Guid userId)
         {
             var status = await _cartRepostory.ClearCart(userId);
 
@@ -84,21 +84,21 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpPost("apply-coupon/{userId}")]
-        public async Task<ActionResult<bool>> ApplyCouponToCart([FromRoute] string userId, 
+        public async Task<ActionResult<bool>> ApplyCouponToCart([FromRoute] Guid userId, 
             [FromHeader(Name = "Coupon-Code")] string couponCode)
         {
             string token = Request.Headers["Authorization"];
             CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(couponCode, token.Replace("Bearer ", ""));
-            if (coupon.Id == 0) return BadRequest();
+            if (coupon.Id == Guid.Empty) return BadRequest();
 
-            var status = await _cartRepostory.ApplyCuopon(userId, couponCode);
+            var status = await _cartRepostory.ApplyCoupon(userId, couponCode);
 
             return Ok(status);
         }
 
         [HttpPost("remove-coupon")]
         public async Task<ActionResult<bool>> RemoveCouponToCart(
-            [FromHeader] string userId)
+            [FromHeader] Guid userId)
         {
             var status = await _cartRepostory.RemoveCoupon(userId);
 

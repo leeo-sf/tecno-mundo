@@ -4,7 +4,7 @@ namespace GeekShopping.PaymentAPI.Messages
 {
     public class PaymentMessage : BaseMessage
     {
-        public long OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public string Name { get; set; }
         public string CartNumber { get; set; }
         public string CVV { get; set; }

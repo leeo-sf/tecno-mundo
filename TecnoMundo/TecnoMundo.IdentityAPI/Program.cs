@@ -1,9 +1,9 @@
 using AutoMapper;
-using GeekShopping.Identity.Commands;
-using GeekShopping.Identity.Config;
-using GeekShopping.Identity.Model.Context;
-using GeekShopping.Identity.Repository;
-using GeekShopping.Identity.Service;
+using TecnoMundo.Identity.Commands;
+using TecnoMundo.Identity.Config;
+using TecnoMundo.Identity.Model.Context;
+using TecnoMundo.Identity.Repository;
+using TecnoMundo.Identity.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

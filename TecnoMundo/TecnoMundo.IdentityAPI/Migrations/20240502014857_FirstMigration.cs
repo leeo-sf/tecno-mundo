@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GeekShopping.Identity.Migrations
+namespace TecnoMundo.Identity.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration

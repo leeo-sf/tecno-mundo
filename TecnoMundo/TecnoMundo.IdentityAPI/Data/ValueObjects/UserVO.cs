@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace GeekShopping.Identity.Data.ValueObjects
+namespace TecnoMundo.Identity.Data.ValueObjects
 {
     public class UserVO
     {
@@ -25,7 +25,5 @@ namespace GeekShopping.Identity.Data.ValueObjects
         [StringLength(12, MinimumLength = 6, ErrorMessage = "{0} must be between 6 and 12 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Column("role_id")]
-        public int RoleId { get; set; }
     }
 }

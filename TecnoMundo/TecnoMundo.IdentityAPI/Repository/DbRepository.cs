@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using GeekShopping.Identity.Data.ValueObjects;
-using GeekShopping.Identity.Model;
-using GeekShopping.Identity.Model.Context;
+using TecnoMundo.Identity.Data.ValueObjects;
+using TecnoMundo.Identity.Model;
+using TecnoMundo.Identity.Model.Context;
 using Microsoft.EntityFrameworkCore;
+using TecnoMundo.IdentityAPI.Data.ValueObjects;
 
-namespace GeekShopping.Identity.Repository
+namespace TecnoMundo.Identity.Repository
 {
     public class DbRepository : IDbRepository
     {
@@ -18,20 +19,11 @@ namespace GeekShopping.Identity.Repository
             _mapper = mapper;
         }
 
-        public async Task<User> ValidateUserEmailAndPassword(UserLogin user)
+        public async Task<User> ValidateUserEmailAndPassword(AuthenticateVO user)
         {
             return await _context.Users
-                .Include(x => x.Role)
                 .Where(x => x.UserEmail == user.UserEmail && x.Password.Equals(user.Password, StringComparison.Ordinal))
                 //.AsNoTracking()
-                .FirstOrDefaultAsync();
-        }
-
-        public async Task<Role> GetRoleById(int roleId)
-        {
-            return await _context.Roles
-                .Where(x => x.Id == roleId)
-                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
@@ -59,9 +51,8 @@ namespace GeekShopping.Identity.Repository
                 .AnyAsync();
         }
 
-        public async Task Create(UserVO userVO)
+        public async Task Create(User user)
         {
-            var user = _mapper.Map<User>(userVO);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using GeekShopping.CouponAPI.Model.Base;
+using TecnoMundo.CouponAPI.Model.Base;
 
-namespace GeekShopping.CouponAPI.Model
+namespace TecnoMundo.CouponAPI.Model
 {
     [Table("coupon")]
     public class Coupon : BaseEntity
@@ -14,5 +14,19 @@ namespace GeekShopping.CouponAPI.Model
         [Column("discount_amount")]
         [Required]
         public float DiscountAmount { get; set; }
+
+        public Coupon(string couponCode, float discountAmount)
+        {
+            Id = Guid.NewGuid();
+            CouponCode = couponCode;
+            DiscountAmount = discountAmount;
+        }
+
+        public Coupon(Guid id, string couponCode, float discountAmount)
+        {
+            Id = id;
+            CouponCode = couponCode;
+            DiscountAmount = discountAmount;
+        }
     }
 }

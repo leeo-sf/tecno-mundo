@@ -7,6 +7,6 @@ namespace GeekShopping.OrderAPI.Model.Base
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

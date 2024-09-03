@@ -1,10 +1,10 @@
-﻿using GeekShopping.Identity.Model;
+﻿using TecnoMundo.Identity.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace GeekShopping.Identity.Service
+namespace TecnoMundo.Identity.Service
 {
     public class TokenService : ITokenService
     {
@@ -30,7 +30,7 @@ namespace GeekShopping.Identity.Service
                 {
                     new Claim(ClaimTypes.Name, $"{user.UserName} {user.LastName}"),
                     new Claim("UserId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role.Name.ToString())
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(
                     Convert.ToDouble(

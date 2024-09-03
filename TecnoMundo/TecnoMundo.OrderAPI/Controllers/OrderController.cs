@@ -19,7 +19,7 @@ namespace TecnoMundo.OrderAPI.Controllers
         }
 
         [HttpGet("{profileId}")]
-        public async Task<ActionResult<List<OrderHeader>>> GetAllOrder(string profileId)
+        public async Task<ActionResult<List<OrderHeader>>> GetAllOrder(Guid profileId)
         {
             var orders = await _orderRepository.GetAllOrder(profileId);
 

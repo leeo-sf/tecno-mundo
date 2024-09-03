@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GeekShopping.CouponAPI.Migrations
+namespace TecnoMundo.CouponAPI.Migrations
 {
     /// <inheritdoc />
     public partial class AddCouponDataTablesOnDB : Migration
