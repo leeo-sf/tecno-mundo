@@ -1,12 +1,12 @@
-﻿using TecnoMundo.ProductAPI.Data.ValueObjects;
-using TecnoMundo.ProductAPI.Repository;
-using TecnoMundo.ProductAPI.Utils;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MySqlConnector;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
+using TecnoMundo.ProductAPI.Repository;
+using TecnoMundo.ProductAPI.Utils;
 
 namespace TecnoMundo.ProductAPI.Controllers
 {
@@ -16,8 +16,7 @@ namespace TecnoMundo.ProductAPI.Controllers
     {
         private IProductRepository _repository;
 
-        public ProductController(
-            IProductRepository repository)
+        public ProductController(IProductRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(_repository));
         }
@@ -35,7 +34,8 @@ namespace TecnoMundo.ProductAPI.Controllers
         {
             var product = await _repository.FindById(id);
 
-            if (product is null) return NotFound();
+            if (product is null)
+                return NotFound();
 
             return Ok(product);
         }
@@ -45,30 +45,40 @@ namespace TecnoMundo.ProductAPI.Controllers
         {
             var categories = await _repository.FindAllCategories();
 
-            if (categories is null) return NotFound();
+            if (categories is null)
+                return NotFound();
 
             return Ok(categories);
         }
 
         [HttpGet("by-category/{idCategory}")]
-        public async Task<ActionResult<IEnumerable<ProductVO>>> FindProductsByCategoryId(Guid idCategory)
+        public async Task<ActionResult<IEnumerable<ProductVO>>> FindProductsByCategoryId(
+            Guid idCategory
+        )
         {
             var products = await _repository.FindProductsByCategoryId(idCategory);
 
-            if (products == null) return NotFound();
+            if (products == null)
+                return NotFound();
 
             return Ok(products);
         }
 
         [HttpGet("filter")]
-        public async Task<ActionResult<IEnumerable<ProductVO>>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo)
+        public async Task<ActionResult<IEnumerable<ProductVO>>> ProductFilter(
+            string? name,
+            decimal? priceOf,
+            decimal? priceUpTo
+        )
         {
             var product = await _repository.ProductFilter(
-                string.IsNullOrEmpty(name) ? "" : name, 
+                string.IsNullOrEmpty(name) ? "" : name,
                 !priceOf.HasValue ? 1 : priceOf,
-                !priceUpTo.HasValue ? 50000 : priceUpTo);
+                !priceUpTo.HasValue ? 50000 : priceUpTo
+            );
 
-            if (product.IsNullOrEmpty()) return NotFound();
+            if (product.IsNullOrEmpty())
+                return NotFound();
 
             return Ok(product);
         }
@@ -77,7 +87,8 @@ namespace TecnoMundo.ProductAPI.Controllers
         //[Authorize(Roles = nameof(EnumRole.Admin))]
         public async Task<ActionResult<ProductVO>> Create(CreateProductVO vo)
         {
-            if (vo is null) return BadRequest();
+            if (vo is null)
+                return BadRequest();
 
             try
             {
@@ -101,7 +112,8 @@ namespace TecnoMundo.ProductAPI.Controllers
         [Authorize(Roles = nameof(EnumRole.Admin))]
         public async Task<ActionResult<ProductVO>> Update(ProductVO vo)
         {
-            if (vo is null) return BadRequest();
+            if (vo is null)
+                return BadRequest();
 
             try
             {
@@ -126,7 +138,8 @@ namespace TecnoMundo.ProductAPI.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var status = await _repository.Delete(id);
-            if (!status)return BadRequest();
+            if (!status)
+                return BadRequest();
             return Ok(status);
         }
     }

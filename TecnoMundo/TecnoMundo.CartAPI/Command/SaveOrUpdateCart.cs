@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Reflection.PortableExecutable;
+using AutoMapper;
 using GeekShopping.CartAPI.Data.ValueObjects;
 using GeekShopping.CartAPI.Model;
 using GeekShopping.CartAPI.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
 
 namespace GeekShopping.CartAPI.Command
 {
@@ -13,9 +13,11 @@ namespace GeekShopping.CartAPI.Command
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public SaveOrUpdateCart(ICartRepoository repository,
+        public SaveOrUpdateCart(
+            ICartRepoository repository,
             IProductRepository productRepository,
-            IMapper mapper)
+            IMapper mapper
+        )
         {
             _repository = repository;
             _productRepository = productRepository;
@@ -26,11 +28,12 @@ namespace GeekShopping.CartAPI.Command
         {
             Cart cart;
 
-            if (vo.CartDetails.FirstOrDefault().Count == 0) 
+            if (vo.CartDetails.FirstOrDefault().Count == 0)
                 throw new ArgumentException("Count invalid.");
 
             var productVO = await _productRepository.GetProductById(
-                vo.CartDetails.FirstOrDefault().ProductId);
+                vo.CartDetails.FirstOrDefault().ProductId
+            );
 
             if (productVO.Id == Guid.Empty)
             {
@@ -41,14 +44,17 @@ namespace GeekShopping.CartAPI.Command
 
             if (cartHeader is null)
             {
-                var cartHeaderToBeCreated = CartHeader.CreateCartHeader(vo.CartHeader.UserId, vo.CartHeader.CouponCode);
+                var cartHeaderToBeCreated = CartHeader.CreateCartHeader(
+                    vo.CartHeader.UserId,
+                    vo.CartHeader.CouponCode
+                );
                 var cartDetailToBeCreated = CartDetail.CreateCartDetail(
                     cartHeaderId: cartHeaderToBeCreated.Id,
                     cartHeader: cartHeaderToBeCreated,
                     productId: productVO.Id,
                     product: null,
                     count: vo.CartDetails.FirstOrDefault().Count
-                    );
+                );
                 await _repository.AddCartHeaders(cartHeaderToBeCreated);
                 await _repository.AddCartDetails(cartDetailToBeCreated);
 
@@ -63,7 +69,8 @@ namespace GeekShopping.CartAPI.Command
 
                 var cartDetail = await _repository.FindCartDetailByProductIdAndCartHeaderId(
                     cart.CartDetails.FirstOrDefault().ProductId,
-                    cartHeader.Id);
+                    cartHeader.Id
+                );
 
                 if (cartDetail is null)
                 {

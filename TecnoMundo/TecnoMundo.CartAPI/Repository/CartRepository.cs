@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
+using AutoMapper;
 using GeekShopping.CartAPI.Data.ValueObjects;
 using GeekShopping.CartAPI.Model;
 using GeekShopping.CartAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Text.Json;
 
 namespace GeekShopping.CartAPI.Repository
 {
@@ -15,9 +15,11 @@ namespace GeekShopping.CartAPI.Repository
         private readonly IMapper _mapper;
         private readonly IProductRepository _productRepository;
 
-        public CartRepository(MySQLContext context,
+        public CartRepository(
+            MySQLContext context,
             IMapper mapper,
-            IProductRepository productRepository)
+            IProductRepository productRepository
+        )
         {
             _context = context;
             _mapper = mapper;
@@ -26,8 +28,7 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<bool> ApplyCoupon(Guid userId, string couponCode)
         {
-            var header = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.UserId == userId);
+            var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
             {
                 header.CouponCode = couponCode;
@@ -40,13 +41,14 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<bool> ClearCart(Guid userId)
         {
-            var cartHeader = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c =>
+                c.UserId == userId
+            );
             if (cartHeader != null)
             {
-                _context.CartDetails
-                    .RemoveRange(
-                        _context.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id));
+                _context.CartDetails.RemoveRange(
+                    _context.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id)
+                );
                 _context.CartHeaders.Remove(cartHeader);
                 await _context.SaveChangesAsync();
                 return true;
@@ -57,16 +59,18 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<CartVO> FindCartByUserId(Guid userId)
         {
-            Cart cart = new()
-            {
-                CartHeader = await _context.CartHeaders
-                    .FirstOrDefaultAsync(c => c.UserId == userId) ?? new CartHeader()
-            };
-            cart.CartDetails = await _context.CartDetails
-                .Where(c => c.CartHeaderId == cart.CartHeader.Id)
+            Cart cart =
+                new()
+                {
+                    CartHeader =
+                        await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+                        ?? new CartHeader()
+                };
+            cart.CartDetails = await _context
+                .CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
                 .ToListAsync();
-            
-            foreach(var cartItem in cart.CartDetails)
+
+            foreach (var cartItem in cart.CartDetails)
             {
                 var product = await _productRepository.GetProductById(cartItem.ProductId);
                 cartItem.Product = _mapper.Map<Product>(product);
@@ -77,8 +81,7 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<bool> RemoveCoupon(Guid userId)
         {
-            var header = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.UserId == userId);
+            var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
             {
                 header.CouponCode = "";
@@ -93,16 +96,19 @@ namespace GeekShopping.CartAPI.Repository
         {
             try
             {
-                CartDetail cartDetail = await _context.CartDetails
-                    .FirstOrDefaultAsync(c => c.Id == cartDetailsId);
-                int total = _context.CartDetails
-                    .Where(c => c.CartHeaderId == cartDetail.CartHeaderId).Count();
+                CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c =>
+                    c.Id == cartDetailsId
+                );
+                int total = _context
+                    .CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId)
+                    .Count();
 
                 _context.CartDetails.Remove(cartDetail);
                 if (total == 1)
                 {
-                    var cartHeaderToRemove = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.Id == cartDetail.CartHeaderId);
+                    var cartHeaderToRemove = await _context.CartHeaders.FirstOrDefaultAsync(c =>
+                        c.Id == cartDetail.CartHeaderId
+                    );
                     _context.CartHeaders.Remove(cartHeaderToRemove);
                 }
 
@@ -134,17 +140,21 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<CartHeader> FindCartHeaderById(Guid id)
         {
-            return await _context.CartHeaders
-                .AsNoTracking()
+            return await _context
+                .CartHeaders.AsNoTracking()
                 .FirstOrDefaultAsync(c => c.UserId == id);
         }
 
-        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(Guid productId, Guid cartHeaderId)
+        public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(
+            Guid productId,
+            Guid cartHeaderId
+        )
         {
-            return await _context.CartDetails
-                .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.ProductId == productId && 
-                p.CartHeaderId == cartHeaderId);
+            return await _context
+                .CartDetails.AsNoTracking()
+                .FirstOrDefaultAsync(p =>
+                    p.ProductId == productId && p.CartHeaderId == cartHeaderId
+                );
         }
 
         public async Task UpdateCartDetails(CartDetail cartDetail)

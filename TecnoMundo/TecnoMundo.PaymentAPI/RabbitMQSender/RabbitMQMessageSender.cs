@@ -1,8 +1,8 @@
-﻿using GeekShopping.MessageBus;
+﻿using System.Text;
+using System.Text.Json;
+using GeekShopping.MessageBus;
 using GeekShopping.PaymentAPI.Messages;
 using RabbitMQ.Client;
-using System.Text;
-using System.Text.Json;
 
 namespace GeekShopping.PaymentAPI.RabbitMQSender
 {
@@ -30,7 +30,11 @@ namespace GeekShopping.PaymentAPI.RabbitMQSender
                 channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
                 byte[] body = GetMessageAsByteArray(message);
                 channel.BasicPublish(
-                    exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                    exchange: "",
+                    routingKey: queueName,
+                    basicProperties: null,
+                    body: body
+                );
             }
         }
 
@@ -41,7 +45,10 @@ namespace GeekShopping.PaymentAPI.RabbitMQSender
                 //para considerar as classes filhas
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize<UpdatePaymentResultMessage>((UpdatePaymentResultMessage)message, options);
+            var json = JsonSerializer.Serialize<UpdatePaymentResultMessage>(
+                (UpdatePaymentResultMessage)message,
+                options
+            );
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }
@@ -67,7 +74,8 @@ namespace GeekShopping.PaymentAPI.RabbitMQSender
 
         private bool ConnectionExists()
         {
-            if (_connection != null) return true;
+            if (_connection != null)
+                return true;
             CreateConnection();
             return _connection != null;
         }

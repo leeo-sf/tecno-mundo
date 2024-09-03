@@ -16,7 +16,8 @@ namespace GeekShopping.OrderAPI.Repository
 
         public async Task<bool> AddOrder(OrderHeader header)
         {
-            if (header == null) return false;
+            if (header == null)
+                return false;
 
             await using var _db = new MySQLContext(_context);
             _db.Headers.Add(header);
@@ -39,8 +40,8 @@ namespace GeekShopping.OrderAPI.Repository
         public async Task<List<OrderHeader>> GetAllOrder(Guid profileId)
         {
             await using var _db = new MySQLContext(_context);
-            var orderHeaders = await _db.Headers
-                .Include(x => x.OrderDetails)
+            var orderHeaders = await _db
+                .Headers.Include(x => x.OrderDetails)
                 .Where(o => o.UserId == profileId)
                 .OrderByDescending(x => x.DateTime)
                 .ToListAsync();

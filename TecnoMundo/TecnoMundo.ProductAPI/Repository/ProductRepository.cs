@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using TecnoMundo.ProductAPI.Data.ValueObjects;
 using TecnoMundo.ProductAPI.Data.ValueObjects;
 using TecnoMundo.ProductAPI.Model;
 using TecnoMundo.ProductAPI.Model.Context;
-using Microsoft.EntityFrameworkCore;
-using TecnoMundo.ProductAPI.Data.ValueObjects;
 
 namespace TecnoMundo.ProductAPI.Repository
 {
@@ -12,9 +12,7 @@ namespace TecnoMundo.ProductAPI.Repository
         private readonly MySQLContext _context;
         private readonly IMapper _mapper;
 
-        public ProductRepository(
-            MySQLContext context, 
-            IMapper mapper)
+        public ProductRepository(MySQLContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -34,8 +32,8 @@ namespace TecnoMundo.ProductAPI.Repository
 
         public async Task<ProductVO> FindById(Guid id)
         {
-            var product = await _context.Products
-                .Include(x => x.Category)
+            var product = await _context
+                .Products.Include(x => x.Category)
                 .Where(p => p.Id == id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -62,12 +60,13 @@ namespace TecnoMundo.ProductAPI.Repository
         {
             try
             {
-                Product product = await _context.Products
-                    .Where(p => p.Id == id)
+                Product product = await _context
+                    .Products.Where(p => p.Id == id)
                     .AsNoTracking()
                     .FirstOrDefaultAsync();
 
-                if (product is null) return false;
+                if (product is null)
+                    return false;
 
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
@@ -82,20 +81,23 @@ namespace TecnoMundo.ProductAPI.Repository
 
         public async Task<IEnumerable<ProductVO>> FindProductsByCategoryId(Guid id)
         {
-            var products = await _context.Products
-                .Include(p => p.Category)
+            var products = await _context
+                .Products.Include(p => p.Category)
                 .Where(p => p.CategoryId == id)
                 .ToListAsync();
 
             return _mapper.Map<List<ProductVO>>(products);
         }
 
-        public async Task<IEnumerable<ProductVO>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo)
+        public async Task<IEnumerable<ProductVO>> ProductFilter(
+            string? name,
+            decimal? priceOf,
+            decimal? priceUpTo
+        )
         {
-            var products = await _context.Products
-                .Include(p => p.Category)
-                .Where(p => p.Name.Contains(name)
-                    && p.Price >= priceOf && p.Price <= priceUpTo)
+            var products = await _context
+                .Products.Include(p => p.Category)
+                .Where(p => p.Name.Contains(name) && p.Price >= priceOf && p.Price <= priceUpTo)
                 .ToListAsync();
 
             return _mapper.Map<List<ProductVO>>(products);

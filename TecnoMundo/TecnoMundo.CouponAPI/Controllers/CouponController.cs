@@ -1,9 +1,9 @@
-using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TecnoMundo.CouponAPI.Data.ValueObjects;
+using TecnoMundo.CouponAPI.Data.ValueObjects;
+using TecnoMundo.CouponAPI.Repository;
 
 namespace TecnoMundo.CouponAPI.Controllers
 {
@@ -23,7 +23,8 @@ namespace TecnoMundo.CouponAPI.Controllers
         public async Task<ActionResult<CouponVO>> GetCouponByCouponCode(string couponCode)
         {
             var coupon = await _repository.GetCouponByCouponCode(couponCode);
-            if (coupon == null) return NotFound("Invalid coupon. Try again!");
+            if (coupon == null)
+                return NotFound("Invalid coupon. Try again!");
             return Ok(coupon);
         }
 
@@ -37,10 +38,7 @@ namespace TecnoMundo.CouponAPI.Controllers
             }
             catch (Exception ex) when (ex is ApplicationException || ex is DbUpdateException)
             {
-                return BadRequest(new
-                {
-                    Error = ex.Message
-                });
+                return BadRequest(new { Error = ex.Message });
             }
         }
     }

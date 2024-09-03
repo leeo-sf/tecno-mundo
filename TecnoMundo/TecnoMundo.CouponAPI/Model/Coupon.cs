@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TecnoMundo.CouponAPI.Model.Base;
 
 namespace TecnoMundo.CouponAPI.Model
@@ -11,6 +11,7 @@ namespace TecnoMundo.CouponAPI.Model
         [Required]
         [StringLength(30)]
         public string CouponCode { get; set; }
+
         [Column("discount_amount")]
         [Required]
         public float DiscountAmount { get; set; }

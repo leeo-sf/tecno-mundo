@@ -18,10 +18,12 @@ namespace GeekShopping.CartAPI.Controllers
         private readonly ICouponRepository _couponRepostory;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public CartController(ICartRepoository repository,
+        public CartController(
+            ICartRepoository repository,
             ISaveOrUpdateCart insertCart,
             ICouponRepository couponRepository,
-            IRabbitMQMessageSender rabbitMQMessageSender)
+            IRabbitMQMessageSender rabbitMQMessageSender
+        )
         {
             _cartRepostory = repository;
             _couponRepostory = couponRepository;
@@ -33,7 +35,8 @@ namespace GeekShopping.CartAPI.Controllers
         public async Task<ActionResult<CartVO>> FindById(Guid userId)
         {
             var cart = await _cartRepostory.FindCartByUserId(userId);
-            if (cart == null) return NotFound();
+            if (cart == null)
+                return NotFound();
             return Ok(cart);
         }
 
@@ -43,7 +46,8 @@ namespace GeekShopping.CartAPI.Controllers
             try
             {
                 var cart = await _saveOrUpdate.Execute(vo);
-                if (cart == null) return NotFound();
+                if (cart == null)
+                    return NotFound();
                 return Ok(cart);
             }
             catch (ArgumentException ex)
@@ -58,7 +62,8 @@ namespace GeekShopping.CartAPI.Controllers
             try
             {
                 var cart = await _saveOrUpdate.Execute(vo);
-                if (cart == null) return NotFound();
+                if (cart == null)
+                    return NotFound();
                 return Ok(cart);
             }
             catch (ArgumentException ex)
@@ -71,7 +76,8 @@ namespace GeekShopping.CartAPI.Controllers
         public async Task<ActionResult<CartVO>> RemoveCart(Guid id)
         {
             var status = await _cartRepostory.RemoveFromCart(id);
-            if (status == null) return BadRequest();
+            if (status == null)
+                return BadRequest();
             return Ok(status);
         }
 
@@ -84,12 +90,18 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpPost("apply-coupon/{userId}")]
-        public async Task<ActionResult<bool>> ApplyCouponToCart([FromRoute] Guid userId, 
-            [FromHeader(Name = "Coupon-Code")] string couponCode)
+        public async Task<ActionResult<bool>> ApplyCouponToCart(
+            [FromRoute] Guid userId,
+            [FromHeader(Name = "Coupon-Code")] string couponCode
+        )
         {
             string token = Request.Headers["Authorization"];
-            CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(couponCode, token.Replace("Bearer ", ""));
-            if (coupon.Id == Guid.Empty) return BadRequest();
+            CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(
+                couponCode,
+                token.Replace("Bearer ", "")
+            );
+            if (coupon.Id == Guid.Empty)
+                return BadRequest();
 
             var status = await _cartRepostory.ApplyCoupon(userId, couponCode);
 
@@ -97,8 +109,7 @@ namespace GeekShopping.CartAPI.Controllers
         }
 
         [HttpPost("remove-coupon")]
-        public async Task<ActionResult<bool>> RemoveCouponToCart(
-            [FromHeader] Guid userId)
+        public async Task<ActionResult<bool>> RemoveCouponToCart([FromHeader] Guid userId)
         {
             var status = await _cartRepostory.RemoveCoupon(userId);
 
@@ -109,12 +120,17 @@ namespace GeekShopping.CartAPI.Controllers
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
         {
             string token = Request.Headers["Authorization"];
-            if (vo?.UserId == null) return BadRequest();
+            if (vo?.UserId == null)
+                return BadRequest();
             var cart = await _cartRepostory.FindCartByUserId(vo.UserId);
-            if (cart == null) return NotFound();
+            if (cart == null)
+                return NotFound();
             if (!string.IsNullOrEmpty(vo.CouponCode))
             {
-                CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(vo.CouponCode, token.Replace("Bearer ", ""));
+                CouponVO coupon = await _couponRepostory.GetCouponByCouponCode(
+                    vo.CouponCode,
+                    token.Replace("Bearer ", "")
+                );
                 if (vo.DiscountAmount != coupon.DiscountAmount)
                 {
                     return StatusCode(412);

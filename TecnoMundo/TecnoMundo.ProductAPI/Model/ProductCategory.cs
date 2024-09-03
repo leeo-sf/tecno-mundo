@@ -1,6 +1,6 @@
-﻿using TecnoMundo.ProductAPI.Model.Base;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TecnoMundo.ProductAPI.Model.Base;
 
 namespace TecnoMundo.ProductAPI.Model
 {

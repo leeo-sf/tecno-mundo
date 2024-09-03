@@ -1,10 +1,10 @@
-﻿using GeekShopping.PaymentAPI.Messages;
+﻿using System.Text;
+using System.Text.Json;
+using GeekShopping.PaymentAPI.Messages;
 using GeekShopping.PaymentAPI.RabbitMQSender;
 using GeekShopping.PaymentProcessor;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
-using System.Text.Json;
 
 namespace GeekShopping.PaymentAPI.MessageConsumer
 {
@@ -16,9 +16,11 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
         private IRabbitMQMessageSender _rabbitMQMessageSender;
         private readonly IProcessPayment _processPayment;
 
-        public RabbitMQPaymentConsumer(IConfiguration configuration,
+        public RabbitMQPaymentConsumer(
+            IConfiguration configuration,
             IRabbitMQMessageSender rabbitMQMessageSender,
-            IProcessPayment processPayment)
+            IProcessPayment processPayment
+        )
         {
             _processPayment = processPayment;
             _rabbitMQMessageSender = rabbitMQMessageSender;
@@ -31,7 +33,13 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "orderpaymentprocessqueue", false, false, false, arguments: null);
+            _channel.QueueDeclare(
+                queue: "orderpaymentprocessqueue",
+                false,
+                false,
+                false,
+                arguments: null
+            );
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -53,12 +61,13 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
         {
             var result = _processPayment.PaymentProcessor();
 
-            UpdatePaymentResultMessage paymentResult = new()
-            {
-                Status = result,
-                OrderId = vo.OrderId,
-                Email = vo.Email
-            };
+            UpdatePaymentResultMessage paymentResult =
+                new()
+                {
+                    Status = result,
+                    OrderId = vo.OrderId,
+                    Email = vo.Email
+                };
 
             try
             {

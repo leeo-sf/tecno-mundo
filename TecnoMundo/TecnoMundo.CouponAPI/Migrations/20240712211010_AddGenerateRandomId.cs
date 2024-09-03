@@ -13,25 +13,27 @@ namespace TecnoMundo.CouponAPI.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 1L);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 1L);
 
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 2L);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 2L);
 
-            migrationBuilder.AlterColumn<int>(
-                name: "id",
-                table: "coupon",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(long),
-                oldType: "bigint")
-                .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                .OldAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+            migrationBuilder
+                .AlterColumn<int>(
+                    name: "id",
+                    table: "coupon",
+                    type: "int",
+                    nullable: false,
+                    oldClrType: typeof(long),
+                    oldType: "bigint"
+                )
+                .Annotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                )
+                .OldAnnotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                );
 
             migrationBuilder.InsertData(
                 table: "coupon",
@@ -40,31 +42,34 @@ namespace TecnoMundo.CouponAPI.Migrations
                 {
                     { 104819, "GEEK_SHOPPING_10", 10f },
                     { 907498, "GEEK_SHOPPING_15", 15f }
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 104819);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 104819);
 
-            migrationBuilder.DeleteData(
-                table: "coupon",
-                keyColumn: "id",
-                keyValue: 907498);
+            migrationBuilder.DeleteData(table: "coupon", keyColumn: "id", keyValue: 907498);
 
-            migrationBuilder.AlterColumn<long>(
-                name: "id",
-                table: "coupon",
-                type: "bigint",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                .OldAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+            migrationBuilder
+                .AlterColumn<long>(
+                    name: "id",
+                    table: "coupon",
+                    type: "bigint",
+                    nullable: false,
+                    oldClrType: typeof(int),
+                    oldType: "int"
+                )
+                .Annotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                )
+                .OldAnnotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                );
 
             migrationBuilder.InsertData(
                 table: "coupon",
@@ -73,7 +78,8 @@ namespace TecnoMundo.CouponAPI.Migrations
                 {
                     { 1L, "GEEK_SHOPPING_10", 10f },
                     { 2L, "GEEK_SHOPPING_15", 15f }
-                });
+                }
+            );
         }
     }
 }

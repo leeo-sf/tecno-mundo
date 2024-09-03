@@ -1,5 +1,5 @@
-﻿using GeekShopping.OrderAPI.Model.Base;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using GeekShopping.OrderAPI.Model.Base;
 
 namespace GeekShopping.OrderAPI.Model
 {
@@ -7,18 +7,28 @@ namespace GeekShopping.OrderAPI.Model
     public class OrderDetail : BaseEntity
     {
         public Guid OrderHeaderId { get; set; }
+
         [Column("ProductId")]
         public Guid ProductId { get; set; }
+
         [Column("count")]
         public int Count { get; set; }
+
         [Column("product_name")]
         public string ProductName { get; set; }
+
         [Column("price")]
         public float Price { get; set; }
 
         public OrderDetail() { }
 
-        public OrderDetail(Guid orderHeaderId, Guid productId, int count, string productName, float price)
+        public OrderDetail(
+            Guid orderHeaderId,
+            Guid productId,
+            int count,
+            string productName,
+            float price
+        )
         {
             Id = Guid.NewGuid();
             OrderHeaderId = orderHeaderId;
@@ -28,7 +38,14 @@ namespace GeekShopping.OrderAPI.Model
             Price = price;
         }
 
-        public OrderDetail(Guid id, Guid orderHeaderId, Guid productId, int count, string productName, float price)
+        public OrderDetail(
+            Guid id,
+            Guid orderHeaderId,
+            Guid productId,
+            int count,
+            string productName,
+            float price
+        )
         {
             Id = id;
             OrderHeaderId = orderHeaderId;
