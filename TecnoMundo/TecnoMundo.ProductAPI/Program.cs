@@ -107,6 +107,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+Console.WriteLine("testando");
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
