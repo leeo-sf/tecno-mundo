@@ -48,7 +48,7 @@
         <div [ngStyle]="{'display': 'none'}" class="container-details-order" [attr.data-order-id]="order.id" #orders>
             <div class="details-order" *ngFor="let orderDetail of order.orderDetails">
                 <div class="img-product">
-                    <a routerLink="/product-details/{{orderDetail.productId}}">
+                    <a routerLink="/product/details/{{orderDetail.productId}}">
                         <img src="{{ orderDetail.product.imageUrl }}" alt="product">
                     </a>
                 </div>
@@ -56,7 +56,7 @@
 
                 <div class="details-product">
                     <div class="content-name">
-                        <a routerLink="/product-details/{{orderDetail.productId}}">
+                        <a routerLink="/product/details/{{orderDetail.productId}}">
                             <p id="productName">{{ orderDetail.product.name }}</p>
                         </a>
                     </div>

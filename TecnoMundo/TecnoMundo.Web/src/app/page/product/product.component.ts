@@ -33,7 +33,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 export class ProductComponent implements OnInit {
   listOfProducts!: Product[];
   minPrice: number = 1;
-  maxPrice: number = 50000;
+  maxPrice: number = 20000;
   listOfCategory!: Category[];
   pageSize: number = 10;
   pageIndex: number = 0;
@@ -53,7 +53,8 @@ export class ProductComponent implements OnInit {
   }
 
   filter(productName: string) {
-    if (this.minPrice !== 1 || this.maxPrice !== 50000) {
+    if (this.minPrice !== 1 || this.maxPrice !== 20000) {
+      this.cleanFilter("category", false);
       return this.router.navigate(["/products"], { queryParams: { 
         "product-name": productName, "low-price": this.minPrice, "high-price": this.maxPrice
        } });
@@ -65,6 +66,7 @@ export class ProductComponent implements OnInit {
   }
 
   filterCategory() {
+    this.cleanFilter("price", false);
     return this.router.navigate(["/products"], { queryParams: { "category": this.category } });
   }
 
@@ -95,6 +97,33 @@ export class ProductComponent implements OnInit {
       this.msgProductNotFound = error;
       this.listOfProducts = []
     });
+  }
+
+  public cleanFilter(tag: string, refresh?: boolean) {
+    if (tag.includes("category")) {
+      return this.cleanCategory();
+    }
+    
+    if (tag.includes("price")) {
+      return this.cleanPrice();
+    }
+
+    this.cleanAll();
+    refresh ? this.router.navigate(["/products"]) : false
+  }
+
+  private cleanCategory(): void {
+    this.category = 0;
+  }
+
+  private cleanPrice(): void {
+    this.minPrice = 1;
+    this.maxPrice = 20000;
+  }
+
+  private cleanAll(): void {
+    this.cleanCategory();
+    this.cleanPrice();
   }
 
 }

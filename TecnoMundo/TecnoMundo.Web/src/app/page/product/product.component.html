@@ -27,6 +27,13 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
+            <div class="container-clear-filter">
+                <div class="content-clean-filter" (click)="cleanFilter('category', false)">
+                    <mat-icon id="icon-clean-filter" aria-hidden="false" fontIcon="delete"></mat-icon>
+                    <span>Clean filter</span>
+                </div>
+            </div>
         </div>
 
         <div class="price-range">
@@ -52,12 +59,24 @@
                     <input matSliderEndThumb [(ngModel)]="maxPrice">
                 </mat-slider>
             </div>
+
+            <div class="container-clear-filter">
+                <div class="content-clean-filter" (click)="cleanFilter('price', false)">
+                    <mat-icon id="icon-clean-filter" aria-hidden="false" fontIcon="delete"></mat-icon>
+                    <span>Clean filter</span>
+                </div>
+            </div>
         </div>
 
         <div class="search">
             <button (click)="filter(inputElement.value)">
                 Apply
             </button>
+
+            <div class="clean-all" (click)="cleanFilter('all', true)">
+                <mat-icon id="clean-all" aria-hidden="false" fontIcon="delete"></mat-icon>
+                <span>Clean all</span>
+            </div>
         </div>
     </div>
 
