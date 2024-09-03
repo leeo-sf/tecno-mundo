@@ -41,9 +41,6 @@ export class HomeComponent implements OnInit {
   public newsProduct!: Product[];
   public receivePromotions!: FormGroup;
   responsiveOptions: any[] | undefined;
-  public product: Product[] = [
-    { id: 1, name: "Headset Gamer Sem Fio Logitech G533 7.1 Dolby Surround com Drivers de Áudio Pro-G e Bateria Recarregável", price: 1198, imageUrl: "https://m.media-amazon.com/images/I/61CQGpNbraL._AC_SL1000_.jpg", color: "Preto", categoryId: 10, category: { id: 10, name: "Teste" }, description: "testando" }
-  ];
 
   constructor(
     private route: ActivatedRoute,

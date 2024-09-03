@@ -28,7 +28,7 @@ export class ProductService {
     return this.httpClient.get<Product>(`${this.baseApiUrl}${idProduct}`);
   }
 
-  serviceGetProductsByCategoryId(idCategory: number): Observable<Product[]> {
+  serviceGetProductsByCategoryId(idCategory: string): Observable<Product[]> {
     return this.httpClient.get<Product[]>(`${this.baseApiUrlGetProductsByCategory}/${idCategory}`);
   }
 

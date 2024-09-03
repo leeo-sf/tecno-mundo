@@ -30,8 +30,8 @@ export class AuthService {
   signIn(user: UserLogin) {
     return this.httpClient.post<any>(this.baseAuth, user).pipe(
       tap((response) => {
-        const tokenInfo = this.decodeToken(response.value.acessToken);
-        localStorage.setItem("token", JSON.stringify(response.value.acessToken));
+        const tokenInfo = this.decodeToken(response.accessToken);
+        localStorage.setItem("token", JSON.stringify(response.accessToken));
         localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
         localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
       })
