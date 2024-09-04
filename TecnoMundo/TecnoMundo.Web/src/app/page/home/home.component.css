@@ -286,13 +286,21 @@
     .newsletter {
         width: 90%;
     }
+
+    .title span {
+        font-size: 1.0rem;
+    }
     
     .title .icon-news {
         width: 10%;
     }
 
+    .news {
+        width: 100%;
+    }
+
     .product {
-        min-width: 100%;
+        min-width: 80%;
     }
 
     .infos {

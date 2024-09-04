@@ -278,7 +278,15 @@ mat-slider {
         color: #fff;
     }
 
-    .content-clean-filter {
-        max-width: 30%;
+    .content-product {
+        width: 90%;
+    }
+
+    .search-by-name button {
+        color: black;
+    }
+
+    .search button, .clean-all span {
+        font-size: 1.0rem;
     }
 }

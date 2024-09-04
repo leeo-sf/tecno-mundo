@@ -55,6 +55,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    alert("page product");
     this.getProductsLoaded();
     this.updatePaginatedProducts();
   }
