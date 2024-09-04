@@ -275,3 +275,30 @@
     font-size: 0.9rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .container-home-footer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .newsletter {
+        width: 90%;
+    }
+    
+    .title .icon-news {
+        width: 10%;
+    }
+
+    .product {
+        min-width: 100%;
+    }
+
+    .infos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}

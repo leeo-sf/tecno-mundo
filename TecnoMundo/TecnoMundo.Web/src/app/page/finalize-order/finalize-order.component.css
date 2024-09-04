@@ -251,3 +251,39 @@ input[type="submit"] {
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .container-checkout {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 4%;
+    }
+
+    .cart-details {
+        width: 90%;
+    }
+
+    .container-purchase-amount {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin-bottom: 4%;
+        padding: 10px;
+    }
+
+    .form-purchase-amount {
+        width: 80%;
+    }
+
+    .form-group-exp input {
+        width: 40%;
+    }
+
+    .container-right {
+        display: flex;
+        width: 90%;
+        height: auto;
+    }
+}

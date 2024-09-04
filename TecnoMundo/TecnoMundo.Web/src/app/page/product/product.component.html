@@ -10,8 +10,22 @@
 </div>
 
 
+<div class="show-or-hide-filters" *ngIf="isMobile">
+    <div class="container-hide-show-filters">
+        <div class="title-filter">
+            <span (click)="showOrHideFilters()">
+                FILTERS
+            </span>
+            <button [ngStyle]="{'transform': 'rotate(270deg)'}" id="see-filters" (click)="showOrHideFilters()" #btnFilters>
+                <mat-icon aria-hidden="false" aria-label="Package" fontIcon="chevron_right"></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+
 <div class="content">
-    <div class="advanced-filter">
+    <div class="advanced-filter" [ngStyle]="{'display': showOrHideFilters$}" #filters>
         <div class="search-by-category">
             <div class="title">
                 <h3>By Category</h3>

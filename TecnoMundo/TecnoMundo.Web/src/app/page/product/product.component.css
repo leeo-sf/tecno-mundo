@@ -224,3 +224,61 @@ mat-slider {
     cursor: pointer;
     color: crimson;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .container-search-by-name {
+        margin: 0;
+        padding: 0;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        width: 100%;
+    }
+    .content-search-by-name {
+        width: 90%;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .advanced-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+
+    .show-or-hide-filters {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2%;
+        width: 100%;
+    }
+    .container-hide-show-filters {
+        display: flex;
+        justify-content: flex-end;
+        width: 90%;
+    }
+    .title-filter {
+        display: flex;
+        align-items: center;
+    }
+    .title-filter span {
+        color: crimson;
+        font-weight: bold;
+        text-decoration: underline white;
+    }
+    .title-filter button {
+        margin-left: 10%;
+        border: none;
+        background: none;
+        color: #fff;
+    }
+
+    .content-clean-filter {
+        max-width: 30%;
+    }
+}

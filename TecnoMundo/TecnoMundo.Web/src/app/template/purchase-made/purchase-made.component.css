@@ -145,3 +145,21 @@
     background-color: rgb(248, 75, 109);
     border: 1px solid crimson;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+    .content-order-made {
+        width: 90%;
+        margin-bottom: 4%;
+    }
+
+    .space {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-order, .container-info-products {
+        width: 100%;
+    }
+}
