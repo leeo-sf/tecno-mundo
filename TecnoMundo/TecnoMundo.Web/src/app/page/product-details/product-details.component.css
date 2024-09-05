@@ -165,4 +165,21 @@
         margin-bottom: 2%;
         width: 70%;
     }
+
+    .info-name {
+        width: 100%;
+        height: auto;
+        max-height: 50%;
+    }
+
+    .price {
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+    }
+
+    .installment {
+        padding: 5px;
+    }
 }
