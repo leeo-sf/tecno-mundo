@@ -34,7 +34,7 @@
     height: 100%;
     align-content: center;
     font-size: 2.0rem;
-    font-family: fantasy;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 
@@ -86,4 +86,20 @@
 }
 .form-btn input:hover {
     transform: scale(1.1);
+}
+
+
+@media only screen and (max-width: 768px) {
+    .container-login {
+        width: 90%;
+    }
+
+    .content-form-login {
+        width: 100%;
+    }
+
+    .title-form p {
+        display: flex;
+        align-items: center;
+    }
 }

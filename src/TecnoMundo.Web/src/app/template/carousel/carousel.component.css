@@ -122,3 +122,10 @@ img {
     font-size: 30px;
     color: #fff;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .carousel-img-title span {
+        font-size: 1.3rem;
+    }
+}

@@ -61,7 +61,7 @@ export class ApplyCouponComponent implements OnInit {
     const userId: string = this.cart.cartHeader.userId;
     const token: string = JSON.parse(localStorage.getItem("token") ?? "");
     
-    this.cartService.serviceApplyCoupon(couponCode, JSON.parse(userId), token).subscribe((response) => {
+    this.cartService.serviceApplyCoupon(couponCode, userId, token).subscribe((response) => {
       this.couponApplied$ = true;
       this.getCoupon(couponCode, token)
     }, 

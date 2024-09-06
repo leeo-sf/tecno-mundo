@@ -164,3 +164,58 @@
     background-color: crimson;
     border-radius: 5px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .purchased-by, .order-total, .order-discount {
+        display: none;
+    }
+
+    .btn-see-order {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 20%;
+    }
+    .btn-see-order button {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .details-header-order {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .details-order {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .img-product {
+        width: 100%;
+    }
+
+    .details-product {
+        margin: 0;
+        padding: 0;
+    }
+
+    .content-name {
+        margin: 10px;
+    }
+
+    .actions-product, .to-assess {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .actions-btn {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .actions-btn button {
+        width: 100%;
+    }
+}

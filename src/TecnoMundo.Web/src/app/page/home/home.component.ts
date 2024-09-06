@@ -1,10 +1,10 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { Images } from '../../../interface/Images';
 import { CarouselComponent } from '../../template/carousel/carousel.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Product } from '../../../interface/Product';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
@@ -40,14 +40,14 @@ export class HomeComponent implements OnInit {
   public slideInterval!: number;
   public newsProduct!: Product[];
   public receivePromotions!: FormGroup;
+  public numVisible: number = 4;
+  public numScroll: number = 2;
   responsiveOptions: any[] | undefined;
-  public product: Product[] = [
-    { id: 1, name: "Headset Gamer Sem Fio Logitech G533 7.1 Dolby Surround com Drivers de Áudio Pro-G e Bateria Recarregável", price: 1198, imageUrl: "https://m.media-amazon.com/images/I/61CQGpNbraL._AC_SL1000_.jpg", color: "Preto", categoryId: 10, category: { id: 10, name: "Teste" }, description: "testando" }
-  ];
 
   constructor(
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +64,19 @@ export class HomeComponent implements OnInit {
     this.slideInterval = 4000;
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile();
+  }
+
+  private checkIfMobile() {
+    let isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      this.numVisible = 1;
+      this.numScroll = 1;
+    }
+  }
+
   private getNewsProduct(): void {
     this.route.data.subscribe((data) => {
       this.newsProduct = data["newsProduct"].slice(0, 10);
@@ -71,6 +84,7 @@ export class HomeComponent implements OnInit {
   }
 
   public iWantToReceivePromotions(email: string): void {
+    this.router.navigateByUrl('/products');
     if (this.receivePromotions.invalid) {
       this._snackBar.open("Enter a valid e-mail", "close", { duration: 3 * 1000 });
       return;

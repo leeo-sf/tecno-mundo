@@ -1,20 +1,24 @@
 <header>
     <nav>
-        <a id="header-title" routerLink="">Tecno<span>Mundo</span></a>
+        <a id="logo" routerLink="">Tecno<span>Mundo</span></a>
 
-        <div class="container-funcs">
-            <a routerLink="/products" routerLinkActive="active-link">Products</a>
+        <div class="mobile-menu" (click)="showOrHideNavList()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
 
-            <div *ngIf="!authService.loggedInUser else notLogged">
-                <a routerLink="/register" routerLinkActive="active-link">Register</a>
-                <a routerLink="/login" routerLinkActive="active-link">Login</a>
-            </div>
+        <ul class="nav-list" [ngStyle]="{'display': activeNavLis}" #navList>
+            <li><a routerLink="/products" routerLinkActive="active-link">Products</a></li>
+
+            <li *ngIf="!authService.loggedInUser else notLogged"><a routerLink="/register" routerLinkActive="active-link">Register</a></li>
+            <li *ngIf="!authService.loggedInUser"><a routerLink="/login" routerLinkActive="active-link">Login</a></li>
 
             <ng-template #notLogged>
-                <a routerLink="/orders" routerLinkActive="active-link">Orders</a>
-                <a routerLink="/my-cart" routerLinkActive="active-link">Cart</a>
-                <a routerLink="#" (click)="logout()">Logout</a>
+                <li *ngIf="authService.loggedInUser"><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
+                <li *ngIf="authService.loggedInUser"><a routerLink="/my-cart" routerLinkActive="active-link">Cart</a></li>
+                <li *ngIf="authService.loggedInUser"><a routerLink="#" (click)="logout()">Logout</a></li>
             </ng-template>
-        </div>
+        </ul>
     </nav>
 </header>

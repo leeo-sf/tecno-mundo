@@ -1,14 +1,14 @@
 <div *ngIf="this.listOfProducts.length != 0 else productNotFound" class="content">
     <div *ngFor="let product of listOfProducts">
         <div class="product">
-            <a routerLink="/product-details/{{product.id}}">
+            <a routerLink="/product/details/{{product.id}}">
                 <div class="img-product">
                     <img src="{{ product.imageUrl }}" alt="image-product">
                 </div>
             </a>
 
             <div class="content-product">
-                <a routerLink="/product-details/{{product.id}}">
+                <a routerLink="/product/details/{{product.id}}">
                     <div class="content-name">
                         <p id="productName">{{ product.name }}</p>
                     </div>

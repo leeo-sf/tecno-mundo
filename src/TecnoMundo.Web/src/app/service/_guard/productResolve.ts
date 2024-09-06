@@ -13,7 +13,7 @@ export const productResolve: ResolveFn<Product[] | Product | Observable<any>> = 
     }
 
     if (route.queryParamMap.get("category")) {
-        const categoryId: number = Number.parseInt(route.queryParamMap.get("category")!);
+        const categoryId = route.queryParamMap.get("category") ?? "";
         return productService.serviceGetProductsByCategoryId(categoryId);
     }
 

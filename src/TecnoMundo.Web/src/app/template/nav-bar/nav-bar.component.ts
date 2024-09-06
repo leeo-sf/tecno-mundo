@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule, NgIf } from '@angular/common';
 
@@ -21,9 +21,36 @@ import { CommonModule, NgIf } from '@angular/common';
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
-  constructor(public authService: AuthService, private router: Router) {}
+  public isMobile: boolean = false;
+  public activeNavLis: string = "flex";
+  @ViewChild('navList') navList!: ElementRef;
+
+  constructor(
+    public authService: AuthService
+  ) {}
 
   logout(): void {
     this.authService.logOut();
+  }
+
+  public showOrHideNavList(): void {
+    let divElement = this.navList.nativeElement;
+    
+    if (divElement.style.display == 'none') {
+      divElement.style.display = "flex";
+    }
+    else {
+      divElement.style.display = "none";
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkIfMobile();
+  }
+
+  private checkIfMobile() {
+    this.isMobile = window.innerWidth <= 999;
+    this.isMobile ? this.activeNavLis = "none" : this.activeNavLis = "flex"
   }
 }

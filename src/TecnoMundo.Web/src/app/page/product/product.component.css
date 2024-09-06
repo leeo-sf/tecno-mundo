@@ -151,25 +151,142 @@ mat-slider {
 
 .search {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    height: 3em;
+    height: 15%;
 }
 .search button {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: 80%;
+    height: 30%;
     border: none;
     border-radius: 10px;
     color: white;
-    background-color: crimson;
+    background-color: #3f51b5;
+}
+.search button:hover, .clean-all:hover {
+    transform: scale(1.07);
+    cursor: pointer;
 }
 
+.clean-all {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 30%;
+    background-color: crimson;
+    border-radius: 10px;
+}
+.clean-all span {
+    padding-left: 5px;
+    font-size: 0.95rem;
+}
 
 .paginator {
     display: flex;
     justify-content: flex-end;
     margin-top: 1%;
+}
+
+.container-clear-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10%;
+}
+.content-clean-filter {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.content-clean-filter span {
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: crimson;
+}
+.content-clean-filter span:hover {
+    cursor: pointer;
+    text-decoration: underline #3f51b5;
+}
+
+#icon-clean-filter {
+    color: #fff;
+}
+#icon-clean-filter:hover {
+    cursor: pointer;
+    color: crimson;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .container-search-by-name {
+        margin: 0;
+        padding: 0;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        width: 100%;
+    }
+    .content-search-by-name {
+        width: 90%;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .advanced-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+
+    .show-or-hide-filters {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2%;
+        width: 100%;
+    }
+    .container-hide-show-filters {
+        display: flex;
+        justify-content: flex-end;
+        width: 90%;
+    }
+    .title-filter {
+        display: flex;
+        align-items: center;
+    }
+    .title-filter span {
+        color: crimson;
+        font-weight: bold;
+        text-decoration: underline white;
+    }
+    .title-filter button {
+        margin-left: 10%;
+        border: none;
+        background: none;
+        color: #fff;
+    }
+
+    .content-product {
+        width: 90%;
+    }
+
+    .search-by-name button {
+        color: black;
+    }
+
+    .search button, .clean-all span {
+        font-size: 1.0rem;
+    }
 }
