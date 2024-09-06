@@ -20,7 +20,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Build
-        run: dotnet build ./TecnoMundo/TecnoMundo.sln
+        run: dotnet build ./src/TecnoMundo.sln
 
   code_format:
     needs: build
