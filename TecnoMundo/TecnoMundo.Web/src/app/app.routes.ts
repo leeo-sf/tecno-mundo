@@ -32,7 +32,7 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'paramsOrQueryParamsChange'
     },
     {
-        path: "product-details/:id",
+        path: "product/details/:id",
         component: ProductDetailsComponent,
         resolve: {
             product: productResolve
