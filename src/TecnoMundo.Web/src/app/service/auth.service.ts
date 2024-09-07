@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '../../interface/UserLogin';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { UserRegister } from '../../interface/UserRegister';
 import { FormatString } from '../../utils/formatString';
 import { MethodUtils } from '../../utils/MethodUtils';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,31 +16,25 @@ export class AuthService {
   private baseApiUrl: string = environment.baseApiUrlIdentity;
   private baseAuth: string = `${this.baseApiUrl}auth`;
   private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
-  userName: string = "";
-  private isLoggedIn = new BehaviorSubject<boolean>(false);
-  public isLoggedIn$ = this.isLoggedIn.asObservable();
+  private localStorage!: Storage | undefined;
 
   constructor(
     private httpClient: HttpClient,
     private format: FormatString,
-    private utils: MethodUtils
+    private utils: MethodUtils,
+    @Inject(DOCUMENT) private document: Document
   ) {
-    this.isLoggedIn.next(false);
+    this.localStorage = document.defaultView?.localStorage;
     this.validateToken();
   }
 
   signIn(user: UserLogin) {
     return this.httpClient.post<any>(this.baseAuth, user).pipe(
-      map((response) => {
+      tap((response) => {
         const tokenInfo = this.decodeToken(response.accessToken);
-        const responseLogin = { 
-          accessToken: JSON.stringify(response.accessToken), 
-          "user_name": JSON.stringify(tokenInfo.unique_name), 
-          "user_id": JSON.stringify(tokenInfo.UserId) 
-        };
-        this.isLoggedIn.next(true);
-        console.log(this.isLoggedIn.getValue());
-        return responseLogin;
+        localStorage.setItem("token", JSON.stringify(response.accessToken));
+        localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
+        localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
       })
     );
   }
@@ -53,12 +48,16 @@ export class AuthService {
     return this.httpClient.post(this.baseCreateAccount, user);
   }
 
-  logOut() {
-    this.isLoggedIn.next(false);
+  logOut(): boolean {
+    if (this.loggedInUser) {
+      this.localStorage?.clear();
+      return true;
+    }
+    return false;
   }
 
   get loggedInUser(): boolean {
-    return this.isLoggedIn.value;
+    return !!this.localStorage?.getItem("token");
   }
 
   private validateToken(): void {
@@ -69,9 +68,6 @@ export class AuthService {
         localStorage.clear();
         return;
       }
-      
-      const tokenInfo = this.decodeToken(String(token));
-      this.userName = tokenInfo.unique_name;
     }
     catch (Error) {
       return;

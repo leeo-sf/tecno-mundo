@@ -31,9 +31,7 @@ export class NavBarComponent {
   ) {}
 
   logout(): void {
-    if (localStorage.getItem("token")) {
-      localStorage.clear();
-      this.authService.logOut();
+    if (this.authService.logOut()) {
       this.router.navigateByUrl("/");
     }
   }

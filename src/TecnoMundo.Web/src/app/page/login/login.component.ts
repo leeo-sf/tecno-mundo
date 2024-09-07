@@ -48,9 +48,6 @@ export class LoginComponent implements OnInit {
 
     this.loadingService.show();
     this.authService.signIn(this.loginForm.value).subscribe((response) => {
-      localStorage.setItem("token", response.accessToken);
-      localStorage.setItem("user-name", response.user_name);
-      localStorage.setItem("user-id", response.user_id);
       this.loadingService.hide();
       this.router.navigate(['']);
     }, (error) => {
