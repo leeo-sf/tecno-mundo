@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '../../interface/UserLogin';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { Router } from '@angular/router';
 import { UserRegister } from '../../interface/UserRegister';
 import { FormatString } from '../../utils/formatString';
 import { MethodUtils } from '../../utils/MethodUtils';
@@ -17,23 +16,30 @@ export class AuthService {
   private baseAuth: string = `${this.baseApiUrl}auth`;
   private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
   userName: string = "";
+  private isLoggedIn = new BehaviorSubject<boolean>(false);
+  public isLoggedIn$ = this.isLoggedIn.asObservable();
 
   constructor(
     private httpClient: HttpClient,
-    private router: Router,
     private format: FormatString,
     private utils: MethodUtils
   ) {
+    this.isLoggedIn.next(false);
     this.validateToken();
   }
 
   signIn(user: UserLogin) {
     return this.httpClient.post<any>(this.baseAuth, user).pipe(
-      tap((response) => {
+      map((response) => {
         const tokenInfo = this.decodeToken(response.accessToken);
-        localStorage.setItem("token", JSON.stringify(response.accessToken));
-        localStorage.setItem("user-name", JSON.stringify(tokenInfo.unique_name));
-        localStorage.setItem("user-id", JSON.stringify(tokenInfo.UserId));
+        const responseLogin = { 
+          accessToken: JSON.stringify(response.accessToken), 
+          "user_name": JSON.stringify(tokenInfo.unique_name), 
+          "user_id": JSON.stringify(tokenInfo.UserId) 
+        };
+        this.isLoggedIn.next(true);
+        console.log(this.isLoggedIn.getValue());
+        return responseLogin;
       })
     );
   }
@@ -48,14 +54,11 @@ export class AuthService {
   }
 
   logOut() {
-    if (this.loggedInUser) {
-      localStorage.clear();
-      this.router.navigate(['/']);
-    }
+    this.isLoggedIn.next(false);
   }
 
   get loggedInUser(): boolean {
-    return !!localStorage.getItem("token");
+    return this.isLoggedIn.value;
   }
 
   private validateToken(): void {

@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule, NgIf } from '@angular/common';
 
@@ -26,11 +26,16 @@ export class NavBarComponent {
   @ViewChild('navList') navList!: ElementRef;
 
   constructor(
+    private router: Router,
     public authService: AuthService
   ) {}
 
   logout(): void {
-    this.authService.logOut();
+    if (localStorage.getItem("token")) {
+      localStorage.clear();
+      this.authService.logOut();
+      this.router.navigateByUrl("/");
+    }
   }
 
   public showOrHideNavList(): void {
