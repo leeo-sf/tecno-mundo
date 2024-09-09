@@ -2,11 +2,13 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY . ./
-
-RUN npm install -g @angular/cli
+COPY package.json package-lock.json ./
 
 RUN npm install
+
+COPY . .
+
+RUN npm run build --prod
 
 FROM nginx:alpine
 COPY --from=build /app/dist/TecnoMundo.Web /usr/share/nginx/html
