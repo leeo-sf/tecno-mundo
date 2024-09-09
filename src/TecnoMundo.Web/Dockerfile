@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /App
+WORKDIR /app
 
 COPY . ./
 
@@ -9,7 +9,7 @@ RUN npm install -g @angular/cli
 RUN npm install
 
 FROM nginx:alpine
-COPY --from=build /app/dist/seu-app-angular /usr/share/nginx/html
+COPY --from=build /app/dist/TecnoMundo.Web /usr/share/nginx/html
 
 EXPOSE 8080
 
@@ -18,4 +18,4 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
