@@ -1,11 +1,21 @@
-FROM node:alpine
+FROM node:21 as builder
 
-WORKDIR /App
+WORKDIR /app
 
-COPY . ./
-
-RUN npm install -g @angular/cli
+COPY . .
 
 RUN npm install
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist/tecno-mundo.web/browser usr/share/nginx/html
+
+COPY  nginx.conf /etc/nginx/nginix.conf
+
+COPY  mime.types /etc/nginx/mime.types
+
+EXPOSE 80
+
+CMD [ "nginx", "-g", "daemon off;" ]
