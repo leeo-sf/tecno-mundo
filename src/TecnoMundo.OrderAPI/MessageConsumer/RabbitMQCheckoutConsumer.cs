@@ -30,7 +30,8 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             {
                 HostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value,
                 UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value,
-                Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value
+                Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value,
+                VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
