@@ -12,6 +12,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
         private readonly string _hostName;
         private readonly string _password;
         private readonly string _userName;
+        private readonly string _virtualHost;
         private IConnection _connection;
 
         public RabbitMQMessageSender(IConfiguration configuration)
@@ -19,7 +20,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
             _configuration = configuration;
             _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value;
             _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value;
-            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value;
+            _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value;
         }
 
         public void SendMessage(BaseMessage message, string queueName)
@@ -61,7 +62,8 @@ namespace GeekShopping.CartAPI.RabbitMQSender
                 {
                     HostName = _hostName,
                     UserName = _userName,
-                    Password = _password
+                    Password = _password,
+                    VirtualHost = _virtualHost
                 };
                 _connection = factory.CreateConnection();
             }
