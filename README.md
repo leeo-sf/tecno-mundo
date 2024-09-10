@@ -22,5 +22,6 @@ Projeto backend em API's ASP.NET 8, frontend em Angular 9. Projeto voltado a ven
 - RabbitMQ.
 - .NET 8.
 - MySQL.
-- Angular 9, Angular Material.
-- Azure
+- Angular 9, Angular Material, Bootstrap.
+- AWS | EC2 | RDS
+- GitHub Actions | CI-CD
