@@ -20,6 +20,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
             _configuration = configuration;
             _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value;
             _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value;
+            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value;
             _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value;
         }
 
