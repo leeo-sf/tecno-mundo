@@ -84,7 +84,7 @@ namespace TecnoMundo.ProductAPI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = nameof(EnumRole.Admin))]
+        [Authorize(Roles = nameof(EnumRole.Admin))]
         public async Task<ActionResult<ProductVO>> Create(CreateProductVO vo)
         {
             if (vo is null)
