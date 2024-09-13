@@ -24,3 +24,4 @@ secrets.json
 .idea/
 *.pfx
 *.key
+*.env

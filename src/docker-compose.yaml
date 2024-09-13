@@ -1,31 +1,21 @@
 services:
-  db:
-    image: leoof/tecnomundo-database:latest
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=superPassword@root
-      - MYSQL_USER=userAdmin
-      - MYSQL_PASSWORD=pwdAdmin@tecno_mundo
-    ports:
-      - '3307:3306'
-    networks:
-      - backend
-    container_name: 'mysql_container'
-    volumes:
-      - 'db_data:/var/lib/mysql'
-    command:
-      - --ssl=0
-
-
-  rabbit_mq:
-    image: leoof/tecnomundo-rabbitmq:latest
-    container_name: rabbitmq
-    restart: always
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    networks:
-      - backend
+  # Pode descomentar para rodar localmente
+  # db:
+  #   image: leoof/tecnomundo-database:latest
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=superPassword@root
+  #     - MYSQL_USER=userAdmin
+  #     - MYSQL_PASSWORD=pwdAdmin@tecno_mundo
+  #   ports:
+  #     - '3307:3306'
+  #   networks:
+  #     - backend
+  #   container_name: 'mysql_container'
+  #   volumes:
+  #     - 'db_data:/var/lib/mysql'
+  #   command:
+  #     - --ssl=0
 
 
   identity:
@@ -33,15 +23,19 @@ services:
     container_name: "identity"
     build:
       context: TecnoMundo.IdentityAPI
-    depends_on:
-      - db
     ports:
       - '4435:8080'
     restart: always
     networks:
       - backend
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_identity_api;Uid=root;Pwd=superPassword@root;
+      - AuthenticationSettings__Secret=${TOKEN_KEY}
+      - AuthenticationSettings__ExpiressHours=${TOKEN_EXPIRE}
+      - AuthenticationSettings__AudienceToken=${TOKEN_AUDIENCE}
+      - AuthenticationSettings__ProvaiderToken=${TOKEN_PROVAIDER}
+      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:4200
+      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:4200
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_identity_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     
   
   product:
@@ -49,13 +43,13 @@ services:
     container_name: "product"
     build:
       context: TecnoMundo.ProductAPI
-    depends_on:
-      - db
-      - identity
     ports:
       - '4440:8080'
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_product_api;Uid=root;Pwd=superPassword@root;
+      - Authentication__Key=${TOKEN_KEY}
+      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:4200
+      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:4200
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     restart: always
     networks:
       - backend
@@ -66,14 +60,14 @@ services:
     container_name: "coupon"
     build:
       context: TecnoMundo.CouponAPI
-    depends_on:
-      - db
-      - identity
     ports:
       - '4445:8080'
     restart: always
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_coupon_api;Uid=root;Pwd=superPassword@root;
+      - Authentication__Key=${TOKEN_KEY}
+      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:4200
+      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:4200
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_coupon_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
   
@@ -85,17 +79,23 @@ services:
       context: 'TecnoMundo.CartAPI'
     depends_on:
       - product
-      - db
       - coupon
-      - rabbit_mq
     ports:
       - '4450:8080'
     restart: always
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_cart_api;Uid=root;Pwd=superPassword@root;
-      - RabbitMQServer__HostName=rabbit_mq
+      - Authentication__Key=${TOKEN_KEY}
+      - Authentication__UrlAuthentication=${TOKEN_PROVAIDER}
+      - Authentication__Scope=${TOKEN_AUDIENCE}
       - ServiceUrls__ProductAPI=http://product:8080
       - ServiceUrls__CouponAPI=http://coupon:8080
+      - RabbitMQServer__HostName=${RABBITMQ_HOSTNAME}
+      - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBITMQ_USERNAME}
+      - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
+      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:4200
+      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:4200
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
   
@@ -106,12 +106,12 @@ services:
     restart: always
     build: 
       context: 'TecnoMundo.PaymentAPI'
-    depends_on:
-      - rabbit_mq
     environment:
-      - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=guest
-      - RabbitMQServer__Username=guest
+      - Authentication__Key=${TOKEN_KEY}
+      - RabbitMQServer__HostName=${RABBITMQ_HOSTNAME}
+      - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBITMQ_USERNAME}
+      - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
     networks:
       - backend
   
@@ -122,15 +122,19 @@ services:
     restart: always
     build: 
       context: 'TecnoMundo.OrderAPI'
-    depends_on:
-      - rabbit_mq
-      - db
-      - identity
+    ports:
+      - '4455:8080'
     environment:
-      - MySQLConnection__MySQLConnectionString=Server=db;DataBase=tecno_mundo_order_api;Uid=root;Pwd=superPassword@root;
-      - RabbitMQServer__HostName=rabbit_mq
-      - RabbitMQServer__Password=guest
-      - RabbitMQServer__Username=guest
+      - Authentication__Key=${TOKEN_KEY}
+      - Authentication__UrlAuthentication=${TOKEN_PROVAIDER}
+      - Authentication__Scope=${TOKEN_AUDIENCE}
+      - RabbitMQServer__HostName=${RABBITMQ_HOSTNAME}
+      - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
+      - RabbitMQServer__Username=${RABBITMQ_USERNAME}
+      - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
+      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:4200
+      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:4200
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
 
