@@ -10,12 +10,18 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=builder /app/dist/tecno-mundo.web/browser usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
 
 COPY  nginx.conf /etc/nginx/nginix.conf
+
+COPY --from=builder /app/dist/tecno-mundo.web/browser usr/share/nginx/html
 
 COPY  mime.types /etc/nginx/mime.types
 
 EXPOSE 80
 
-CMD [ "nginx", "-g", "daemon off;" ]
+RUN echo "mainFileName=\"\$(ls /usr/share/nginx/html/main*.js)\" && \
+          envsubst '\$BASE_API_URL_PRODUCT \$BASE_API_URL_IDENTITY \$BASE_API_URL_CART \$BASE_API_URL_COUPON \$BASE_API_URL_ORDER' < \${mainFileName} > main.tmp && \
+          mv main.tmp  \${mainFileName} && nginx -g 'daemon off;'" > run.sh
+
+ENTRYPOINT ["sh", "run.sh"]
