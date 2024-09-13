@@ -4,4 +4,4 @@ export const environment = {
     baseApiUrlCart: "http://localhost:4450/api/v1/Cart/",
     baseApiUrlCoupon: "http://localhost:4445/api/v1/Coupon/",
     baseApiUrlOrder: "http://localhost:4455/api/v1/Order/"
-}
+};
