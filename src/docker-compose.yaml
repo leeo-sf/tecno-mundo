@@ -148,6 +148,8 @@ services:
       - BASE_API_URL_CART=http://localhost:4450/api/v1/Cart/
       - BASE_API_URL_COUPON=http://localhost:4445/api/v1/Coupon/
       - BASE_API_URL_ORDER=http://localhost:4455/api/v1/Order/
+    networks:
+      - backend
 
 
 volumes:
