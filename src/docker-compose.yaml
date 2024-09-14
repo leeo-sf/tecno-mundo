@@ -1,21 +1,15 @@
 services:
-  # Pode descomentar para rodar localmente
+  # Pode descomentar para rodar localmente e algumas informações devem ser passadas para as API's
   # db:
+  #   container_name: 'mysql_container'
   #   image: leoof/tecnomundo-database:latest
   #   restart: always
   #   environment:
   #     - MYSQL_ROOT_PASSWORD=superPassword@root
-  #     - MYSQL_USER=userAdmin
-  #     - MYSQL_PASSWORD=pwdAdmin@tecno_mundo
   #   ports:
   #     - '3307:3306'
   #   networks:
   #     - backend
-  #   container_name: 'mysql_container'
-  #   volumes:
-  #     - 'db_data:/var/lib/mysql'
-  #   command:
-  #     - --ssl=0
 
 
   identity:
