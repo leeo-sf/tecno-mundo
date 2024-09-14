@@ -27,8 +27,8 @@ services:
       - AuthenticationSettings__ExpiressHours=${TOKEN_EXPIRE}
       - AuthenticationSettings__AudienceToken=${TOKEN_AUDIENCE}
       - AuthenticationSettings__ProvaiderToken=${TOKEN_PROVAIDER}
-      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
-      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_identity_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     
   
@@ -42,7 +42,7 @@ services:
     environment:
       - Authentication__Key=${TOKEN_KEY}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     restart: always
     networks:
@@ -59,8 +59,8 @@ services:
     restart: always
     environment:
       - Authentication__Key=${TOKEN_KEY}
-      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
-      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_coupon_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -87,8 +87,8 @@ services:
       - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
-      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
-      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -126,8 +126,8 @@ services:
       - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
-      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
-      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -144,10 +144,10 @@ services:
       - '443:80'
     environment:
       - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/v1/Product/
-      - BASE_API_URL_IDENTITY=http://localhost:4435/api/v1/Authentication/
-      - BASE_API_URL_CART=http://localhost:4450/api/v1/Cart/
-      - BASE_API_URL_COUPON=http://localhost:4445/api/v1/Coupon/
-      - BASE_API_URL_ORDER=http://localhost:4455/api/v1/Order/
+      - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/v1/Authentication/
+      - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/v1/Cart/
+      - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/v1/Coupon/
+      - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/v1/Order/
 
 
 volumes:
