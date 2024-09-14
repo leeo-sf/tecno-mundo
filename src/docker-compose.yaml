@@ -41,7 +41,7 @@ services:
       - '4440:8080'
     environment:
       - Authentication__Key=${TOKEN_KEY}
-      - CorsPolicy__TecnoMundo-Web-Http=http://page:443
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
       - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     restart: always
@@ -143,13 +143,11 @@ services:
       - '80:80'
       - '443:80'
     environment:
-      - BASE_API_URL_PRODUCT=http://product:8080/api/v1/Product/
+      - BASE_API_URL_PRODUCT=http://localhost:4440/api/v1/Product/
       - BASE_API_URL_IDENTITY=http://localhost:4435/api/v1/Authentication/
       - BASE_API_URL_CART=http://localhost:4450/api/v1/Cart/
       - BASE_API_URL_COUPON=http://localhost:4445/api/v1/Coupon/
       - BASE_API_URL_ORDER=http://localhost:4455/api/v1/Order/
-    networks:
-      - backend
 
 
 volumes:
