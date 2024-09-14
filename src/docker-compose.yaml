@@ -28,7 +28,7 @@ services:
       - AuthenticationSettings__AudienceToken=${TOKEN_AUDIENCE}
       - AuthenticationSettings__ProvaiderToken=${TOKEN_PROVAIDER}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_identity_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     
   
@@ -42,7 +42,7 @@ services:
     environment:
       - Authentication__Key=${TOKEN_KEY}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     restart: always
     networks:
@@ -60,7 +60,7 @@ services:
     environment:
       - Authentication__Key=${TOKEN_KEY}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_coupon_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -88,7 +88,7 @@ services:
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -127,7 +127,7 @@ services:
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
-      - CorsPolicy__TecnoMundo-Web-Https=https://${CORS_HTTPS}
+      - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
