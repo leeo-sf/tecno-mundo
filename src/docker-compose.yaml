@@ -27,8 +27,8 @@ services:
       - AuthenticationSettings__ExpiressHours=${TOKEN_EXPIRE}
       - AuthenticationSettings__AudienceToken=${TOKEN_AUDIENCE}
       - AuthenticationSettings__ProvaiderToken=${TOKEN_PROVAIDER}
-      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:443
-      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:80
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
+      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_identity_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     
   
@@ -41,8 +41,8 @@ services:
       - '4440:8080'
     environment:
       - Authentication__Key=${TOKEN_KEY}
-      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:443
-      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:80
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
+      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     restart: always
     networks:
@@ -59,8 +59,8 @@ services:
     restart: always
     environment:
       - Authentication__Key=${TOKEN_KEY}
-      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:443
-      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:80
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
+      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_coupon_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -87,8 +87,8 @@ services:
       - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
-      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:443
-      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:80
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
+      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
@@ -126,8 +126,8 @@ services:
       - RabbitMQServer__Password=${RABBITMQ_PASSWORD}
       - RabbitMQServer__Username=${RABBITMQ_USERNAME}
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
-      - CorsPolicy__TecnoMundo-Web-Http=http://localhost:443
-      - CorsPolicy__TecnoMundo-Web-Https=https://localhost:80
+      - CorsPolicy__TecnoMundo-Web-Http=${CORS_HTTP}
+      - CorsPolicy__TecnoMundo-Web-Https=${CORS_HTTPS}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
     networks:
       - backend
