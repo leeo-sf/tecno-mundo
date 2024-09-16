@@ -59,6 +59,8 @@ services:
     restart: always
     environment:
       - Authentication__Key=${TOKEN_KEY}
+      - Authentication__UrlAuthentication=${TOKEN_PROVAIDER}
+      - Authentication__Scope=${TOKEN_AUDIENCE}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
       - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
       - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_coupon_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
