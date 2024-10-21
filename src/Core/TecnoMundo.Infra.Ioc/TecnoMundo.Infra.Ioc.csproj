@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TecnoMundo.Application\TecnoMundo.Application.csproj" />
+    <ProjectReference Include="..\TecnoMundo.Domain\TecnoMundo.Domain.csproj" />
+    <ProjectReference Include="..\TecnoMundo.Infra.Data\TecnoMundo.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
