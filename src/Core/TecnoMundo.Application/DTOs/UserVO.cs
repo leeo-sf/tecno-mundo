@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TecnoMundo.Identity.Data.ValueObjects
+namespace TecnoMundo.Application.DTOs
 {
     public class UserVO
     {

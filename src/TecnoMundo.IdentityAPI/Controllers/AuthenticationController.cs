@@ -1,14 +1,9 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TecnoMundo.Identity.Commands;
-using TecnoMundo.Identity.Data.ValueObjects;
-using TecnoMundo.Identity.Model;
-using TecnoMundo.Identity.Repository;
-using TecnoMundo.Identity.Response;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.Interfaces;
 using TecnoMundo.Identity.Service;
-using TecnoMundo.IdentityAPI.Data.ValueObjects;
 
 namespace TecnoMundo.Identity.Controllers
 {
@@ -16,32 +11,29 @@ namespace TecnoMundo.Identity.Controllers
     [Route("api/v1/[controller]")]
     public class AuthenticationController : Controller
     {
-        private readonly IDbRepository _repository;
+        private readonly IIdentityService _repository;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
-        private readonly IInsertUser _insert;
 
         public AuthenticationController(
-            IDbRepository repository,
+            IIdentityService repository,
             ITokenService tokenService,
-            IConfiguration configuration,
-            IInsertUser insert
+            IConfiguration configuration
         )
         {
             _repository = repository;
             _tokenService = tokenService;
             _configuration = configuration;
-            _insert = insert;
         }
 
         [HttpPost]
         [Route("Auth")]
-        public async Task<ActionResult> GetToken([FromBody] AuthenticateVO userLogin)
+        public async Task<ActionResult> GetToken([FromBody] AuthenticateVO vo)
         {
-            var user = await _repository.ValidateUserEmailAndPassword(userLogin);
+            var user = await _repository.ValidateUserEmailAndPassword(vo.UserEmail, vo.Password);
 
-            if (user is null)
-                return NotFound(Json("Invalid email or password"));
+            if (user?.Id == Guid.Empty)
+                return BadRequest(new { errorMessage = "Invalid email or password" });
 
             var accessToken = _tokenService.GenerateToken(user);
 
@@ -63,7 +55,7 @@ namespace TecnoMundo.Identity.Controllers
         {
             try
             {
-                await _insert.Execute(user);
+                await _repository.Create(user);
                 return Ok();
             }
             catch (Exception ex)

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
-using TecnoMundo.ProductAPI.Utils;
+using TecnoMundo.Domain.Enums;
 
 namespace TecnoMundo.ProductAPI.Controllers
 {
@@ -81,7 +81,7 @@ namespace TecnoMundo.ProductAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = nameof(EnumRole.Admin))]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<ActionResult<ProductVO>> Create(CreateProductVO vo)
         {
             if (vo is null)
@@ -103,7 +103,7 @@ namespace TecnoMundo.ProductAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = nameof(EnumRole.Admin))]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<ActionResult<ProductVO>> Update(ProductVO vo)
         {
             if (vo is null)
@@ -125,7 +125,7 @@ namespace TecnoMundo.ProductAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = nameof(EnumRole.Admin))]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<ActionResult> Delete(Guid id)
         {
             var status = await _repository.Delete(id);

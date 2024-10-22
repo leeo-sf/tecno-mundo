@@ -7,9 +7,9 @@ namespace TecnoMundo.Infra.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContextProduct _context;
 
-        public ProductRepository(ApplicationDbContext context)
+        public ProductRepository(ApplicationDbContextProduct context)
         {
             _context = context;
         }

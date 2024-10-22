@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TecnoMundo.IdentityAPI.Data.ValueObjects
+namespace TecnoMundo.Application.DTOs
 {
     public class AuthenticateVO
     {

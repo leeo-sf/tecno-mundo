@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TecnoMundo.IdentityAPI.Utils;
+using TecnoMundo.Domain.Entities;
 
-namespace TecnoMundo.Identity.Model.Context
+namespace TecnoMundo.Infra.Data.Context
 {
-    public class MySQLContext : DbContext
+    public class ApplicationDbContextIdentity : DbContext
     {
-        public MySQLContext(DbContextOptions<MySQLContext> options)
+        public ApplicationDbContextIdentity(DbContextOptions<ApplicationDbContextIdentity> options) 
             : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -16,6 +16,6 @@ namespace TecnoMundo.Identity.Model.Context
             );
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

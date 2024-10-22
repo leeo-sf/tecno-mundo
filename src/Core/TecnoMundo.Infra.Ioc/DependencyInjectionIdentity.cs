@@ -11,13 +11,13 @@ using TecnoMundo.Infra.Data.Repositories;
 
 namespace TecnoMundo.Infra.Ioc
 {
-    public static class DependencyInjectionProduct
+    public class DependencyInjectionIdentity
     {
         public static IServiceCollection AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             var connection = configuration.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
 
-            services.AddDbContext<ApplicationDbContextProduct>(options =>
+            services.AddDbContext<ApplicationDbContextIdentity>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
             );
 
@@ -26,10 +26,10 @@ namespace TecnoMundo.Infra.Ioc
 
         public static void AddInfrastructureDbContext(IServiceCollection services)
         {
-            IMapper mapper = DomainToDTOMappingProduct.RegisterMaps().CreateMapper();
+            IMapper mapper = DomainToDTOMappingIdentity.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IIdentityRepository, IdentityRepository>();
+            services.AddScoped<IIdentityService, IdentityService>();
         }
     }
 }

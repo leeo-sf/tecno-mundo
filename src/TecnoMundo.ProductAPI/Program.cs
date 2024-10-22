@@ -3,7 +3,7 @@ using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-DependencyInjection.AddInfrastructureDbContext(builder.Services, builder.Configuration);
+DependencyInjectionProduct.AddDbContext(builder.Services, builder.Configuration);
 
 // Adicionando scope
 DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);

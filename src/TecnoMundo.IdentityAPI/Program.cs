@@ -1,45 +1,19 @@
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using TecnoMundo.Identity.Commands;
-using TecnoMundo.Identity.Config;
-using TecnoMundo.Identity.Model.Context;
-using TecnoMundo.Identity.Repository;
 using TecnoMundo.Identity.Service;
+using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
+// connection DB
+DependencyInjectionIdentity.AddDbContext(builder.Services, builder.Configuration);
 
-builder.Services.AddDbContext<MySQLContext>(options =>
-    options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
-);
+// Adicionando CORS
+DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
 
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy(
-        name: "CorsPolicy",
-        policy =>
-        {
-            policy
-                .WithOrigins(
-                    builder.Configuration["CorsPolicy:TecnoMundo-Web-Http"],
-                    builder.Configuration["CorsPolicy:TecnoMundo-Web-Https"]
-                )
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        }
-    );
-});
-
+// Adicionar scopeds
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IDbRepository, DbRepository>();
-builder.Services.AddScoped<IInsertUser, InsertUser>();
-
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
+DependencyInjectionIdentity.AddInfrastructureDbContext(builder.Services);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -71,17 +71,6 @@ namespace TecnoMundo.Infra.Ioc
             return services;
         }
 
-        public static IServiceCollection AddInfrastructureDbContext(IServiceCollection services, IConfiguration configuration)
-        {
-            var connection = configuration.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
-            );
-
-            return services;
-        }
-
         public static IServiceCollection AddInfrastructureSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
