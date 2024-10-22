@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TecnoMundo.Domain.DTOs;
+using TecnoMundo.Application.DTOs;
 using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.Application.Mappings

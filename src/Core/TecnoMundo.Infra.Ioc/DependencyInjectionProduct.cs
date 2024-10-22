@@ -10,7 +10,7 @@ namespace TecnoMundo.Infra.Ioc
 {
     public static class DependencyInjectionProduct
     {
-        public static void AddInfrastructureDbContext(this IServiceCollection services)
+        public static void AddInfrastructureDbContext(IServiceCollection services)
         {
             IMapper mapper = DomainToDTOMappingProduct.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);

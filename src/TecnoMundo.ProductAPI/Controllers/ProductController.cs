@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MySqlConnector;
-using TecnoMundo.ProductAPI.Data.ValueObjects;
-using TecnoMundo.ProductAPI.Data.ValueObjects;
-using TecnoMundo.ProductAPI.Repository;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.Interfaces;
 using TecnoMundo.ProductAPI.Utils;
 
 namespace TecnoMundo.ProductAPI.Controllers
@@ -14,9 +11,9 @@ namespace TecnoMundo.ProductAPI.Controllers
     [Route("api/v1/[controller]")]
     public class ProductController : ControllerBase
     {
-        private IProductRepository _repository;
+        private IProductService _repository;
 
-        public ProductController(IProductRepository repository)
+        public ProductController(IProductService repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(_repository));
         }
@@ -95,14 +92,11 @@ namespace TecnoMundo.ProductAPI.Controllers
                 var product = await _repository.Create(vo);
                 return Ok(product);
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                if (ex.InnerException is MySqlException mysqlError)
+                if (ex.Message.Contains("category_id"))
                 {
-                    if (mysqlError.Message.Contains("category_id"))
-                    {
-                        return BadRequest("Unregistered category");
-                    }
+                    return BadRequest("Unregistered category");
                 }
                 return BadRequest(ex.Message);
             }
@@ -120,14 +114,11 @@ namespace TecnoMundo.ProductAPI.Controllers
                 var product = await _repository.Update(vo);
                 return Ok(product);
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                if (ex.InnerException is MySqlException mysqlError)
+                if (ex.Message.Contains("category_id"))
                 {
-                    if (mysqlError.Message.Contains("category_id"))
-                    {
-                        return BadRequest("Unregistered category");
-                    }
+                    return BadRequest("Unregistered category");
                 }
                 return BadRequest(ex.Message);
             }
