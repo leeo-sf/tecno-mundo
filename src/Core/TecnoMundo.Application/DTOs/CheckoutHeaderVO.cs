@@ -1,6 +1,6 @@
 ﻿using GeekShopping.MessageBus;
 
-namespace GeekShopping.OrderAPI.Messages
+namespace TecnoMundo.Application.DTOs
 {
     public class CheckoutHeaderVO : BaseMessage
     {

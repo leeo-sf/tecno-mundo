@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="GeekShopping.MessagesBusPackage" Version="1.0.0" />
     <ProjectReference Include="..\TecnoMundo.Domain\TecnoMundo.Domain.csproj" />
   </ItemGroup>
 

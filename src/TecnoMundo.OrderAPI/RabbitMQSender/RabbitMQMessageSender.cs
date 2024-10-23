@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
 using GeekShopping.MessageBus;
-using GeekShopping.OrderAPI.Messages;
 using RabbitMQ.Client;
+using TecnoMundo.Application.DTOs;
 
 namespace GeekShopping.OrderAPI.RabbitMQSender
 {
@@ -47,7 +47,7 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
                 //para considerar as classes filhas
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize<PaymentVO>((PaymentVO)message, options);
+            var json = JsonSerializer.Serialize((PaymentVO)message, options);
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }

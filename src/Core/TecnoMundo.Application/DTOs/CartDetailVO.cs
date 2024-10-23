@@ -1,6 +1,4 @@
-﻿using TecnoMundo.Application.DTOs;
-
-namespace GeekShopping.OrderAPI.Messages
+﻿namespace TecnoMundo.Application.DTOs
 {
     public class CartDetailVO
     {

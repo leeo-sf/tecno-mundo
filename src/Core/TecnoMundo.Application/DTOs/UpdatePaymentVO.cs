@@ -1,6 +1,8 @@
-﻿namespace GeekShopping.OrderAPI.Messages
+﻿using GeekShopping.MessageBus;
+
+namespace TecnoMundo.Application.DTOs
 {
-    public class UpdatePaymentResult
+    public class UpdatePaymentVO : BaseMessage
     {
         public Guid OrderId { get; set; }
         public bool Status { get; set; }

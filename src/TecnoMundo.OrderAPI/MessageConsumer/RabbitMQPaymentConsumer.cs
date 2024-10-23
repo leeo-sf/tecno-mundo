@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json;
-using GeekShopping.OrderAPI.Messages;
 using GeekShopping.OrderAPI.RabbitMQSender;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
@@ -48,7 +48,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             consumer.Received += (chanel, evt) =>
             {
                 var content = Encoding.UTF8.GetString(evt.Body.ToArray());
-                UpdatePaymentResult vo = JsonSerializer.Deserialize<UpdatePaymentResult>(content);
+                UpdatePaymentVO vo = JsonSerializer.Deserialize<UpdatePaymentVO>(content) ?? new UpdatePaymentVO();
                 UpdaatePaymentStatus(vo).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
@@ -56,7 +56,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             return Task.CompletedTask;
         }
 
-        private async Task UpdaatePaymentStatus(UpdatePaymentResult vo)
+        private async Task UpdaatePaymentStatus(UpdatePaymentVO vo)
         {
             try
             {
