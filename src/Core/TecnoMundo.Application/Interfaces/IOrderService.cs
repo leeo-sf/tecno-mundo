@@ -1,9 +1,8 @@
-﻿using GeekShopping.OrderAPI.Model;
-using TecnoMundo.OrderAPI.Model;
+﻿using TecnoMundo.Domain.Entities;
 
-namespace GeekShopping.OrderAPI.Repository
+namespace TecnoMundo.Application.Interfaces
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
         Task<bool> AddOrder(OrderHeader header);
         Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status);

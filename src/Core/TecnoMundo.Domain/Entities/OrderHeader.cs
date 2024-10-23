@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using GeekShopping.OrderAPI.Model.Base;
+using TecnoMundo.Domain.Entities.Base;
 
-namespace GeekShopping.OrderAPI.Model
+namespace TecnoMundo.Domain.Entities
 {
     [Table("order_header")]
     public class OrderHeader : BaseEntity

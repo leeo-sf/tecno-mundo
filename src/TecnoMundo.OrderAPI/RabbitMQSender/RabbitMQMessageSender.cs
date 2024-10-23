@@ -18,10 +18,10 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
         public RabbitMQMessageSender(IConfiguration configuration)
         {
             _configuration = configuration;
-            _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value;
-            _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value;
-            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value;
-            _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value;
+            _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value ?? "";
+            _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value ?? "";
+            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value ?? "";
+            _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value ?? "";
         }
 
         public void SendMessage(BaseMessage message, string queueName)

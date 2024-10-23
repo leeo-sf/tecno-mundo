@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using GeekShopping.OrderAPI.Model.Base;
+using TecnoMundo.Domain.Entities.Base;
 
-namespace GeekShopping.OrderAPI.Model
+namespace TecnoMundo.Domain.Entities
 {
     [Table("order_detail")]
     public class OrderDetail : BaseEntity
@@ -18,7 +18,7 @@ namespace GeekShopping.OrderAPI.Model
         public string ProductName { get; set; }
 
         [Column("price")]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         public OrderDetail() { }
 
@@ -27,7 +27,7 @@ namespace GeekShopping.OrderAPI.Model
             Guid productId,
             int count,
             string productName,
-            float price
+            decimal price
         )
         {
             Id = Guid.NewGuid();
@@ -44,7 +44,7 @@ namespace GeekShopping.OrderAPI.Model
             Guid productId,
             int count,
             string productName,
-            float price
+            decimal price
         )
         {
             Id = id;

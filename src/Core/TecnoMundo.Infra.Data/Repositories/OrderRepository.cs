@@ -1,15 +1,15 @@
-﻿using GeekShopping.OrderAPI.Model;
-using GeekShopping.OrderAPI.Model.Context;
-using Microsoft.EntityFrameworkCore;
-using TecnoMundo.OrderAPI.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using TecnoMundo.Domain.Entities;
+using TecnoMundo.Domain.Interfaces;
+using TecnoMundo.Infra.Data.Context;
 
-namespace GeekShopping.OrderAPI.Repository
+namespace TecnoMundo.Infra.Data.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly DbContextOptions<MySQLContext> _context;
+        private readonly DbContextOptions<ApplicationDbContextOrder> _context;
 
-        public OrderRepository(DbContextOptions<MySQLContext> context)
+        public OrderRepository(DbContextOptions<ApplicationDbContextOrder> context)
         {
             _context = context;
         }
@@ -19,7 +19,7 @@ namespace GeekShopping.OrderAPI.Repository
             if (header == null)
                 return false;
 
-            await using var _db = new MySQLContext(_context);
+            await using var _db = new ApplicationDbContextOrder(_context);
             _db.Headers.Add(header);
             await _db.SaveChangesAsync();
 
@@ -28,7 +28,7 @@ namespace GeekShopping.OrderAPI.Repository
 
         public async Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status)
         {
-            await using var _db = new MySQLContext(_context);
+            await using var _db = new ApplicationDbContextOrder(_context);
             var header = await _db.Headers.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
             if (header != null)
             {
@@ -39,7 +39,7 @@ namespace GeekShopping.OrderAPI.Repository
 
         public async Task<List<OrderHeader>> GetAllOrder(Guid profileId)
         {
-            await using var _db = new MySQLContext(_context);
+            await using var _db = new ApplicationDbContextOrder(_context);
             var orderHeaders = await _db
                 .Headers.Include(x => x.OrderDetails)
                 .Where(o => o.UserId == profileId)

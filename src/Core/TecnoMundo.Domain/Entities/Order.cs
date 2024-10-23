@@ -1,6 +1,4 @@
-﻿using GeekShopping.OrderAPI.Model;
-
-namespace TecnoMundo.OrderAPI.Model
+﻿namespace TecnoMundo.Domain.Entities
 {
     public class Order
     {
