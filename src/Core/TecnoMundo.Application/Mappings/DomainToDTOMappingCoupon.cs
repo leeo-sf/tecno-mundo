@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Model;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Domain.Entities;
 
-namespace TecnoMundo.CouponAPI.Config
+namespace TecnoMundo.Application.Mappings
 {
-    public class MappingConfig
+    public class DomainToDTOMappingCoupon
     {
         public static MapperConfiguration RegisterMaps()
         {

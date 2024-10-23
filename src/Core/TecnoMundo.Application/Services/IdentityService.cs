@@ -60,7 +60,7 @@ namespace TecnoMundo.Application.Services
 
         public async Task<User?> ValidateUserEmailAndPassword(string email, string password)
         {
-            var user = await _repository.ValidateUserEmailAndPassword(email, password);
+            var user = await _repository.ValidateUserEmailAndPassword(email, password) ?? new User();
             user.Password = "";
             return user;
         }

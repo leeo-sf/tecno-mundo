@@ -21,7 +21,7 @@ DependencyInjection.AddAuthentication(builder.Services, builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 
 //Adicionando defini��o de seguran�a
-DependencyInjection.AddInfrastructureSwagger(builder.Services);
+DependencyInjection.AddInfrastructureSwagger(builder.Services, "Products");
 
 var app = builder.Build();
 

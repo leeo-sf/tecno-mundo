@@ -1,4 +1,4 @@
-﻿namespace TecnoMundo.CouponAPI.Data.ValueObjects
+﻿namespace TecnoMundo.Application.DTOs
 {
     public class CouponVO
     {

@@ -1,19 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using TecnoMundo.CouponAPI.Model.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TecnoMundo.Domain.Entities.Base;
 
-namespace TecnoMundo.CouponAPI.Model
+namespace TecnoMundo.Domain.Entities
 {
     [Table("coupon")]
     public class Coupon : BaseEntity
     {
         [Column("coupon_code")]
-        [Required]
-        [StringLength(30)]
         public string CouponCode { get; set; }
-
         [Column("discount_amount")]
-        [Required]
         public float DiscountAmount { get; set; }
 
         public Coupon(string couponCode, float discountAmount)

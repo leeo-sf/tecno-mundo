@@ -71,11 +71,11 @@ namespace TecnoMundo.Infra.Ioc
             return services;
         }
 
-        public static IServiceCollection AddInfrastructureSwagger(IServiceCollection services)
+        public static IServiceCollection AddInfrastructureSwagger(IServiceCollection services, string api)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecnoMundo.Products", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = $"TecnoMundo.{api}", Version = "v1" });
                 c.AddSecurityDefinition(
                     "Bearer",
                     new OpenApiSecurityScheme

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Data.ValueObjects;
-using TecnoMundo.CouponAPI.Repository;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.Interfaces;
+using TecnoMundo.Domain.Enums;
 
 namespace TecnoMundo.CouponAPI.Controllers
 {
@@ -12,9 +12,9 @@ namespace TecnoMundo.CouponAPI.Controllers
     [Authorize]
     public class CouponController : ControllerBase
     {
-        private readonly ICouponRepository _repository;
+        private readonly ICouponService _repository;
 
-        public CouponController(ICouponRepository repository)
+        public CouponController(ICouponService repository)
         {
             _repository = repository;
         }
@@ -29,6 +29,7 @@ namespace TecnoMundo.CouponAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<ActionResult<CouponVO>> CreateCoupon([FromBody] CreateCouponVO couponVO)
         {
             try
