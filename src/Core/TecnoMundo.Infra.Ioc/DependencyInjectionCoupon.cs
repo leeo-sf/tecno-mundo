@@ -11,25 +11,28 @@ using TecnoMundo.Infra.Data.Repositories;
 
 namespace TecnoMundo.Infra.Ioc
 {
-    public class DependencyInjectionCoupon
+    public class DependencyInjectionCoupon : DependencyInjection
     {
-        public static IServiceCollection AddDbContext(IServiceCollection services, IConfiguration configuration)
-        {
-            var connection = configuration.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+        public DependencyInjectionCoupon(IServiceCollection service,
+            IConfiguration configuration) : base(service, configuration) { }
 
-            services.AddDbContext<ApplicationDbContextCoupon>(options =>
+        public override IServiceCollection AddDbContext()
+        {
+            var connection = _config.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+
+            _service.AddDbContext<ApplicationDbContextCoupon>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
             );
 
-            return services;
+            return _service;
         }
 
-        public static void AddInfrastructureDbContext(IServiceCollection services)
+        public override void AddScopedAndDependencies()
         {
             IMapper mapper = DomainToDTOMappingCoupon.RegisterMaps().CreateMapper();
-            services.AddSingleton(mapper);
-            services.AddScoped<ICouponRepository, CouponRepository>();
-            services.AddScoped<ICouponService, CouponService>();
+            _service.AddSingleton(mapper);
+            _service.AddScoped<ICouponRepository, CouponRepository>();
+            _service.AddScoped<ICouponService, CouponService>();
         }
     }
 }

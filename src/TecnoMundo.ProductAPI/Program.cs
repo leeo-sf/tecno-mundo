@@ -1,27 +1,27 @@
-using System.Text;
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+var structure = new DependencyInjectionProduct(builder.Services, builder.Configuration);
 
-DependencyInjectionProduct.AddDbContext(builder.Services, builder.Configuration);
+structure.AddDbContext();
 
 // Adicionando scope
-DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
+structure.AddCorsPolicy();
 
-DependencyInjectionProduct.AddInfrastructureDbContext(builder.Services);
+structure.AddScopedAndDependencies();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 //Adicionando configura��es de seguran�a
-DependencyInjection.AddAuthentication(builder.Services, builder.Configuration);
+structure.AddAuthentication();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 //Adicionando defini��o de seguran�a
-DependencyInjection.AddInfrastructureSwagger(builder.Services, "Products");
+structure.AddInfrastructureSwagger(apiName: "Products");
 
 var app = builder.Build();
 

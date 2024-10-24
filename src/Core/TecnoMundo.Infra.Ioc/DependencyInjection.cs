@@ -1,19 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using TecnoMundo.Infra.Data.Context;
 
 namespace TecnoMundo.Infra.Ioc
 {
-    public static class DependencyInjection
+    public abstract class DependencyInjection
     {
-        public static IServiceCollection AddCorsPolicy(IServiceCollection services, IConfiguration configuration)
+        protected readonly IServiceCollection _service;
+        protected readonly IConfiguration _config;
+
+        public DependencyInjection(IServiceCollection service,
+            IConfiguration configuration)
         {
-            services.AddCors(opt =>
+            _service = service;
+            _config = configuration;
+        }
+
+        public IServiceCollection AddCorsPolicy()
+        {
+            _service.AddCors(opt =>
             {
                 opt.AddPolicy(
                     name: "CorsPolicy",
@@ -21,21 +29,21 @@ namespace TecnoMundo.Infra.Ioc
                     {
                         policy
                             .WithOrigins(
-                                configuration.GetSection("CorsPolicy:TecnoMundo-Web-Http").Value ?? "",
-                                configuration.GetSection("CorsPolicy:TecnoMundo-Web-Https").Value ?? ""
+                                _config.GetSection("CorsPolicy:TecnoMundo-Web-Http").Value ?? "",
+                                _config.GetSection("CorsPolicy:TecnoMundo-Web-Https").Value ?? ""
                             )
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     }
                 );
             });
-            return services;
+            return _service;
         }
 
-        public static IServiceCollection AddAuthentication(IServiceCollection services, IConfiguration configuration)
+        public IServiceCollection AddAuthentication()
         {
-            var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication:Key").Value ?? "");
-            services.AddAuthentication(x =>
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("Authentication:Key").Value ?? "");
+            _service.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,17 +53,17 @@ namespace TecnoMundo.Infra.Ioc
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = configuration.GetSection("Authentication:UrlAuthentication")
+                        ValidIssuer = _config.GetSection("Authentication:UrlAuthentication")
                             .Value,
                         ValidateAudience = true,
-                        ValidAudience = configuration.GetSection("Authentication:Scope").Value,
+                        ValidAudience = _config.GetSection("Authentication:Scope").Value,
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateLifetime = true
                     };
                 });
 
-            services.AddAuthorization(options =>
+            _service.AddAuthorization(options =>
             {
                 options.AddPolicy(
                     "ApiScope",
@@ -63,19 +71,19 @@ namespace TecnoMundo.Infra.Ioc
                     {
                         //garantir que o usu�rio esteja autenticado
                         policy.RequireAuthenticatedUser();
-                        policy.RequireClaim("scope", $"{configuration["Authentication:Scope"]}");
+                        policy.RequireClaim("scope", $"{_config["Authentication:Scope"]}");
                     }
                 );
             });
 
-            return services;
+            return _service;
         }
 
-        public static IServiceCollection AddInfrastructureSwagger(IServiceCollection services, string api)
+        public IServiceCollection AddInfrastructureSwagger(string apiName)
         {
-            services.AddSwaggerGen(c =>
+            _service.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = $"TecnoMundo.{api}", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = $"TecnoMundo.{apiName}", Version = "v1" });
                 c.AddSecurityDefinition(
                     "Bearer",
                     new OpenApiSecurityScheme
@@ -109,7 +117,11 @@ namespace TecnoMundo.Infra.Ioc
                     }
                 );
             });
-            return services;
+            return _service;
         }
+
+        public abstract IServiceCollection AddDbContext();
+
+        public abstract void AddScopedAndDependencies();
     }
 }

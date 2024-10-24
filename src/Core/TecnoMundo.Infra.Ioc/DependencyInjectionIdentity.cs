@@ -11,25 +11,28 @@ using TecnoMundo.Infra.Data.Repositories;
 
 namespace TecnoMundo.Infra.Ioc
 {
-    public class DependencyInjectionIdentity
+    public class DependencyInjectionIdentity : DependencyInjection
     {
-        public static IServiceCollection AddDbContext(IServiceCollection services, IConfiguration configuration)
-        {
-            var connection = configuration.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+        public DependencyInjectionIdentity(IServiceCollection services,
+            IConfiguration configuration) : base(services, configuration) { }
 
-            services.AddDbContext<ApplicationDbContextIdentity>(options =>
+        public override IServiceCollection AddDbContext()
+        {
+            var connection = _config.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+
+            _service.AddDbContext<ApplicationDbContextIdentity>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
             );
 
-            return services;
+            return _service;
         }
 
-        public static void AddInfrastructureDbContext(IServiceCollection services)
+        public override void AddScopedAndDependencies()
         {
             IMapper mapper = DomainToDTOMappingIdentity.RegisterMaps().CreateMapper();
-            services.AddSingleton(mapper);
-            services.AddScoped<IIdentityRepository, IdentityRepository>();
-            services.AddScoped<IIdentityService, IdentityService>();
+            _service.AddSingleton(mapper);
+            _service.AddScoped<IIdentityRepository, IdentityRepository>();
+            _service.AddScoped<IIdentityService, IdentityService>();
         }
     }
 }

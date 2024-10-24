@@ -3,12 +3,13 @@ using GeekShopping.OrderAPI.RabbitMQSender;
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+var structure = new DependencyInjectionOrder(builder.Services, builder.Configuration);
 
-DependencyInjectionOrder.AddDbContext(builder.Services, builder.Configuration);
+structure.AddDbContext();
 
-DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
+structure.AddCorsPolicy();
 
-DependencyInjectionOrder.AddInfrastructureDbContext(builder.Services);
+structure.AddScopedAndDependencies();
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
@@ -18,12 +19,12 @@ builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 builder.Services.AddControllers();
 
 //Adicionando configura��es de seguran�a
-DependencyInjection.AddAuthentication(builder.Services, builder.Configuration);
+structure.AddAuthentication();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-DependencyInjection.AddInfrastructureSwagger(builder.Services, "Order");
+structure.AddInfrastructureSwagger(apiName: "Order");
 
 var app = builder.Build();
 

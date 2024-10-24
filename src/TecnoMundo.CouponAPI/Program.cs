@@ -1,22 +1,23 @@
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+var structure = new DependencyInjectionCoupon(builder.Services, builder.Configuration);
 
-DependencyInjectionCoupon.AddDbContext(builder.Services, builder.Configuration);
+structure.AddDbContext();
 
-DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
+structure.AddCorsPolicy();
 
-DependencyInjectionCoupon.AddInfrastructureDbContext(builder.Services);
+structure.AddScopedAndDependencies();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 //Adicionando configura��es de seguran�a
-DependencyInjection.AddAuthentication(builder.Services, builder.Configuration);
+structure.AddAuthentication();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-DependencyInjection.AddInfrastructureSwagger(builder.Services, "Coupon");
+structure.AddInfrastructureSwagger(apiName: "Coupon");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

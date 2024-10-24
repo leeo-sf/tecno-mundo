@@ -3,13 +3,13 @@ using TecnoMundo.CartAPI.Service;
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+var structure = new DependencyInjectionCart(builder.Services, builder.Configuration);
 
-DependencyInjectionCart.AddDbContext(builder.Services, builder.Configuration);
+structure.AddDbContext();
 
-DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
+structure.AddCorsPolicy();
 
-DependencyInjectionCart.AddInfrastructureDbContext(builder.Services);
-
+structure.AddScopedAndDependencies();
 builder.Services.AddScoped<IServiceCoupon, ServiceCoupon>();
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
@@ -26,11 +26,11 @@ builder.Services.AddHttpClient<IServiceProduct, ServiceProduct>(s =>
 );
 
 //Adicionando configura��es de seguran�a
-DependencyInjection.AddAuthentication(builder.Services, builder.Configuration);
+structure.AddAuthentication();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-DependencyInjection.AddInfrastructureSwagger(builder.Services, "Cart");
+structure.AddInfrastructureSwagger(apiName: "Cart");
 
 var app = builder.Build();
 

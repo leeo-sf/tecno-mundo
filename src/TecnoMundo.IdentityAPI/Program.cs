@@ -2,16 +2,17 @@ using TecnoMundo.Identity.Service;
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+var structure = new DependencyInjectionIdentity(builder.Services, builder.Configuration);
 
 // connection DB
-DependencyInjectionIdentity.AddDbContext(builder.Services, builder.Configuration);
+structure.AddDbContext();
 
 // Adicionando CORS
-DependencyInjection.AddCorsPolicy(builder.Services, builder.Configuration);
+structure.AddCorsPolicy();
 
 // Adicionar scopeds
 builder.Services.AddScoped<ITokenService, TokenService>();
-DependencyInjectionIdentity.AddInfrastructureDbContext(builder.Services);
+structure.AddScopedAndDependencies();
 
 // Add services to the container.
 builder.Services.AddControllers();

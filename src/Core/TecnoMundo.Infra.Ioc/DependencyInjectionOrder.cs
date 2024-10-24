@@ -1,12 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TecnoMundo.Application.Interfaces;
 using TecnoMundo.Application.Services;
 using TecnoMundo.Domain.Interfaces;
@@ -15,28 +9,31 @@ using TecnoMundo.Infra.Data.Repositories;
 
 namespace TecnoMundo.Infra.Ioc
 {
-    public class DependencyInjectionOrder
+    public class DependencyInjectionOrder : DependencyInjection
     {
-        public static IServiceCollection AddDbContext(IServiceCollection services, IConfiguration configuration)
-        {
-            var connection = configuration.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+        public DependencyInjectionOrder(IServiceCollection services,
+            IConfiguration configuration) : base(services, configuration) { }
 
-            services.AddDbContext<ApplicationDbContextOrder>(options =>
+        public override IServiceCollection AddDbContext()
+        {
+            var connection = _config.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+
+            _service.AddDbContext<ApplicationDbContextOrder>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))
             );
 
             var builderDbContext = new DbContextOptionsBuilder<ApplicationDbContextOrder>();
             builderDbContext.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)));
 
-            services.AddSingleton(new OrderRepository(builderDbContext.Options));
+            _service.AddSingleton(new OrderRepository(builderDbContext.Options));
 
-            return services;
+            return _service;
         }
 
-        public static void AddInfrastructureDbContext(IServiceCollection services)
+        public override void AddScopedAndDependencies()
         {
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IOrderService, OrderService>();
+            _service.AddScoped<IOrderRepository, OrderRepository>();
+            _service.AddScoped<IOrderService, OrderService>();
         }
     }
 }
