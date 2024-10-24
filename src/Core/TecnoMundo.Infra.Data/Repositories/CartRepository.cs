@@ -1,29 +1,19 @@
-﻿using System.Net;
-using System.Net.Http.Headers;
-using System.Text.Json;
-using AutoMapper;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model;
-using GeekShopping.CartAPI.Model.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TecnoMundo.Domain.Entities;
+using TecnoMundo.Domain.Interfaces;
+using TecnoMundo.Infra.Data.Context;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.Infra.Data.Repositories
 {
-    public class CartRepository : ICartRepoository
+    public class CartRepository : ICartRepository
     {
-        private readonly MySQLContext _context;
-        private readonly IMapper _mapper;
-        private readonly IProductRepository _productRepository;
+        private readonly ApplicationDbContextCart _context;
 
         public CartRepository(
-            MySQLContext context,
-            IMapper mapper,
-            IProductRepository productRepository
+            ApplicationDbContextCart context
         )
         {
             _context = context;
-            _mapper = mapper;
-            _productRepository = productRepository;
         }
 
         public async Task<bool> ApplyCoupon(Guid userId, string couponCode)
@@ -57,7 +47,7 @@ namespace GeekShopping.CartAPI.Repository
             return false;
         }
 
-        public async Task<CartVO> FindCartByUserId(Guid userId)
+        public async Task<Cart> FindCartByUserId(Guid userId)
         {
             Cart cart =
                 new()
@@ -70,13 +60,7 @@ namespace GeekShopping.CartAPI.Repository
                 .CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
                 .ToListAsync();
 
-            foreach (var cartItem in cart.CartDetails)
-            {
-                var product = await _productRepository.GetProductById(cartItem.ProductId);
-                cartItem.Product = _mapper.Map<Product>(product);
-            }
-
-            return _mapper.Map<CartVO>(cart);
+            return cart;
         }
 
         public async Task<bool> RemoveCoupon(Guid userId)
@@ -98,7 +82,7 @@ namespace GeekShopping.CartAPI.Repository
             {
                 CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c =>
                     c.Id == cartDetailsId
-                );
+                ) ?? new CartDetail();
                 int total = _context
                     .CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId)
                     .Count();
@@ -108,7 +92,7 @@ namespace GeekShopping.CartAPI.Repository
                 {
                     var cartHeaderToRemove = await _context.CartHeaders.FirstOrDefaultAsync(c =>
                         c.Id == cartDetail.CartHeaderId
-                    );
+                    ) ?? new CartHeader();
                     _context.CartHeaders.Remove(cartHeaderToRemove);
                 }
 
@@ -122,18 +106,14 @@ namespace GeekShopping.CartAPI.Repository
             }
         }
 
-        public async Task AddCartDetails(CartDetail cartDetailsVO)
+        public async Task AddCartDetails(CartDetail cartDetail)
         {
-            var cartDetail = _mapper.Map<CartDetail>(cartDetailsVO);
-
             _context.CartDetails.Add(cartDetail);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddCartHeaders(CartHeader cartHeaderVO)
+        public async Task AddCartHeaders(CartHeader cartHeader)
         {
-            var cartHeader = _mapper.Map<CartHeader>(cartHeaderVO);
-
             _context.CartHeaders.Add(cartHeader);
             await _context.SaveChangesAsync();
         }
@@ -142,7 +122,7 @@ namespace GeekShopping.CartAPI.Repository
         {
             return await _context
                 .CartHeaders.AsNoTracking()
-                .FirstOrDefaultAsync(c => c.UserId == id);
+                .FirstOrDefaultAsync(c => c.UserId == id) ?? new CartHeader();
         }
 
         public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(
@@ -154,7 +134,7 @@ namespace GeekShopping.CartAPI.Repository
                 .CartDetails.AsNoTracking()
                 .FirstOrDefaultAsync(p =>
                     p.ProductId == productId && p.CartHeaderId == cartHeaderId
-                );
+                ) ?? new CartDetail();
         }
 
         public async Task UpdateCartDetails(CartDetail cartDetail)

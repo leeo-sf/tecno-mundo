@@ -1,12 +1,10 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model;
+﻿using TecnoMundo.Domain.Entities;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.Domain.Interfaces
 {
-    public interface ICartRepoository
+    public interface ICartRepository
     {
-        //recupera um carrinho de acordo com o id do usuário
-        Task<CartVO> FindCartByUserId(Guid userId);
+        Task<Cart> FindCartByUserId(Guid userId);
         Task<CartHeader> FindCartHeaderById(Guid id);
         Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(
             Guid productId,

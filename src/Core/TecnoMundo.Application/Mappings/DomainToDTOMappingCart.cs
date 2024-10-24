@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Domain.Entities;
 
-namespace GeekShopping.CartAPI.Config
+namespace TecnoMundo.Application.Mappings
 {
-    public class MappingConfig
+    public class DomainToDTOMappingCart
     {
         public static MapperConfiguration RegisterMaps()
         {

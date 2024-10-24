@@ -1,17 +1,15 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
-using AutoMapper;
-using GeekShopping.CartAPI.Data.ValueObjects;
-using GeekShopping.CartAPI.Model.Context;
+using TecnoMundo.Application.DTOs;
 
-namespace GeekShopping.CartAPI.Repository
+namespace TecnoMundo.CartAPI.Service
 {
-    public class CouponRepository : ICouponRepository
+    public class ServiceCoupon : IServiceCoupon
     {
         private readonly HttpClient _client;
 
-        public CouponRepository(HttpClient client)
+        public ServiceCoupon(HttpClient client)
         {
             _client = client;
         }
@@ -29,7 +27,7 @@ namespace GeekShopping.CartAPI.Repository
             return JsonSerializer.Deserialize<CouponVO>(
                 content,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            );
+            ) ?? new CouponVO();
         }
     }
 }

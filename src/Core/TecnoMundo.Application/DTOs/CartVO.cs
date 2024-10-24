@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.CartAPI.Data.ValueObjects
+﻿namespace TecnoMundo.Application.DTOs
 {
     public class CartVO
     {

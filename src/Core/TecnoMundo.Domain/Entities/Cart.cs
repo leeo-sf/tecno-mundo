@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.CartAPI.Model
+﻿namespace TecnoMundo.Domain.Entities
 {
     public class Cart
     {
