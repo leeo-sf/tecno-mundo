@@ -8,10 +8,8 @@ COPY ./src/Core/TecnoMundo.Infra.Ioc/TecnoMundo.Infra.Ioc.csproj ./App/Core/Tecn
 # Copy everything
 COPY ./src/TecnoMundo.ProductAPI ./App
 
-WORKDIR /App
-
 # Restore as distinct layers
-RUN dotnet restore ./TecnoMundo.ProductAPI/TecnoMundo.ProductAPI.csproj
+RUN dotnet restore ./App
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
