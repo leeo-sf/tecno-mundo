@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /App
 
-COPY ../Core/TecnoMundo.Domain/TecnoMundo.Domain.csproj ./App/Core/TecnoMundo.Domain
-COPY ../Core/TecnoMundo.Application/TecnoMundo.Application.csproj ./App/Core/TecnoMundo.Application
-COPY ../Core/TecnoMundo.Infra.Data/TecnoMundo.Infra.Data.csproj ./App/Core/TecnoMundo.Infra.Data
-COPY ../Core/TecnoMundo.Infra.Ioc/TecnoMundo.Infra.Ioc.csproj ./App/Core/TecnoMundo.Infra.Ioc
+COPY ./src/Core/TecnoMundo.Domain/TecnoMundo.Domain.csproj ./App/Core/TecnoMundo.Domain
+COPY ./src/Core/TecnoMundo.Application/TecnoMundo.Application.csproj ./App/Core/TecnoMundo.Application
+COPY ./src/Core/TecnoMundo.Infra.Data/TecnoMundo.Infra.Data.csproj ./App/Core/TecnoMundo.Infra.Data
+COPY ./src/Core/TecnoMundo.Infra.Ioc/TecnoMundo.Infra.Ioc.csproj ./App/Core/TecnoMundo.Infra.Ioc
 # Copy everything
 COPY . ./
 # Restore as distinct layers
