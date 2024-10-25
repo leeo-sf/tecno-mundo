@@ -12,7 +12,7 @@ COPY ./src/TecnoMundo.ProductAPI ./App
 RUN dotnet restore ./App
 
 # Build and publish a release
-RUN dotnet publish -c Release -o out ./App
+RUN dotnet publish -c Release -o out ./App/TecnoMundo.ProductAPI
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
