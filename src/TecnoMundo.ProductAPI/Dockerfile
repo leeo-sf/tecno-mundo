@@ -10,6 +10,9 @@ COPY ./src/TecnoMundo.ProductAPI ./App
 
 # Restore as distinct layers
 RUN dotnet restore ./App
+
+WORKDIR /App
+
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
