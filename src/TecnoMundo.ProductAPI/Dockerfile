@@ -6,7 +6,7 @@ COPY ./src/Core/TecnoMundo.Application/TecnoMundo.Application.csproj ./App/Core/
 COPY ./src/Core/TecnoMundo.Infra.Data/TecnoMundo.Infra.Data.csproj ./App/Core/TecnoMundo.Infra.Data
 COPY ./src/Core/TecnoMundo.Infra.Ioc/TecnoMundo.Infra.Ioc.csproj ./App/Core/TecnoMundo.Infra.Ioc
 # Copy everything
-COPY . ./
+COPY ./src/TecnoMundo.ProductAPI ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
