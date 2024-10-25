@@ -1,10 +1,10 @@
-﻿using TecnoMundo.CartAPI.RabbitMQSender;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
 using TecnoMundo.CartAPI.Service;
+using TecnoMundo.Application.RabbitMQServer;
 
 namespace TecnoMundo.CartAPI.Controllers
 {
@@ -17,18 +17,21 @@ namespace TecnoMundo.CartAPI.Controllers
         private readonly IServiceCoupon _couponService;
         private readonly IServiceProduct _productService;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
+        private readonly IConfiguration _configuration;
 
         public CartController(
             ICartService service,
             IServiceCoupon couponRepository,
             IServiceProduct productRepository,
-            IRabbitMQMessageSender rabbitMQMessageSender
+            IRabbitMQMessageSender rabbitMQMessageSender,
+            IConfiguration configuration
         )
         {
             _service = service;
             _couponService = couponRepository;
             _productService = productRepository;
             _rabbitMQMessageSender = rabbitMQMessageSender;
+            _configuration = configuration;
         }
 
         [HttpGet("find-cart/{userId}")]
@@ -152,7 +155,7 @@ namespace TecnoMundo.CartAPI.Controllers
         [HttpPost("checkout")]
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
         {
-            string token = Request.Headers["Authorization"];
+            string token = Request.Headers["Authorization"].ToString();
             if (vo?.UserId == null)
                 return BadRequest();
             var cart = await _service.FindCartByUserId(vo.UserId);
@@ -172,7 +175,15 @@ namespace TecnoMundo.CartAPI.Controllers
             vo.CartDetails = cart.CartDetails;
             vo.DateTime = DateTime.Now;
 
-            _rabbitMQMessageSender.SendMessage(vo, "checkoutqueue");
+            var dataSendToRabbitMQ = new DataServerRabbitMQ(
+                hostName: _configuration.GetSection("RabbitMQServer:HostName").Value ?? "",
+                password: _configuration.GetSection("RabbitMQServer:Password").Value ?? "",
+                userName:_configuration.GetSection("RabbitMQServer:Username").Value ?? "",
+                virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value ?? "",
+                queueName: "checkoutqueue",
+                baseMessage: vo
+            );
+            _rabbitMQMessageSender.SendMessage<CheckoutHeaderVO>(dataSendToRabbitMQ);
 
             await _service.ClearCart(vo.UserId);
 

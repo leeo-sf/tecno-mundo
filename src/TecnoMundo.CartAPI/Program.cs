@@ -1,4 +1,3 @@
-using TecnoMundo.CartAPI.RabbitMQSender;
 using TecnoMundo.CartAPI.Service;
 using TecnoMundo.Infra.Ioc;
 
@@ -12,7 +11,6 @@ structure.AddCorsPolicy();
 structure.AddScopedAndDependencies();
 builder.Services.AddScoped<IServiceCoupon, ServiceCoupon>();
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
-builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Add services to the container.
 
