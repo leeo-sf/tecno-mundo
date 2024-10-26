@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
-using GeekShopping.CartAPI.Messages;
 using GeekShopping.MessageBus;
 using RabbitMQ.Client;
+using TecnoMundo.Application.DTOs;
 
-namespace GeekShopping.CartAPI.RabbitMQSender
+namespace TecnoMundo.CartAPI.RabbitMQSender
 {
     public class RabbitMQMessageSender : IRabbitMQMessageSender
     {

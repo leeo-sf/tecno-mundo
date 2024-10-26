@@ -1,29 +1,29 @@
 ﻿using System.Text;
 using System.Text.Json;
-using GeekShopping.OrderAPI.Messages;
-using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.RabbitMQSender;
-using GeekShopping.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.Interfaces;
+using TecnoMundo.Domain.Entities;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
     public class RabbitMQCheckoutConsumer : BackgroundService
     {
-        private readonly OrderRepository _repository;
+        private readonly IOrderService _service;
         private readonly IConfiguration _configuration;
         private IConnection _connection;
         private IModel _channel;
         private IRabbitMQMessageSender _rabbitMQMessageSender;
 
         public RabbitMQCheckoutConsumer(
-            OrderRepository repository,
+            IOrderService repository,
             IConfiguration configuration,
             IRabbitMQMessageSender rabbitMQMessageSender
         )
         {
-            _repository = repository;
+            _service = repository;
             _rabbitMQMessageSender = rabbitMQMessageSender;
             _configuration = configuration;
             var factory = new ConnectionFactory
@@ -89,7 +89,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 order.OrderDetails.Add(detail);
             }
 
-            await _repository.AddOrder(order);
+            await _service.AddOrder(order);
 
             PaymentVO payment =
                 new()

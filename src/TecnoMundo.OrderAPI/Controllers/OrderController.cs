@@ -1,8 +1,7 @@
-﻿using GeekShopping.OrderAPI.Model;
-using GeekShopping.OrderAPI.Repository;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TecnoMundo.OrderAPI.Model;
+using TecnoMundo.Application.Interfaces;
+using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.OrderAPI.Controllers
 {
@@ -11,17 +10,17 @@ namespace TecnoMundo.OrderAPI.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly IOrderRepository _orderRepository;
+        private readonly IOrderService _service;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IOrderService service)
         {
-            _orderRepository = orderRepository;
+            _service = service;
         }
 
         [HttpGet("{profileId}")]
         public async Task<ActionResult<List<OrderHeader>>> GetAllOrder(Guid profileId)
         {
-            var orders = await _orderRepository.GetAllOrder(profileId);
+            var orders = await _service.GetAllOrder(profileId);
 
             return Ok(orders);
         }

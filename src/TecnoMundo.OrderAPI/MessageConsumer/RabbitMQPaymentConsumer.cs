@@ -1,35 +1,34 @@
 ﻿using System.Text;
 using System.Text.Json;
-using GeekShopping.OrderAPI.Messages;
-using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.RabbitMQSender;
-using GeekShopping.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.Interfaces;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
     public class RabbitMQPaymentConsumer : BackgroundService
     {
-        private readonly OrderRepository _repository;
+        private readonly IOrderService _service;
         private readonly IConfiguration _configuration;
         private IConnection _connection;
         private IModel _channel;
 
         public RabbitMQPaymentConsumer(
-            OrderRepository repository,
+            IOrderService service,
             IConfiguration configuration,
             IRabbitMQMessageSender rabbitMQMessageSender
         )
         {
-            _repository = repository;
+            _service = service;
             _configuration = configuration;
             var factory = new ConnectionFactory
             {
-                HostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value,
-                UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value,
-                Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value,
-                VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value
+                HostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value ?? "",
+                UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value ?? "",
+                Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value ?? "",
+                VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value ?? ""
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -49,7 +48,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             consumer.Received += (chanel, evt) =>
             {
                 var content = Encoding.UTF8.GetString(evt.Body.ToArray());
-                UpdatePaymentResult vo = JsonSerializer.Deserialize<UpdatePaymentResult>(content);
+                UpdatePaymentVO vo = JsonSerializer.Deserialize<UpdatePaymentVO>(content) ?? new UpdatePaymentVO();
                 UpdaatePaymentStatus(vo).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
@@ -57,11 +56,11 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             return Task.CompletedTask;
         }
 
-        private async Task UpdaatePaymentStatus(UpdatePaymentResult vo)
+        private async Task UpdaatePaymentStatus(UpdatePaymentVO vo)
         {
             try
             {
-                await _repository.UpdateOrderPaymentStatus(vo.OrderId, vo.Status);
+                await _service.UpdateOrderPaymentStatus(vo.OrderId, vo.Status);
             }
             catch (Exception)
             {

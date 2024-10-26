@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
 using GeekShopping.MessageBus;
-using GeekShopping.OrderAPI.Messages;
 using RabbitMQ.Client;
+using TecnoMundo.Application.DTOs;
 
 namespace GeekShopping.OrderAPI.RabbitMQSender
 {
@@ -18,10 +18,10 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
         public RabbitMQMessageSender(IConfiguration configuration)
         {
             _configuration = configuration;
-            _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value;
-            _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value;
-            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value;
-            _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value;
+            _hostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value ?? "";
+            _password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value ?? "";
+            _userName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value ?? "";
+            _virtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value ?? "";
         }
 
         public void SendMessage(BaseMessage message, string queueName)
@@ -47,7 +47,7 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
                 //para considerar as classes filhas
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize<PaymentVO>((PaymentVO)message, options);
+            var json = JsonSerializer.Serialize((PaymentVO)message, options);
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }

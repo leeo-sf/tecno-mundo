@@ -13,7 +13,7 @@ services:
 
 
   identity:
-    image: leoof/tecnomundo-identity-server:v1
+    image: leoof/tecnomundo-identity-server:latest
     container_name: "identity"
     build:
       context: TecnoMundo.IdentityAPI
@@ -33,7 +33,7 @@ services:
     
   
   product:
-    image: leoof/tecnomundo-product:v1
+    image: leoof/tecnomundo-product:latest
     container_name: "product"
     build:
       context: TecnoMundo.ProductAPI
@@ -50,7 +50,7 @@ services:
   
 
   coupon:
-    image: leoof/tecnomundo-coupon:v1
+    image: leoof/tecnomundo-coupon:latest
     container_name: "coupon"
     build:
       context: TecnoMundo.CouponAPI
@@ -69,7 +69,7 @@ services:
   
 
   cart:
-    image: leoof/tecnomundo-cart:v1
+    image: leoof/tecnomundo-cart:latest
     container_name: 'cart'
     build: 
       context: 'TecnoMundo.CartAPI'
@@ -97,7 +97,7 @@ services:
   
 
   payment:
-    image: leoof/tecnomundo-payment:v1
+    image: leoof/tecnomundo-payment:latest
     container_name: 'payment'
     restart: always
     build: 
@@ -113,7 +113,7 @@ services:
   
 
   order:
-    image: leoof/tecnomundo-order:v1
+    image: leoof/tecnomundo-order:latest
     container_name: 'order'
     restart: always
     build: 
@@ -136,7 +136,7 @@ services:
   
 
   page:
-    image: leoof/tecnomundo-web:v1
+    image: leoof/tecnomundo-web:latest
     container_name: 'page'
     restart: always
     build: 
@@ -145,11 +145,11 @@ services:
       - '80:80'
       - '443:80'
     environment:
-      - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/v1/Product/
-      - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/v1/Authentication/
-      - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/v1/Cart/
-      - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/v1/Coupon/
-      - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/v1/Order/
+      - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/latest/Product/
+      - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/latest/Authentication/
+      - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/latest/Cart/
+      - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/latest/Coupon/
+      - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/latest/Order/
 
 
 volumes:

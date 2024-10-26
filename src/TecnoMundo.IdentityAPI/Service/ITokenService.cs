@@ -1,4 +1,4 @@
-﻿using TecnoMundo.Identity.Model;
+﻿using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.Identity.Service
 {

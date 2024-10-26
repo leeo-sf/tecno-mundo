@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using TecnoMundo.Identity.Model;
+using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.Identity.Service
 {
@@ -19,7 +19,7 @@ namespace TecnoMundo.Identity.Service
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(
-                _configuration.GetSection("AuthenticationSettings:Secret").Value
+                _configuration.GetSection("AuthenticationSettings:Secret").Value ?? ""
             );
 
             var tokenDescriptor = new SecurityTokenDescriptor
