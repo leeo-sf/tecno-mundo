@@ -8,6 +8,7 @@
 
   <ItemGroup>
 	<PackageReference Include="GeekShopping.MessagesBusPackage" Version="1.0.0" />
+	<PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <ProjectReference Include="..\TecnoMundo.Domain\TecnoMundo.Domain.csproj" />
   </ItemGroup>
 

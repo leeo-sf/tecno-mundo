@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
-using GeekShopping.PaymentAPI.RabbitMQSender;
 using GeekShopping.PaymentProcessor;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using TecnoMundo.Application.DTOs;
+using TecnoMundo.Application.RabbitMQServer;
 
 namespace GeekShopping.PaymentAPI.MessageConsumer
 {
@@ -72,7 +72,15 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
 
             try
             {
-                _rabbitMQMessageSender.SendMessage(paymentResult, "orderpaymentresultqueue");
+                var dataSendToRabbitMQ = new DataServerRabbitMQ(
+                    hostName: _configuration.GetSection("RabbitMQServer:HostName").Value ?? "",
+                    password: _configuration.GetSection("RabbitMQServer:Password").Value ?? "",
+                    userName: _configuration.GetSection("RabbitMQServer:Username").Value ?? "",
+                    virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value ?? "",
+                    queueName: "orderpaymentresultqueue",
+                    baseMessage: paymentResult
+                );
+                _rabbitMQMessageSender.SendMessage<UpdatePaymentVO>(dataSendToRabbitMQ);
             }
             catch (Exception)
             {

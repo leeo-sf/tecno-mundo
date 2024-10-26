@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TecnoMundo.Application.Interfaces;
 using TecnoMundo.Application.Mappings;
+using TecnoMundo.Application.RabbitMQServer;
 using TecnoMundo.Application.Services;
 using TecnoMundo.Domain.Interfaces;
 using TecnoMundo.Infra.Data.Context;
@@ -33,6 +34,7 @@ namespace TecnoMundo.Infra.Ioc
             _service.AddSingleton(mapper);
             _service.AddScoped<ICartRepository, CartRepository>();
             _service.AddScoped<ICartService, CartService>();
+            _service.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
         }
     }
 }

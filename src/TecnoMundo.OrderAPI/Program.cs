@@ -1,5 +1,4 @@
 using GeekShopping.OrderAPI.MessageConsumer;
-using GeekShopping.OrderAPI.RabbitMQSender;
 using TecnoMundo.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,6 @@ structure.AddCorsPolicy();
 structure.AddScopedAndDependencies();
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
-builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Add services to the container.
 

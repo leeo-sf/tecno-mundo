@@ -1,10 +1,6 @@
-using System.Text;
 using GeekShopping.PaymentAPI.MessageConsumer;
-using GeekShopping.PaymentAPI.RabbitMQSender;
 using GeekShopping.PaymentProcessor;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using TecnoMundo.Application.RabbitMQServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
