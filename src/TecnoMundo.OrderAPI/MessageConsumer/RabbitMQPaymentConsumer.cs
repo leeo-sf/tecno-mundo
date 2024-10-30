@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Caching.Distributed;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using TecnoMundo.Application.DTOs;
@@ -14,6 +15,8 @@ namespace GeekShopping.OrderAPI.MessageConsumer
         private readonly IConfiguration _configuration;
         private IConnection _connection;
         private IModel _channel;
+        private readonly DistributedCacheEntryOptions _options;
+        private readonly string _keyCache;
 
         public RabbitMQPaymentConsumer(
             IOrderService service,
@@ -29,6 +32,12 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value ?? "",
                 Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value ?? "",
                 VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value ?? ""
+            };
+            _keyCache = _configuration.GetSection("Redis").GetSection("Key_Cache").Value ?? "orders"; 
+            _options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Absolute_Expire").Value ?? "3600")),
+                SlidingExpiration = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Sliding_Expire").Value ?? "600"))
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -60,7 +69,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
         {
             try
             {
-                await _service.UpdateOrderPaymentStatus(vo.OrderId, vo.Status);
+                await _service.UpdateOrderPaymentStatus(vo.OrderId, vo.Status, _keyCache, _options);
             }
             catch (Exception)
             {
