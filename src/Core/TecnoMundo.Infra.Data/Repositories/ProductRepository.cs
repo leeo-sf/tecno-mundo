@@ -47,7 +47,7 @@ namespace TecnoMundo.Infra.Data.Repositories
             return product;
         }
 
-        public async Task<bool> Delete(Guid id)
+        public async Task<Product?> Delete(Guid id)
         {
             try
             {
@@ -57,16 +57,16 @@ namespace TecnoMundo.Infra.Data.Repositories
                     .FirstOrDefaultAsync();
 
                 if (product is null)
-                    return false;
+                    return null;
 
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
 
-                return true;
+                return product;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 

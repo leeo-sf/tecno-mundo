@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System.Text;
+using TecnoMundo.Application.DTOs;
 
 namespace TecnoMundo.ProductAPI.Caching
 {
@@ -69,15 +70,33 @@ namespace TecnoMundo.ProductAPI.Caching
             return await GetItemInCache<T>(keyCache);
         }
 
-        public async Task RemoveExistingListItemFromCache<T>(T item, string keyCache, DistributedCacheEntryOptions options)
+        public async Task RemoveExistingListItemFromCache<T>(T item, List<T> listOfItemToBeRemoved, string keyCache, DistributedCacheEntryOptions options)
         {
-            var listCache = await GetListCache<T>(keyCache);
+            listOfItemToBeRemoved.RemoveAll(x => EqualityComparer<T>.Default.Equals(x, item) ||
+                (typeof(T).GetProperty("Id")?.GetValue(x)?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false));
+            await AddListInCache(listOfItemToBeRemoved, keyCache, options);
+        }
 
-            if (listCache.Count == 0) return;
+        public async Task UpdateExistingListItemFromCache<T>(T item, List<T> listOfItemToBeUpdated, string keyCache, DistributedCacheEntryOptions options)
+        {
+            int indexItemToBeUpdated = listOfItemToBeUpdated.FindIndex(x => EqualityComparer<T>.Default.Equals(x, item) ||
+                (typeof(T).GetProperty("Id")?.GetValue(x)?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false));
 
-            listCache.Remove(item);
-            var updateList = listCache.ToList();
-            await AddListInCache(updateList, keyCache, options);
+            if (indexItemToBeUpdated != -1)
+            {
+                listOfItemToBeUpdated[indexItemToBeUpdated] = item;
+                await AddListInCache(listOfItemToBeUpdated, keyCache, options);
+            }
+        }
+
+        public async Task RemoveItemInCache(string keyCache)
+        {
+            await _distributedCache.RemoveAsync(keyCache);
+        }
+
+        public async Task UpdateItemInCache<T>(T item, string keyCache, DistributedCacheEntryOptions options)
+        {
+            await AddItemInCache(item, keyCache, options);
         }
     }
 }

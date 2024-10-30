@@ -8,6 +8,7 @@ using TecnoMundo.Application.Services;
 using TecnoMundo.Domain.Interfaces;
 using TecnoMundo.Infra.Data.Context;
 using TecnoMundo.Infra.Data.Repositories;
+using TecnoMundo.ProductAPI.Caching;
 
 namespace TecnoMundo.Infra.Ioc
 {
@@ -33,6 +34,11 @@ namespace TecnoMundo.Infra.Ioc
             _service.AddSingleton(mapper);
             _service.AddScoped<IProductRepository, ProductRepository>();
             _service.AddScoped<IProductService, ProductService>();
+            _service.AddScoped<ICachingService, CachingService>();
+            _service.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = _config.GetSection("Redis").GetSection("Host").Value;
+            });
         }
     }
 }

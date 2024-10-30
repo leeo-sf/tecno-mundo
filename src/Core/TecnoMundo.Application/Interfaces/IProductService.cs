@@ -1,10 +1,11 @@
-﻿using TecnoMundo.Application.DTOs;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using TecnoMundo.Application.DTOs;
 
 namespace TecnoMundo.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductVO>> FindAll();
+        Task<IEnumerable<ProductVO>> FindAll(string keyCache, DistributedCacheEntryOptions options);
         Task<IEnumerable<CategoryVO>> FindAllCategories();
         Task<IEnumerable<ProductVO>> FindProductsByCategoryId(Guid id);
         Task<IEnumerable<ProductVO>> ProductFilter(
@@ -12,9 +13,9 @@ namespace TecnoMundo.Application.Interfaces
             decimal? priceOf,
             decimal? priceUpTo
         );
-        Task<ProductVO> FindById(Guid id);
-        Task<ProductVO> Create(CreateProductVO vo);
-        Task<ProductVO> Update(ProductVO vo);
-        Task<bool> Delete(Guid id);
+        Task<ProductVO?> FindById(Guid id, string keyCache, DistributedCacheEntryOptions options);
+        Task<ProductVO> Create(CreateProductVO vo, string keyCache, DistributedCacheEntryOptions options);
+        Task<ProductVO> Update(ProductVO vo, string keyCache, DistributedCacheEntryOptions options);
+        Task<bool> Delete(Guid id, string keyCache, DistributedCacheEntryOptions options);
     }
 }
