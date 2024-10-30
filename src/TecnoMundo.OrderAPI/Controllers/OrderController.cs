@@ -33,7 +33,7 @@ namespace TecnoMundo.OrderAPI.Controllers
         [HttpGet("{profileId}")]
         public async Task<ActionResult<List<OrderHeader>>> GetAllOrder(Guid profileId)
         {
-            var orders = await _service.GetAllOrder(profileId, _keyCache, _options);
+            var orders = await _service.GetAllOrder(profileId, $"{_keyCache}-{profileId}", _options);
 
             return Ok(orders);
         }

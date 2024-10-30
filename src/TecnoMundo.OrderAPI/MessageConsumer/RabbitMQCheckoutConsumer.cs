@@ -98,7 +98,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 order.OrderDetails.Add(detail);
             }
 
-            await _service.AddOrder(order, _keyCache, _options);
+            await _service.AddOrder(order, $"{_keyCache}-{order.UserId}", _options);
 
             PaymentVO payment =
                 new()

@@ -49,11 +49,11 @@ namespace TecnoMundo.Application.Services
         public async Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status, string keyCache, DistributedCacheEntryOptions options)
         {
             var orderUpdated = await _repository.UpdateOrderPaymentStatus(orderHeaderId, status);
-            var orders = await _cache.GetListCache<OrderHeader>(keyCache);
+            var orders = await _cache.GetListCache<OrderHeader>($"{keyCache}-{orderUpdated?.UserId}");
 
             if (orders.Count != 0)
             {
-                await _cache.UpdateExistingListItemFromCache(orderUpdated, orders, keyCache, options);
+                await _cache.UpdateExistingListItemFromCache(orderUpdated, orders, $"{keyCache}-{orderUpdated?.UserId}", options);
             }
         }
     }
