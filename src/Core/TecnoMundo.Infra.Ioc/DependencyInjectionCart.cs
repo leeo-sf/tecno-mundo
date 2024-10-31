@@ -9,6 +9,7 @@ using TecnoMundo.Application.Services;
 using TecnoMundo.Domain.Interfaces;
 using TecnoMundo.Infra.Data.Context;
 using TecnoMundo.Infra.Data.Repositories;
+using TecnoMundo.ProductAPI.Caching;
 
 namespace TecnoMundo.Infra.Ioc
 {
@@ -35,6 +36,11 @@ namespace TecnoMundo.Infra.Ioc
             _service.AddScoped<ICartRepository, CartRepository>();
             _service.AddScoped<ICartService, CartService>();
             _service.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+            _service.AddScoped<ICachingService, CachingService>();
+            _service.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = _config.GetSection("Redis").GetSection("Host").Value;
+            });
         }
     }
 }

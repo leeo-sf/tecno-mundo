@@ -16,7 +16,7 @@ namespace TecnoMundo.Infra.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> ApplyCoupon(Guid userId, string couponCode)
+        public async Task<Cart?> ApplyCoupon(Guid userId, string couponCode)
         {
             var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
@@ -24,9 +24,10 @@ namespace TecnoMundo.Infra.Data.Repositories
                 header.CouponCode = couponCode;
                 _context.CartHeaders.Update(header);
                 await _context.SaveChangesAsync();
-                return true;
+                var cart = await FindCartByUserId(userId);
+                return cart;
             }
-            return false;
+            return null;
         }
 
         public async Task<bool> ClearCart(Guid userId)
@@ -63,7 +64,7 @@ namespace TecnoMundo.Infra.Data.Repositories
             return cart;
         }
 
-        public async Task<bool> RemoveCoupon(Guid userId)
+        public async Task<Cart?> RemoveCoupon(Guid userId)
         {
             var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
@@ -71,12 +72,13 @@ namespace TecnoMundo.Infra.Data.Repositories
                 header.CouponCode = "";
                 _context.CartHeaders.Update(header);
                 await _context.SaveChangesAsync();
-                return true;
+                var cart = await FindCartByUserId(userId);
+                return cart;
             }
-            return false;
+            return null;
         }
 
-        public async Task<bool> RemoveFromCart(Guid cartDetailsId)
+        public async Task<Cart?> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
@@ -97,12 +99,13 @@ namespace TecnoMundo.Infra.Data.Repositories
                 }
 
                 await _context.SaveChangesAsync();
+                var cart = await FindCartByUserId(cartDetail.CartHeader.UserId);
 
-                return true;
+                return cart;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 

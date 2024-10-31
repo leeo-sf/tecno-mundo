@@ -5,6 +5,8 @@ using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
 using TecnoMundo.CartAPI.Service;
 using TecnoMundo.Application.RabbitMQServer;
+using Microsoft.Extensions.Caching.Distributed;
+using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.CartAPI.Controllers
 {
@@ -18,6 +20,8 @@ namespace TecnoMundo.CartAPI.Controllers
         private readonly IServiceProduct _productService;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
         private readonly IConfiguration _configuration;
+        private readonly DistributedCacheEntryOptions _options;
+        private readonly string _keyCache;
 
         public CartController(
             ICartService service,
@@ -32,13 +36,19 @@ namespace TecnoMundo.CartAPI.Controllers
             _productService = productRepository;
             _rabbitMQMessageSender = rabbitMQMessageSender;
             _configuration = configuration;
+            _keyCache = _configuration.GetSection("Redis").GetSection("Key_Cache").Value ?? "cart";
+            _options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Absolute_Expire").Value ?? "3600")),
+                SlidingExpiration = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Sliding_Expire").Value ?? "600"))
+            };
         }
 
         [HttpGet("find-cart/{userId}")]
         public async Task<ActionResult<CartVO>> FindById(Guid userId)
         {
-            var cart = await _service.FindCartByUserId(userId);
-            if (cart.CartHeader is null)
+            var cart = await _service.FindCartByUserId(userId, $"{_keyCache}-{userId}", _options);
+            if (cart == null)
                 return NotFound(new { errorMessage = "No cart found for this account." });
 
             try
@@ -72,7 +82,7 @@ namespace TecnoMundo.CartAPI.Controllers
                     throw new ArgumentException("Product id invalid.");
                 }
 
-                var cart = await _service.SaveOrUpdate(vo, productVO);
+                var cart = await _service.SaveOrUpdate(vo, productVO, $"{_keyCache}-{vo.CartHeader.UserId}", _options);
                 if (cart == null)
                     return NotFound();
                 return Ok(cart);
@@ -97,7 +107,7 @@ namespace TecnoMundo.CartAPI.Controllers
                     throw new ArgumentException("Product id invalid.");
                 }
 
-                var cart = await _service.SaveOrUpdate(vo, productVO);
+                var cart = await _service.SaveOrUpdate(vo, productVO, $"{_keyCache}-{vo.CartHeader.UserId}", _options);
                 if (cart == null)
                     return NotFound();
                 return Ok(cart);
@@ -108,21 +118,21 @@ namespace TecnoMundo.CartAPI.Controllers
             }
         }
 
-        [HttpDelete("remove-cart/{id}")]
-        public async Task<ActionResult<CartVO>> RemoveCart(Guid id)
+        [HttpDelete("remove-cart/{cartDetailsId}")]
+        public async Task<ActionResult<CartVO>> RemoveCart(Guid cartDetailsId)
         {
-            var status = await _service.RemoveFromCart(id);
+            var status = await _service.RemoveFromCart(cartDetailsId, _keyCache, _options);
             if (!status)
-                return NotFound(status);
-            return Ok(status);
+                return NotFound(new { Status = status });
+            return Ok(new { Status = status });
         }
 
         [HttpDelete("clear/{userId}")]
         public async Task<ActionResult<bool>> ClearCart(Guid userId)
         {
-            var status = await _service.ClearCart(userId);
+            var status = await _service.ClearCart(userId, $"{_keyCache}-{userId}");
 
-            return Ok(status);
+            return Ok(new { Status = status });
         }
 
         [HttpPost("apply-coupon/{userId}")]
@@ -137,19 +147,19 @@ namespace TecnoMundo.CartAPI.Controllers
                 token.Replace("Bearer ", "")
             );
             if (coupon.Id == Guid.Empty)
-                return BadRequest();
+                return BadRequest(new { errorMessage = "Error when searching for coupon." });
 
-            var status = await _service.ApplyCoupon(userId, couponCode);
+            var status = await _service.ApplyCoupon(userId, couponCode, $"{_keyCache}-{userId}", _options);
 
-            return Ok(status);
+            return Ok(new { Status = status });
         }
 
         [HttpPost("remove-coupon")]
         public async Task<ActionResult<bool>> RemoveCouponToCart([FromHeader] Guid userId)
         {
-            var status = await _service.RemoveCoupon(userId);
+            var status = await _service.RemoveCoupon(userId, $"{_keyCache}-{userId}", _options);
 
-            return Ok(status);
+            return Ok(new { Status = status });
         }
 
         [HttpPost("checkout")]
@@ -158,9 +168,9 @@ namespace TecnoMundo.CartAPI.Controllers
             string token = Request.Headers["Authorization"].ToString();
             if (vo?.UserId == null)
                 return BadRequest();
-            var cart = await _service.FindCartByUserId(vo.UserId);
+            var cart = await _service.FindCartByUserId(vo.UserId, $"{_keyCache}-{vo.UserId}", _options);
             if (cart == null)
-                return NotFound();
+                return NotFound(new { errorMessage = "Cart not found." });
             if (!string.IsNullOrEmpty(vo.CouponCode))
             {
                 CouponVO coupon = await _couponService.GetCouponByCouponCode(
@@ -169,7 +179,7 @@ namespace TecnoMundo.CartAPI.Controllers
                 );
                 if (vo.DiscountAmount != coupon.DiscountAmount)
                 {
-                    return StatusCode(412);
+                    return StatusCode(412, new { errorMessage = "The coupon discount has been changed, we recommend applying again." });
                 }
             }
             vo.CartDetails = cart.CartDetails;
@@ -185,7 +195,7 @@ namespace TecnoMundo.CartAPI.Controllers
             );
             _rabbitMQMessageSender.SendMessage<CheckoutHeaderVO>(dataSendToRabbitMQ);
 
-            await _service.ClearCart(vo.UserId);
+            await _service.ClearCart(vo.UserId, $"{_keyCache}-{vo.UserId}");
 
             return Ok(vo);
         }
