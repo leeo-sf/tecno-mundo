@@ -50,18 +50,14 @@ namespace TecnoMundo.Infra.Data.Repositories
 
         public async Task<Cart> FindCartByUserId(Guid userId)
         {
-            Cart cart =
-                new()
-                {
-                    CartHeader =
-                        await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
-                        ?? new CartHeader()
-                };
-            cart.CartDetails = await _context
-                .CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
+            var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+                        ?? new CartHeader();
+            
+            var cartDetails = await _context
+                .CartDetails.Where(c => c.CartHeaderId == cartHeader.Id)
                 .ToListAsync();
 
-            return cart;
+            return new Cart { CartHeader = cartHeader, CartDetails = cartDetails };
         }
 
         public async Task<Cart?> RemoveCoupon(Guid userId)
@@ -82,7 +78,7 @@ namespace TecnoMundo.Infra.Data.Repositories
         {
             try
             {
-                CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c =>
+                CartDetail cartDetail = await _context.CartDetails.Include(x => x.CartHeader).FirstOrDefaultAsync(c =>
                     c.Id == cartDetailsId
                 ) ?? new CartDetail();
                 int total = _context

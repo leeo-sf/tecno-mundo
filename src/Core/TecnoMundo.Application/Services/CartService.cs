@@ -112,7 +112,7 @@ namespace TecnoMundo.Application.Services
 
             var cartHeader = await _repository.FindCartHeaderById(vo.CartHeader.UserId);
 
-            if (cartHeader is null)
+            if (cartHeader.Id == Guid.Empty)
             {
                 var cartHeaderToBeCreated = CartHeader.CreateCartHeader(
                     vo.CartHeader.UserId,
@@ -142,7 +142,7 @@ namespace TecnoMundo.Application.Services
                     cartHeader.Id
                 );
 
-                if (cartDetail is null)
+                if (cartDetail.Id == Guid.Empty)
                 {
                     cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
                     cart.CartDetails.FirstOrDefault().Product = null;
@@ -158,11 +158,12 @@ namespace TecnoMundo.Application.Services
             }
 
             cart.CartDetails.FirstOrDefault().Product = _mapper.Map<Product>(productVO);
-            var cartVO = _mapper.Map<CartVO>(cart);
+            var newCart = await _repository.FindCartByUserId(vo.CartHeader.UserId);
 
-            await _cache.UpdateItemInCache(cartVO, keyCache, options);
 
-            return cartVO;
+            await _cache.UpdateItemInCache(_mapper.Map<CartVO>(newCart), keyCache, options);
+
+            return _mapper.Map<CartVO>(newCart);
         }
     }
 }
