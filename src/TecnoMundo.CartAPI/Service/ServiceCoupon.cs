@@ -25,9 +25,9 @@ namespace TecnoMundo.CartAPI.Service
             if (response.StatusCode != HttpStatusCode.OK)
                 return new CouponVO();
             return JsonSerializer.Deserialize<CouponVO>(
-                content,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            ) ?? new CouponVO();
+                    content,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                ) ?? new CouponVO();
         }
     }
 }

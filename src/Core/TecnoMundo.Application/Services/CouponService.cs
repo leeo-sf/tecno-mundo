@@ -11,12 +11,12 @@ namespace TecnoMundo.Application.Services
         private readonly ICouponRepository _repository;
         private readonly IMapper _mapper;
 
-        public CouponService(ICouponRepository repository,
-            IMapper mapper)
+        public CouponService(ICouponRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
+
         public async Task<CouponVO> CreateCoupon(CreateCouponVO vo)
         {
             var coupon = _mapper.Map<Coupon>(vo);

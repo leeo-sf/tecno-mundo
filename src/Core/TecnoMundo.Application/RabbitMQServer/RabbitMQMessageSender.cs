@@ -1,7 +1,8 @@
-﻿using GeekShopping.MessageBus;
-using RabbitMQ.Client;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text;
+using GeekShopping.MessageBus;
+using NPOI.SS.Formula.Functions;
+using RabbitMQ.Client;
 
 namespace TecnoMundo.Application.RabbitMQServer
 {
@@ -9,47 +10,44 @@ namespace TecnoMundo.Application.RabbitMQServer
     {
         private IConnection? _connection;
 
-        public void SendMessage<T>(DataServerRabbitMQ data)
+        public void SendMessage<T>(DataServerRabbitMQ<T> data)
         {
             if (ConnectionExists(data))
             {
                 using var channel = _connection?.CreateModel();
-                channel?.QueueDeclare(queue: data.queueName, false, false, false, arguments: null);
-                byte[] body = GetMessageAsByteArray<T>(data.baseMessage);
+                channel?.QueueDeclare(queue: data.QueueName, false, false, false, arguments: null);
+                byte[] body = GetMessageAsByteArray<T>(data.BaseMessage);
                 channel.BasicPublish(
                     exchange: "",
-                    routingKey: data.queueName,
+                    routingKey: data.QueueName,
                     basicProperties: null,
                     body: body
                 );
             }
         }
 
-        private byte[] GetMessageAsByteArray<T>(BaseMessage message)
+        private byte[] GetMessageAsByteArray<T>(T message)
         {
             var options = new JsonSerializerOptions
             {
                 //para considerar as classes filhas
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize(
-                message,
-                options
-            );
+            var json = JsonSerializer.Serialize(message, options);
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }
 
-        private void CreateConnection(DataServerRabbitMQ data)
+        private void CreateConnection<T>(DataServerRabbitMQ<T> data)
         {
             try
             {
                 var factory = new ConnectionFactory
                 {
-                    HostName = data.hostName,
-                    UserName = data.userName,
-                    Password = data.password,
-                    VirtualHost = data.virtualHost
+                    HostName = data.HostName,
+                    UserName = data.UserName,
+                    Password = data.Password,
+                    VirtualHost = data.VirtualHost
                 };
                 _connection = factory.CreateConnection();
             }
@@ -60,7 +58,7 @@ namespace TecnoMundo.Application.RabbitMQServer
             }
         }
 
-        private bool ConnectionExists(DataServerRabbitMQ data)
+        private bool ConnectionExists<T>(DataServerRabbitMQ<T> data)
         {
             if (_connection != null)
                 return true;

@@ -1,4 +1,4 @@
-﻿using GeekShopping.MessageBus;
+﻿using TecnoMundo.Domain.Entities.Base;
 
 namespace TecnoMundo.Application.DTOs
 {
@@ -18,5 +18,38 @@ namespace TecnoMundo.Application.DTOs
         public string ExpireMonthYear { get; set; }
         public int CartTotalItens { get; set; }
         public IEnumerable<CartDetailVO> CartDetails { get; set; }
+
+        public CheckoutHeaderVO(
+            Guid userId,
+            string couponCode,
+            decimal purchaseAmount,
+            decimal discountAmount,
+            string fistrName,
+            string lastName,
+            DateTime dateTime,
+            string phone,
+            string email,
+            string cardNumber,
+            string cVV,
+            string expireMonthYear,
+            int cartTotalItens,
+            IEnumerable<CartDetailVO> cartDetails
+        )
+        {
+            UserId = userId;
+            CouponCode = couponCode;
+            PurchaseAmount = purchaseAmount;
+            DiscountAmount = discountAmount;
+            FistrName = fistrName;
+            LastName = lastName;
+            DateTime = dateTime;
+            Phone = phone;
+            Email = email;
+            CardNumber = cardNumber;
+            CVV = cVV;
+            ExpireMonthYear = expireMonthYear;
+            CartTotalItens = cartTotalItens;
+            CartDetails = cartDetails;
+        }
     }
 }

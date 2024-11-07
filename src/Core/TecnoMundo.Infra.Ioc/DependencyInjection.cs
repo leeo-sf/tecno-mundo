@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 
 namespace TecnoMundo.Infra.Ioc
 {
@@ -12,8 +12,7 @@ namespace TecnoMundo.Infra.Ioc
         protected readonly IServiceCollection _service;
         protected readonly IConfiguration _config;
 
-        public DependencyInjection(IServiceCollection service,
-            IConfiguration configuration)
+        public DependencyInjection(IServiceCollection service, IConfiguration configuration)
         {
             _service = service;
             _config = configuration;
@@ -43,7 +42,8 @@ namespace TecnoMundo.Infra.Ioc
         public IServiceCollection AddAuthentication()
         {
             var key = Encoding.ASCII.GetBytes(_config.GetSection("Authentication:Key").Value ?? "");
-            _service.AddAuthentication(x =>
+            _service
+                .AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -53,8 +53,7 @@ namespace TecnoMundo.Infra.Ioc
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = _config.GetSection("Authentication:UrlAuthentication")
-                            .Value,
+                        ValidIssuer = _config.GetSection("Authentication:UrlAuthentication").Value,
                         ValidateAudience = true,
                         ValidAudience = _config.GetSection("Authentication:Scope").Value,
                         ValidateIssuerSigningKey = true,
@@ -83,7 +82,10 @@ namespace TecnoMundo.Infra.Ioc
         {
             _service.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = $"TecnoMundo.{apiName}", Version = "v1" });
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = $"TecnoMundo.{apiName}", Version = "v1" }
+                );
                 c.AddSecurityDefinition(
                     "Bearer",
                     new OpenApiSecurityScheme

@@ -8,6 +8,7 @@ namespace TecnoMundo.Domain.Entities
     {
         [Column("coupon_code")]
         public string CouponCode { get; set; }
+
         [Column("discount_amount")]
         public float DiscountAmount { get; set; }
 

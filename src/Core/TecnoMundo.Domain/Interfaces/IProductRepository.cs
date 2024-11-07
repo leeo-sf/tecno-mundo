@@ -15,6 +15,6 @@ namespace TecnoMundo.Domain.Interfaces
         Task<Product?> FindById(Guid id);
         Task<Product> Create(Product vo);
         Task<Product> Update(Product vo);
-        Task<bool> Delete(Guid id);
+        Task<Product?> Delete(Guid id);
     }
 }

@@ -12,6 +12,16 @@ services:
   #     - backend
 
 
+  redis:
+    image: redis
+    container_name: "redis"
+    ports:
+      - '6379:6379'
+    restart: always
+    networks:
+      - backend
+
+
   identity:
     image: leoof/tecnomundo-identity-server:latest
     container_name: "identity"
@@ -37,13 +47,19 @@ services:
     container_name: "product"
     build:
       context: TecnoMundo.ProductAPI
+    depends_on:
+      - redis
     ports:
       - '4440:8080'
     environment:
       - Authentication__Key=${TOKEN_KEY}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
       - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
-      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD}
+      - Redis__Host=redis
+      - Redis__Absolute_Expire=3600
+      - Redis__Sliding_Expire=600
+      - Redis__Key_Cache_Products=products
     restart: always
     networks:
       - backend
@@ -76,6 +92,7 @@ services:
     depends_on:
       - product
       - coupon
+      - redis
     ports:
       - '4450:8080'
     restart: always
@@ -91,7 +108,11 @@ services:
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
       - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
-      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_cart_api;Uid=${DB_USER};Pwd=${DB_PASSWORD}
+      - Redis__Host=redis
+      - Redis__Absolute_Expire=3600
+      - Redis__Sliding_Expire=600
+      - Redis__Key_Cache=cart
     networks:
       - backend
   
@@ -118,6 +139,8 @@ services:
     restart: always
     build: 
       context: 'TecnoMundo.OrderAPI'
+    depends_on:
+      - redis
     ports:
       - '4455:8080'
     environment:
@@ -130,7 +153,11 @@ services:
       - RabbitMQServer__VirtualHost=${RABBITMQ_VIRTUAL_HOST}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
       - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
-      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD};
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_order_api;Uid=${DB_USER};Pwd=${DB_PASSWORD}
+      - Redis__Host=redis
+      - Redis__Absolute_Expire=3600
+      - Redis__Sliding_Expire=600
+      - Redis__Key_Cache=orders
     networks:
       - backend
   
@@ -145,11 +172,11 @@ services:
       - '80:80'
       - '443:80'
     environment:
-      - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/latest/Product/
-      - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/latest/Authentication/
-      - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/latest/Cart/
-      - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/latest/Coupon/
-      - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/latest/Order/
+      - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/v1/Product/
+      - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/v1/Authentication/
+      - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/v1/Cart/
+      - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/v1/Coupon/
+      - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/v1/Order/
 
 
 volumes:

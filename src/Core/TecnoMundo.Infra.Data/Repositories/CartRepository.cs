@@ -9,14 +9,12 @@ namespace TecnoMundo.Infra.Data.Repositories
     {
         private readonly ApplicationDbContextCart _context;
 
-        public CartRepository(
-            ApplicationDbContextCart context
-        )
+        public CartRepository(ApplicationDbContextCart context)
         {
             _context = context;
         }
 
-        public async Task<bool> ApplyCoupon(Guid userId, string couponCode)
+        public async Task<Cart?> ApplyCoupon(Guid userId, string couponCode)
         {
             var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
@@ -24,9 +22,10 @@ namespace TecnoMundo.Infra.Data.Repositories
                 header.CouponCode = couponCode;
                 _context.CartHeaders.Update(header);
                 await _context.SaveChangesAsync();
-                return true;
+                var cart = await FindCartByUserId(userId);
+                return cart;
             }
-            return false;
+            return null;
         }
 
         public async Task<bool> ClearCart(Guid userId)
@@ -49,21 +48,18 @@ namespace TecnoMundo.Infra.Data.Repositories
 
         public async Task<Cart> FindCartByUserId(Guid userId)
         {
-            Cart cart =
-                new()
-                {
-                    CartHeader =
-                        await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
-                        ?? new CartHeader()
-                };
-            cart.CartDetails = await _context
-                .CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
+            var cartHeader =
+                await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+                ?? new CartHeader();
+
+            var cartDetails = await _context
+                .CartDetails.Where(c => c.CartHeaderId == cartHeader.Id)
                 .ToListAsync();
 
-            return cart;
+            return new Cart { CartHeader = cartHeader, CartDetails = cartDetails };
         }
 
-        public async Task<bool> RemoveCoupon(Guid userId)
+        public async Task<Cart?> RemoveCoupon(Guid userId)
         {
             var header = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (header != null)
@@ -71,18 +67,20 @@ namespace TecnoMundo.Infra.Data.Repositories
                 header.CouponCode = "";
                 _context.CartHeaders.Update(header);
                 await _context.SaveChangesAsync();
-                return true;
+                var cart = await FindCartByUserId(userId);
+                return cart;
             }
-            return false;
+            return null;
         }
 
-        public async Task<bool> RemoveFromCart(Guid cartDetailsId)
+        public async Task<CartDetail?> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
-                CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c =>
-                    c.Id == cartDetailsId
-                ) ?? new CartDetail();
+                CartDetail cartDetail =
+                    await _context
+                        .CartDetails.Include(x => x.CartHeader)
+                        .FirstOrDefaultAsync(c => c.Id == cartDetailsId) ?? new CartDetail();
                 int total = _context
                     .CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId)
                     .Count();
@@ -90,19 +88,20 @@ namespace TecnoMundo.Infra.Data.Repositories
                 _context.CartDetails.Remove(cartDetail);
                 if (total == 1)
                 {
-                    var cartHeaderToRemove = await _context.CartHeaders.FirstOrDefaultAsync(c =>
-                        c.Id == cartDetail.CartHeaderId
-                    ) ?? new CartHeader();
+                    var cartHeaderToRemove =
+                        await _context.CartHeaders.FirstOrDefaultAsync(c =>
+                            c.Id == cartDetail.CartHeaderId
+                        ) ?? new CartHeader();
                     _context.CartHeaders.Remove(cartHeaderToRemove);
                 }
 
                 await _context.SaveChangesAsync();
 
-                return true;
+                return cartDetail;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 
@@ -121,8 +120,8 @@ namespace TecnoMundo.Infra.Data.Repositories
         public async Task<CartHeader> FindCartHeaderById(Guid id)
         {
             return await _context
-                .CartHeaders.AsNoTracking()
-                .FirstOrDefaultAsync(c => c.UserId == id) ?? new CartHeader();
+                    .CartHeaders.AsNoTracking()
+                    .FirstOrDefaultAsync(c => c.UserId == id) ?? new CartHeader();
         }
 
         public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(
@@ -131,10 +130,10 @@ namespace TecnoMundo.Infra.Data.Repositories
         )
         {
             return await _context
-                .CartDetails.AsNoTracking()
-                .FirstOrDefaultAsync(p =>
-                    p.ProductId == productId && p.CartHeaderId == cartHeaderId
-                ) ?? new CartDetail();
+                    .CartDetails.AsNoTracking()
+                    .FirstOrDefaultAsync(p =>
+                        p.ProductId == productId && p.CartHeaderId == cartHeaderId
+                    ) ?? new CartDetail();
         }
 
         public async Task UpdateCartDetails(CartDetail cartDetail)

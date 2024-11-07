@@ -26,15 +26,18 @@ namespace TecnoMundo.Infra.Data.Repositories
             return true;
         }
 
-        public async Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status)
+        public async Task<OrderHeader?> UpdateOrderPaymentStatus(Guid orderHeaderId, bool status)
         {
             await using var _db = new ApplicationDbContextOrder(_context);
-            var header = await _db.Headers.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
+            var header = await _db
+                .Headers.Include(x => x.OrderDetails)
+                .FirstOrDefaultAsync(o => o.Id == orderHeaderId);
             if (header != null)
             {
                 header.PaymentStatus = status;
                 await _db.SaveChangesAsync();
             }
+            return header;
         }
 
         public async Task<List<OrderHeader>> GetAllOrder(Guid profileId)
