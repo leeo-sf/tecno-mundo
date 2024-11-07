@@ -11,8 +11,7 @@ namespace TecnoMundo.Application.Services
         private readonly IIdentityRepository _repository;
         private readonly IMapper _mapper;
 
-        public IdentityService(IIdentityRepository repository, 
-            IMapper mapper)
+        public IdentityService(IIdentityRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -60,7 +59,8 @@ namespace TecnoMundo.Application.Services
 
         public async Task<User?> ValidateUserEmailAndPassword(string email, string password)
         {
-            var user = await _repository.ValidateUserEmailAndPassword(email, password) ?? new User();
+            var user =
+                await _repository.ValidateUserEmailAndPassword(email, password) ?? new User();
             user.Password = "";
             return user;
         }

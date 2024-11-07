@@ -9,9 +9,7 @@ namespace TecnoMundo.Infra.Data.Repositories
     {
         private readonly ApplicationDbContextCart _context;
 
-        public CartRepository(
-            ApplicationDbContextCart context
-        )
+        public CartRepository(ApplicationDbContextCart context)
         {
             _context = context;
         }
@@ -50,9 +48,10 @@ namespace TecnoMundo.Infra.Data.Repositories
 
         public async Task<Cart> FindCartByUserId(Guid userId)
         {
-            var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
-                        ?? new CartHeader();
-            
+            var cartHeader =
+                await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+                ?? new CartHeader();
+
             var cartDetails = await _context
                 .CartDetails.Where(c => c.CartHeaderId == cartHeader.Id)
                 .ToListAsync();
@@ -74,13 +73,14 @@ namespace TecnoMundo.Infra.Data.Repositories
             return null;
         }
 
-        public async Task<Cart?> RemoveFromCart(Guid cartDetailsId)
+        public async Task<CartDetail?> RemoveFromCart(Guid cartDetailsId)
         {
             try
             {
-                CartDetail cartDetail = await _context.CartDetails.Include(x => x.CartHeader).FirstOrDefaultAsync(c =>
-                    c.Id == cartDetailsId
-                ) ?? new CartDetail();
+                CartDetail cartDetail =
+                    await _context
+                        .CartDetails.Include(x => x.CartHeader)
+                        .FirstOrDefaultAsync(c => c.Id == cartDetailsId) ?? new CartDetail();
                 int total = _context
                     .CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId)
                     .Count();
@@ -88,16 +88,16 @@ namespace TecnoMundo.Infra.Data.Repositories
                 _context.CartDetails.Remove(cartDetail);
                 if (total == 1)
                 {
-                    var cartHeaderToRemove = await _context.CartHeaders.FirstOrDefaultAsync(c =>
-                        c.Id == cartDetail.CartHeaderId
-                    ) ?? new CartHeader();
+                    var cartHeaderToRemove =
+                        await _context.CartHeaders.FirstOrDefaultAsync(c =>
+                            c.Id == cartDetail.CartHeaderId
+                        ) ?? new CartHeader();
                     _context.CartHeaders.Remove(cartHeaderToRemove);
                 }
 
                 await _context.SaveChangesAsync();
-                var cart = await FindCartByUserId(cartDetail.CartHeader.UserId);
 
-                return cart;
+                return cartDetail;
             }
             catch (Exception)
             {
@@ -120,8 +120,8 @@ namespace TecnoMundo.Infra.Data.Repositories
         public async Task<CartHeader> FindCartHeaderById(Guid id)
         {
             return await _context
-                .CartHeaders.AsNoTracking()
-                .FirstOrDefaultAsync(c => c.UserId == id) ?? new CartHeader();
+                    .CartHeaders.AsNoTracking()
+                    .FirstOrDefaultAsync(c => c.UserId == id) ?? new CartHeader();
         }
 
         public async Task<CartDetail> FindCartDetailByProductIdAndCartHeaderId(
@@ -130,10 +130,10 @@ namespace TecnoMundo.Infra.Data.Repositories
         )
         {
             return await _context
-                .CartDetails.AsNoTracking()
-                .FirstOrDefaultAsync(p =>
-                    p.ProductId == productId && p.CartHeaderId == cartHeaderId
-                ) ?? new CartDetail();
+                    .CartDetails.AsNoTracking()
+                    .FirstOrDefaultAsync(p =>
+                        p.ProductId == productId && p.CartHeaderId == cartHeaderId
+                    ) ?? new CartDetail();
         }
 
         public async Task UpdateCartDetails(CartDetail cartDetail)

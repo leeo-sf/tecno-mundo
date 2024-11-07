@@ -7,7 +7,7 @@ namespace TecnoMundo.Application.DTOs
         [Required]
         [StringLength(150, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public string Name { get; set; }
-        
+
         [Required]
         [Range(1, 30000, ErrorMessage = "{0} should be between R${1} and R${2}")]
         public decimal Price { get; set; }

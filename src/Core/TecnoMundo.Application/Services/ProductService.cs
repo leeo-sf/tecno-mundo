@@ -15,16 +15,17 @@ namespace TecnoMundo.Application.Services
         private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository repository,
-            IMapper mapper,
-            ICachingService cache)
+        public ProductService(IProductRepository repository, IMapper mapper, ICachingService cache)
         {
             _repository = repository;
             _mapper = mapper;
             _cache = cache;
         }
 
-        public async Task<IEnumerable<ProductVO>> FindAll(string keyCache, DistributedCacheEntryOptions options)
+        public async Task<IEnumerable<ProductVO>> FindAll(
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var products = await _cache.GetListCache<ProductVO>(keyCache);
 
@@ -44,7 +45,11 @@ namespace TecnoMundo.Application.Services
             return _mapper.Map<IEnumerable<CategoryVO>>(categories);
         }
 
-        public async Task<ProductVO?> FindById(Guid id, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<ProductVO?> FindById(
+            Guid id,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var product = await _cache.GetItemInCache<ProductVO>(keyCache);
 
@@ -52,7 +57,8 @@ namespace TecnoMundo.Application.Services
             {
                 var productToBeAddCache = await _repository.FindById(id);
 
-                if (productToBeAddCache == null) return null;
+                if (productToBeAddCache == null)
+                    return null;
 
                 var productToBeAddCacheVO = _mapper.Map<ProductVO>(productToBeAddCache);
                 product = await _cache.AddItemInCache(productToBeAddCacheVO, keyCache, options);
@@ -67,13 +73,21 @@ namespace TecnoMundo.Application.Services
             return _mapper.Map<IEnumerable<ProductVO>>(products);
         }
 
-        public async Task<IEnumerable<ProductVO>> ProductFilter(string? name, decimal? priceOf, decimal? priceUpTo)
+        public async Task<IEnumerable<ProductVO>> ProductFilter(
+            string? name,
+            decimal? priceOf,
+            decimal? priceUpTo
+        )
         {
             var products = await _repository.ProductFilter(name, priceOf, priceUpTo);
             return _mapper.Map<IEnumerable<ProductVO>>(products);
         }
 
-        public async Task<ProductVO> Create(CreateProductVO vo, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<ProductVO> Create(
+            CreateProductVO vo,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var product = _mapper.Map<Product>(vo);
             var productCreated = await _repository.Create(product);
@@ -82,23 +96,37 @@ namespace TecnoMundo.Application.Services
             return productCreatedVO;
         }
 
-        public async Task<bool> Delete(Guid id, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<bool> Delete(
+            Guid id,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var deleted = await _repository.Delete(id);
-            if (deleted == null) return false;
+            if (deleted == null)
+                return false;
 
             var productsInCache = await _cache.GetListCache<ProductVO>(keyCache);
             if (productsInCache.Count != 0)
             {
                 var deletedVO = _mapper.Map<ProductVO>(deleted);
-                await _cache.RemoveExistingListItemFromCache(deletedVO, productsInCache, keyCache, options);
+                await _cache.RemoveExistingListItemFromCache(
+                    deletedVO,
+                    productsInCache,
+                    keyCache,
+                    options
+                );
                 await _cache.RemoveItemInCache($"product-{id}");
             }
 
             return true;
         }
 
-        public async Task<ProductVO> Update(ProductVO vo, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<ProductVO> Update(
+            ProductVO vo,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var product = _mapper.Map<Product>(vo);
             var productUpdated = await _repository.Update(product);
@@ -107,8 +135,17 @@ namespace TecnoMundo.Application.Services
             if (productsInCache.Count != 0)
             {
                 var productUpdatedVO = _mapper.Map<ProductVO>(productUpdated);
-                await _cache.UpdateExistingListItemFromCache(productUpdatedVO, productsInCache, keyCache, options);
-                await _cache.UpdateItemInCache(productUpdatedVO, $"product-{productUpdatedVO.Id}", options);
+                await _cache.UpdateExistingListItemFromCache(
+                    productUpdatedVO,
+                    productsInCache,
+                    keyCache,
+                    options
+                );
+                await _cache.UpdateItemInCache(
+                    productUpdatedVO,
+                    $"product-{productUpdatedVO.Id}",
+                    options
+                );
             }
 
             return _mapper.Map<ProductVO>(productUpdated);

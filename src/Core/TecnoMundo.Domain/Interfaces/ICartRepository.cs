@@ -13,7 +13,7 @@ namespace TecnoMundo.Domain.Interfaces
         Task AddCartDetails(CartDetail cartDetail);
         Task UpdateCartDetails(CartDetail cartDetail);
         Task AddCartHeaders(CartHeader cartHeader);
-        Task<Cart?> RemoveFromCart(Guid cartDetailsId);
+        Task<CartDetail?> RemoveFromCart(Guid cartDetailsId);
         Task<Cart?> ApplyCoupon(Guid userId, string couponCode);
         Task<Cart?> RemoveCoupon(Guid userId);
         Task<bool> ClearCart(Guid userId);

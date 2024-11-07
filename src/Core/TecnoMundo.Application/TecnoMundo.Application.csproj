@@ -10,6 +10,7 @@
 	<PackageReference Include="GeekShopping.MessagesBusPackage" Version="1.0.0" />
 	<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.10" />
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="NPOI" Version="2.7.1" />
 	<PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <ProjectReference Include="..\TecnoMundo.Domain\TecnoMundo.Domain.csproj" />
   </ItemGroup>

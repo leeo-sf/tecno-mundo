@@ -29,7 +29,9 @@ namespace TecnoMundo.Infra.Data.Repositories
         public async Task<OrderHeader?> UpdateOrderPaymentStatus(Guid orderHeaderId, bool status)
         {
             await using var _db = new ApplicationDbContextOrder(_context);
-            var header = await _db.Headers.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
+            var header = await _db
+                .Headers.Include(x => x.OrderDetails)
+                .FirstOrDefaultAsync(o => o.Id == orderHeaderId);
             if (header != null)
             {
                 header.PaymentStatus = status;

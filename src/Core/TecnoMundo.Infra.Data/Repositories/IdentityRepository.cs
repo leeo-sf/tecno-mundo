@@ -17,12 +17,12 @@ namespace TecnoMundo.Infra.Data.Repositories
         public async Task<User?> ValidateUserEmailAndPassword(string email, string password)
         {
             return await _context
-                .User.Where(x =>
-                    x.UserEmail == email
-                    && x.Password.Equals(password, StringComparison.Ordinal)
-                )
-                .AsNoTracking()
-                .FirstOrDefaultAsync() ?? new User();
+                    .User.Where(x =>
+                        x.UserEmail == email
+                        && x.Password.Equals(password, StringComparison.Ordinal)
+                    )
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync() ?? new User();
         }
 
         public async Task<bool> CpfExists(string cpf)
@@ -37,10 +37,7 @@ namespace TecnoMundo.Infra.Data.Repositories
 
         public async Task<bool> TelephoneExists(string phone)
         {
-            return await _context
-                .User.Where(x => x.PhoneNumber == phone)
-                .AsNoTracking()
-                .AnyAsync();
+            return await _context.User.Where(x => x.PhoneNumber == phone).AsNoTracking().AnyAsync();
         }
 
         public async Task Create(User user)

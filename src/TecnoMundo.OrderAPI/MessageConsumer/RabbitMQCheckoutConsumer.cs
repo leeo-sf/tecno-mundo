@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
+using Org.BouncyCastle.Asn1.X509;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using StackExchange.Redis;
 using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
 using TecnoMundo.Application.RabbitMQServer;
@@ -12,35 +14,49 @@ namespace GeekShopping.OrderAPI.MessageConsumer
 {
     public class RabbitMQCheckoutConsumer : BackgroundService
     {
-        private readonly IOrderService _service;
         private readonly IConfiguration _configuration;
         private IConnection _connection;
         private IModel _channel;
         private IRabbitMQMessageSender _rabbitMQMessageSender;
         private readonly DistributedCacheEntryOptions _options;
         private readonly string _keyCache;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public RabbitMQCheckoutConsumer(
-            IOrderService repository,
             IConfiguration configuration,
-            IRabbitMQMessageSender rabbitMQMessageSender
+            IRabbitMQMessageSender rabbitMQMessageSender,
+            IServiceScopeFactory serviceScopeFactory
         )
         {
-            _service = repository;
             _rabbitMQMessageSender = rabbitMQMessageSender;
+            _serviceScopeFactory = serviceScopeFactory;
             _configuration = configuration;
             var factory = new ConnectionFactory
             {
                 HostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value,
                 UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value,
                 Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value,
-                VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value
+                VirtualHost = _configuration
+                    .GetSection("RabbitMQServer")
+                    .GetSection("VirtualHost")
+                    .Value
             };
-            _keyCache = _configuration.GetSection("Redis").GetSection("Key_Cache").Value ?? "orders";
+            _keyCache =
+                _configuration.GetSection("Redis").GetSection("Key_Cache").Value ?? "orders";
             _options = new DistributedCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Absolute_Expire").Value ?? "3600")),
-                SlidingExpiration = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Sliding_Expire").Value ?? "600"))
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Absolute_Expire").Value
+                            ?? "3600"
+                    )
+                ),
+                SlidingExpiration = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Sliding_Expire").Value
+                            ?? "600"
+                    )
+                )
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -67,6 +83,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             OrderHeader order =
                 new()
                 {
+                    Id = vo.Id,
                     UserId = vo.UserId,
                     FistrName = vo.FistrName,
                     LastName = vo.LastName,
@@ -98,7 +115,11 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 order.OrderDetails.Add(detail);
             }
 
-            await _service.AddOrder(order, $"{_keyCache}-{order.UserId}", _options);
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var orderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
+                await orderService.AddOrder(order, $"{_keyCache}-{order.UserId}", _options);
+            }
 
             PaymentVO payment =
                 new()
@@ -114,15 +135,16 @@ namespace GeekShopping.OrderAPI.MessageConsumer
 
             try
             {
-                var dataSendToRabbitMQ = new DataServerRabbitMQ(
+                var dataSendToRabbitMQ = new DataServerRabbitMQ<PaymentVO>(
                     hostName: _configuration.GetSection("RabbitMQServer:HostName").Value ?? "",
                     password: _configuration.GetSection("RabbitMQServer:Password").Value ?? "",
                     userName: _configuration.GetSection("RabbitMQServer:Username").Value ?? "",
-                    virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value ?? "",
+                    virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value
+                        ?? "",
                     queueName: "orderpaymentprocessqueue",
                     baseMessage: payment
                 );
-                _rabbitMQMessageSender.SendMessage<PaymentVO>(dataSendToRabbitMQ);
+                _rabbitMQMessageSender.SendMessage(dataSendToRabbitMQ);
             }
             catch (Exception)
             {

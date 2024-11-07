@@ -13,14 +13,17 @@ namespace TecnoMundo.Application.Services
         private readonly ICachingService _cache;
         private readonly IOrderRepository _repository;
 
-        public OrderService(IOrderRepository repository,
-            ICachingService cache)
+        public OrderService(IOrderRepository repository, ICachingService cache)
         {
             _repository = repository;
             _cache = cache;
         }
 
-        public async Task<bool> AddOrder(OrderHeader obj, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<bool> AddOrder(
+            OrderHeader obj,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var orderAdded = await _repository.AddOrder(obj);
             var orders = await _cache.GetListCache<OrderHeader>(keyCache);
@@ -33,7 +36,11 @@ namespace TecnoMundo.Application.Services
             return orderAdded;
         }
 
-        public async Task<List<OrderHeader>> GetAllOrder(Guid profileId, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<List<OrderHeader>> GetAllOrder(
+            Guid profileId,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var orders = await _cache.GetListCache<OrderHeader>(keyCache);
 
@@ -46,14 +53,28 @@ namespace TecnoMundo.Application.Services
             return orders;
         }
 
-        public async Task UpdateOrderPaymentStatus(Guid orderHeaderId, bool status, string keyCache, DistributedCacheEntryOptions options)
+        public async Task UpdateOrderPaymentStatus(
+            Guid orderHeaderId,
+            bool status,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var orderUpdated = await _repository.UpdateOrderPaymentStatus(orderHeaderId, status);
-            var orders = await _cache.GetListCache<OrderHeader>($"{keyCache}-{orderUpdated?.UserId}");
+            var orders = await _cache.GetListCache<OrderHeader>(
+                $"{keyCache}-{orderUpdated?.UserId}"
+            );
 
             if (orders.Count != 0)
             {
-                await _cache.UpdateExistingListItemFromCache(orderUpdated, orders, $"{keyCache}-{orderUpdated?.UserId}", options);
+                int indexOfTheItemToBeUpdatedPayment = orders.FindIndex(order =>
+                    order.Id == orderHeaderId
+                );
+                if (indexOfTheItemToBeUpdatedPayment != -1)
+                {
+                    orders[indexOfTheItemToBeUpdatedPayment].PaymentStatus = status;
+                    await _cache.AddListInCache(orders, $"{keyCache}-{orders[indexOfTheItemToBeUpdatedPayment].UserId}", options);
+                }
             }
         }
     }

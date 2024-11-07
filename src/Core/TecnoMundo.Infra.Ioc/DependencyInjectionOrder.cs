@@ -13,12 +13,15 @@ namespace TecnoMundo.Infra.Ioc
 {
     public class DependencyInjectionOrder : DependencyInjection
     {
-        public DependencyInjectionOrder(IServiceCollection services,
-            IConfiguration configuration) : base(services, configuration) { }
+        public DependencyInjectionOrder(IServiceCollection services, IConfiguration configuration)
+            : base(services, configuration) { }
 
         public override IServiceCollection AddDbContext()
         {
-            var connection = _config.GetSection("MySQLConnection").GetSection("MySQLConnectionString").Value;
+            var connection = _config
+                .GetSection("MySQLConnection")
+                .GetSection("MySQLConnectionString")
+                .Value;
 
             _service.AddDbContext<ApplicationDbContextOrder>(options =>
                 options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 36)))

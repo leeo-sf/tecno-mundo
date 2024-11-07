@@ -5,7 +5,7 @@ namespace TecnoMundo.Infra.Data.Context
 {
     public class ApplicationDbContextIdentity : DbContext
     {
-        public ApplicationDbContextIdentity(DbContextOptions<ApplicationDbContextIdentity> options) 
+        public ApplicationDbContextIdentity(DbContextOptions<ApplicationDbContextIdentity> options)
             : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

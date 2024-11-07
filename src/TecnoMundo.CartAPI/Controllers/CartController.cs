@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using TecnoMundo.Application.DTOs;
 using TecnoMundo.Application.Interfaces;
-using TecnoMundo.CartAPI.Service;
 using TecnoMundo.Application.RabbitMQServer;
-using Microsoft.Extensions.Caching.Distributed;
+using TecnoMundo.CartAPI.Service;
 using TecnoMundo.Domain.Entities;
 
 namespace TecnoMundo.CartAPI.Controllers
@@ -39,8 +39,18 @@ namespace TecnoMundo.CartAPI.Controllers
             _keyCache = _configuration.GetSection("Redis").GetSection("Key_Cache").Value ?? "cart";
             _options = new DistributedCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Absolute_Expire").Value ?? "3600")),
-                SlidingExpiration = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Sliding_Expire").Value ?? "600"))
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Absolute_Expire").Value
+                            ?? "3600"
+                    )
+                ),
+                SlidingExpiration = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Sliding_Expire").Value
+                            ?? "600"
+                    )
+                )
             };
         }
 
@@ -53,8 +63,15 @@ namespace TecnoMundo.CartAPI.Controllers
 
             try
             {
-                if (!cart.CartDetails.IsNullOrEmpty())
+                if (cart?.CartDetails?.FirstOrDefault()?.Product == null)
+                {
                     cart = await _productService.GetProductsByListCart(cart);
+                    await _service.AddCartVOInCache(
+                        cart,
+                        $"{_keyCache}-{cart.CartHeader.UserId}",
+                        _options
+                    );
+                }
             }
             catch (ApplicationException ex)
             {
@@ -82,9 +99,14 @@ namespace TecnoMundo.CartAPI.Controllers
                     throw new ArgumentException("Product id invalid.");
                 }
 
-                var cart = await _service.SaveOrUpdate(vo, productVO, $"{_keyCache}-{vo.CartHeader.UserId}", _options);
-                if (cart == null)
-                    return NotFound();
+                var cart = await _service.SaveOrUpdate(
+                    vo,
+                    productVO,
+                    $"{_keyCache}-{vo.CartHeader.UserId}",
+                    _options
+                );
+                /*if (cart == null)
+                    return NotFound();*/
                 return Ok(cart);
             }
             catch (ArgumentException ex)
@@ -107,7 +129,12 @@ namespace TecnoMundo.CartAPI.Controllers
                     throw new ArgumentException("Product id invalid.");
                 }
 
-                var cart = await _service.SaveOrUpdate(vo, productVO, $"{_keyCache}-{vo.CartHeader.UserId}", _options);
+                var cart = await _service.SaveOrUpdate(
+                    vo,
+                    productVO,
+                    $"{_keyCache}-{vo.CartHeader.UserId}",
+                    _options
+                );
                 if (cart == null)
                     return NotFound();
                 return Ok(cart);
@@ -149,7 +176,12 @@ namespace TecnoMundo.CartAPI.Controllers
             if (coupon.Id == Guid.Empty)
                 return BadRequest(new { errorMessage = "Error when searching for coupon." });
 
-            var status = await _service.ApplyCoupon(userId, couponCode, $"{_keyCache}-{userId}", _options);
+            var status = await _service.ApplyCoupon(
+                userId,
+                couponCode,
+                $"{_keyCache}-{userId}",
+                _options
+            );
 
             return Ok(new { Status = status });
         }
@@ -168,7 +200,11 @@ namespace TecnoMundo.CartAPI.Controllers
             string token = Request.Headers["Authorization"].ToString();
             if (vo?.UserId == null)
                 return BadRequest();
-            var cart = await _service.FindCartByUserId(vo.UserId, $"{_keyCache}-{vo.UserId}", _options);
+            var cart = await _service.FindCartByUserId(
+                vo.UserId,
+                $"{_keyCache}-{vo.UserId}",
+                _options
+            );
             if (cart == null)
                 return NotFound(new { errorMessage = "Cart not found." });
             if (!string.IsNullOrEmpty(vo.CouponCode))
@@ -179,21 +215,27 @@ namespace TecnoMundo.CartAPI.Controllers
                 );
                 if (vo.DiscountAmount != coupon.DiscountAmount)
                 {
-                    return StatusCode(412, new { errorMessage = "The coupon discount has been changed, we recommend applying again." });
+                    return StatusCode(
+                        412,
+                        new
+                        {
+                            errorMessage = "The coupon discount has been changed, we recommend applying again."
+                        }
+                    );
                 }
             }
             vo.CartDetails = cart.CartDetails;
             vo.DateTime = DateTime.Now;
 
-            var dataSendToRabbitMQ = new DataServerRabbitMQ(
+            var dataSendToRabbitMQ = new DataServerRabbitMQ<CheckoutHeaderVO>(
                 hostName: _configuration.GetSection("RabbitMQServer:HostName").Value ?? "",
                 password: _configuration.GetSection("RabbitMQServer:Password").Value ?? "",
-                userName:_configuration.GetSection("RabbitMQServer:Username").Value ?? "",
+                userName: _configuration.GetSection("RabbitMQServer:Username").Value ?? "",
                 virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value ?? "",
                 queueName: "checkoutqueue",
                 baseMessage: vo
             );
-            _rabbitMQMessageSender.SendMessage<CheckoutHeaderVO>(dataSendToRabbitMQ);
+            _rabbitMQMessageSender.SendMessage(dataSendToRabbitMQ);
 
             await _service.ClearCart(vo.UserId, $"{_keyCache}-{vo.UserId}");
 

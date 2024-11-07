@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using System.Text;
+using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using System.Text;
-using TecnoMundo.Application.DTOs;
 
 namespace TecnoMundo.ProductAPI.Caching
 {
@@ -40,7 +39,11 @@ namespace TecnoMundo.ProductAPI.Caching
             return default(T);
         }
 
-        public async Task<List<T>> AddListInCache<T>(List<T> item, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<List<T>> AddListInCache<T>(
+            List<T> item,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var serializeItem = JsonConvert.SerializeObject(item);
             var redisProducts = Encoding.UTF8.GetBytes(serializeItem);
@@ -50,17 +53,26 @@ namespace TecnoMundo.ProductAPI.Caching
             return await GetListCache<T>(keyCache);
         }
 
-        public async Task AddItemToExistingListInCache<T>(T item, string keyCache, DistributedCacheEntryOptions options)
+        public async Task AddItemToExistingListInCache<T>(
+            T item,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var itemListInCache = await GetListCache<T>(keyCache);
 
-            if (itemListInCache.Count == 0) return;
+            if (itemListInCache.Count == 0)
+                return;
 
             itemListInCache.Add(item);
             await AddListInCache(itemListInCache, keyCache, options);
         }
 
-        public async Task<T?> AddItemInCache<T>(T item, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<T?> AddItemInCache<T>(
+            T item,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var serializeItem = JsonConvert.SerializeObject(item);
             var redisProducts = Encoding.UTF8.GetBytes(serializeItem);
@@ -70,17 +82,41 @@ namespace TecnoMundo.ProductAPI.Caching
             return await GetItemInCache<T>(keyCache);
         }
 
-        public async Task RemoveExistingListItemFromCache<T>(T item, List<T> listOfItemToBeRemoved, string keyCache, DistributedCacheEntryOptions options)
+        public async Task RemoveExistingListItemFromCache<T>(
+            T item,
+            List<T> listOfItemToBeRemoved,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
-            listOfItemToBeRemoved.RemoveAll(x => EqualityComparer<T>.Default.Equals(x, item) ||
-                (typeof(T).GetProperty("Id")?.GetValue(x)?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false));
+            listOfItemToBeRemoved.RemoveAll(x =>
+                EqualityComparer<T>.Default.Equals(x, item)
+                || (
+                    typeof(T)
+                        .GetProperty("Id")
+                        ?.GetValue(x)
+                        ?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false
+                )
+            );
             await AddListInCache(listOfItemToBeRemoved, keyCache, options);
         }
 
-        public async Task UpdateExistingListItemFromCache<T>(T item, List<T> listOfItemToBeUpdated, string keyCache, DistributedCacheEntryOptions options)
+        public async Task UpdateExistingListItemFromCache<T>(
+            T item,
+            List<T> listOfItemToBeUpdated,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
-            int indexItemToBeUpdated = listOfItemToBeUpdated.FindIndex(x => EqualityComparer<T>.Default.Equals(x, item) ||
-                (typeof(T).GetProperty("Id")?.GetValue(x)?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false));
+            int indexItemToBeUpdated = listOfItemToBeUpdated.FindIndex(x =>
+                EqualityComparer<T>.Default.Equals(x, item)
+                || (
+                    typeof(T)
+                        .GetProperty("Id")
+                        ?.GetValue(x)
+                        ?.Equals(typeof(T).GetProperty("Id")?.GetValue(item)) ?? false
+                )
+            );
 
             if (indexItemToBeUpdated != -1)
             {
@@ -94,9 +130,79 @@ namespace TecnoMundo.ProductAPI.Caching
             await _distributedCache.RemoveAsync(keyCache);
         }
 
-        public async Task UpdateItemInCache<T>(T item, string keyCache, DistributedCacheEntryOptions options)
+        public async Task UpdateItemInCache<T>(
+            T item,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             await AddItemInCache(item, keyCache, options);
+        }
+
+        public async Task AddItemToAnItemList<T1, T2>(
+            T1 objToBeAdded,
+            T2 item,
+            string propertyName,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
+        {
+            var listProperty = typeof(T2).GetProperty(propertyName);
+            var list = (System.Collections.IList)listProperty.GetValue(item);
+            list?.Add(objToBeAdded);
+            await UpdateItemInCache(item, keyCache, options);
+        }
+
+        public async Task UpdateItemToAnItemList<T1, T2>(
+            T1 objToBeUpdated,
+            T2 item,
+            string propertyName,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
+        {
+            var listProperty = typeof(T2).GetProperty(propertyName);
+            var list = (List<T1>)listProperty.GetValue(item);
+
+            int indexItemToBeUpdated = list.FindIndex(x =>
+                EqualityComparer<T1>.Default.Equals(x, objToBeUpdated)
+                || (
+                    typeof(T1)
+                        .GetProperty("Id")
+                        ?.GetValue(x)
+                        ?.Equals(typeof(T1).GetProperty("Id")?.GetValue(objToBeUpdated)) ?? false
+                )
+            );
+
+            if (indexItemToBeUpdated != -1)
+            {
+                list[indexItemToBeUpdated] = objToBeUpdated;
+                await AddItemInCache<T2>(item, keyCache, options);
+            }
+        }
+
+        public async Task RemoveItemByIdInAnItem<T, TListOfItemToBeRemoved>(
+            Guid idToBeRemoved,
+            string propertyName,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
+        {
+            var item = await GetItemInCache<T>(keyCache);
+            var listProperty = typeof(T).GetProperty(propertyName);
+            var list = (List<TListOfItemToBeRemoved>)listProperty.GetValue(item);
+
+            if (list?.Count == 1)
+            {
+                await RemoveItemInCache(keyCache);
+            }
+            else
+            {
+                list?.RemoveAll(x =>
+                    (Guid)x.GetType().GetProperty("Id").GetValue(x) == idToBeRemoved
+                );
+                await UpdateItemInCache(item, keyCache, options);
+            }
         }
     }
 }

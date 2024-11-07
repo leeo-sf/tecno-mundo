@@ -30,7 +30,10 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
                 HostName = _configuration.GetSection("RabbitMQServer").GetSection("HostName").Value,
                 UserName = _configuration.GetSection("RabbitMQServer").GetSection("Username").Value,
                 Password = _configuration.GetSection("RabbitMQServer").GetSection("Password").Value,
-                VirtualHost = _configuration.GetSection("RabbitMQServer").GetSection("VirtualHost").Value
+                VirtualHost = _configuration
+                    .GetSection("RabbitMQServer")
+                    .GetSection("VirtualHost")
+                    .Value
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -72,15 +75,16 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
 
             try
             {
-                var dataSendToRabbitMQ = new DataServerRabbitMQ(
+                var dataSendToRabbitMQ = new DataServerRabbitMQ<UpdatePaymentVO>(
                     hostName: _configuration.GetSection("RabbitMQServer:HostName").Value ?? "",
                     password: _configuration.GetSection("RabbitMQServer:Password").Value ?? "",
                     userName: _configuration.GetSection("RabbitMQServer:Username").Value ?? "",
-                    virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value ?? "",
+                    virtualHost: _configuration.GetSection("RabbitMQServer:VirtualHost").Value
+                        ?? "",
                     queueName: "orderpaymentresultqueue",
                     baseMessage: paymentResult
                 );
-                _rabbitMQMessageSender.SendMessage<UpdatePaymentVO>(dataSendToRabbitMQ);
+                _rabbitMQMessageSender.SendMessage(dataSendToRabbitMQ);
             }
             catch (Exception)
             {

@@ -10,12 +10,10 @@ namespace TecnoMundo.Application.Mappings
         {
             var config = new MapperConfiguration(config =>
             {
-                config
-                    .CreateMap<ProductVO, Product>();
+                config.CreateMap<ProductVO, Product>();
                 config.CreateMap<Product, ProductVO>();
 
-                config.CreateMap<ProductCategory, CategoryVO>()
-                    .ReverseMap();
+                config.CreateMap<ProductCategory, CategoryVO>().ReverseMap();
                 config.CreateMap<CreateProductVO, Product>();
             });
 

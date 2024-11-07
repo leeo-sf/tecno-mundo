@@ -14,9 +14,7 @@ namespace TecnoMundo.Application.Services
         private readonly ICartRepository _repository;
         private readonly IMapper _mapper;
 
-        public CartService(ICartRepository repository,
-            IMapper mapper,
-            ICachingService cache)
+        public CartService(ICartRepository repository, IMapper mapper, ICachingService cache)
         {
             _repository = repository;
             _mapper = mapper;
@@ -35,12 +33,25 @@ namespace TecnoMundo.Application.Services
             await _repository.AddCartHeaders(cartHeader);
         }
 
-        public async Task<bool> ApplyCoupon(Guid userId, string couponCode, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<bool> ApplyCoupon(
+            Guid userId,
+            string couponCode,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var cartWithCoupon = await _repository.ApplyCoupon(userId, couponCode);
-            if (cartWithCoupon == null) return false;
+            if (cartWithCoupon == null)
+                return false;
 
-            await _cache.UpdateItemInCache(cartWithCoupon, keyCache, options);
+            var cartInCache =
+                await _cache.GetItemInCache<CartVO>(keyCache)
+                ?? throw new ApplicationException(
+                    "Error getting shopping cart when applying coupon."
+                );
+            cartInCache.CartHeader.CouponCode = couponCode;
+
+            await _cache.UpdateItemInCache(cartInCache, keyCache, options);
 
             return true;
         }
@@ -52,22 +63,32 @@ namespace TecnoMundo.Application.Services
             return cleanCart;
         }
 
-        public async Task<CartVO?> FindCartByUserId(Guid userId, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<CartVO?> FindCartByUserId(
+            Guid userId,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var cart = await _cache.GetItemInCache<CartVO>(keyCache);
 
             if (cart == null)
             {
                 var cartToBeAdded = await _repository.FindCartByUserId(userId);
-                var cartToBeAddedVO = _mapper.Map<CartVO>(cartToBeAdded);
-                cart = await _cache.AddItemInCache(cartToBeAddedVO, keyCache, options);
+                var cartVO = _mapper.Map<CartVO>(cartToBeAdded);
+                cart = cartVO;
             }
             return cart;
         }
 
-        public async Task<CartDetailVO> FindCartDetailByProductIdAndCartHeaderId(Guid productId, Guid cartHeaderId)
+        public async Task<CartDetailVO> FindCartDetailByProductIdAndCartHeaderId(
+            Guid productId,
+            Guid cartHeaderId
+        )
         {
-            var cartDetail = await _repository.FindCartDetailByProductIdAndCartHeaderId(productId, cartHeaderId);
+            var cartDetail = await _repository.FindCartDetailByProductIdAndCartHeaderId(
+                productId,
+                cartHeaderId
+            );
             return _mapper.Map<CartDetailVO>(cartDetail);
         }
 
@@ -77,23 +98,49 @@ namespace TecnoMundo.Application.Services
             return _mapper.Map<CartHeaderVO>(cartHeader);
         }
 
-        public async Task<bool> RemoveCoupon(Guid userId, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<bool> RemoveCoupon(
+            Guid userId,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var cartWithoutCoupon = await _repository.RemoveCoupon(userId);
-            if (cartWithoutCoupon == null) return false;
+            if (cartWithoutCoupon == null)
+                return false;
 
-            await _cache.UpdateItemInCache(cartWithoutCoupon, keyCache, options);
+            var cartInCache =
+                await _cache.GetItemInCache<CartVO>(keyCache)
+                ?? throw new ApplicationException(
+                    "Error getting shopping cart when remove coupon."
+                );
+            cartInCache.CartHeader.CouponCode = "";
+
+            await _cache.UpdateItemInCache(cartInCache, keyCache, options);
 
             return true;
         }
 
-        public async Task<bool> RemoveFromCart(Guid cartDetailsId, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<bool> RemoveFromCart(
+            Guid cartDetailsId,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             var newCart = await _repository.RemoveFromCart(cartDetailsId);
-            if (newCart == null) return false;
+            if (newCart == null)
+                return false;
 
-            await _cache.AddItemInCache(newCart, $"{keyCache}-{newCart.CartHeader.UserId}", options);
-            
+            var cartInCache = await _cache.GetItemInCache<CartVO>(
+                $"{keyCache}-{newCart.CartHeader.UserId}"
+            );
+            if (cartInCache != null)
+                await _cache.RemoveItemByIdInAnItem<CartVO, CartDetailVO>(
+                    cartDetailsId,
+                    nameof(cartInCache.CartDetails),
+                    $"{keyCache}-{newCart.CartHeader.UserId}",
+                    options
+                );
+
             return true;
         }
 
@@ -103,9 +150,15 @@ namespace TecnoMundo.Application.Services
             await _repository.UpdateCartDetails(cartDetail);
         }
 
-        public async Task<CartVO> SaveOrUpdate(CartVO vo, ProductVO productVO, string keyCache, DistributedCacheEntryOptions options)
+        public async Task<CartVO> SaveOrUpdate(
+            CartVO vo,
+            ProductVO productVO,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
         {
             Cart? cart;
+            var cartInCache = await _cache.GetItemInCache<CartVO>(keyCache);
 
             if (vo?.CartDetails?.FirstOrDefault()?.Count == 0)
                 throw new ArgumentException("Count invalid.");
@@ -158,12 +211,44 @@ namespace TecnoMundo.Application.Services
             }
 
             cart.CartDetails.FirstOrDefault().Product = _mapper.Map<Product>(productVO);
-            var newCart = await _repository.FindCartByUserId(vo.CartHeader.UserId);
+            if (cartInCache != null)
+            {
+                var cartVO = _mapper.Map<CartVO>(cart);
+                var cartDetailsAreAlReadyInTheCache = cartInCache.CartDetails.Any(x =>
+                    x.Id == cart?.CartDetails?.FirstOrDefault()?.Id
+                );
+                if (cartDetailsAreAlReadyInTheCache)
+                {
+                    await _cache.UpdateItemToAnItemList(
+                        cartVO.CartDetails.FirstOrDefault(),
+                        cartInCache,
+                        nameof(cartVO.CartDetails),
+                        keyCache,
+                        options
+                    );
+                }
+                else
+                {
+                    await _cache.AddItemToAnItemList<CartDetailVO, CartVO>(
+                        cartVO.CartDetails.FirstOrDefault(),
+                        cartInCache,
+                        nameof(cartVO.CartDetails),
+                        keyCache,
+                        options
+                    );
+                }
+            }
 
+            return _mapper.Map<CartVO>(cartInCache);
+        }
 
-            await _cache.UpdateItemInCache(_mapper.Map<CartVO>(newCart), keyCache, options);
-
-            return _mapper.Map<CartVO>(newCart);
+        public async Task AddCartVOInCache(
+            CartVO vo,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        )
+        {
+            await _cache.AddItemInCache(vo, keyCache, options);
         }
     }
 }

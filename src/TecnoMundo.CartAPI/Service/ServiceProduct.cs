@@ -21,9 +21,9 @@ namespace TecnoMundo.CartAPI.Service
             if (response.StatusCode != HttpStatusCode.OK)
                 return new ProductVO();
             return JsonSerializer.Deserialize<ProductVO>(
-                content,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            ) ?? new ProductVO();
+                    content,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                ) ?? new ProductVO();
         }
 
         public async Task<CartVO> GetProductsByListCart(CartVO vo)
@@ -33,8 +33,13 @@ namespace TecnoMundo.CartAPI.Service
                 var response = await _httpClient.GetAsync($"/api/v1/Product/{cartItem.ProductId}");
                 var content = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != HttpStatusCode.OK)
-                    throw new ApplicationException("It was not possible to obtain some data. try again later");
-                var deserializeProduct = JsonSerializer.Deserialize<ProductVO>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    throw new ApplicationException(
+                        "It was not possible to obtain some data. try again later"
+                    );
+                var deserializeProduct = JsonSerializer.Deserialize<ProductVO>(
+                    content,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
                 cartItem.Product = deserializeProduct;
             }
 

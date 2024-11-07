@@ -37,9 +37,7 @@ namespace TecnoMundo.Domain.Entities
             Role = Role.Client;
         }
 
-        public User()
-        {
-        }
+        public User() { }
 
         public static bool ValidateCpf(string cpf)
         {

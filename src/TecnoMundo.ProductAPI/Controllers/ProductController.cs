@@ -18,16 +18,27 @@ namespace TecnoMundo.ProductAPI.Controllers
         private readonly DistributedCacheEntryOptions _options;
         private readonly string _keyCache;
 
-        public ProductController(IProductService repository,
-            IConfiguration configuration)
+        public ProductController(IProductService repository, IConfiguration configuration)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(_repository));
             _configuration = configuration;
-            _keyCache = _configuration.GetSection("Redis").GetSection("Key_Cache_Products").Value ?? "products";
+            _keyCache =
+                _configuration.GetSection("Redis").GetSection("Key_Cache_Products").Value
+                ?? "products";
             _options = new DistributedCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Absolute_Expire").Value ?? "3600")),
-                SlidingExpiration = TimeSpan.FromSeconds(double.Parse(_configuration.GetSection("Redis").GetSection("Sliding_Expire").Value ?? "600"))
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Absolute_Expire").Value
+                            ?? "3600"
+                    )
+                ),
+                SlidingExpiration = TimeSpan.FromSeconds(
+                    double.Parse(
+                        _configuration.GetSection("Redis").GetSection("Sliding_Expire").Value
+                            ?? "600"
+                    )
+                )
             };
         }
 
@@ -144,7 +155,9 @@ namespace TecnoMundo.ProductAPI.Controllers
         {
             var status = await _repository.Delete(id, _keyCache, _options);
             if (!status)
-                return BadRequest(new { errorMessage = "Product not found or unable to be removed" });
+                return BadRequest(
+                    new { errorMessage = "Product not found or unable to be removed" }
+                );
             return Ok(status);
         }
     }

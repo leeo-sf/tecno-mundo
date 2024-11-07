@@ -1,15 +1,16 @@
 ﻿using GeekShopping.MessageBus;
+using NPOI.SS.Formula.Functions;
 
 namespace TecnoMundo.Application.RabbitMQServer
 {
-    public class DataServerRabbitMQ
+    public class DataServerRabbitMQ<T>
     {
-        public string hostName { get; private set; }
-        public string password { get; private set; }
-        public string userName { get; private set; }
-        public string virtualHost { get; private set; }
-        public string queueName { get; private set; }
-        public BaseMessage baseMessage { get; private set; }
+        public string HostName { get; private set; }
+        public string Password { get; private set; }
+        public string UserName { get; private set; }
+        public string VirtualHost { get; private set; }
+        public string QueueName { get; private set; }
+        public T BaseMessage { get; private set; }
 
         public DataServerRabbitMQ(
             string hostName,
@@ -17,14 +18,15 @@ namespace TecnoMundo.Application.RabbitMQServer
             string userName,
             string virtualHost,
             string queueName,
-            BaseMessage baseMessage)
+            T baseMessage
+        )
         {
-            this.hostName = hostName;
-            this.password = password;
-            this.userName = userName;
-            this.virtualHost = virtualHost;
-            this.queueName = queueName;
-            this.baseMessage = baseMessage;
+            HostName = hostName;
+            Password = password;
+            UserName = userName;
+            VirtualHost = virtualHost;
+            QueueName = queueName;
+            BaseMessage = baseMessage;
         }
     }
 }

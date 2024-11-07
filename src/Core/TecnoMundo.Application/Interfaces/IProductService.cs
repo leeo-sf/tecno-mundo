@@ -14,7 +14,11 @@ namespace TecnoMundo.Application.Interfaces
             decimal? priceUpTo
         );
         Task<ProductVO?> FindById(Guid id, string keyCache, DistributedCacheEntryOptions options);
-        Task<ProductVO> Create(CreateProductVO vo, string keyCache, DistributedCacheEntryOptions options);
+        Task<ProductVO> Create(
+            CreateProductVO vo,
+            string keyCache,
+            DistributedCacheEntryOptions options
+        );
         Task<ProductVO> Update(ProductVO vo, string keyCache, DistributedCacheEntryOptions options);
         Task<bool> Delete(Guid id, string keyCache, DistributedCacheEntryOptions options);
     }

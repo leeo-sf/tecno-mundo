@@ -1,8 +1,6 @@
-﻿using GeekShopping.MessageBus;
-
-namespace TecnoMundo.Application.DTOs
+﻿namespace TecnoMundo.Application.DTOs
 {
-    public class PaymentVO : BaseMessage
+    public class PaymentVO
     {
         public Guid OrderId { get; set; }
         public string Name { get; set; }
