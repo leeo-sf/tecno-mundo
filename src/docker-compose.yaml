@@ -23,7 +23,7 @@ services:
 
 
   identity:
-    image: leoof/tecnomundo-identity-server:latest
+    image: leoof/tecnomundo-identity-server:v2
     container_name: "identity"
     build:
       context: TecnoMundo.IdentityAPI
@@ -43,7 +43,7 @@ services:
     
   
   product:
-    image: leoof/tecnomundo-product:latest
+    image: leoof/tecnomundo-product:v2
     container_name: "product"
     build:
       context: TecnoMundo.ProductAPI
@@ -55,7 +55,7 @@ services:
       - Authentication__Key=${TOKEN_KEY}
       - CorsPolicy__TecnoMundo-Web-Http=http://${ENV_HOST}
       - CorsPolicy__TecnoMundo-Web-Https=https://${ENV_HOST}
-      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};Port=3306;DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD}
+      - MySQLConnection__MySQLConnectionString=Server=${DB_SERVER};DataBase=tecno_mundo_product_api;Uid=${DB_USER};Pwd=${DB_PASSWORD}
       - Redis__Host=redis
       - Redis__Absolute_Expire=3600
       - Redis__Sliding_Expire=600
@@ -66,7 +66,7 @@ services:
   
 
   coupon:
-    image: leoof/tecnomundo-coupon:latest
+    image: leoof/tecnomundo-coupon:v2
     container_name: "coupon"
     build:
       context: TecnoMundo.CouponAPI
@@ -85,7 +85,7 @@ services:
   
 
   cart:
-    image: leoof/tecnomundo-cart:latest
+    image: leoof/tecnomundo-cart:v2
     container_name: 'cart'
     build: 
       context: 'TecnoMundo.CartAPI'
@@ -118,7 +118,7 @@ services:
   
 
   payment:
-    image: leoof/tecnomundo-payment:latest
+    image: leoof/tecnomundo-payment:v2
     container_name: 'payment'
     restart: always
     build: 
@@ -134,7 +134,7 @@ services:
   
 
   order:
-    image: leoof/tecnomundo-order:latest
+    image: leoof/tecnomundo-order:v2
     container_name: 'order'
     restart: always
     build: 
@@ -163,7 +163,7 @@ services:
   
 
   page:
-    image: leoof/tecnomundo-web:latest
+    image: leoof/tecnomundo-web:v1
     container_name: 'page'
     restart: always
     build: 
