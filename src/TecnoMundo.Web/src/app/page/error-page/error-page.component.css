@@ -61,6 +61,28 @@
     justify-content: flex-end;
     font-size: 2rem;
     height: 100%;
-    width: 7%;
+    width: auto;
     color: rgb(146, 146, 0);
+}
+
+@media only screen and (max-width: 768px) {
+    .content-error {
+        width: 85%;
+        min-height: 40%;
+    }
+
+    .error-title {
+        gap: 3%;
+    }
+    .error-title > span {
+        font-size: 1.1rem;
+    }
+    #icon-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-width: 10%;
+    }
 }
