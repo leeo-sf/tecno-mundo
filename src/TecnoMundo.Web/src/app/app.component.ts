@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './template/loading/loading.component';
 import { NavBarComponent } from './template/nav-bar/nav-bar.component';
 import { FooterComponent } from './template/footer/footer.component';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.development';
 
 @Component({
   selector: 'app-root',
