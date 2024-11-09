@@ -1,4 +1,10 @@
 {
+    "builds": [
+      {
+        "src": "dist/tecno-mundo.web/**/*",
+        "use": "@vercel/static"
+      }
+    ],
     "rewrites": [
         { "source": "/(.*)", "destination": "/" }
     ]
