@@ -1,0 +1,21 @@
+<div class="container-error">
+    <div class="content-error">
+        <div class="error-title">
+            <mat-icon aria-hidden="false" fontIcon="sentiment_dissatisfied"></mat-icon>
+            <span>Sorry, we had a problem getting service from {{ failedService }}</span>
+        </div>
+
+        <div class="error-reasons">
+            <ul>
+                <li *ngFor="let reason of listOfPossibleErrors"><span>{{reason.error}}</span></li>
+            </ul>
+        </div>
+
+        <div class="error-alert">
+            <div class="content">
+                <mat-icon id="icon-error-page" aria-hidden="false" fontIcon="report"></mat-icon>
+                <span>We are working to better serve you</span>
+            </div>
+        </div>
+    </div>
+</div>

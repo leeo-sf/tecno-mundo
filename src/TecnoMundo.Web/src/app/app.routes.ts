@@ -15,8 +15,15 @@ import { routeGuard } from './service/_guard/route.guard';
 import { OrderComponent } from './page/order/order.component';
 import { orderResolve } from './service/_guard/orderResolve';
 import { HomeComponent } from './page/home/home.component';
+import { ErrorPageComponent } from './page/error-page/error-page.component';
+import { errorGuard } from './service/_guard/error.guard';
 
 export const routes: Routes = [
+    {
+        path: 'error',
+        component: ErrorPageComponent,
+        canActivate: [errorGuard]
+    },
     {
         path: "login",
         component: LoginComponent,
