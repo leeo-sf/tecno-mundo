@@ -17,5 +17,6 @@ export const routeGuard: CanActivateFn = (route, state): boolean => {
     return true;
   }
 
+  router.navigate(["/"]);
   return false;
 };
