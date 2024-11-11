@@ -25,9 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Infra.Ioc", "Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Application", "Core\TecnoMundo.Application\TecnoMundo.Application.csproj", "{D6AE1A3A-F6C3-455B-9232-42111198489B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{1FB80E4C-F8E8-44D6-BEA8-2BAE3A633996}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway1", "Gateway1", "{1FB80E4C-F8E8-44D6-BEA8-2BAE3A633996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoMundo.APIGateway", "TecnoMundo.APIGateway\TecnoMundo.APIGateway.csproj", "{82C549C8-C6F7-4A24-AF1B-6C468E47B433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.APIGateway", "TecnoMundo.APIGateway\TecnoMundo.APIGateway.csproj", "{82C549C8-C6F7-4A24-AF1B-6C468E47B433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

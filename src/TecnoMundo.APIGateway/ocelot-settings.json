@@ -6,11 +6,11 @@
     {
       // Rota para obter todos os produtos
       "DownstreamPathTemplate": "/api/v1/Product", //Para onde a request sera redirecionada
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product", //Caminho onde vai receber a request
@@ -19,11 +19,11 @@
     // Rota para obter um produto pelo id
     {
       "DownstreamPathTemplate": "/api/v1/Product/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product/{id}",
@@ -32,11 +32,11 @@
     // Rota para obter as categorias dos produtos
     {
       "DownstreamPathTemplate": "/api/v1/Product/categories",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product/categories",
@@ -45,11 +45,11 @@
     // Rota para obter produtos pelo id da categoria
     {
       "DownstreamPathTemplate": "/api/v1/Product/by-category/{idCategory}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product/by-category/{idCategory}",
@@ -58,11 +58,11 @@
     // Rota para obter os produtos através do filtro (name, priceOf, priceUpTo)
     {
       "DownstreamPathTemplate": "/api/v1/Product/filter/name={name}&priceOf={priceOf}&priceUpTo={priceUpTo}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product/filter/?name={name}&priceOf={priceOf}&priceUpTo={priceUpTo}",
@@ -71,11 +71,11 @@
     // Rota para cadastrar ou atualizar um produto
     {
       "DownstreamPathTemplate": "/api/v1/Product",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product",
@@ -88,11 +88,11 @@
     // Rota para deletar um produto
     {
       "DownstreamPathTemplate": "/api/v1/Product/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4440
+          "Host": "product",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Product/{id}",
@@ -107,11 +107,11 @@
     // Rota para autenticação
     {
       "DownstreamPathTemplate": "/api/v1/Authentication/auth",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4435
+          "Host": "identity",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Authentication/auth",
@@ -120,11 +120,11 @@
     // Rota para criar conta
     {
       "DownstreamPathTemplate": "/api/v1/Authentication/Create-Account",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4435
+          "Host": "identity",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Authentication/Create-Account",
@@ -135,11 +135,11 @@
     // Rota para obter os pedidos
     {
       "DownstreamPathTemplate": "/api/v1/Order/{profileId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4455
+          "Host": "order",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Order/{profileId}",
@@ -154,11 +154,11 @@
     // Rota para consultar um cupom
     {
       "DownstreamPathTemplate": "/api/v1/Coupon/{couponCode}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4445
+          "Host": "coupon",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Coupon/{couponCode}",
@@ -171,11 +171,11 @@
     // Rota para cadastrar um cupom
     {
       "DownstreamPathTemplate": "/api/v1/Coupon",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4445
+          "Host": "coupon",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Coupon",
@@ -190,11 +190,11 @@
     // Rota para obter um carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/find-cart/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/find-cart/{userId}",
@@ -207,11 +207,11 @@
     // Rota para adicionar um item no carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/add-cart",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/add-cart",
@@ -224,11 +224,11 @@
     // Rota para atualizar um item no carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/update-cart",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/update-cart",
@@ -241,11 +241,11 @@
     // Rota para remover um item do carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/remove-cart/{cartDetailsId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/remove-cart/{cartDetailsId}",
@@ -258,11 +258,11 @@
     // Rota para limpar um carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/clear/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/clear/{userId}",
@@ -275,11 +275,11 @@
     // Rota para aplicar um cupom no carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/apply-coupon/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/apply-coupon/{userId}",
@@ -292,11 +292,11 @@
     // Rota para remover um cupom do carrinho
     {
       "DownstreamPathTemplate": "/api/v1/Cart/remove-coupon",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/remove-coupon",
@@ -309,11 +309,11 @@
     // Rota para finalizar uma compra
     {
       "DownstreamPathTemplate": "/api/v1/Cart/checkout",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4450
+          "Host": "cart",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Cart/checkout",
