@@ -30,5 +30,7 @@ Projeto responsivo para aplicativos móveis.
 - Docker | Docker Compose
 - RabbitMQ
 - .NET 8
+- Redis
+- Ocelot (API Gateway)
 - MySQL
 - Angular 9, Angular Materiale e Bootstrap
