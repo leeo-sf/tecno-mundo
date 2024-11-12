@@ -9,7 +9,7 @@ import { Category } from '../../interface/Category';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseApiUrl = environment.baseApiUrlProduct;
+  private baseApiUrl = `${environment.baseApiGateway}api/v1/Product/`;
   private baseApiUrlGetCategories = `${this.baseApiUrl}categories`;
   private baseApiUrlGetProductsByCategory = `${this.baseApiUrl}by-category`;
   private baseApiUrlGetProductsByName = `${this.baseApiUrl}filter`;

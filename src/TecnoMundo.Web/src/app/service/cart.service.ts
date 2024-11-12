@@ -9,7 +9,7 @@ import { Checkout } from '../../interface/Checkout';
   providedIn: 'root'
 })
 export class CartService {
-  private baseApiUrl = environment.baseApiUrlCart;
+  private baseApiUrl = `${environment.baseApiGateway}api/v1/Cart/`;
   private baseApiUrlFindCart = `${this.baseApiUrl}find-cart`;
   private baseApiUrlAddCart = `${this.baseApiUrl}add-cart`;
   private baseApiUrlUpdateCart = `${this.baseApiUrl}update-cart`;
