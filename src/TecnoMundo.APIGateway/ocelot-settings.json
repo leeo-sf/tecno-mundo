@@ -1,0 +1,327 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:4480"
+  },
+  "Routes": [
+    {
+      // Rota para obter todos os produtos
+      "DownstreamPathTemplate": "/api/v1/Product", //Para onde a request sera redirecionada
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product", //Caminho onde vai receber a request
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // Rota para obter um produto pelo id
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // Rota para obter as categorias dos produtos
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/categories",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/categories",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // Rota para obter produtos pelo id da categoria
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/by-category/{idCategory}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/by-category/{idCategory}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // Rota para obter os produtos através do filtro (name, priceOf, priceUpTo)
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/filter/name={name}&priceOf={priceOf}&priceUpTo={priceUpTo}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/filter/?name={name}&priceOf={priceOf}&priceUpTo={priceUpTo}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // Rota para cadastrar ou atualizar um produto
+    {
+      "DownstreamPathTemplate": "/api/v1/Product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product",
+      "UpstreamHttpMethod": [ "POST", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para deletar um produto
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+
+
+    // Rota para autenticação
+    {
+      "DownstreamPathTemplate": "/api/v1/Authentication/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Authentication/auth",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    // Rota para criar conta
+    {
+      "DownstreamPathTemplate": "/api/v1/Authentication/Create-Account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Authentication/Create-Account",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
+    // Rota para obter os pedidos
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/{profileId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "order",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/{profileId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+
+
+    // Rota para consultar um cupom
+    {
+      "DownstreamPathTemplate": "/api/v1/Coupon/{couponCode}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "coupon",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Coupon/{couponCode}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para cadastrar um cupom
+    {
+      "DownstreamPathTemplate": "/api/v1/Coupon",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "coupon",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Coupon",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+
+
+    // Rota para obter um carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/find-cart/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/find-cart/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para adicionar um item no carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/add-cart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/add-cart",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para atualizar um item no carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/update-cart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/update-cart",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para remover um item do carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/remove-cart/{cartDetailsId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/remove-cart/{cartDetailsId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para limpar um carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/clear/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/clear/{userId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para aplicar um cupom no carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/apply-coupon/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/apply-coupon/{userId}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para remover um cupom do carrinho
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/remove-coupon",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/remove-coupon",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    },
+    // Rota para finalizar uma compra
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Cart/checkout",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvaiderKey": "Bearer",
+        "AllowedScopes": [ "tecno_mundo" ]
+      }
+    }
+  ]
+}

@@ -17,13 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.PaymentAPI", "Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{43D1C82C-13FC-4406-8FEE-D42FA7B980D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoMundo.Domain", "Core\TecnoMundo.Domain\TecnoMundo.Domain.csproj", "{BE7E5980-C1EB-401B-8E67-AB3D826CF506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Domain", "Core\TecnoMundo.Domain\TecnoMundo.Domain.csproj", "{BE7E5980-C1EB-401B-8E67-AB3D826CF506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoMundo.Infra.Data", "Core\TecnoMundo.Infra.Data\TecnoMundo.Infra.Data.csproj", "{C768E33D-2349-40B4-BE70-52B736D000F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Infra.Data", "Core\TecnoMundo.Infra.Data\TecnoMundo.Infra.Data.csproj", "{C768E33D-2349-40B4-BE70-52B736D000F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoMundo.Infra.Ioc", "Core\TecnoMundo.Infra.Ioc\TecnoMundo.Infra.Ioc.csproj", "{2ECE1FBA-8E2D-4D6E-B547-8320B3D037D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Infra.Ioc", "Core\TecnoMundo.Infra.Ioc\TecnoMundo.Infra.Ioc.csproj", "{2ECE1FBA-8E2D-4D6E-B547-8320B3D037D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoMundo.Application", "Core\TecnoMundo.Application\TecnoMundo.Application.csproj", "{D6AE1A3A-F6C3-455B-9232-42111198489B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.Application", "Core\TecnoMundo.Application\TecnoMundo.Application.csproj", "{D6AE1A3A-F6C3-455B-9232-42111198489B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{1FB80E4C-F8E8-44D6-BEA8-2BAE3A633996}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TecnoMundo.APIGateway", "TecnoMundo.APIGateway\TecnoMundo.APIGateway.csproj", "{82C549C8-C6F7-4A24-AF1B-6C468E47B433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{D6AE1A3A-F6C3-455B-9232-42111198489B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6AE1A3A-F6C3-455B-9232-42111198489B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6AE1A3A-F6C3-455B-9232-42111198489B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82C549C8-C6F7-4A24-AF1B-6C468E47B433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C549C8-C6F7-4A24-AF1B-6C468E47B433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C549C8-C6F7-4A24-AF1B-6C468E47B433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C549C8-C6F7-4A24-AF1B-6C468E47B433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +88,7 @@ Global
 		{C768E33D-2349-40B4-BE70-52B736D000F1} = {43D1C82C-13FC-4406-8FEE-D42FA7B980D1}
 		{2ECE1FBA-8E2D-4D6E-B547-8320B3D037D5} = {43D1C82C-13FC-4406-8FEE-D42FA7B980D1}
 		{D6AE1A3A-F6C3-455B-9232-42111198489B} = {43D1C82C-13FC-4406-8FEE-D42FA7B980D1}
+		{82C549C8-C6F7-4A24-AF1B-6C468E47B433} = {1FB80E4C-F8E8-44D6-BEA8-2BAE3A633996}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {305C4598-6884-454A-86D3-E255ADB89D8B}
