@@ -27,6 +27,8 @@ services:
     container_name: "identity"
     build:
       context: TecnoMundo.IdentityAPI
+    depends_on:
+      - apigateway
     ports:
       - '4435:8080'
     restart: always
@@ -49,6 +51,7 @@ services:
       context: TecnoMundo.ProductAPI
     depends_on:
       - redis
+      - apigateway
     ports:
       - '4440:8080'
     environment:
@@ -70,6 +73,8 @@ services:
     container_name: "coupon"
     build:
       context: TecnoMundo.CouponAPI
+    depends_on:
+      - apigateway
     ports:
       - '4445:8080'
     restart: always
@@ -93,6 +98,7 @@ services:
       - product
       - coupon
       - redis
+      - apigateway
     ports:
       - '4450:8080'
     restart: always
@@ -141,6 +147,7 @@ services:
       context: 'TecnoMundo.OrderAPI'
     depends_on:
       - redis
+      - apigateway
     ports:
       - '4455:8080'
     environment:
@@ -178,6 +185,17 @@ services:
   #     - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/v1/Cart/
   #     - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/v1/Coupon/
   #     - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/v1/Order/
+
+  apigateway:
+    image: leoof/tecnomundo-apigateway:v1
+    container_name: 'apigateway'
+    restart: always
+    build: 
+      context: 'TecnoMundo.APIGateway'
+    ports:
+      - '4480:8080'
+    networks:
+      - backend
 
 
 volumes:
