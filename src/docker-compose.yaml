@@ -169,7 +169,7 @@ services:
       - backend
   
 
-  # Para executar a aplicação web basta descomentar o código abaixo e informar as URL's das API's
+  # Para executar a aplicação web basta descomentar o código abaixo e informar a URL da API Gateway. Por exemplo (http://apigateway:4480/)
   # page:
   #   image: leoof/tecnomundo-web:v1
   #   container_name: 'page'
@@ -180,11 +180,7 @@ services:
   #     - '80:80'
   #     - '443:80'
   #   environment:
-  #     - BASE_API_URL_PRODUCT=http://${ENV_HOST}:4440/api/v1/Product/
-  #     - BASE_API_URL_IDENTITY=http://${ENV_HOST}:4435/api/v1/Authentication/
-  #     - BASE_API_URL_CART=http://${ENV_HOST}:4450/api/v1/Cart/
-  #     - BASE_API_URL_COUPON=http://${ENV_HOST}:4445/api/v1/Coupon/
-  #     - BASE_API_URL_ORDER=http://${ENV_HOST}:4455/api/v1/Order/
+  #     - BASE_API_GATEWAY=http://${ENV_HOST}:4480/
 
   apigateway:
     image: leoof/tecnomundo-apigateway:v1

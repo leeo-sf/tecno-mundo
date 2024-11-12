@@ -8,7 +8,7 @@ import { Coupon } from '../../interface/Coupon';
   providedIn: 'root'
 })
 export class CouponService {
-  private baseApiUrl: string = environment.baseApiUrlCoupon;
+  private baseApiUrl: string = `${environment.baseApiGateway}api/v1/Coupon/`;
 
   constructor(private httpClient: HttpClient) { }
 

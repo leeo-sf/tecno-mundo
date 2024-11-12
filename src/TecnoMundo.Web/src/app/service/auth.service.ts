@@ -13,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseApiUrl: string = environment.baseApiUrlIdentity;
+  private baseApiUrl: string = `${environment.baseApiGateway}api/v1/Authentication/`;
   private baseAuth: string = `${this.baseApiUrl}auth`;
   private baseCreateAccount: string = `${this.baseApiUrl}create-account`;
   private localStorage!: Storage | undefined;

@@ -8,7 +8,7 @@ import { OrderHeader } from '../../interface/OrderHeader';
   providedIn: 'root'
 })
 export class OrderService {
-  private baseApiUrl = environment.baseApiUrlOrder;
+  private baseApiUrl = `${environment.baseApiGateway}api/v1/Order/`;
 
   constructor(private httpClient: HttpClient) { }
 
