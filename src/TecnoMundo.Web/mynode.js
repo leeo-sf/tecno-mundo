@@ -5,11 +5,7 @@ const checkSign = '\u{2705}';
 const dotenv = require('dotenv').config({path: 'src/.env'}); ;
 
 const envFile = `export const environment = {
-    baseApiUrlProduct: '${process.env.BASE_API_URL_PRODUCT}',
-    baseApiUrlIdentity: '${process.env.BASE_API_URL_IDENTITY}',
-    baseApiUrlCart: '${process.env.BASE_API_URL_CART}',
-    baseApiUrlCoupon: '${process.env.BASE_API_URL_COUPON}',
-    baseApiUrlOrder: '${process.env.BASE_API_URL_ORDER}',
+    baseApiGateway: '${process.env.BASE_API_GATEWAY}',
 };
 `;
 const targetPath = path.join(__dirname, './src/environments/environment.development.ts');

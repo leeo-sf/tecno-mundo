@@ -19,11 +19,7 @@ import { environment } from '../environments/environment.development';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ 
-    { provide: 'BASE_API_URL_PRODUCT', useValue: environment.baseApiUrlProduct },
-    { provide: 'BASE_API_URL_IDENTITY', useValue: environment.baseApiUrlIdentity },
-    { provide: 'BASE_API_URL_CART', useValue: environment.baseApiUrlCart },
-    { provide: 'BASE_API_URL_COUPON', useValue: environment.baseApiUrlCoupon },
-    { provide: 'BASE_API_URL_ORDER', useValue: environment.baseApiUrlOrder }
+    { provide: 'BASE_API_GATEWAY', useValue: environment.baseApiGateway }
   ]
 })
 export class AppComponent {

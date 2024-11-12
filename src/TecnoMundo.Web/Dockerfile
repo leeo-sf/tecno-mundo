@@ -21,7 +21,7 @@ COPY  mime.types /etc/nginx/mime.types
 EXPOSE 80
 
 RUN echo "mainFileName=\"\$(ls /usr/share/nginx/html/main*.js)\" && \
-          envsubst '\$BASE_API_URL_PRODUCT \$BASE_API_URL_IDENTITY \$BASE_API_URL_CART \$BASE_API_URL_COUPON \$BASE_API_URL_ORDER' < \${mainFileName} > main.tmp && \
+          envsubst '\$BASE_API_GATEWAY ' < \${mainFileName} > main.tmp && \
           mv main.tmp  \${mainFileName} && nginx -g 'daemon off;'" > run.sh
 
 ENTRYPOINT ["sh", "run.sh"]
