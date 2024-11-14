@@ -190,6 +190,10 @@ services:
       context: 'TecnoMundo.APIGateway'
     ports:
       - '4480:8080'
+    environment:
+      - Authentication__Key=${TOKEN_KEY}
+      - Authentication__UrlAuthentication=${TOKEN_PROVAIDER}
+      - Authentication__Scope=${TOKEN_AUDIENCE}
     networks:
       - backend
 
